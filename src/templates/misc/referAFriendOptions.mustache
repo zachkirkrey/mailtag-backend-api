@@ -1,0 +1,409 @@
+<link href="/css/referAFriendOptions.css" rel="stylesheet"/>
+<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+    <div class="container-fluid" style="margin-left: 205px;margin-top: 1vh;background-color: white; height: 92vh;">
+        <div class="cover" style="display: none;">
+            <img id="settings-spinner" src="/img/loader.gif">
+            </img>
+        </div>
+        <div class="modal fade" data-backdrop="static" id="gmail-refer-modal" role="dialog">
+            <div class="modal-dialog gmail-refer-modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content gmail-refer-modal-content">
+                    <div class="modal-header gmail-refer-modal-header">
+                        <button class="close" data-dismiss="modal" type="button">
+                            ×
+                        </button>
+                        <h4 class="modal-title gmail-refer-modal-title">
+                            Invite your friends to join MailTag
+                        </h4>
+                        <div>
+                            <p class="gmail-refer-desc" style="margin-top: 10px">
+                                For each one who adds MailTag to their browser,
+                            </p>
+                            <p class="gmail-refer-desc">
+                                we’ll give you both 1 month of free MailTag PRO.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="search-box">
+                            <div style="display: inline-block;">
+                                <input class="search-input-box" name="search" placeholder="Search" type="text"/>
+                            </div>
+                            <div class="select-all">
+                                <span class="select-all-span">
+                                    Select All
+                                </span>
+                            </div>
+                        </div>
+                        <div class="email-list">
+                            <table class="table">
+                            </table>
+                        </div>
+                    </div>
+                    <div class="modal-footer gmail-refer-footer gmail-refer-modal-footer">
+                        <div class="row">
+                            <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7">
+                                <div class="slider-head-text ">
+                                    Potential free PRO time.
+                                </div>
+                                <div class="slidecontainer">
+                                    <div class="slider-value">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5">
+                                <button class="btn invite-gmail-btn">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" data-backdrop="static" id="gmail-refer-success-modal" role="dialog">
+            <div class="modal-dialog gmail-refer-success-modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content gmail-refer-success-modal-content">
+                    <div class="modal-body">
+                        <button class="close" data-dismiss="modal" style="margin: 6px 10px 0px 0px;" type="button">
+                            ×
+                        </button>
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 25px;">
+                                <img src="/img/FeedbackSuccess.svg" style="height: 160px;">
+                                </img>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 25px;">
+                                <p class="congrats">
+                                    Congrats!
+                                </p>
+                                <p class="congrats-desc">
+                                    Your friends have been invited.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" data-backdrop="static" id="gmail-refer-invalid-email-modal" role="dialog">
+            <div class="modal-dialog gmail-refer-invalid-email-modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content gmail-refer-invalid-email-modal-content">
+                    <div class="modal-body">
+                        <button class="close" data-dismiss="modal" style="margin: 6px 10px 0px 0px;" type="button">
+                            ×
+                        </button>
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 25px;">
+                                <img src="/img/read-email.png">
+                                </img>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 25px;">
+                                <p class="congrats">
+                                    Oops!
+                                </p>
+                                <p class="congrats-desc">
+                                    Please enter valid emails separated by comma (,).
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" data-backdrop="static" id="gmail-refer-unsuccess-modal" role="dialog">
+            <div class="modal-dialog gmail-refer-unsuccess-modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content gmail-refer-unsuccess-modal-content">
+                    <div class="modal-body">
+                        <button class="close" data-dismiss="modal" style="margin: 6px 10px 0px 0px;" type="button">
+                            ×
+                        </button>
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 25px;">
+                                <img src="/img/inviteUnSuccess.png" style="height: 160px;">
+                                </img>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="margin-top: 25px;">
+                                <p class="congrats">
+                                    Sorry!
+                                </p>
+                                <p class="congrats-desc">
+                                    Something went wrong.
+                                </p>
+                                <p class="congrats-desc">
+                                    Please try again later.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row" style="margin: 12px 0px 12px 0px; min-height: 65px;">
+            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+                <div id="referal-options-title">
+                    {{#_i18n}}referal-options{{/_i18n}}
+                </div>
+            </div>
+            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6" style="margin: 10px 0px;">
+                <select id="change-user" style="display: none;">
+                    {{#subscription}}
+                    <option image="{{image_url}}" value="{{email}}">
+                        {{email}}
+                    </option>
+                    {{/subscription}}
+                </select>
+                <div class="pull-right" id="switch-user">
+                </div>
+                <div class="pull-right progress-bar-container"></div>
+                <img class="pull-right" id="feedback-img" src="/img/toolbar/ic-feedback.svg">
+                </img>
+            </div>
+        </div>
+        <hr id="big-hr">
+            <div class="row referal-details">
+                <div class="row" style="margin: 40px 2% 25px 2%;">
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3 referal-options-header text-center">
+                        <img src="/img/invite-a-friend.svg"/>
+                        <div class="dotted-line">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3 referal-options-header text-center">
+                        <img src="/img/track.svg"/>
+                        <div class="dotted-line">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3 referal-options-header text-center">
+                        <img src="/img/save-money.svg"/>
+                        <div class="dotted-line">
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3 referal-options-header text-center">
+                        <img src="/img/reward.svg"/>
+                    </div>
+                </div>
+                <div class="row" style="margin: 25px 2% 40px 2%;">
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3 text-center">
+                        <p class="referal-options-header-title">
+                            Invite-A-Friend
+                        </p>
+                        <p class="referal-options-header-discription">
+                            Share your referral link and
+                        </p>
+                        <p class="referal-options-header-discription">
+                            spread the word!
+                        </p>
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3">
+                        <p class="referal-options-header-title">
+                            Track Progress
+                        </p>
+                        <p class="referal-options-header-discription">
+                            Quickly and easily view your
+                        </p>
+                        <p class="referal-options-header-discription">
+                            referral progress.
+                        </p>
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3">
+                        <p class="referal-options-header-title">
+                            Save Money
+                        </p>
+                        <p class="referal-options-header-discription">
+                            You’ll receive 1 month of free MailTag
+                        </p>
+                        <p class="referal-options-header-discription">
+                            PRO for each referred sign-up.
+                        </p>
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3">
+                        <p class="referal-options-header-title">
+                            Reward Others
+                        </p>
+                        <p class="referal-options-header-discription">
+                            Each person you refer will receive
+                        </p>
+                        <p class="referal-options-header-discription">
+                            1 month of free MailTag PRO.
+                        </p>
+                    </div>
+                </div>
+                <div class="row" style="margin: 40px 2% 25px 2%;">
+                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 referal-options">
+                        <div class="row">
+                            <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3">
+                            </div>
+                            <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6 referal-options-title text-center">
+                                Get More MailTag PRO
+                            </div>
+                            <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3" style="text-align: right;">
+                                <span class="copy-link" data-clipboard-text="?referral={{refId}}" id="copy">
+                                    <img src="/img/link-img.svg" style="display: inline-block; margin-bottom: 5px"/>
+                                    <div class="link-img-text">
+                                        Copy referral link
+                                    </div>
+                                </span>
+                                <div class="mailtag-copy-tooltip">
+                                    <span class="copy-tooltiptext">
+                                        Copied!
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="padding-top: 10px">
+                            <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center referal-options-text" style="padding-top: 12px;">
+                                <p>
+                                    Invite your friends to join MailTag, and for each one who adds MailTag to
+                                </p>
+                                <p>
+                                    their browser, we’ll give you both 1 month of free MailTag PRO.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 30px 0px">
+                            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                            </div>
+                            <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-xs-8 send-mail-box">
+                                <div class="row">
+                                    <div class="col-lg-10 col-xl-10 col-md-10 col-sm-10 col-xs-10">
+                                        <input id="email-box" name="email" placeholder="Enter email address seperated by comma(,)" type="email"/>
+                                    </div>
+                                    <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 send-link-btn">
+                                        <span class="send-link-text">
+                                            SEND
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                            </div>
+                        </div>
+                        <div class="row" style="padding: 30px 0px">
+                            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                            </div>
+                            <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-xs-8" style="padding: 0px;">
+                                <table class="table">
+                                    <tbody>
+                                        <tr>
+                                            <td class="refer-img">
+                                                <img class="refer-click gmail" src="/img/gmail-refer.svg"/>
+                                            </td>
+                                            <td>
+                                                <p class="gmail-head gmail refer-head refer-click">
+                                                    Invite your Gmail contacts
+                                                </p>
+                                                <p class="refer-desc">
+                                                    Invite your friends with a quick email
+                                                </p>
+                                            </td>
+                                            <td class="refer-reward">
+                                                <p>
+                                                    1 month of MailTag PRO
+                                                </p>
+                                                <p>
+                                                    for each referred sign-up
+                                                </p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="refer-img">
+                                                <img class="refer-click facebook" src="/img/facebook-refer.svg"/>
+                                            </td>
+                                            <td>
+                                                <p class="facebook-head refer-head refer-click facebook" url="https://www.facebook.com/sharer/sharer.php?u={{shareUrl}}?referral={{refId}}&src=sdkpreparse">
+                                                    Connect your Facebook account
+                                                </p>
+                                                <p class="refer-desc">
+                                                    Invite your friends with a post
+                                                </p>
+                                            </td>
+                                            <td class="refer-reward">
+                                                {{#facebookReferalComplete}}
+                                                <p style="color: #03c599; opacity: 1;">
+                                                    <img class="facebook-post-completed"  src="/img/refereComplete.svg" style="margin-right: 5px;margin-bottom: 2px;">
+                                                    </img>
+                                                    Completed.
+                                                </p>
+                                                {{/facebookReferalComplete}}
+                                                {{^facebookReferalComplete}}
+                                                <p>
+                                                    Free 2 weeks of MailTag PRO
+                                                </p>
+                                                {{/facebookReferalComplete}}
+                                            </td>
+                                        </tr>
+                                        <tr style="border-bottom: none !important;">
+                                            <td class="refer-img">
+                                                <img class="refer-click twitter" src="/img/twitter-refer.svg"/>
+                                            </td>
+                                            <td>
+                                                <p class="twitter-head refer-head refer-click twitter" url="{{twitterLoginUrl}}">
+                                                    Connect your Twitter account
+                                                </p>
+                                                <p class="refer-desc">
+                                                    Invite your friends with a tweet
+                                                </p>
+                                            </td>
+                                            <td class="refer-reward">
+                                                {{#twitterReferalComplete}}
+                                                <p style="color: #03c599; opacity: 1;">
+                                                    <img src="/img/refereComplete.svg" style="margin-right: 5px;margin-bottom: 2px;">
+                                                    </img>
+                                                    Completed.
+                                                </p>
+                                                {{/twitterReferalComplete}}
+                                                {{^twitterReferalComplete}}
+                                                <p>
+                                                    Free 2 weeks of MailTag PRO
+                                                </p>
+                                                {{/twitterReferalComplete}}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="col-lg-2 col-xl-2 col-md-2 col-sm-2 col-xs-2 text-center">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                        <a class="btn btn-md referal-status-btn" href="/dashboard/refer-a-friend">
+                            View referral status
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </hr>
+    </div>
+</div>
+<div style="display: none;">
+    <div id="subIdFlag" value="{{subIdFlag}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="planId" value="{{planId}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="featureset" value="{{featureset}}">
+    </div>
+</div>
+<script src="/js/moment.js" type="text/javascript">
+</script>
+<script src="/lib/clipboard/dist/clipboard.min.js">
+</script>
+<script src="/js/referAFriendOptions.js">
+</script>
+<script src="/js/mixpanel.js">
+</script>

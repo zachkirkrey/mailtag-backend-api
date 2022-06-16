@@ -1,0 +1,77 @@
+<link href="/css/signatures.css" rel="stylesheet"/>
+<div class="container-fluid" style="margin-left: 205px;padding: 0px 0px 0px 40px;">
+    <input id="timezone" timezone="{{{timezone}}}" type="hidden">
+    <div class="row" style="margin: 23px 0px;">
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+			<div id="sidemenu-btn">
+				<i class="fa fa-bars"></i>
+			</div>
+            <div id="signatures-title">
+                Signature Generator
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+            <select id="change-user" style="display: none;">
+                {{#subscription}}
+                <option image="{{image_url}}" value="{{email}}">
+                    {{email}}
+                </option>
+                {{/subscription}}
+            </select>
+            <div class="pull-right" id="switch-user">
+            </div>
+            <div class="pull-right progress-bar-container">
+            </div>
+            <img class="pull-right" id="feedback-img" src="/img/ic-feedback.svg">
+        </div>
+    </div>
+    <hr id="big-hr">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="signatures-content">
+            <!-- <span class="details-none" style="display: none; font-size:large; margin-left: 40%;">No signatures created!</span> -->
+            <div id="signatures-table">
+				<table class="table" style="display: none;">
+				<thead>
+				<tr>
+                    <th style="padding-right: 60px;">SIGNATURE NAME</th>
+                    <th>DEFAULT</th>
+					<th>DATE CREATED</th>
+                    <th>DATE MODIFIED</th>
+                    <th></th>
+					<th></th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr id="detail-table-row-template">
+                    <td id="signature-name" class="signature-name"></td>
+					<td class="default"><span id="default" class="signature-default">MAKE DEFAULT</span></td>
+					<td id="signature-created"></td>
+                    <td id="signature-updated"></td>
+                    <td id="edit"><a href="">EDIT</a></td>
+                    <td class="delete"><span id="delete" class="signature-delete">DELETE</span></td>
+				</tr>
+				</tbody>
+				</table>
+            </div>
+
+            <div class="empty-signatures" id="empty-signatures" style="display: none;">
+                <img src="/img/Illustration-One.svg">
+                <div class="email-text">
+                    You have 0 signatures
+                </div>
+            </div>
+
+            <div class="add-signatures" id="add-signatures" style="text-align:center;">
+                <a href="/dashboard/signature" id="signature-save" class="signature-button" style="margin-bottom: 35px;">Add Signature</a>
+            </div>
+
+            <div id="user-email" style="display:none;">{{email}}</div>
+
+        </div>
+    </div>
+</div>
+
+<script src="/js/moment.js" type="text/javascript">
+</script>
+<script src="/js/signatures.js?v=3.0">
+</script>

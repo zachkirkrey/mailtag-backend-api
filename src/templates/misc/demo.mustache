@@ -1,0 +1,107 @@
+{{% BLOCKS }}
+{{< static-pages-layout }}
+    {{$ title }}Demo On-Demand | MailTag for Gmail{{/title}}
+    
+    {{$ header }}{{/header}}
+    
+    {{$ content }}
+        {{> ./components/install }}
+    
+    <main id="main" class="demo-holder">
+        <div class="banner banner-demo">
+            <div class="container">
+                <div class="logo">
+                    <a href="/">
+                        <img alt="MailTag" height="27" src="/images/logo.png" width="157">
+                            <img alt="MailTag" class="logo-fixed" height="24" src="/images/logo-fixed.png" width="130"/>
+                        </img>
+                    </a>
+                </div>
+                
+                <h2>Demo On-Demand</h2>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="column-content">
+                <div class="col">
+                    <div class="txt-box">
+                        <div class="headline">
+                            Spend less time in your inbox, and&nbsp;get&nbsp;more&nbsp;done.
+                        </div>
+                        <p>
+                            In this demo, we’ll go&nbsp;over:
+                        </p>
+                        <ul class="list">
+                            <li>
+                                How to know what happens to your emails after you click&nbsp;send.&nbsp;<img alt="image description" src="/images/ico-mail@2x.png" width="21" height="21"/>
+                            </li>
+                            <li>
+                                How to write your emails now and make them arrive&nbsp;later.&nbsp;<img alt="image description" src="/images/ico-clock@2x.png" width="21" height="21"/>
+
+                            </li>
+                            <li>
+                                How to automate your email follow-ups (and never manually follow-up, ever&nbsp;again!)&nbsp;<img alt="image description" src="/images/ico-rocket@2x.png" width="21" height="20"/>
+
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col">
+                    <form action="">
+                        <div class="headline">
+                            Get instant access<br>to your MailTag&nbsp;demo <img alt="image description" src="/images/ico-play@2x.png" width="36" height="36"/> <img alt="image description" src="/images/ico-finger@2x.png" width="25" height="36"/>
+                        </div>
+                        
+                        <div class="input">
+                            <label for="name">First Name</label>
+                            <input type="text" id="name" name="name" placeholder="e.g. John"/>
+                        </div>
+                        
+                        <div class="input">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="e.g. John@Gmail.com"/>
+                        </div>
+                        
+                        <button class="btn btn-lift btn-yellow" type="submit">
+                            Watch Demo Now&nbsp;→
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <section class="gallery-section">
+            <div class="container">
+                <h2>
+                    Trusted by 13,000+ professionals worldwide, including:
+                </h2>
+                <div class="logo-slider">
+                    <div class="slide">
+                        <img alt="image description" height="37" src="/images/google.png" width="89"/>
+                    </div>
+                    <div class="slide">
+                        <img alt="image description" height="37" src="/images/uber.png" width="99"/>
+                    </div>
+                    <div class="slide">
+                        <img alt="image description" height="37" src="/images/verizon.png" width="119"/>
+                    </div>
+                    <div class="slide">
+                        <img alt="image description" height="37" src="/images/lyft.png" width="51"/>
+                    </div>
+                    <div class="slide">
+                        <img alt="image description" height="37" src="/images/shopify.png" width="108"/>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+    {{/ content }}
+    
+    {{$ footer }}{{/footer}}
+        
+    {{$ scripts }}
+        <script defer="" src="/js/home.js" type="text/javascript"></script>
+    {{/ scripts }}
+    
+{{/ static-pages-layout }}

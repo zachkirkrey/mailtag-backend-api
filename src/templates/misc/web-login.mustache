@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+        MailTag | Login
+        </title>
+        <meta charset="utf-8"/>
+        <meta content="text/html; charset=UTF-8" name="Content-Type"/>
+        <meta content="width=device-width, initial-scale=1" name="viewport"/>
+        <meta content="458867-3eb18e63-beef-4f85-907f-046732aaec99" name="OMG-Verify-V1"/>
+        <link href="/favicon.ico" rel="icon" type="image/x-icon"/>
+        <link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet"/>
+        <link href="/lib/bootstrap/dist/css/bootstrap-theme.min.css" rel="stylesheet"/>
+        <link href="/css/bootstrap-dialog.min.css" rel="stylesheet"/>
+        <link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet"/>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.3/css/bootstrapValidator.min.css" rel="stylesheet" type="text/css"/>
+        <script src="/lib/jquery/dist/jquery.min.js">
+        </script>
+        <script src="/lib/jqueryui/jquery-ui.min.js">
+        </script>
+        ‌​
+        <script src="/lib/bootstrap/dist/js/material.min.js">
+        </script>
+        <script src="/lib/bootstrap/dist/js/bootstrap.min.js">
+        </script>
+        <script src="/lib/mustache/mustache.min.js" type="text/javascript">
+        </script>
+        <script src="/lib/bootstrap/dist/js/bootstrap.min.js">
+        </script>
+        <script src="/js/bootstrap-dialog.min.js">
+        </script>
+        <script src="/js/config.js">
+        </script>
+        <!-- <script id="profitwell-js" data-pw-auth="800982233c7362be92984f6363f547c1">
+        (function(i,s,o,g,r,a,m){i[o]=i[o]||function(){(i[o].q=i[o].q||[]).push(arguments)};
+        a=s.createElement(g);m=s.getElementsByTagName(g)[0];a.async=1;a.src=r+'?auth='+
+        s.getElementById(o+'-js').getAttribute('data-pw-auth');m.parentNode.insertBefore(a,m);
+        })(window,document,'profitwell','script','https://public.profitwell.com/js/profitwell.js');
+
+        try{
+            var currentUser = common.getUserDataFromCookie();
+            if (currentUser['email']){
+                profitwell('start', {'user_email': currentUser['email']});
+            }
+            else{
+                profitwell('start', {});
+            }
+        }
+        catch(e){
+
+        }
+        
+        </script> -->
+        <style type="text/css">
+
+        @font-face {
+        font-family: 'ProximaNovaRegular';
+        src:  url('/font/ProximaNova/3754B8_8_0.ttf') format('truetype');
+        }
+        body {
+        font-family: 'ProximaNovaRegular', Arial, sans-serif;
+        }
+        .loading{
+        display: none;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 999999;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0px;
+        }
+        .cssload-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        }
+        .cssload-thing {
+        height: 29px;
+        width: 6px;
+        background: rgb(242,242,242);
+        position: absolute;
+        animation: somecssload-thing_maybe_cool_idk 2.3s infinite ease;
+        -webkit-animation: somecssload-thing_maybe_cool_idk 2.3s infinite ease;
+        }
+        .cssload-thing:nth-child(1) {
+        transform: rotate(30deg);
+        -webkit-transform: rotate(30deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 0.29s;
+        -webkit-animation-delay: 0.29s;
+        }
+        .cssload-thing:nth-child(2) {
+        transform: rotate(60deg);
+        -webkit-transform: rotate(60deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 0.58s;
+        -webkit-animation-delay: 0.58s;
+        }
+        .cssload-thing:nth-child(3) {
+        transform: rotate(90deg);
+        -webkit-transform: rotate(90deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 0.86s;
+        -webkit-animation-delay: 0.86s;
+        }
+        .cssload-thing:nth-child(4) {
+        transform: rotate(120deg);
+        -webkit-transform: rotate(120deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 1.15s;
+        -webkit-animation-delay: 1.15s;
+        }
+        .cssload-thing:nth-child(5) {
+        transform: rotate(150deg);
+        -webkit-transform: rotate(150deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 1.44s;
+        -webkit-animation-delay: 1.44s;
+        }
+        .cssload-thing:nth-child(6) {
+        transform: rotate(180deg);
+        -webkit-transform: rotate(180deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 1.73s;
+        -webkit-animation-delay: 1.73s;
+        }
+        .cssload-thing:nth-child(7) {
+        transform: rotate(210deg);
+        -webkit-transform: rotate(210deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 2.01s;
+        -webkit-animation-delay: 2.01s;
+        }
+        .cssload-thing:nth-child(8) {
+        transform: rotate(240deg);
+        -webkit-transform: rotate(240deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 2.3s;
+        -webkit-animation-delay: 2.3s;
+        }
+        .cssload-thing:nth-child(9) {
+        transform: rotate(270deg);
+        -webkit-transform: rotate(270deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 2.59s;
+        -webkit-animation-delay: 2.59s;
+        }
+        .cssload-thing:nth-child(10) {
+        transform: rotate(300deg);
+        -webkit-transform: rotate(300deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 2.88s;
+        -webkit-animation-delay: 2.88s;
+        }
+        .cssload-thing:nth-child(11) {
+        transform: rotate(330deg);
+        -webkit-transform: rotate(330deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 3.16s;
+        -webkit-animation-delay: 3.16s;
+        }
+        .cssload-thing:nth-child(12) {
+        transform: rotate(360deg);
+        -webkit-transform: rotate(360deg);
+        transform-origin: 50% -200%;
+        -webkit-transform-origin: 50% -200%;
+        animation-delay: 3.45s;
+        -webkit-animation-delay: 3.45s;
+        }
+        @keyframes somecssload-thing_maybe_cool_idk {
+        50% {
+        background: rgb(0,0,0);
+        transform-origin: 50% -170%;
+        }
+        }
+        @-webkit-keyframes somecssload-thing_maybe_cool_idk {
+        50% {
+        background: rgb(0,0,0);
+        -webkit-transform-origin: 50% -170%;
+        }
+        }
+        html, body {
+        height: 100%;
+        background-color: #ffffff;
+        background-image: linear-gradient(142deg, #f9fafb 0%, #ffffff 100%);
+        }
+        h3.activation-message {
+        color: #2f3d4c;
+        font-family: "ProximaNovaRegular";
+        font-size: 34px;
+        line-height: 44px;
+        margin-bottom: 35px;
+        }
+        .google{
+        border: none;
+        -webkit-border-radius: 28px;
+        -khtml-border-radius: 28px;
+        -moz-border-radius: 28px;
+        -ms-border-radius: 28px;
+        -o-border-radius: 28px;
+        border-radius: 28px;
+        text-transform: none;
+        text-shadow: none;
+        background-size: 18px;
+        transition: transform 0.3s ease;
+        display: inline-block;
+        cursor: pointer;
+        width: 215px;
+        height: 55px;
+        text-decoration: none !important;
+        box-shadow: 0 5px 23px -2px rgba(0, 64, 128, 0.1);
+        background-color: #ffffff;
+        color: #2f3d4c;
+        font-family: "ProximaNovaRegular";
+        font-size: 16px;
+        padding: 15px 0px;
+        }
+        .google span {
+            margin: 0px 10px;
+        }
+        .google:hover,
+        .google:active,
+        .google:focus{
+            color: #2f3d4c;
+            transform: translate3d(0, -4px, 0);
+            animation: none;
+        }
+        .vertical-center {
+        height: 50%;
+        margin: auto;
+        position: absolute;
+        top: 0; left: 0; bottom: 0; right: 0;
+        }
+        .panel-msg {
+        font-size: 33px
+        font-weight: medium;
+        border: none;
+        -webkit-border-radius: 4px;
+        -khtml-border-radius: 4px;
+        -moz-border-radius: 4px;
+        -ms-border-radius: 4px;
+        -o-border-radius: 4px;
+        border-radius: 4px;
+        color: #777;
+        text-transform: none;
+        text-shadow: none;
+        box-shadow: 0 1px 2px rgba(0,0,0,.2);
+        }
+        .cover-google {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background: rgba(0, 0, 0, 0.6);
+        z-index: 5;
+        width: 100%;
+        height: 100%;
+        display: none;
+        }
+        #api-spinner-google {
+        position: absolute;
+        /*height: 35px;
+        width: 35px;*/
+        margin-top: 25%;
+        left: 50%;
+        }
+        @keyframes api-spinner-google {
+        to {
+        transform: rotate(360deg);
+        }
+        }
+        #api-spinner-google:before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 42px;
+        height: 42px;
+        margin-top: -15px;
+        margin-left: -15px;
+        border-radius: 50%;
+        border: 2px solid rgba(204, 204, 204, 0.2);
+        border-top-color: #fff;
+        animation: api-spinner-google .6s linear infinite;
+        }
+        </style>
+        <!-- Facebook Pixel Code -->
+        <!-- <script>
+            if (navigator.platform.indexOf('Win')!=-1) {
+      $('body').append('<style>#signin-with-google {padding:13px 0px !important;}</style>');
+    }
+        </script>
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '419304145193430');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=419304145193430&ev=PageView&noscript=1"
+        /></noscript> -->
+        <!-- End Facebook Pixel Code -->
+
+        <!-- Facebook Pixel Code -->
+        <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '419304145193430');
+        fbq('track', 'PageView');
+        </script>
+        <noscript><img height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=419304145193430&ev=PageView&noscript=1"
+        /></noscript>
+        <!-- End Facebook Pixel Code -->
+
+        <script type=“text/javascript”>
+            _linkedin_partner_id = “1648418";
+            window._linkedin_data_partner_ids = window._linkedin_data_partner_ids || [];
+            window._linkedin_data_partner_ids.push(_linkedin_partner_id);
+            </script><script type=“text/javascript”>
+            (function(){var s = document.getElementsByTagName(“script”)[0];
+            var b = document.createElement(“script”);
+            b.type = “text/javascript”;b.async = true;
+            b.src = “https://snap.licdn.com/li.lms-analytics/insight.min.js”;
+            s.parentNode.insertBefore(b, s);})();
+        </script>
+        <noscript>
+            <img height="1" width="1" style="display:none;" alt="" src="https://px.ads.linkedin.com/collect/?pid=1648418&fmt=gif" />
+        </noscript>
+
+        <!-- Pixel Code for https://app.flockrocket.io/ -->
+        <!-- <script async src="https://app.flockrocket.io/pixel/4d4cbf32d567c7e9dc3fce6625eca0c1"></script> -->
+        <!-- END Pixel Code -->
+    </head>
+</html>
+<body>
+    <div class="cover-google">
+        <div id="api-spinner-google">
+        </div>
+    </div>
+    <div class="loading">
+        <div class="cssload-container">
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+            <div class="cssload-thing">
+            </div>
+        </div>
+    </div>
+    <div class="vertical-center">
+        <div class="container">
+            <div class="row text-center">
+                <div class="panel-heading text-center" style="padding-bottom:25px;">
+                    <img height="55" src="/img/icon-128.svg" width="auto">
+                    <!-- <h2 class="activate">MailTag</h2> -->
+                </div>
+                <div class="panel-heading text-center">
+                    <h3 class="activation-message">
+                    Sign in with Google to access MailTag.
+                    </h3>
+                    <div class="text-center">
+                        <a class="google" id="signin-with-google">
+                            <img src="/img/google-g.svg" width="25">
+                            <span>
+                            Sign in with Google
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+    /*if (document.cookie.indexOf('user') != -1 ) {
+    $('.loading').css('display', 'block');
+    document.location.href="/dashboard";
+    }*/
+    $('#signin-with-google').click(function() {
+    var left = (screen.width / 2) - (520 / 2);
+    var top = (screen.height / 2) - (570 / 2);
+    var googleSignInWindow = window.open("/google-login", '_blank', ',height=570,width=520,scrollbars=yes,status=yes,top=' + top + ',left=' + left);
+    var timer = setInterval(function() {
+    if (googleSignInWindow.closed) {
+    console.log("before timer");
+    clearInterval(timer);
+    console.log("after timer");
+    $('.cover-google').css('display', 'block');
+    if (document.cookie.indexOf('user') == -1 ) {
+    document.location.href = config.rootURL+"login";
+    } else {
+    document.location.href="/dashboard";
+    }
+    }
+    }, 500);
+    });
+    </script>
+</body>

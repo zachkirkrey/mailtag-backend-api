@@ -1,0 +1,750 @@
+<link href="/lib/jquery_ui_date_picker/daterangepicker.scss" rel="stylesheet"/>
+<link href="/css/teamManagement.css?v=3.0" rel="stylesheet"/>
+<div class="container-fluid" style="margin-left: 205px;padding: 0px 0px 0px 40px;">
+    <div class="row" style="margin: 23px 0px;">
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+			<div id="sidemenu-btn">
+				<i class="fa fa-bars"></i>
+            </div>
+            <div id="team-management-title">
+                Team Management
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+            <select id="change-user" style="display: none;">
+                {{#subscription}}
+                <option image="{{image_url}}" value="{{email}}">
+                    {{email}}
+                </option>
+                {{/subscription}}
+            </select>
+            <div class="pull-right" id="switch-user">
+            </div>
+            <div class="pull-right progress-bar-container"></div>
+            <img class="pull-right" id="feedback-img" src="/img/ic-feedback.svg">
+            </img>
+        </div>
+    </div>
+    <hr id="big-hr">
+    <input id="sentEmailDates" type="hidden" value="{{sentEmailDates}}"/>
+    <input id="readEmailDates" type="hidden" value="{{readEmailDates}}"/>
+    <input id="sentEmailCount" type="hidden" value="{{sentEmailCount}}"/>
+    <input id="readEmailCount" type="hidden" value="{{readEmailCount}}"/>
+
+    <div class="row">
+    </div>
+    <div class="row vdivide" id="down-panel" style="display: none;">
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-one">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="email-sent-today">
+                        {{{emailSentThisDate}}}
+                        <img class="arrow-img" id="sent-mail-today-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}email-sent-today{{/_i18n}}
+                    </span>
+                    <input id="email-sent-yesterday" type="hidden" value="{{{emailSentPreviousDate}}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-two">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="email-sent-this-month">
+                        {{{emailSentThisMonth}}}
+                        <img class="arrow-img" id="sent-mail-this-month-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}email-sent-this-month{{/_i18n}}
+                    </span>
+                    <input id="email-sent-previous-month" type="hidden" value="{{{emailSentPreviousMonth}}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-three">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="avg-of-open-emails">
+                        {{{avgOfOpenEmails}}}%
+                        <img class="arrow-img" id="sent-mail-avg-month-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}avg-open-rate{{/_i18n}}
+                    </span>
+                    <input id="email-sent-avg-previous-month" type="hidden" value="{{{previousMonthAvgOpening}}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-three">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="link-sent-this-date">
+                        {{{avgOfOpenLinks}}}%
+                        <img class="arrow-img" id="sent-link-avg-month-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}avg-link-click-rate{{/_i18n}}
+                    </span>
+                    <input id="link-sent-avg-previous-month" type="hidden" value="{{{previousMonthAvgOpeningForLink}}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+            
+    <div id="team-id" style="display: none;">{{{userTeamId}}}</div>
+    <div id="team-type" style="display: none;">{{{type}}}</div>
+    <div id="team-owner" style="display: none;">{{{owner}}}</div>
+
+    <div class="row heading-row" id="team-management-admin" style="display: none;">
+        <div class="row heading-row">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3">
+                        <h2 class="team-heading">Your team</h2>
+                    </div>
+                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+                    </div>
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 text-left">
+                        <div class="wrap-select" id="date-picker">
+                            <div class="wrapper-dropdown-3 win_btn_padding_top_12px" featureset="{{featuresetFlag}}" id="dd" subid="{{subId}}">
+                                <span>
+                                    {{#_i18n}}this-month{{/_i18n}}
+                                </span>
+                                <img class="pull-right win_dropdown_arrow" id="dropdown-arrow" src="/img/graph-date-selector-drop-down.svg">
+                                </img>
+                                <ul class="dropdown">
+                                    <li>
+                                        <a href="#" value="This Week">
+                                            {{#_i18n}}this-week{{/_i18n}}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="Last Week">
+                                            {{#_i18n}}last-week{{/_i18n}}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="This Month">
+                                            {{#_i18n}}this-month{{/_i18n}}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="Last Month">
+                                            {{#_i18n}}last-month{{/_i18n}}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="This Year">
+                                            {{#_i18n}}this-year{{/_i18n}}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" value="Last Year">
+                                            {{#_i18n}}last-year{{/_i18n}}
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" id="date-picker-cal">
+                                            {{#_i18n}}custom-range{{/_i18n}}
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="team-management-content" style="margin: 11px 34px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 owner-details-table" id="owner-details-table">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="team-management-table">
+                            </div>
+                            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                                <div class="add-members" id="add-members" style="text-align:center;">
+                                    <a  id="members-save" class="invite-member-button" style="padding-bottom: 39px;padding-top:7px">Add Users</a>
+                                </div>      
+                            </div>
+                            <div class="col-xs-7 col-sm-7 col-md-7 col-lg-7"></div>
+                            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                                {{#ownerFlag}}
+                                <div class="subscribe-members" id="subscribe-members" style="text-align:center;">
+                                    <a  id="subscribe-members" class="subscribe-members-button btn">Upgrade Team to MailTag PRO</a>
+                                </div>  
+                                {{/ownerFlag}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row heading-row" id="team-management-member" style="display: none;">
+        <div class="row heading-row">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3">
+                        <h2 class="team-heading">Your team</h2>
+                    </div>
+                    <div class="col-lg-9 col-xl-9 col-md-9 col-sm-9">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="team-management-member-content" style="margin: 11px 34px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 owner-details-table" id="owner-details-table">
+                            </div>
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="team-management-member-table">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row heading-row" id="team-management-owner" style="display: none;">
+        <div class="row heading-row">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3">
+                        <h2 class="team-heading">Your Owner</h2>
+                    </div>
+                    <div class="col-lg-9 col-xl-9 col-md-9 col-sm-9">
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="team-management-owner-content" style="margin: 11px 34px;">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="team-management-owner-table">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 empty-team-management text-center" id="empty-team-management-content" style="display:none;margin-top: 5px;overflow:hidden">
+        <img src="/img/Illustration-Three.svg" id="no-pings-emails-present-img" style="max-width:55%">
+        <div class="email-text">
+            You dont have any Team members.
+        </div>
+        <p class="team-management-content-1" style="margin-top:22px;">Click on the button below and create your first.</p>
+        <!-- <p class="team-management-content">If you don't know how to do it, dont worry.</p>
+        <p class="team-management-content">Watch our tutorial instead! <span><img class="thumbs-up-image" src="/images/success_hand.png" alt=""></span></p> -->
+        <div class="add-members" id="add-members" style="text-align:center;">
+            <a  id="members-save" class="members-button" style="padding-bottom: 39px;padding-top:7px">Add your first team member</a>
+        </div>            
+        <!-- <a class="btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" youtubeid="wQbwipvswug">
+            <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+            Watch Tutorial
+        </a> -->
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 text-center">
+            <div id="container">
+            </div>
+        </div>
+    </div>
+
+    <!--Invite Modal-->
+    <div class="modal fade" id="invite-modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header invite-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body invite-modal-body">
+                    <h3 class="invite-heading text-center">Invite team member</h3>
+                    <!-- <p class="text-center invite-description">You can invite existing or new member</p> -->
+                    <div class="col-md-2"></div>
+                    <div class="col-md-4">
+                        <h3 class="email-label">EMAIL</h3>
+                        <input type="text" class="email-input" placeholder="email@domain.com" id="email-input">
+                        <button class="btn invite-btn" id="invite-btn">Add Users</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Delete Invite Confirmation Modal-->
+    <div class="modal fade" id="delete-invite-btn-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Delete Invite</h5>
+                </div>
+                <div class="modal-body">
+                    <h4>Do you really want to delete invite of <span id="delete-invite-email" class="email-red"></span>?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-info" id="delete-invite-button-confirmation">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Remove Admin Confirmation Modal-->
+    <div class="modal fade" id="remove-admin-btn-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Remove Admin</h5>
+                </div>
+                <div class="modal-body">
+                    <h4>Do you really want to remove <span id="remove-admin-email" class="email-red"></span> as an admin?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-info" id="remove-admin-button-confirmation">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Set Admin Confirmation Modal-->
+    <div class="modal fade" id="set-admin-btn-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Set Admin</h5>
+                </div>
+                <div class="modal-body">
+                    <h4>Do you really want to set <span id="set-admin-email" class="email-red"></span> as an admin?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-info" id="set-admin-button-confirmation">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Delete Member Admin Confirmation Modal-->
+    <div class="modal fade" id="delete-member-btn-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Delete Member</h5>
+                </div>
+                <div class="modal-body">
+                    <h4>Do you really want to delete <span id="delete-member-email" class="email-red"></span> from team?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-info" id="delete-member-button-confirmation">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+     <!--Cancel Subscription Confirmation Modal-->
+     <div class="modal fade" id="cancel-subscription-btn-modal" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title">Cancel Subscription</h5>
+                </div>
+                <div class="modal-body">
+                    <h4>Do you really want to cancel subscription of <span id="cancel-subscription-email" class="email-red"></span>?</h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+                    <button type="button" class="btn btn-info" id="cancel-subscription-button-confirmation">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--Subscribe For Team Confirmation Modal-->
+    <div class="modal fade" data-backdrop="static" id="team-upgrade-modal" role="dialog">
+        <div class="modal-dialog new-upgrade-modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content new-upgrade-modal-content">
+                <div class="modal-header new-upgrade-modal-header">
+                    <button class="close new-upgrade-modal-close" data-dismiss="modal" type="button">
+                    <img src="/img/payment-modal-close.svg"  id="team-modal-close">
+                    </button>
+                    <div class="new-upgrade-head-1">
+                        Get ready to supercharge your Gmail.
+                    </div>
+                    <div class="new-upgrade-head-2">
+                        <img data-html="true" data-placement="bottom" data-toggle="tooltip" src="/img/alert-circle-que.svg" style="margin-top: -4px;" title="<strong>30-Day Refund Guarantee</strong><br>Receive a full refund at any time within the first 30 days after your purchase for absolutely any reason. Simply email Help@MailTag.io and our team will process your refund within 24 hours."/>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3"></div>
+                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4 text-right">
+                            <div class="btn-group text-center upgrade-btn-grp">
+                                <button class="btn team-yearly-btn upgrade-span-btn btn-md active-up win_btn_padding_top" type="button">
+                                Annual
+                                <span style="color:#2b9eff;margin-left: 5px;">
+                                    Save 20%
+                                </span>
+                                </button>
+                                <button class="btn team-monthly-btn upgrade-span-btn btn-md win_btn_padding_top" type="button">
+                                Monthly
+                                </button>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4 text-left" style="margin:20px 0px;">
+                            <div class="new-upgrade-head-3 monthly-plan" style="display: none;">
+                                You're saving 20%!
+                                <img src="/img/party.svg" style="width: 20px; margin-top: -7px;"/>
+                            </div>
+                            <div class="new-upgrade-head-3 yearly-plan" style="display: none;">
+                                Save big by paying annually!
+                                <img src="/img/sunglasses.svg" style="width: 20px; margin-top: -9px;"/>
+                            </div>
+                            <div class="new-upgrade-head-3 early-bird-plan" style="display: none;">
+                                You’re saving big with early-bird pricing!
+                                <img src="/img/party.svg" style="width: 20px; margin-top: -7px;"/>
+                            </div>
+                        </div>
+                        <div class="col-lg-1 col-xl-1 col-md-1 col-sm-1 col-xs-1"></div>
+                    </div>
+                </div>
+                <div class="modal-body" style="height: 380px;background: white; border-bottom-left-radius: 5px; border-bottom-right-radius: 5px;padding-top: 10px;">
+                    <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8 col-xs-8 pricing-container">
+                        <div class="pricing-box monthly-pricing-box">
+                            <div class="pricing-box-content">
+                                <div class="popular-badge">
+                                    <span>
+                                        SPECIAL NEW
+                                        <br>
+                                        CUSTOMER
+                                        </br>
+                                        SAVINGS
+                                        </br>
+                                    </span>
+                                </div>
+                                <div class="pricing-box-plan">
+                                    PRO
+                                </div>
+                                <div class="pricing-box-price">
+                                    <span class="display-price">
+                                        <span class="dollar">
+                                            $
+                                        </span>
+                                        <span class="team-price">
+                                            9.99/m
+                                        </span>
+                                    </span>
+                                    <span class="pricing-box-off-price" style="display: inline-block;">
+                                        $18
+                                    </span>
+                                </div>
+                                <div class="pricing-box-billing">
+                                    per user, billed monthly
+                                </div>
+                                <div class="pricing-box-plan-details">
+                                    <div class="left-side-pricing-details" style="padding-left: 0px; width: 350px; display: inline-block;">
+                                        <ul>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title='Track unlimited emails in real-time, without any “Sent with MailTag” branding.' class="show-at-bottom">
+                                                    Unlimited Real-Time Email Tracking (No Watermark)
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="Create unlimited Ping follow-up sequences." class="show-at-top">
+                                                    Unlimited Ping Sequences
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="Receive real-time desktop alerts the moment links are clicked in your emails.<br><br>And, hover your mouse over your MailTag icon (in your Gmail threads / Sent Mail) to view if any of your links have been clicked." class="show-at-top">
+                                                    Link-Click Tracking
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="Receive real-time desktop alerts the moment your emails are opened." class="show-at-top">
+                                                    Real-Time Desktop Notifications
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="When tracking is enabled, you can automatically BCC your email to your CRM (e.g. Salesforce).<br><br>No coding required. (Configurable in the preferences section of your MailTag dashboard)." class="show-at-top">
+                                                    Auto-BCC to CRM
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="right-side-pricing-details" style="width: 230px;padding-left: 25px; display: inline-block;">
+                                        <ul>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="Know at-a-glance if your emails have been read, via your MailTag dashboard." class="show-at-bottom">
+                                                    View Read & Unread Emails
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="View greater insights into your tracked emails. Including your avg. email open-rate and more." class="show-at-top">
+                                                    Advanced Dashboard
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="View unlimited analytics in your MailTag dashboard.<br><br>Know how many tracked emails you send daily, how many are opened, and more." class="show-at-top">
+                                                    View Beyond 30 Days Of Data
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="Skip the line and get super fast response times." class="show-at-top">
+                                                    Executive Support
+                                                </span>
+                                            </li>
+                                            <li>
+                                                <span data-html="true" data-toggle="tooltip" title="Track your scheduled emails so they arrive in your recipients inbox at the perfect time, every time." class="show-at-top">
+                                                    Track Scheduled Emails
+                                                </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="checkout-faq">
+                                    
+                                    <div class="text" style="display: inline-block;margin-left: 43px;margin-top: 7px;">
+                                        <span class="text1">
+                                            Have questions? <span style="cursor: pointer;color:#2b9eff;" data-html="true" data-toggle="tooltip" title="<b>Can I change my subscription to a different email?</b><br>Absolutely! Simply send us an email (<font color='#2b9eff'><b>Help@MailTag.io</b></font>) with the address you’d like<br>your subscription transferred to, and we’ll get it processed!<br><br><b>Does MailTag offer team discounts?</b><br>Yes, if you have a team of 5 or more, please email us (<font color='#2b9eff'><b>Help@MailTag.io</b></font>),<br>and you can save with our team pricing.<br><br><b>I selected the annual plan, why doesn’t it say $9.99?</b><br>MailTag Pro is $12.99 monthly, you can prepay for the year and save 30%.<br>This will save you $36 over 12 months (bringing the would-be monthly cost to $9.99).<br><br><b>If I upgrade, will MailTag Pro be applied to all of my accounts?</b><br>No, each subscription applies to one email address." class="show-at-top faq-tooltip"> Check out our FAQ.</span>
+                                        </span>
+                                    </div>
+                                    <svg width="63px" height="63px" viewBox="0 0 55 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position: absolute; right: 345px; bottom: -55px;">
+                                        <defs>
+                                        <circle id="path-1" cx="17.5" cy="17.5" r="17.5"></circle>
+                                        <filter x="-72.9%" y="-58.6%" width="245.7%" height="245.7%" filterUnits="objectBoundingBox" id="filter-2">
+                                        <feMorphology radius="1" operator="erode" in="SourceAlpha" result="shadowSpreadOuter1"></feMorphology>
+                                        <feOffset dx="0" dy="5" in="shadowSpreadOuter1" result="shadowOffsetOuter1"></feOffset>
+                                        <feGaussianBlur stdDeviation="8" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+                                        <feColorMatrix values="0 0 0 0 0   0 0 0 0 0.250980392   0 0 0 0 0.501960784  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+                                        </filter>
+                                        </defs>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <g id="Mailtag.io-Checkout" transform="translate(-208.000000, -748.000000)">
+                                                <g id="Mailtag.io-Scheduled-Emails-+-Popup-Mask">
+                                                    <g id="Popup" transform="translate(133.000000, 55.000000)">
+                                                        <g id="FAQ" transform="translate(84.000000, 698.000000)">
+                                                            <g id="Bg">
+                                                                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+                                                                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+                                                            </g>
+                                                            <text id="?" font-family="ProximaNovaRegular" font-size="17" font-weight="bold" line-spacing="26" fill="#2B9EFF">
+                                                            <tspan x="14" y="24">?</tspan>
+                                                            </text>
+                                                        </g>
+                                                    </g>
+                                                </g>
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-4 text-center payment-container">
+                        <div class="payment-container-inner rewardful" data-rewardful>
+                            <div class="pay-with-card-details pay-with-details pay-with-active">
+                                <!-- Paypal button -->
+                                <!-- <div class="row" style="margin-bottom: 10px;margin-top: 15px;">
+                                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3"></div>
+                                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6">
+                                        <div id="paypal-button-container-team" style="text-align: -webkit-center;"></div>
+                                    </div>
+                                    <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-3"></div>
+                                </div> -->
+                                
+                                <div class="row text-center" style="padding: 0px;margin-top: 0px;">
+                                    <div class="payment-details-title">
+                                        Card number
+                                    </div>
+                                    <div class="field" id="team-card-number-element">
+                                    </div>
+                                    <span class="brand">
+                                        <i class="pf pf-credit-card" id="team-brand-icon">
+                                        </i>
+                                    </span>
+                                    <div class="outcome">
+                                        <div class="team-card-no-error" style="display: none;">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row text-center" style="padding: 0px;margin-top: 0px;">
+                                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 0px;padding-left: 0px;">
+                                        <div class="payment-details-title">
+                                            Expiration date
+                                        </div>
+                                        <div class="field" id="team-card-expiry-element" placeholder="MM/YY">
+                                        </div>
+                                        <div class="outcome">
+                                            <div class="team-card-exp-error" style="display: none; width: 170px;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6 col-xs-6" style="margin-top: 0px;padding-left: 0px;">
+                                        <div class="payment-details-title payment-details-title-cvc">
+                                            CVC
+                                        </div>
+                                        <div class="field" id="team-card-cvc-element" placeholder="123">
+                                        </div>
+                                        <div class="outcome">
+                                            <div class="team-card-cvc-error" style="display: none;">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row text-center promocode-row" style="padding: 0px;margin-top: 0px;">
+                                <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="padding-left: 0px;">
+                                    <div class="payment-details-title">
+                                        PROMO CODE
+                                    </div>
+                                    <div class="promocode-div">
+                                        <img class="glyphicon team-tick" hidden="true" src="/img/promocode-tick.svg">
+                                        </img>
+                                        <img class="glyphicon team-fail" hidden="true" src="/img/promocode-fail.svg">
+                                        </img>
+                                        <input class="team-promocode-input" name="promocode" placeholder="Promo code" type="text" id="promocode-input">
+                                        </input>
+                                        <span class="promocode-apply">
+                                            APPLY
+                                        </span>
+                                    </div>
+                                    <div class="outcome">
+                                        <div class="promocode-earlybird-error" style="display: none;">
+                                            Oops! Code is only for yearly plan!
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="text-left payment-tip-title">
+                                You'll be charged <span id="team-billing-amount">$12.99/m</span> USD when your trial ends.<br>
+                                <span style="font-family:ProximaNovaSemiBold;color: #2f3d4c; ">Billed now: $0</span>
+                            </div>
+                            <div class="row text-center" style="padding: 0px;margin-top: 5px;">
+                                <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center" style="padding-left: 0px;">
+                                    <button class="btn btn-md upgrade-pay-btn card-btn win_btn_padding_top">
+                                    Start Plan
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="padding: 0px;margin-top: 10px;">
+                                <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center secure-payment">
+                                    <img src="/img/secure-lock.svg" />
+                                    <span class="secure-payment-text">
+                                        Secure credit card payment
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="row text-center" style="padding: 0px;margin-top: 0px;">
+                                <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 col-xs-12 text-center">
+                                    <span class="ssl-text">
+                                        This is a secure 128-bit SSL encrypted form
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="successful-modal" tabindex="-1" role="dialog" aria-labelledby="successful-modalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        
+            <div class="modal-body">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h2 class="text-success text-center">Successful</h2>
+            </h3>
+            </div>
+            <div class="modal-footer">
+            <button type="button" class="btn btn-success" data-dismiss="modal">Okay</button>
+            </div>
+        </div>
+        </div>
+    </div>
+    <!--Successfull model-->
+
+    <div class="modal fade" id="no-subscription-modal" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h5 class="modal-title already-subscribed" id="">Alert</h5>
+                </div>
+                <div class="modal-body">
+                    <h4>At least 5 unsubscribed members required to subscribe for team. </h4>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-info" data-dismiss="modal">Okay</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    </hr>
+    </hr>
+</div>
+<div style="display: none;">
+<div class="localized-string" id="localized-string-sent">
+    {{#_i18n}}sent{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-opened">
+    {{#_i18n}}opened{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-unopened">
+    {{#_i18n}}unopened{{/_i18n}}
+</div>
+</div>
+<div style="display: none;">
+<div class="localized-string" id="localized-string-upgrade">
+    {{#_i18n}}menu-item-upgrade{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-pro-user">
+    {{#_i18n}}menu-item-pro-user{{/_i18n}}
+</div>
+</div>
+<div style="display: none;">
+<div id="subIdFlag" value="{{subIdFlag}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="planId" value="{{planId}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="featureset" value="{{featureset}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="expiryDate" value="{{expiryDate}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="paymentStatus" value="{{paymentStatus}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="plan" value="{{plan}}">
+</div>
+<div style="display: none;">
+<div id="userCreatedOn" value="{{userCreatedOn}}">
+</div>
+<div id="userTeam" value="{{userTeam}}">
+</div>
+</div>
+<script src="/js/moment.js" type="text/javascript">
+</script>
+<script src="/lib/jquery_ui_date_picker/jquery.daterangepicker.js" type="text/javascript">
+</script>
+<script src="/js/teamManagement.js?v=3.0">
+</script>
+<script src="https://code.highcharts.com/highcharts.js">
+</script>
+<script src="https://code.highcharts.com/modules/exporting.js">
+</script>

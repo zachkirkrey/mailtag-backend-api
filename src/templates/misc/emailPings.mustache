@@ -1,0 +1,201 @@
+<link href="/css/emailPings.css?v=3.0" rel="stylesheet"/>
+<link rel="stylesheet" href="/lib/youtube-video/grt-youtube-popup.css">
+<div class="container-fluid" style="margin-left: 205px;padding: 0px 0px 0px 40px;">
+    <div class="modal fade" data-backdrop="static" id="ping-delete-modal" role="dialog">
+        <div class="modal-dialog ping-delete-modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content ping-delete-modal-content">
+                <div class="modal-body">
+                    <button class="close" data-dismiss="modal" style="margin: 6px 10px 0px 0px;" type="button">
+                    <img src="/img/cancel-ping-sequence-popup-close.svg" style="width:17px;">
+                    </button>
+                    <div class="row text-center">
+                        <p class="ping-delete-head">
+                        </p>
+                    </div>
+                    <div class="row text-center">
+                        <p class="ping-delete-desc">
+                        </p>
+                    </div>
+                    <div class="row text-center">
+                        <label class="dont-show-cancel-ping-email-warning checkbox-container">
+                            <input id="" class="pings-delete-warning-checkbox" type="checkbox">
+                            <div id="win_line_height">Don't show this message again.</div>
+                            <span class="checkmark" style="left: 140px;top: 0;">
+                            </span>
+                        </label>
+                    </div>
+                    <div class="row text-center">
+                        <button class="delete-ping-btn">
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin: 23px 0px;">
+        <div class="col-lg-7 col-xl-7 col-md-7 col-sm-7">
+			<div id="sidemenu-btn">
+				<i class="fa fa-bars"></i>
+			</div>
+            <div id="ping-title">
+                {{#_i18n}}pings{{/_i18n}}
+            </div>
+        </div>
+        <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5">
+            <select id="change-user" style="display: none;">
+                {{#subscription}}
+                <option image="{{image_url}}" plan="{{featureset}}" sub-id="{{subscription_id}}" value="{{email}}">
+                    {{email}}
+                </option>
+                {{/subscription}}
+            </select>
+            <div class="pull-right" id="switch-user">
+            </div>
+            <div class="pull-right progress-bar-container"></div>
+            <img class="pull-right" id="feedback-img" src="/img/ic-feedback.svg">
+            </img>
+        </div>
+    </div>
+    <hr id="big-hr">
+    <div class="row">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-0">
+            <img src="/img/inbox-search.svg" id="inbox-search-img" style="position: absolute;top: 21px;left: 30px;">
+            <input type="text" placeholder="Start typing to search subject lines..." class="form-control" id="inbox-ping-search">
+        </div>
+        <div class="col-lg-4 col-xl-4 col-md-3 col-sm-4 col-xs-12 text-center">
+            <!-- <div class="col-lg-4 col-xl-3 col-md-6 col-sm-3 col-xs-3 text-center">
+            </div>
+            -->
+            <!-- <div class="col-lg-4 col-xl-6 col-md-3 col-sm-6 col-xs-6 text-center read-btn-div"> -->
+            <div class="btn-group text-center ping-btn-grp">
+                <button class="btn email-btn ping-btn win_btn_padding_top" type="button">
+                {{#_i18n}}emails{{/_i18n}}
+                </button>
+                <button class="btn pings-btn ping-btn win_btn_padding_top" type="button">
+                {{#_i18n}}ping-sequences{{/_i18n}}
+                </button>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="col-lg-4 col-xl-3 col-md-4 col-sm-3 col-xs-3 text-center">
+            </div> -->
+        </div>
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-0">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="emails-content">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="emails-table">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="emails-spinner">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 empty-email" id="empty-email-content" style="display: none;margin-top: 5px; overflow:hidden">
+                <img src="/img/Illustration-Three.svg" id="no-pings-emails-present-img" style="max-width:100%">
+                <div class="email-text">
+                    You haven't sent any Pings yet.
+                </div>
+                <a class="btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" youtubeid="wQbwipvswug">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </a>
+                <!-- <div class="wistia_embed wistia_async_pc2gpxcmok popover=true popoverContent=html wistia_embed_initialized btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" id="wistia-pc2gpxcmok-1" style="display: inline-block;">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </div> -->
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="pings-content" style="display: none;">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="pings-table">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="pings-spinner">
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 empty-pings" id="empty-ping-content" style="display: none;text-align: -webkit-center;text-align: -moz-center;margin-top: 5px;">
+                <img src="/img/Illustration-Three.svg" id="no-pings-sequence-present-img">
+                <div class="email-text">
+                    You don't have any Ping sequences.
+                </div>
+                <a class="btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" youtubeid="wQbwipvswug">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </a>
+                <!-- <a class="btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" youtubeid="qQq-smfdjPQ">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </a> -->
+                <!-- <div class="wistia_embed wistia_async_pc2gpxcmok popover=true popoverContent=html wistia_embed_initialized btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" id="wistia-pc2gpxcmok-2" style="display: inline-block;">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </div> -->
+                <button class="btn add-pings-btn btn-md win_btn_padding_top">
+                {{#_i18n}}add-ping{{/_i18n}}
+                </button>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center add-new-ping" style="text-align: -webkit-center;text-align: -moz-center;">
+                <button class="btn add-pings-btn btn-md win_btn_padding_top" style="display: none;">
+                {{#_i18n}}add-ping{{/_i18n}}
+                </button>
+            </div>
+        </div>
+    </div>
+    </hr>
+	<table class="details-table" id="details-table-template">
+	<thead>
+		<td class="details-spacer"></td>
+		<td>PING</td>
+		<td style="width:100%">SUBJECT</td>
+		<td>SENT</td>
+		<td nowrap>LAST OPEN</td>
+		<td></td>
+		<td class="details-spacer"></td>
+	</thead>
+	<tbody>
+		<tr id="detail-table-row-template">
+			<td class="details-spacer"></td>
+			<td nowrap class="detail-number">01</td>
+			<td><img src="/img/ping-email-grey.png" class="detail-table-icon" title=""><span class="detail-subject">Re: Work Inquiry</span></td>
+			<td nowrap class="detail-sent">30 Min Ago</td>
+			<td nowrap class="detail-opened">30 Min Ago</td>
+			<td nowrap><a href="">DETAIL</a></td>
+			<td class="details-spacer"></td>
+		</tr>
+	</tbody>
+	</table>
+</div>
+<div style="display: none;">
+    <div id="subIdFlag" value="{{subIdFlag}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="planId" value="{{planId}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="featureset" value="{{featureset}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="expiryDate" value="{{expiryDate}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="plan" value="{{plan}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="paymentStatus" value="{{paymentStatus}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="userCreatedOn" value="{{userCreatedOn}}">
+    </div>
+</div>
+<script src="/js/moment.js" type="text/javascript">
+</script>
+<script src="/lib/youtube-video/grt-youtube-popup.js">
+</script>
+<script src="/js/emailPings.js?v=3.0">
+</script>

@@ -1,0 +1,17 @@
+{
+  "text-summary": "Hi {{userName}}, Have you ever wondered what happens after you click send on your emails? Thanks to MailTag, you no longer have to wonder. With MailTag, you can access each of the following features at no cost whatsoever.",
+  "greetings": "Hi {{userName}},",
+  "welcome-line-1": "Have you ever wondered what happens after you<br>click send on your emails?<br><br>Thanks to MailTag, you no longer have to wonder.<br><br>With MailTag, you can access each of the following features at no cost whatsoever:",
+  "welcome-line-2": "To begin using MailTag PRO without our watermark or ads, simply refresh this page.",
+  "post-script": "To remove the “Sent with MailTag” signature from your emails by default, all you need to do is upgrade your account to PRO<br>(only $25.00 a month, per user).",
+  "signature": "Questions? Reply to this email and we’ll get back to you right away.<br><br>Best,<br>MailTag Customer Success Team",
+  "list-of-features-1": "Unlimited real-time email open tracking.",
+  "list-of-features-2": "Unlimited real-time link-click tracking.",
+  "list-of-features-3": "Real-time desktop alerts when your emails have been opened.",
+  "list-of-features-4": "Know when your emails have not been read (via your dashboard).",
+  "list-of-features-5": "Daily analytics on your open-rates and link-click rates (via your dashboard).",
+  "list-of-features-6": "And so much more …",
+  "bottom-line-1": "So … how do you track emails with MailTag?",
+  "bottom-line-2": "Simply tag your emails, click send, and you’re done! It’s really that easy.",
+  "update-to-pro": "UPGRADE TO PRO"
+}

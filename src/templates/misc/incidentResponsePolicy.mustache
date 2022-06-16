@@ -1,0 +1,210 @@
+{{% BLOCKS }}
+{{< static-pages-layout }}
+    {{$ title }}Incident Response Policy{{/title}}
+    
+    {{$ content }}
+        <main id="main">
+        <div class="banner inner-banner">
+            <div class="container">
+                <div class="banner-heading">
+                    <h1>
+                    MailTag Incident Response Policy
+                    </h1>
+                </div>
+            </div>
+        </div>
+        <div id="holder">
+            <div class="content">
+                <div class="container">
+                    <i>
+                    <p>
+                        Last Updated & Effective date: Apr 12, 2021
+                    </p>
+                    <p>
+                        We take your privacy extremely seriously and would like to describe how we collect, use and protect your information when you access our website(s), products, services and applications (collectively, the “Services”).
+                    </p>
+                    </i>
+                    <ul class="accordion">
+                        <li>
+                            <a class="opener" href="#">
+                                Introduction
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    This Incident Response Policy describes how MailTag will respond to potential information security incidents.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Scope
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    This policy covers all security incidents (as defined below) affecting any MailTag information systems. All MailTag staff and contractors must ensure that they carry out any identified responsibilities under this policy.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Policy Statements
+                            </a>
+                            <div class="slide">
+                                <a class="opener" href="#">
+                                    Definition
+                                </a>
+                                <p>
+                                    A security incident is an adverse event that compromises the security of a system, a network, information, physical assets, and/or the safety of employees. A security incident includes malicious activities such as viruses, intrusion by outsiders into physically or logically protected spaces, theft of hardware, software, or other information assets, and unauthorized access to classified information.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Planning
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    MailTag will establish an Incident Response Plan containing:
+                                </p>
+                                <ul>
+                                    <li>Contact information for key personnel, including:
+                                        <ul>
+                                            <li>Technical Leadership</li>
+                                            <li>Outside Counsel</li>
+                                            <li>Others, if necessary</li>
+                                        </ul>
+                                    </li>
+                                    <li>Information on how to deploy critical infrastructure, including how to redeploy on other providers and/or provider regions, as appropriate;</li>
+                                    <li>Information on how to create an incident communications channel, alert key personnel, and record relevant information.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Reporting
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    All staff are responsible for reporting security incidents, or potential security incidents, to their manager or the Head of Engineering. External parties can report security concerns by sending email to security@mailtag.io, which will send email to the Head of Engineering and other appropriate parties.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Incident Response
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    In the event of a reported security incident, MailTag staff, led by [Security Lead] or other personnel they designate, will perform the following steps:
+                                </p>
+                                <ul>
+                                    <li>Confirm the incident: ensure that the report is correct, and that an incident appears to have been detected.</li>
+                                    <li>Containment: Limit the scope of the incident to its current boundaries. For instance, in the event of a data leak event, stop additional data from being leaked. In the event of an attacker compromising systems, cut the compromised systems off from all other systems through applying firewall or security group rules.</li>
+                                    <li>Determine the root cause: Using logs (see Operational Security Policy) or other available information, investigate and determine the source or sources of the incident.</li>
+                                    <li>Remediation: Fix the identified issues. In addition, record and terminate any compromised systems; for instance, take snapshots of compromised cloud systems, then terminate and redeploy them with patches to fix the root cause(s).</li>
+                                    <li>Restoration: Return systems to normal operations and communicate the end of the incident with relevant stakeholders.</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Documentation
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    Throughout a security incident, the response team will keep a written (electronic) record of all actions taken, along with timestamps, in addition to notes on decision-making, electronic records of the investigation (such as links to snapshots of compromised systems), and any other relevant information. This record will be retained after the incident.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Communication with Affected Parties
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    In the event of a security incident that compromises (internal or external) customer-facing systems, [Security Lead] will coordinate with MailTag leadership to communicate with appropriate customers regarding any downtime or service interruptions. Once services have been restored, that will be communicated through the same method(s). These communications will be retained along with the incident documentation (above).
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Communication with Law Enforcement
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    MailTag leadership will determine if an incident merits law enforcement contact, in conjunction with legal counsel. All such communication will go through or be directed by counsel.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Post-Incident Review
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    After system restoration has been completed and appropriate documentation finalized, MailTag will hold a meeting with stakeholders and the incident response team to determine:
+                                </p>
+                                <ul>
+                                    <li>What were the root cause(s) and contributing causes to the incident?</li>
+                                    <li>Are there ways to prevent similar incidents in the future?</li>
+                                    <li>What (human and/or technical) systems can be strengthened to increase resilience against this type of incident?</li>
+                                    <li>How can the incident response process be improved? </li>
+                                </ul>
+                                <p>
+                                    Documentation from this meeting will be retained, and action items prioritized for work.
+                                </p>
+                                <p>
+                                    Periodically and not less than annually, management will review the documentation of security incidents to ensure that lessons learned are being taken into account, and any changes needed to the information security program are being made.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Incident Response Plan Testing
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    Periodically and not less than annually, all incident response plans shall be tested either with responsible parties gathered to walk through a hypothetical scenario and their responses (tabletop testing) or with a mock incident (full-dress testing). Documentation and post-incident review of the incident will occur as with a true incident.
+                                </p>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Staff Roles
+                            </a>
+                            <div class="slide">
+                                <a class="opener" href="#">
+                                    All Staff
+                                </a>
+                                <p>
+                                    All staff are responsible for:
+                                </p>
+                                <ul>
+                                    <li>Reporting suspected security incidents to Ben Cohen, Partner. </li>
+                                    <li>Assisting the incident response team as requested.</li>
+                                  </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a class="opener" href="#">
+                                Head of Engineering
+                            </a>
+                            <div class="slide">
+                                <p>
+                                    The Head of Engineering is responsible for:
+                                    <ul>
+                                        <li>Leading the incident response process.</li>
+                                        <li>Facilitating executive communication and any communications with counsel that may become necessary.</li>
+                                        <li>Ensuring that documentation of the incident response process is made and retained.</li>
+                                        <li>Working with any outside security or technical advisors as part of the incident response process.</li>
+                                    </ul>
+                                </p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+    {{/ content }}
+{{/ static-pages-layout }}

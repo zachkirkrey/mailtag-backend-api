@@ -1,0 +1,720 @@
+<link href="/lib/jquery_ui_date_picker/daterangepicker.scss" rel="stylesheet"/>
+<link href="/css/dashboard.css?v=3.0" rel="stylesheet"/>
+<div class="container-fluid" style="margin-left: 205px;padding: 0px 0px 0px 40px;">
+    <div class="row" style="margin: 23px 0px;">
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+			<div id="sidemenu-btn">
+				<i class="fa fa-bars"></i>
+			</div>
+            <div id="username">
+            </div>
+        </div>
+        <!-- <div class="col-lg-1 col-xl-1 hidden-md hidden-sm hidden-xs">
+        </div> -->
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+            <select id="change-user" style="display: none;">
+                {{#subscription}}
+                <option image="{{image_url}}" value="{{email}}">
+                    {{email}}
+                </option>
+                {{/subscription}}
+            </select>
+            <div class="pull-right" id="switch-user">
+            </div>
+            <div class="pull-right progress-bar-container"></div>
+            <img class="pull-right" id="feedback-img" src="/img/ic-feedback.svg">
+            </img>
+        </div>
+    </div>
+    <hr id="big-hr">
+    <input id="sentEmailDates" type="hidden" value="{{sentEmailDates}}"/>
+    <input id="readEmailDates" type="hidden" value="{{readEmailDates}}"/>
+    <input id="sentEmailCount" type="hidden" value="{{sentEmailCount}}"/>
+    <input id="readEmailCount" type="hidden" value="{{readEmailCount}}"/>
+    <div class="row">
+    </div>
+    <div class="row vdivide" id="down-panel">
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-one">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="email-sent-today">
+                        {{{emailSentThisDate}}}
+                        <img class="arrow-img" id="sent-mail-today-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}email-sent-today{{/_i18n}}
+                    </span>
+                    <input id="email-sent-yesterday" type="hidden" value="{{{emailSentPreviousDate}}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-two">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="email-sent-this-month">
+                        {{{emailSentThisMonth}}}
+                        <img class="arrow-img" id="sent-mail-this-month-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}email-sent-this-month{{/_i18n}}
+                    </span>
+                    <input id="email-sent-previous-month" type="hidden" value="{{{emailSentPreviousMonth}}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-three">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="avg-of-open-emails">
+                        {{{avgOfOpenEmails}}}%
+                        <img class="arrow-img" id="sent-mail-avg-month-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}avg-open-rate{{/_i18n}}
+                    </span>
+                    <input id="email-sent-avg-previous-month" type="hidden" value="{{{previousMonthAvgOpening}}}"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 col-xs-6" id="panel-three">
+            <div class="container-fluid">
+                <div class="text-center">
+                    <div class="email-count" id="link-sent-this-date">
+                        {{{avgOfOpenLinks}}}%
+                        <img class="arrow-img" id="sent-link-avg-month-img">
+                    </div>
+                    <span class="email-count-label" id="emailSentPreviousDate">
+                        {{#_i18n}}avg-link-click-rate{{/_i18n}}
+                    </span>
+                    <input id="link-sent-avg-previous-month" type="hidden" value="{{{previousMonthAvgOpeningForLink}}}"/>
+                </div>
+            </div>
+        </div>
+    </div>
+	<div class="new-dashboard-row">
+		<div class="new-dashboard-box-container">
+			<div class="new-dashboard-box">
+				<div class="new-dashboard-box-title">
+					Recently Opened Emails
+				</div>
+                <a class="new-dashboard-box-show-all" id="show-all-recently-opened-emails">SHOW ALL</a>
+                {{#readExist}}                                
+				<div class="new-dashboard-box-list">
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-1" data-email-address="{{{readOneEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{readOneSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{readOneEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{readOneTime}}}</div>
+						</div>
+					</div>
+                    {{#readCountTwo}}                                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-2" data-email-address="{{{readTwoEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{readTwoSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{readTwoEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{readTwoTime}}}</div>
+						</div>
+                    </div>
+                    {{/readCountTwo}}
+                    {{#readCountThree}}                                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-3" data-email-address="{{{readThreeEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{readThreeSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{readThreeEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{readThreeTime}}}</div>
+						</div>
+                    </div>
+                    {{/readCountThree}}                               
+                </div>
+                {{/readExist}}
+                {{^readExist}}
+                <div class="no-data-available" style="text-align: center; font-size: large;">
+                    {{#unreadExist}}<br>{{/unreadExist}}
+                    {{#unreadCountTwo}}<br>{{/unreadCountTwo}} 
+                    {{#unreadCountThree}}<br>{{/unreadCountThree}} 
+                    You have 0 opened emails
+                </div>                    
+                {{/readExist}}
+			</div>
+		</div>
+
+
+
+		<div class="new-dashboard-box-container">
+			<div class="new-dashboard-box">
+				<div class="new-dashboard-box-title">
+					Unread Emails
+				</div>
+                <a class="new-dashboard-box-show-all" id="show-all-unread-emails">SHOW ALL</a>
+                {{#unreadExist}}                                
+				<div class="new-dashboard-box-list">
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-4" data-email-address="{{{unreadOneEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{unreadOneSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{unreadOneEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{unreadOneTime}}}</div>
+						</div>
+					</div>
+                    {{#unreadCountTwo}}
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-5" data-email-address="{{{unreadTwoEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{unreadTwoSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{unreadTwoEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{unreadTwoTime}}}</div>
+						</div>
+                    </div>
+                    {{/unreadCountTwo}}
+                    {{#unreadCountThree}}
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-6" data-email-address="{{{unreadThreeEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{unreadThreeSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{unreadThreeEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{unreadThreeTime}}}</div>
+						</div>
+                    </div>
+                    {{/unreadCountThree}}                                 
+                </div>
+                {{/unreadExist}}
+                {{^unreadExist}}
+                <div class="no-data-available" style="text-align: center; font-size: large;">
+                    {{#readExist}}<br>{{/readExist}}
+                    {{#readCountTwo}}<br>{{/readCountTwo}} 
+                    {{#readCountThree}}<br>{{/readCountThree}} 
+                    You have 0 unread emails
+                </div>                    
+                {{/unreadExist}}
+			</div>
+		</div>
+
+
+
+		<!-- <div class="new-dashboard-box-container">
+			<div class="new-dashboard-box">
+				<div class="new-dashboard-box-title">
+					Scheduled emails
+				</div>
+                <a class="new-dashboard-box-show-all" id="show-all-scheduled-emails">SHOW ALL</a>
+                {{#scheduledExist}}                
+				<div class="new-dashboard-box-list">
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-7" data-email-address="{{{scheduledOneEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{scheduledOneSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{scheduledOneEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{scheduledOneTime}}}</div>
+						</div>
+					</div>
+                    {{#scheduledCountTwo}}                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-8" data-email-address="{{{scheduledTwoEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{scheduledTwoSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{scheduledTwoEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{scheduledTwoTime}}}</div>
+						</div>
+                    </div>
+                    {{/scheduledCountTwo}}
+                    {{#scheduledCountThree}}                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-9" data-email-address="{{{scheduledThreeEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{scheduledThreeSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{scheduledThreeEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{scheduledThreeTime}}}</div>
+						</div>
+                    </div>
+                    {{/scheduledCountThree}}           
+                </div>
+                {{/scheduledExist}}
+                {{^scheduledExist}}
+                <div class="no-data-available" style="text-align: center; font-size: large;">
+                    {{#pingExist}}<br>{{/pingExist}}
+                    {{#pingCountTwo}}<br>{{/pingCountTwo}} 
+                    {{#pingCountThree}}<br>{{/pingCountThree}} 
+                    You have 0 scheduled emails
+                </div>                    
+                {{/scheduledExist}}
+			</div>
+		</div> -->
+
+	<div class="new-dashboard-box-container">
+			<div class="new-dashboard-box">
+				<div class="new-dashboard-box-title">
+					Signature clicks
+				</div>
+                <!-- <a class="new-dashboard-box-show-all" id="show-all-signature-clicks">SHOW ALL</a> -->
+                {{#signatureExist}}                
+				<div class="new-dashboard-box-list">
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-7" data-email-address="{{{signatureOneEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{signatureOneSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{signatureOneEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{signatureOneTime}}}</div>
+						</div>
+					</div>
+                    {{#signatureCountTwo}}                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-8" data-email-address="{{{signatureTwoEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{signatureTwoSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{signatureTwoEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{signatureTwoTime}}}</div>
+						</div>
+                    </div>
+                    {{/signatureCountTwo}}
+                    {{#signatureCountThree}}                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-9" data-email-address="{{{signatureThreeEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{signatureThreeSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{signatureThreeEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{signatureThreeTime}}}</div>
+						</div>
+                    </div>
+                    {{/signatureCountThree}}           
+                </div>
+                {{/signatureExist}}
+                {{^signatureExist}}
+                <div class="no-data-available" style="text-align: center; font-size: large;">
+                    {{#pingExist}}<br>{{/pingExist}}
+                    {{#pingCountTwo}}<br>{{/pingCountTwo}} 
+                    {{#pingCountThree}}<br>{{/pingCountThree}} 
+                    You have 0 signature clicks
+                </div>                    
+                {{/signatureExist}}
+			</div>
+		</div>
+
+		<div class="new-dashboard-box-container">
+			<div class="new-dashboard-box">
+				<div class="new-dashboard-box-title">
+					Scheduled PING's
+				</div>
+                <a class="new-dashboard-box-show-all" id="show-all-ping-emails">SHOW ALL</a>
+                {{#pingExist}}
+				<div class="new-dashboard-box-list">
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-10" data-email-address="{{{pingOneEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{pingOneSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{pingOneEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{pingOneTime}}}</div>
+						</div>
+					</div>
+                    {{#pingCountTwo}}                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-11" data-email-address="{{{pingTwoEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{pingTwoSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{pingTwoEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{pingTwoTime}}}</div>
+						</div>
+                    </div>
+                    {{/pingCountTwo}}
+                    {{#pingCountThree}}                
+					<div class="new-dashboard-box-item">
+						<div class="new-dashboard-box-item-avatar" id="profile-pic-12" data-email-address="{{{pingThreeEmail}}}"></div>
+						<div class="new-dashboard-box-item-right">
+							<div class="new-dashboard-box-item-main">
+								<div class="new-dashboard-box-subject">{{{pingThreeSubject}}}</div>
+								<div class="new-dashboard-box-email">{{{pingThreeEmail}}}</div>
+							</div>
+							<div class="new-dashboard-box-item-time">{{{pingThreeTime}}}</div>
+						</div>
+                    </div>
+                    {{/pingCountThree}}                              
+                </div>
+                {{/pingExist}}
+                {{^pingExist}}
+                <div class="no-data-available" style="text-align: center; font-size: large;">
+                    {{#signatureExist}}<br>{{/signatureExist}}
+                    {{#signatureCountTwo}}<br>{{/signatureCountTwo}} 
+                    {{#signatureCountThree}}<br>{{/signatureCountThree}} 
+                    You have 0 ping emails
+                </div>                    
+                {{/pingExist}}
+			</div>
+		</div>
+		
+			
+		
+	</div>
+    <div class="row" style="margin: 50px 0px;">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4" style="padding-left: 20px;">
+            <div id="graf-head">
+                {{#_i18n}}emails-sent-opened{{/_i18n}}
+            </div>
+        </div>
+        <div class="col-lg-5 col-xl-5 col-md-5 col-sm-5 text-right" id="tabs">
+            <img src="/img/opened-email-graph-icon.svg" id="opened">
+            <span class="graph-indicator" id="opened-text">
+                {{#_i18n}}opened{{/_i18n}}
+            </span>
+            <img src="/img/send-email-graph-icon.svg" id="sent">
+            <span class="graph-indicator" id="sent-text">
+                {{#_i18n}}sent{{/_i18n}}
+            </span>
+            <img src="/img/unopened-email-graph-icon.svg" id="unopened">
+            <span class="graph-indicator" id="unopened-text">
+                {{#_i18n}}unopened{{/_i18n}}
+            </span>
+        </div>
+        <div class="col-lg-3 col-xl-3 col-md-3 col-sm-3 text-left">
+            <div class="wrap-select" id="date-picker">
+                <div class="wrapper-dropdown-3 win_btn_padding_top_12px" featureset="{{featuresetFlag}}" id="dd" subid="{{subId}}">
+                    <span>
+                        {{#_i18n}}this-month{{/_i18n}}
+                    </span>
+                    <img class="pull-right win_dropdown_arrow" id="dropdown-arrow" src="/img/graph-date-selector-drop-down.svg">
+                    </img>
+                    <ul class="dropdown">
+                        <li>
+                            <a href="#" value="This Week">
+                                {{#_i18n}}this-week{{/_i18n}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" value="Last Week">
+                                {{#_i18n}}last-week{{/_i18n}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" value="This Month">
+                                {{#_i18n}}this-month{{/_i18n}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" value="Last Month">
+                                {{#_i18n}}last-month{{/_i18n}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" value="This Year">
+                                {{#_i18n}}this-year{{/_i18n}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" value="Last Year">
+                                {{#_i18n}}last-year{{/_i18n}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="date-picker-cal">
+                                {{#_i18n}}custom-range{{/_i18n}}
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div data-backdrop="static" id="dashboard-upgrade-modal" style="display: none;">
+                <div class="row">
+                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 text-center">
+                        <div class="background-circle">
+                        </div>
+                        <img class="dash-graph-img" src="/img/dash-graph.svg">
+                        </img>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 text-center dash-graph-head">
+                        <p>
+                            Want to see MailTag data
+                        </p>
+                        <p>
+                            beyond the last 30 days?
+                        </p>
+                    </div>
+                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 text-center dash-graph-msg">
+                        <p>
+                            Upgrade to PRO for just $18 (billed yearly).
+                        </p>
+                    </div>
+                    <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 text-center dash-graph-btn" style="text-align: center;text-align: -webkit-center;text-align: -moz-center;">
+                        <button class="btn-md upgrade-btn">
+                        <img src="/img/flash.svg">
+                        </img>
+                        {{#_i18n}}menu-item-upgrade{{/_i18n}}
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-xl-12 col-md-12 col-sm-12 text-center">
+            <div id="container">
+            </div>
+        </div>
+    </div>
+    </hr>
+    </hr>
+</div>
+</div>
+<div style="display: none;">
+<div class="localized-string" id="localized-string-sent">
+    {{#_i18n}}sent{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-opened">
+    {{#_i18n}}opened{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-unopened">
+    {{#_i18n}}unopened{{/_i18n}}
+</div>
+</div>
+<div style="display: none;">
+<div class="localized-string" id="localized-string-upgrade">
+    {{#_i18n}}menu-item-upgrade{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-pro-user">
+    {{#_i18n}}menu-item-pro-user{{/_i18n}}
+</div>
+</div>
+<div style="display: none;">
+<div id="subIdFlag" value="{{subIdFlag}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="planId" value="{{planId}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="featureset" value="{{featureset}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="expiryDate" value="{{expiryDate}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="paymentStatus" value="{{paymentStatus}}">
+</div>
+</div>
+<div style="display: none;">
+<div id="plan" value="{{plan}}">
+</div>
+<div style="display: none;">
+<div id="userCreatedOn" value="{{userCreatedOn}}">
+</div>
+</div>
+<div id="welcome-msg" style="display: none;">
+<div class="localized-string" id="localized-string-name-0">
+    {{#_i18n}}name-0{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-0">
+    {{#_i18n}}msg-0{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-1">
+    {{#_i18n}}name-1{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-1">
+    {{#_i18n}}msg-1{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-2">
+    {{#_i18n}}name-2{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-2">
+    {{#_i18n}}msg-2{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-3">
+    {{#_i18n}}name-3{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-3">
+    {{#_i18n}}msg-3{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-4">
+    {{#_i18n}}name-4{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-4">
+    {{#_i18n}}msg-4{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-5">
+    {{#_i18n}}name-5{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-5">
+    {{#_i18n}}msg-5{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-6">
+    {{#_i18n}}name-6{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-6">
+    {{#_i18n}}msg-6{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-7">
+    {{#_i18n}}name-7{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-7">
+    {{#_i18n}}msg-7{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-8">
+    {{#_i18n}}name-8{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-8">
+    {{#_i18n}}msg-8{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-9">
+    {{#_i18n}}name-9{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-9">
+    {{#_i18n}}msg-9{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-10">
+    {{#_i18n}}name-10{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-10">
+    {{#_i18n}}msg-10{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-11">
+    {{#_i18n}}name-11{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-11">
+    {{#_i18n}}msg-11{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-12">
+    {{#_i18n}}name-12{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-12">
+    {{#_i18n}}msg-12{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-13">
+    {{#_i18n}}name-13{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-13">
+    {{#_i18n}}msg-13{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-14">
+    {{#_i18n}}name-14{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-14">
+    {{#_i18n}}msg-14{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-15">
+    {{#_i18n}}name-15{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-15">
+    {{#_i18n}}msg-15{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-16">
+    {{#_i18n}}name-16{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-16">
+    {{#_i18n}}msg-16{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-17">
+    {{#_i18n}}name-17{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-17">
+    {{#_i18n}}msg-17{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-18">
+    {{#_i18n}}name-18{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-18">
+    {{#_i18n}}msg-18{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-19">
+    {{#_i18n}}name-19{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-19">
+    {{#_i18n}}msg-19{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-20">
+    {{#_i18n}}name-20{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-20">
+    {{#_i18n}}msg-20{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-21">
+    {{#_i18n}}name-21{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-21">
+    {{#_i18n}}msg-21{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-22">
+    {{#_i18n}}name-22{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-22">
+    {{#_i18n}}msg-22{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-23">
+    {{#_i18n}}name-23{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-23">
+    {{#_i18n}}msg-23{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-24">
+    {{#_i18n}}name-24{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-24">
+    {{#_i18n}}msg-24{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-25">
+    {{#_i18n}}name-25{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-25">
+    {{#_i18n}}msg-25{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-26">
+    {{#_i18n}}name-26{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-26">
+    {{#_i18n}}msg-26{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-27">
+    {{#_i18n}}name-27{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-27">
+    {{#_i18n}}msg-27{{/_i18n}}
+</div>
+<div class="localized-string" id="localized-string-name-28">
+    {{#_i18n}}name-28{{/_i18n}}{{userName}}
+</div>
+<div class="localized-string" id="localized-string-msg-28">
+    {{#_i18n}}msg-28{{/_i18n}}
+</div>
+</div>
+<script src="/js/moment.js" type="text/javascript">
+</script>
+<script src="/lib/jquery_ui_date_picker/jquery.daterangepicker.js" type="text/javascript">
+</script>
+<script src="/js/dashboardNew.js?v=3.0">
+</script>
+<script src="https://code.highcharts.com/highcharts.js">
+</script>
+<script src="https://code.highcharts.com/modules/exporting.js">
+</script>

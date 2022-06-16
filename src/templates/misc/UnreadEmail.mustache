@@ -1,0 +1,53 @@
+<link href="/css/unreadEmails.css" rel="stylesheet">
+<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+    <div class="container-fluid" style="margin-left: 205px;margin-top: 1vh;background-color: white; height: 98vh;">
+        <div class="row">
+            <div class="row">
+                <div class="col-lg-8 col-xl-8 col-md-8 col-sm-8">
+                    <h2><b>Unread Emails</b></h2>
+                </div>
+                <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4">
+                    <select id="change-user" style="display: none;">
+                        {{#subscription}}
+                        <option value="{{email}}" image="{{image_url}}">{{email}}</option>
+                        {{/subscription}}
+                    </select>
+                    <div id="switch-user"></div>
+                </div>
+            </div>
+            <input type="hidden" id="hiddenCount" value="{{{emailSummaryLength}}}">
+            <hr id="big-hr">
+            <div class="row">
+                <div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" style="margin-top: 20px;">
+                    {{#unreadArray}}
+                    <div class="panel panel-default">
+                        <div class="panel-body panelBody">
+                            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <table>
+                                    <tr>
+                                        <td style="width: 100%;"><h4><b>{{subject}}</b></h4>
+                                            <h4>{{name}} ({{destination_email}}) hasn't read your email yet.</h4>
+                                        <h4>Your email was sent {{ago}} ago, on {{created_on}}.</h4></td>
+                                        <td class="align-middle"><button type="button" class="btn btn-md btn-default openEmailButton" thread-id="{{gmail_thread_id}}">Open Email<span class="glyphicon glyphicon-arrow-right" style="margin-left: 5px;"></span></button></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    {{/unreadArray}}
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <ul class="pager pull-left" style="display: none;">
+                                <li><a id="all-read-previous">Previous</a></li>
+                                <li><a id="all-read-next">Next</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{^unreadArray}}
+            <h3 style="margin-top: 0px;">Currently, no emails are unread.</h3> {{/unreadArray}}
+        </div>
+    </div>
+</div>
+<script src="/js/emailUnread.js"></script>

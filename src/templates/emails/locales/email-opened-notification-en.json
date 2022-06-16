@@ -1,0 +1,12 @@
+{
+  "your-email-was-opened": "Your email was opened",
+  "read-your-email-after": " read your email {{read-after}} after it was sent.",
+  "sent": "SENT",
+  "opened": "OPENED",
+  "recipient": "RECIPIENT",
+  "location": "LOCATION",
+  "notification-settings": "NOTIFICATION SETTINGS",
+  "text-summary": "Your email was opened. {{recipient}} read your email {{read-after}} after it was sent.",
+  "sent-dateTime": "{{email_sent_timestamp}}",
+  "open-dateTime": "{{email_read_timestamp}}"
+}

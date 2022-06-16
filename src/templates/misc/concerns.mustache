@@ -1,0 +1,105 @@
+{{% BLOCKS }}
+{{< static-pages-layout }}
+    {{$ title }}Concerns | MailTag for Gmail{{/title}}
+    
+    {{$ header }}{{/header}}
+    
+    {{$ content }}
+        {{> ./components/install }}
+    
+    <main id="main" class="concerns-holder">
+        <div class="overlay-header">
+            <a href="/"><img alt="MailTag" height="27" src="/images/logo.png" width="157"/></a>
+        </div>
+        
+        <div class="banner">
+            <div class="container">
+                <div class="column-content">
+                    <div class="col">
+                        <img alt="image description" src="/images/shield-lock@2x.png" height="340" width="298"/>
+                    </div>
+                    
+                    <div class="col">
+                        <h2>Do you have concerns?</h2>
+                        
+                        <p>
+                            Our <a href="/privacy-policy" target="_blank">privacy policy</a> is simple and transparent.
+                            <br>
+                            Feel free to read it for yourself, but in case you’re wondering…
+                        </p>
+                        
+                        <ul class="list">
+                            <li>No one at MailTag is able to view any of your emails.</li>
+                            <li>We have no insight into any of the content stored on your inbox (or any of the information stored on your browser).</li>
+                        </ul>
+                        
+                        <p>In addition, any and all information that you provide us will never be shared or sold.</p>
+                        
+                        <a class="btn btn-yellow btn-lift add-chrome" href="#" id="install-extension-button-toolbar">
+                            Add to Chrome - It's Free!
+                        </a>
+                    </div>
+                </div>
+                
+                <section class="gallery-section gallery-section-white">
+                    <h2>
+                        Trusted by
+                    </h2>
+                    <div class="logo-slider">
+                        <div class="slide">
+                            <img alt="image description" height="35" src="/images/google-fff@2x.png" width="117"/>
+                        </div>
+                        <div class="slide">
+                            <img alt="image description" height="35" src="/images/uber-fff@2x.png" width="117"/>
+                        </div>
+                        <div class="slide">
+                            <img alt="image description" height="35" src="/images/verizon-fff@2x.png" width="117"/>
+                        </div>
+                        <div class="slide">
+                            <img alt="image description" height="35" src="/images/lyft-fff@2x.png" width="117"/>
+                        </div>
+                        <div class="slide">
+                            <img alt="image description" height="35" src="/images/shopify-fff@2x.png" width="117"/>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <div class="container container-propositions">
+            <div class="column-content">
+                <div class="col">
+                    <div class="headline">
+                        So, why does MailTag require certain permissions?
+                    </div>
+                    <p>
+                        Our service modifies the appearance of your Gmail by adding new features, and thus requires your permission to modify your webpages.
+                    </p>
+                </div>
+                
+                <div class="col">
+                    <div class="headline">
+                        Is MailTag safe?
+                    </div>
+                    <p>
+                        Absolutely. MailTag securely communicates with Google via the secure oAuth system (making our service much safer than most other browser extension technologies).
+                    </p>
+                </div>
+            </div>
+            
+            <p>
+                If you have any questions, please don’t hesitate to reach out to <a href="mailto:help@mailtag.io">Help@MailTag.io</a> at anytime!
+                <br>
+                We’re happy to help!
+            </p>
+        </div>
+    </main>
+    {{/ content }}
+    
+    {{$ footer }}{{/footer}}
+        
+    {{$ scripts }}
+        <script defer="" src="/js/home.js" type="text/javascript"></script>
+    {{/ scripts }}
+    
+{{/ static-pages-layout }}

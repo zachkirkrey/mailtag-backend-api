@@ -1,0 +1,252 @@
+<link href="/css/dashboard.css" rel="stylesheet">
+<!-- <script id="profitwell-js" data-pw-auth="800982233c7362be92984f6363f547c1">
+        (function(i,s,o,g,r,a,m){i[o]=i[o]||function(){(i[o].q=i[o].q||[]).push(arguments)};
+        a=s.createElement(g);m=s.getElementsByTagName(g)[0];a.async=1;a.src=r+'?auth='+
+        s.getElementById(o+'-js').getAttribute('data-pw-auth');m.parentNode.insertBefore(a,m);
+        })(window,document,'profitwell','script','https://public.profitwell.com/js/profitwell.js');
+
+        try{
+            var currentUser = common.getUserDataFromCookie();
+            if (currentUser['email']){
+                profitwell('start', {'user_email': currentUser['email']});
+            }
+            else{
+                profitwell('start', {});
+            }
+        }
+        catch(e){
+
+        }  
+</script> -->
+
+<div class="col-lg-12 col-xl-12 col-md-12 col-sm-12">
+    <div class="container-fluid" style="margin-left: 205px;margin-top: 1vh;background-color: white; height: 98vh;">
+        <div class="row text-center">
+            <h1 style="font-weight: bold;">Upgrade</h1>
+            <!-- <h3>Begin Your FREE 30-Day PRO Trial</h3> -->
+            <h5>100% Happiness Guarantee. 30 day refund policy & cancel anytime.</h5>
+        </div>
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6" id="bigHr" style="border: solid 3px #e0dfdf !important;margin-bottom:15px;"></div>
+            <div class="col-lg-3"></div>
+        </div>
+        <div class="row" style="margin-bottom:10px;"></div>
+        <!-- <div class="row text-center">
+            <h1 style="color:#696969;font-family: sans-serif;">Get started today.</h1>
+            <h5 style="color:#9e9e9e;font-size:large;font-weight: normal;">Begin your 7-day trial.</h5>
+        </div> -->
+        <div class="row text-center">
+            <div class="btn-group" data-toggle="buttons">
+                <label class="btn btn-outlined" id="annual-plan">
+                    <input type="radio" name="duration" value="yearly" checked="checked"> Annual (Save 20%)
+                </label>
+                <label class="btn btn-outlined" id="monthly-plan">
+                    <input type="radio" name="duration" value="monthly" > Monthly
+                </label>
+            </div>
+        </div>
+        <div class="row" style="margin-bottom:40px;"></div>
+        <div class="row" id="monthly-plans-row" style="display:none;">
+            <div class="col-md-6 col-lg-1 col-xl-1"></div>
+            <div class="col-md-5 col-sm-5 col-lg-5">
+                <div class="panel panel-default" style="margin-top:30px;box-shadow: 0 0 15px #DFE0E4;">
+                    <div class="panel-heading panel-heading-custom">
+                        <h1 style="font-weight: bolder;">BASIC</h1>
+                        <h4>Limited free version</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item borderless text-center">Unlimited email tracking</li>
+                            <li class="list-group-item borderless text-center">MailTag signature watermark</li>
+                            <li class="list-group-item borderless text-center">MailTag ads</li>
+                            <li class="list-group-item borderless text-center">Real-time desktop push notifications</li>
+                            <li class="list-group-item borderless text-center">Link tracking</li>
+                            <li class="list-group-item borderless text-center">View unread emails</li>
+                            <li class="list-group-item borderless text-center">Tracking panel dashboard</li>
+                            <li class="list-group-item borderless text-center">Ticket-system support</li>
+                        </ul>
+                        <!-- <img src="https://app.mailtag.io/img/already-installed.png" style="width: 260px;" data-plan-id="free-trial"> -->
+                        <div class="row text-center">
+                            <button class="btn icon-search text-center" data-plan-id="free-trial" id="free-plan" disabled="true"><h4 style="margin:0px;">Already Installed</h4></button>
+                        </div>
+                    </div>
+                    <!-- <div class="panel-footer"></div> -->
+                </div>
+            </div>
+            <div class="col-md-5 col-sm-5 col-lg-5">
+                <div class="panel panel-default" style="padding-bottom: 5px;padding-top: 1px;box-shadow: 0 0 15px #DFE0E4;">
+                    <div class="panel-heading panel1-heading-custom">
+                        <img class="img-responsive pull-right" src="https://app.mailtag.io/img/MOST-POPULAR.png" style="display: none;position:absolute;width: 50%;height:auto;z-index:999;left: 172px;top: -1px;">
+                        <h1 class ="text-center" style="font-weight: bolder;">PRO</h1>
+                        <h4 class ="text-center">Only $25 (billed monthly)</h4>
+                    </div>
+                    <div class="panel-body text-center">
+                        <ul class="list-group" style="margin-top: -27px;">
+                            <li class="list-group-item borderless text-center">All features from Basic plan</li>
+                            <li class="list-group-item borderless text-center">No MailTag signature watermark</li>
+                            <li class="list-group-item borderless text-center">No MailTag ads</li>
+                            <!--<li class="list-group-item borderless text-center">Real-time desktop push notifications</li>
+                            <li class="list-group-item borderless text-center">Link tracking</li>
+                            <li class="list-group-item borderless text-center">Reminders</li>
+                             <li class="list-group-item borderless text-center">Daily email report</li> 
+                            <li class="list-group-item borderless text-center">Tracking panel dashboard</li>-->
+                            <li class="list-group-item borderless text-center">Executive service support</li>
+                        </ul>
+                        <!-- <select id="change-user" style="display: none;" class="text-center">
+                            {{#subscription}}
+                            <option value="{{email}}" image="{{image_url}}">{{email}}</option>
+                            {{/subscription}}
+                        </select>
+                        <div id="switch-user"></div>-->
+                        <div class="row text-center">
+                            <button class="btn icon-search text-center btn-subscribe" type="submit" id="basic-monthly" data-plan-id="basic" data-plan-price="25.00" style="margin-top: -5px;margin-bottom: 10px;padding: 6px 25px;"><h4 style="margin:0px;">Upgrade Now</h4></button>
+                            <!-- <img src="https://app.mailtag.io/img/begin-free-trial.png" id="basic-monthly" style="width: 260px;cursor: pointer;" data-plan-id="basic" class="btn-subscribe"> -->
+                        </div>
+                    </div>
+                    <!-- <div class="panel-footer">
+                        
+                    </div> -->
+                </div>
+            </div>
+            <!-- <div class="col-md-6 col-lg-2 col-xl-2"></div> -->
+            <!-- <div class="col-xs-12 col-sm-12 col-lg-3 col-xl-3"></div> -->
+            <!-- <div class="col-md-3 col-lg-4 offset-lg-2 col-xl-4">
+                <div class="panel price panel-green">
+                    <div class="panel-heading arrow_box text-center" style="background-color: #4EEE94;color:#fff;">
+                        <h3>Pro Teams</h3>
+                        <h4>For small companies</h4>
+                    </div>
+                    <div class="panel-body text-center">
+                        <span class="plan-price"><sup style="font-size: 29px;position:relative;top:-20px;">$ </sup>99.5</span><span class="plan-duration"> / mo</span>
+                    </div>
+                    <ul class="text-center" style="font-size:15px;font-family: sans-serif;">
+                        <li> Unlimited Email Tracking</li>
+                        <li> Non-Removable Signature</li>
+                        <li> Real-time Notifications</li>
+                        <li> Reminders</li>
+                        <li> Ticket-System Support</li>
+                        <li> Link Tracking</li>
+                        <li> Daily email report sent.</li>
+                        <li> Superior VIP Service Support</li>
+                        <li> Control Panel Dashboard</li>
+                        <li> Top-level Executive Support</li>
+                    </ul>
+                    <div class="panel-footer">
+                        <button class="btn btn-md btn-block btn-subscribe" type="submit" data-plan-id="executive">BUY NOW</button>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <div class="row text-center" id="yearly-plans-row" >
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-1 col-xl-1"></div>
+            <div class="col-md-5 col-sm-5 col-lg-5">
+                <div class="panel panel-default" style="margin-top:30px;box-shadow: 0 0 15px #DFE0E4;">
+                    <div class="panel-heading panel-heading-custom">
+                        <h1 style="font-weight: bolder;">BASIC</h1>
+                        <h4>Limited free version</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group">
+                            <li class="list-group-item borderless text-center">Unlimited email tracking</li>
+                            <li class="list-group-item borderless text-center">MailTag signature watermark</li>
+                            <li class="list-group-item borderless text-center">MailTag ads</li>
+                            <li class="list-group-item borderless text-center">Real-time desktop push notifications</li>
+                            <li class="list-group-item borderless text-center">Link tracking</li>
+                            <li class="list-group-item borderless text-center">View unread emails</li>
+                            <li class="list-group-item borderless text-center">Tracking panel dashboard</li>
+                            <li class="list-group-item borderless text-center">Ticket-system support</li>
+                        </ul>
+                        <!-- <img src="https://app.mailtag.io/img/already-installed.png" style="width: 260px;" data-plan-id="free-trial"> -->
+                        <div class="row text-center">
+                            <button class="btn icon-search text-center" data-plan-id="free-trial" id="free-plan" disabled="true"><h4 style="margin:0px;">Already Installed</h4></button>
+                        </div>
+                    </div>
+                    <!-- <div class="panel-footer"></div> -->
+                </div>
+                <!-- <div class="panel price panel-blue">
+                    <div class="panel-heading arrow_box text-center" style="background-color: #739ae9;color:#fff;border-radius: 0px;">
+                        <h1 style="font-weight: bolder;">BASIC</h1>
+                        <h4>Limited free version.</h4>
+                    </div>
+                    <div class="panel-body"></div>
+                    <ul class="list-group">
+                        <li class="borderless text-center">Non-Removable Signature</li>
+                        <li class="list-group-item borderless text-center">Real-time Notifications</li>
+                        <li class="list-group-item borderless text-center">Reminders</li>
+                        <li class="list-group-item borderless text-center">Ticket-System Support</li>
+                    </ul>
+                    
+                    <div class="panel-footer">
+                        <button class="btn btn-lg btn-block btn-subscribe-free" type="submit" data-plan-id="free-trial" disabled="true">Already Installed</button>
+                    </div>
+                </div> -->
+            </div>
+            <div class="col-md-5 col-sm-5 col-lg-5">
+                <div class="panel panel-default" style="padding-bottom: 5px;padding-top: 1px;box-shadow: 0 0 15px #DFE0E4;">
+                    <div class="panel-heading panel1-heading-custom">
+                        <img class="img-responsive pull-right" src="https://app.mailtag.io/img/MOST-POPULAR.png" style="display: none;position:absolute;width: 50%;height:auto;z-index:999;left: 172px;top: -1px;">
+                        <h1 style="font-weight: bolder;">PRO</h1>
+                        <h4>$18 (billed yearly)</h4>
+                    </div>
+                    <div class="panel-body">
+                        <ul class="list-group" style="margin-top: -27px;">
+                            <li class="list-group-item borderless text-center">All features from Basic plan</li>
+                            <li class="list-group-item borderless text-center">No MailTag signature watermark</li>
+                            <li class="list-group-item borderless text-center">No MailTag ads</li>
+                            <!--<li class="list-group-item borderless text-center">Real-time desktop push notifications</li>
+                            <li class="list-group-item borderless text-center">Link tracking</li>
+                            <li class="list-group-item borderless text-center">Reminders</li>
+                             <li class="list-group-item borderless text-center">Daily email report</li> 
+                            <li class="list-group-item borderless text-center">Tracking panel dashboard</li>-->
+                            <li class="list-group-item borderless text-center">Executive service support</li>
+                        </ul>
+                        <div class="row text-center">
+                            <button class="btn icon-search text-center btn-subscribe" type="submit" id="basic-yearly" data-plan-id="basic" data-plan-price="216.00" style="margin-top: -5px;margin-bottom: 10px;padding: 6px 25px;"><h4 style="margin:0px;">Upgrade Now</h4></button>
+                            <!-- <img src="https://app.mailtag.io/img/begin-free-trial.png" id="basic-monthly" style="width: 260px;cursor: pointer;" data-plan-id="basic" class="btn-subscribe"> -->
+                        </div>
+                        <!-- <img src="https://app.mailtag.io/img/begin-free-trial.png" id="basic-monthly" style="width: 260px;cursor: pointer;" data-plan-id="basic" class="btn-subscribe"> -->
+                    </div>
+                    <!-- <img src="https://app.mailtag.io/img/begin-free-trial.png" id="basic-yearly" style="width: 260px;cursor: pointer;" data-plan-id="basic" class="btn-subscribe"> -->
+                </div>
+                <!-- <div class="panel-footer text-center">
+                    <h5>from <span style="font-size:18px;color: #4EEE94;">US$47.00</span>/ year</h5>
+                    <button class="btn btn-md btn-block btn-subscribe" type="submit" data-plan-id="basic">Begin Free Trial</button>
+                </div> -->
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-lg-1 col-xl-1"></div>
+        <!-- <div class="col-md-3 col-lg-4 offset-lg-2 col-xl-4">
+            <div class="panel price panel-green">
+                <div class="panel-heading arrow_box text-center" style="background-color: #4EEE94;color:#fff;">
+                    <h3>Pro Teams</h3>
+                    <h4>For small companies</h4>
+                </div>
+                <div class="panel-body text-center">
+                    <span class="plan-price"><sup style="font-size: 29px;position:relative;top:-20px;">$ </sup>99.5</span><span class="plan-duration"> / mo</span>
+                </div>
+                <ul class="text-center" style="font-size:15px;font-family: sans-serif;">
+                    <li> Unlimited Email Tracking</li>
+                    <li> Non-Removable Signature</li>
+                    <li> Real-time Notifications</li>
+                    <li> Reminders</li>
+                    <li> Ticket-System Support</li>
+                    <li> Link Tracking</li>
+                    <li> Daily email report sent.</li>
+                    <li> Superior VIP Service Support</li>
+                    <li> Control Panel Dashboard</li>
+                    <li> Top-level Executive Support</li>
+                </ul>
+                <div class="panel-footer">
+                    <button class="btn btn-md btn-block btn-subscribe" type="submit" data-plan-id="executive">BUY NOW</button>
+                </div>
+            </div>
+        </div> -->
+    </div>
+    <!-- </div> -->
+</div>
+</div>
+<script src="/js/subscribe.js"></script>
+<script src="/js/mixpanel.js"></script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+<script src="https://checkout.stripe.com/checkout.js"></script>

@@ -1,0 +1,15 @@
+{
+  "text-summary": "Hi {{userName}}, welcome to MailTag! In-case you didn’t know, you can earn free PRO time by referring friends to sign-up for MailTag. What are you waiting for? If MailTag has helped you save valuable time and energy, and you know it can help other people do the same, why not share the love? :-)",
+  "greetings": "Hi {{userName}},",
+  "welcome-line-1": "In-case you didn’t know, you can earn free PRO time by referring<br>friends to sign-up for MailTag.",
+  "welcome-line-2": "Here’s how it works:",
+  "get-1-month-free": "Get <b>1 month</b> free",
+  "refer-1-friend": "Refer 1 friend",
+  "get-1-year-free": "Get <b>1 year</b> free",
+  "refer-6-friends": "Refer 6 friends",
+  "get-lifetime-free": "Get <b>lifetime</b> free",
+  "refer-25-friends": "Refer 25 friends",
+  "post-script": "But here’s the best part ... <b>each of your referred friends will<br>also be provided with 1 month of free MailTag PRO</b> upon<br>signing up. It’s a double-win!<br><br>What are you waiting for?<br>If MailTag has helped you save valuable time and energy,<br>and you know it can help other people do the same,<br>why not share the love? :-)",
+  "earn-free-pro": "EARN FREE PRO",
+  "signature": "Best,<br> MailTag Customer Success Team"
+}

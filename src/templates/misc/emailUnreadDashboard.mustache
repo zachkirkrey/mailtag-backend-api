@@ -1,0 +1,143 @@
+<link href="/css/readEmails.css?v=3.0" rel="stylesheet"/>
+<link href="/lib/youtube-video/grt-youtube-popup.css" rel="stylesheet" />
+<div class="container-fluid" style="margin-left: 205px;padding: 0px 0px 0px 40px;">
+    <input id="timezone" timezone="{{{timezone}}}" type="hidden">
+    <input id="hiddenCount" type="hidden" value="{{{emailSummaryLength}}}">
+    <!--  {{#showflag}}
+    <h3>SHOWING EMAILS {{{start}}}-{{{end}}} OF {{{emailSummaryLength}}}</h3>
+    {{/showflag}} -->
+    <input name="count" type="hidden" value="{{emailEventcount}}">
+    <div class="row" style="margin: 23px 0px;">
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+			<div id="sidemenu-btn">
+				<i class="fa fa-bars"></i>
+			</div>
+            <div id="inbox-title">
+                {{#_i18n}}your-inbox{{/_i18n}}
+            </div>
+        </div>
+        <div class="col-lg-6 col-xl-6 col-md-6 col-sm-6">
+            <select id="change-user" style="display: none;">
+                {{#subscription}}
+                <option image="{{image_url}}" value="{{email}}">
+                    {{email}}
+                </option>
+                {{/subscription}}
+            </select>
+            <div class="pull-right" id="switch-user">
+            </div>
+            <div class="pull-right progress-bar-container">
+            </div>
+            <img class="pull-right" id="feedback-img" src="/img/ic-feedback.svg">
+            </img>
+        </div>
+    </div>
+    <hr id="big-hr">
+    <div class="row">
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-12">
+            <img src="/img/inbox-search.svg" id="inbox-search-img" style="position: absolute;top: 21px;left: 30px;">
+            <input type="text" placeholder="Start typing to search subject lines..." class="form-control" id="inbox-read-search">
+            <input type="text" placeholder="Start typing to search subject lines..." class="form-control" id="inbox-unread-search" style="display: none;">
+        </div>
+        <div class="col-lg-4 col-xl-4 col-md-3 col-sm-4 col-xs-12 text-center">
+            <!-- <div class="col-lg-4 col-xl-3 col-md-6 col-sm-3 col-xs-3 text-center">
+            </div>
+            -->
+            <!-- <div class="col-lg-4 col-xl-6 col-md-3 col-sm-6 col-xs-6 text-center read-btn-div"> -->
+            <div class="btn-group text-center email-btn-grp">
+                <button class="btn read-btn email-btn btn-md win_btn_padding_top" type="button">
+                {{#_i18n}}read{{/_i18n}}
+                </button>
+                <button class="btn unread-btn email-btn btn-md win_btn_padding_top" type="button">
+                {{#_i18n}}unread{{/_i18n}}
+                </button>
+            </div>
+            <!-- </div> -->
+            <!-- <div class="col-lg-4 col-xl-3 col-md-4 col-sm-3 col-xs-3 text-center">
+            </div> -->
+        </div>
+        <div class="col-lg-4 col-xl-4 col-md-4 col-sm-4 col-xs-0">
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="read-email-content" style="display: none;">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="read-email-table">
+            </div>
+            <div class="empty-email" id="empty-read-email" style="display: none;">
+                <img src="/img/Illustration-Two.svg" style="max-width:100%">
+                <div class="email-text">
+                    None of your emails have been read yet.
+                </div>
+                <!-- <a class="btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" youtubeid="kAJdpzdOLXw">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </a> -->
+                <!--div class="wistia_embed wistia_async_6df6f749ss popover=true popoverContent=html wistia_embed_initialized btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" id="wistia-6df6f749ss-1" style="display: inline-block;">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </div-->
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="read-spinner">
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="unread-email-content">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12" id="unread-email-table">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 empty-email" id="empty-unread-email" style="display: none;">
+                <img src="/img/Illustration-Two.svg">
+                <div class="email-text">
+                    Huraaay! All of your emails have been opened.
+                </div>
+                <!-- <a class="btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" youtubeid="kAJdpzdOLXw">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </a> -->
+                <div class="wistia_embed wistia_async_6df6f749ss popover=true popoverContent=html wistia_embed_initialized btn btn-video youtube-link text-center watch-tutorial windows-watch-tutorial" id="wistia-6df6f749ss-1" style="display: inline-block;">
+                    <img src="/img/play-circle.svg" style="width: 23px;margin: 0px 5px 3px 0px;">
+                    Watch Tutorial
+                </div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div id="unread-spinner">
+                </div>
+            </div>
+        </div>
+    </div>
+    </hr>
+</div>
+<div style="display: none;">
+    <div id="subIdFlag" value="{{subIdFlag}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="planId" value="{{planId}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="featureset" value="{{featureset}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="expiryDate" value="{{expiryDate}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="plan" value="{{plan}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="paymentStatus" value="{{paymentStatus}}">
+    </div>
+</div>
+<div style="display: none;">
+    <div id="userCreatedOn" value="{{userCreatedOn}}">
+    </div>
+</div>
+<script src="/js/moment.js" type="text/javascript">
+</script>
+<script src="/lib/youtube-video/grt-youtube-popup.js">
+</script>
+<script src="/js/emailUnreadDashboard.js?v=3.0">
+</script>

@@ -1,0 +1,18 @@
+{
+  "refer-heading-1": "Ready to make more <br/> sales in less time?",
+  "refer-heading-2": "MailTag is a powerful light-weight sales platform<br/>that lives inside of your Gmail.",
+  "text-summary": "{{userName}} has invited you to join MailTag. Email Tracking: Unlimited real-time email tracking, Email Scheduling: Make your emails arrive at the perfect time, every time., Email Pings: Automate your email follow-up process.",
+  "email-begin-text": "I just started using MailTag. I think you should check it out.",
+  "greetings": "{{userName}} has invited you to join MailTag",
+  "email-tracking": "Email Tracking",
+  "email-tracking-benefit-1": "Unlimited real-time",
+  "email-tracking-benefit-2": "email tracking",
+  "watch-video": "Watch Video",
+  "email-scheduling": "Email Scheduling",
+  "email-scheduling-benefit-1": "Make your emails arrive at the perfect time, every time.",
+  "email-scheduling-benefit-2": "",
+  "email-pings": "Email Pings",
+  "email-pings-benefit-1": "Automate your email",
+  "email-pings-benefit-2": "follow-up process",
+  "join-mailtag": "JOIN MAILTAG"
+}
