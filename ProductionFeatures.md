@@ -1,0 +1,128 @@
+MailTag.io production features: 
+
+- auth with google same login/register
+- dashboard page
+ - statistics (numbers)
+    - emails sent today
+    - emails sent this month
+    - average open rate (what is open rate?)
+    - average link-click rate (with button to inbox)
+    - recently opened emails
+    - unread emails
+    - signature clicks
+    - schedules pings(what is ping?)
+    - emails sent and opened chart (timeline) with range filter (month, week, year etc)
+- inbox page
+	- read / unread sections
+	- search functionality
+- signature generator page
+	- personal information form
+		- avatar (upload file)
+		- avatar border radius type
+		- avatar size scrollbar
+		- name
+		- title
+		- company
+		- email
+		- website
+		- office address
+		- office phone number
+		- home phone number
+		- calendar schedule url
+		- banner (upload file)
+		- banner enable/disable
+		- font color selection
+		- social media accounts
+			- linkedin
+			- facebook
+			- twitter
+			- instagram
+			- medium
+			- whatsapp
+			- pinterest
+			- youtube
+			- soundcloud
+			- skype
+	- signature live preview
+	- signature saving name
+	- signature style change button
+- pings page
+	- search functionality
+	- email section
+	- ping sequences section
+		- sequences table 
+			- name
+			- number of pings
+			- duration
+			- edit / delete button
+		- edit sequence page
+			- edit sequence name
+			- days sequence
+				- ping name
+				- sequence duration after x days from original
+				- wysiwyg editor
+				- preview popup
+					- send test email
+				- remove day sequence button
+				- add sequence day button
+				- discard
+			- sequence settings popup
+				- timezone
+				- exclude ping days options
+				- ping time range
+				- ping holiday option
+				- save /cancel
+- team page
+	- add team member button to send email invitation
+	- cancel invitation
+	- resend invite
+	- member personal info (name, sent emails, open rate)
+	- upgrade team to MailTag pro
+- settings page
+	- account section
+		- add more account with gmail
+		- email address and subscription plan
+		- transfer subscription
+		- change to annual
+		- cancel subscription
+	- profile section
+		- personal info form
+			- full name
+			- email
+			- language
+			- timezone
+			- country
+			- language
+			- save
+	- preferences section (options on/off)
+		- enable MailTag by default
+		- receive desktop notifications
+		- receive email notifications for email opens (some info about open email)
+		- know when receiver click links in email (some info about verified subdomain)
+		- know when receiver download attachments in your email
+		- enable custom signatures by default
+		- enable custom signatures in pings by default
+		- send copy to CRM (BCC) (some info about when tracking is enabled)
+		- subdomain (some info about using subdomain for tracking)
+		- boomerang (some info about getting email if not answered)
+			- number of emails?? input
+		- save
+	- billing section
+		- card info/edit (name, number, expiration, cvc)
+		- invoice table
+			- date
+			- price
+			- pdf download receipt button
+				- plan, duration, amount, total
+- support page
+	- some video tutorials
+	- faq
+	- contact form with message body and subject
+	- captcha
+ - misc functionalities
+ 	- add new email account (switch to another MailTag account)
+	- MailTag product checklist
+	- send feedback button for current page
+- navbar and sidebar with account info (name, avatar, email) and logout and nav buttons
+	
+
