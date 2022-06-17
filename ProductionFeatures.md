@@ -1,4 +1,4 @@
-MailTag.io production features: 
+MailTag.ioo production features: 
 
 - auth with google same login/register
 - dashboard page
