@@ -134,6 +134,9 @@ const schema: { [key in keyof typeof ROUTES]: joi.ObjectSchema } = {
   removeError: joi.object({
     params: generateSchema(['id']),
   }),
+  readConfigKeys: undefined,
+  readAppConfigKeys: undefined,
+  readErrors: undefined
 };
 
 export default schema;

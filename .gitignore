@@ -54,3 +54,4 @@ package-lock.json
 .env
 !cookies
 cookies/*
+.vscode/settings.json
