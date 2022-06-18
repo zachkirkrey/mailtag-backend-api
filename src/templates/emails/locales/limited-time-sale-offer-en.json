@@ -1,7 +1,0 @@
-{
-  "text-summary": "Hey {{userName}}, Are you someone who uses MailTag for business? If so, you may want to consider upgrading your plan to MailTag PRO. This will remove the \"Sent with MailTag\" signature from your emails, by default. In-case you weren’t aware, MailTag PRO costs just $18.00 (per user, billed annually).And to make things even more awesome, you can save an additional 20% by using code “COOL24” at checkout (offer expires today).",
-  "greetings": "Hey {{userName}},",
-  "welcome-line-1": "<br>Are you someone who uses MailTag for business?<br><br>If so, you may want to consider upgrading to MailTag PRO.<br><br>This will remove the \"Sent with MailTag\" signature from your emails, by default.<br><br>In-case you weren’t aware, MailTag PRO costs just <br><b>$18.00</b> (per user, billed annually).<br><br>And to make things even more awesome, you can save an additional 20% by using code “<b>COOL24</b>” at checkout<br> (offer expires today).<br><br>",
-  "signature": "To your success,<br>MailTag Customer Success Team<br>",
-  "update-now": "UPGRADE NOW"
-}

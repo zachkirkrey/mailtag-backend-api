@@ -1,8 +1,0 @@
-{
-  "text-summary": "Hi {{userName}}, I hope you’re doing awesome! It’s Jeremy from the MailTag Customer Success Team. Email scheduling is a really neat (and free) feature of MailTag, and if you haven’t sent any scheduled emails yet, you’re missing out! To schedule an email with MailTag, simply click the “schedule” icon, and follow the below GIF’s instructions.",
-  "greetings": "Hi {{userName}},",
-  "welcome-line-1": "I hope you’re doing awesome!<br>It’s Jeremy from the MailTag Customer Success Team.<br><br>Email scheduling is a really neat (and free) feature of MailTag, and if you haven’t sent any scheduled emails yet, you’re missing out!<br><br>To schedule an email with MailTag, simply click the “schedule” icon,<br>and follow the below GIF’s instructions:",
-  "welcome-line-2": "To begin using MailTag PRO without our watermark or ads, simply refresh this page.",
-  "post-script": "Please feel free to reply to this email if you have any questions or need clarification on anything, I’m happy to help! :-)",
-  "signature": "Best,<br>Jeremy"
-}
