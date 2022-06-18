@@ -5,7 +5,7 @@ export default class extends BaseSchema {
 
   public override async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
+      table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
