@@ -1,0 +1,4467 @@
+{
+  "info": {
+    "_postman_id": "9c7f32f0-9d34-4752-a771-78f710cbb0d9",
+    "name": "MAILTAG",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Google login",
+      "item": [
+        {
+          "name": "{{rootURL }}/google-login/",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "idToken",
+                "value": "eyJ1c2VyX2lkIjoiMGFlNDRkMWEtNjg0MS0xMWVhLWI5NmEtMDI5MmM0NmM5MjBlIiwiYXV0aF90b2tlbiI6ImEzN2Y0ODdlMTRjZWZmYTA4NmE4MjM1MGIyNDVmNDEyIn0="
+              }
+            ],
+            "url": {
+              "raw": "{{rootURL }}/google-login/",
+              "host": ["{{rootURL }}"],
+              "path": ["google-login", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Dashboard",
+      "item": [
+        {
+          "name": "{{rootURL }}/dashboard/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{rootURL }}/dashboard/",
+              "host": ["{{rootURL }}"],
+              "path": ["dashboard", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Google Callback",
+      "item": [
+        {
+          "name": "{{rootURL }}/google-callback/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{rootURL }}/google-callback/",
+              "host": ["{{rootURL }}"],
+              "path": ["google-callback", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Inbox",
+      "item": [
+        {
+          "name": "{{rootURL }}/dashboard/read-emails/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{rootURL }}/dashboard/read-emails/",
+              "host": ["{{rootURL }}"],
+              "path": ["dashboard", "read-emails", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Read Email Summary",
+      "item": [
+        {
+          "name": "{{baseURL}}/read-email-summary?offset=0&order=DESC",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/read-email-summary?offset=0&order=DESC",
+              "host": ["{{baseURL}}"],
+              "path": ["read-email-summary"],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "order",
+                  "value": "DESC"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "GET EMAIL DETAILS ",
+      "item": [
+        {
+          "name": "{{baseURL}}/dashboard/show-specific-sent-email/4258d933-599f-46be-ae04-2043544919c6 ",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{rootUrl}}/dashboard/show-specific-sent-email/4258d933-599f-46be-ae04-2043544919c6 ",
+              "host": ["{{rootUrl}}"],
+              "path": [
+                "dashboard",
+                "show-specific-sent-email",
+                "4258d933-599f-46be-ae04-2043544919c6 "
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Unread Emails Summary",
+      "item": [
+        {
+          "name": "{{baseUrl}}/unread-email-summary?offset=0&order=DESC",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/unread-email-summary?offset=0&order=DESC",
+              "host": ["{{baseUrl}}"],
+              "path": ["unread-email-summary"],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "order",
+                  "value": "DESC"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Pings",
+      "item": [
+        {
+          "name": "{{baseUrl}}/dashboard/ping-emails/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/dashboard/ping-emails/",
+              "host": ["{{baseUrl}}"],
+              "path": ["dashboard", "ping-emails", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Ping Emails Summary",
+      "item": [
+        {
+          "name": "{{baseUrl}}/ping-emails?offset=0&order=DESC",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ping-emails?offset=0&order=DESC",
+              "host": ["{{baseUrl}}"],
+              "path": ["ping-emails"],
+              "query": [
+                {
+                  "key": "offset",
+                  "value": "0"
+                },
+                {
+                  "key": "order",
+                  "value": "DESC"
+                }
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Ping Sequences",
+      "item": [
+        {
+          "name": "{{baseUrl}}/ping-sequence-list/0",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ping-sequence-list/0",
+              "host": ["{{baseUrl}}"],
+              "path": ["ping-sequence-list", "0"]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Extension API (Endpoints)",
+      "item": [
+        {
+          "name": "Dashboard",
+          "item": []
+        },
+        {
+          "name": "{{baseUrl}}/session-new",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/session-new",
+              "host": ["{{baseUrl}}"],
+              "path": ["session-new"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/errors/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{baseUrl}}/errors/",
+              "host": ["{{baseUrl}}"],
+              "path": ["errors", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/email/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{baseUrl}}/email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["email", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/ping-email/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ping-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["ping-email", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/ping-email-mg/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{baseUrl}}/ping-email-mg/",
+              "host": ["{{baseUrl}}"],
+              "path": ["ping-email-mg", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/email-mg/",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": []
+            },
+            "url": {
+              "raw": "{{baseUrl}}/email-mg/",
+              "host": ["{{baseUrl}}"],
+              "path": ["email-mg", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/ping-sequence-list/0/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/ping-sequence-list/0/",
+              "host": ["{{baseUrl}}"],
+              "path": ["ping-sequence-list", "0", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/milestone-event",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/milestone-event",
+              "host": ["{{baseUrl}}"],
+              "path": ["milestone-event"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/scheduled-email/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/scheduled-email/",
+              "host": ["{{baseUrl}}"],
+              "path": ["scheduled-email", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/preferences",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/preferences",
+              "host": ["{{baseUrl}}"],
+              "path": ["preferences"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/session/",
+          "request": {
+            "method": "DELETE",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Token"
+              },
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": ""
+            },
+            "url": {
+              "raw": "{{baseUrl}}/session/",
+              "host": ["{{baseUrl}}"],
+              "path": ["session", ""]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "{{baseUrl}}/optimised-email-summary-v2/",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/optimised-email-summary-v2/",
+              "host": ["{{baseUrl}}"],
+              "path": ["optimised-email-summary-v2", ""]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "ROUTES APIS",
+      "item": [
+        {
+          "name": "Dashboard",
+          "item": [
+            {
+              "name": "{{rootUrl}}/dashboard-optimization",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard-optimization",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard-optimization"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/dashboard-email-count/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboard-email-count/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["dashboard-email-count", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/signature/:id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/signature/:id",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "signature", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/signature/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/signature/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "signature", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/signatures",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/signatures",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "signatures"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/signatures/:id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/signatures/:id",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "signatures", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}//dashboard/team-management/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}//dashboard/team-management/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["", "dashboard", "team-management", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard-old/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard-old/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard-old", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}/dashboard/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}/dashboard/",
+                  "host": ["{{rootUrl}"],
+                  "path": ["dashboard", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/show-specific-sent-email/:id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/show-specific-sent-email/:id",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "show-specific-sent-email", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/account/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/account/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "account", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/read-emails/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/read-emails/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "read-emails", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/recent-unread-emails/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/recent-unread-emails/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "recent-unread-emails", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/unread-emails/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/unread-emails/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "unread-emails", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/preferences",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/preferences",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "preferences"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/upgrade/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/upgrade/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "upgrade", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/invoice/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/invoice/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "invoice", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/videos/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/videos/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "videos", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/dashboard/refer-a-friend/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/dashboard/refer-a-friend/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["dashboard", "refer-a-friend", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/support/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/support/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "support", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/ping-emails/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/ping-emails/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "ping-emails", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/ping-sequence-details/:pingSequenceId",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/ping-sequence-details/:pingSequenceId",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "ping-sequence-details", ":pingSequenceId"],
+                  "variable": [
+                    {
+                      "key": "pingSequenceId",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/stop-ping-email/:id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/stop-ping-email/:id",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "stop-ping-email", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/show-specific-sent-ping/:id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/show-specific-sent-ping/:id",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "show-specific-sent-ping", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Inbox",
+          "item": [
+            {
+              "name": "{{baseUrl}}/session-new",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/session-new",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["session-new"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Signature Generator",
+          "item": [
+            {
+              "name": "{{baseUrl}}/get-signature-data/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"signature_id\": \"12\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/get-signature-data/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["get-signature-data", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/signature-calculator",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/signature-calculator",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["signature-calculator"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/signature-calculator",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"html\": \"<html></html>\",\n\t\"template\": \"212\",\n\t\"data\": \"{keys: values}\",\n\t\"name\": \"Signature Name\",\n\t\"image\": \"imageUrl\"\n\t\n}"
+                },
+                "url": {
+                  "raw": "{{rootUrl}}/signature-calculator",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["signature-calculator"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/set-default-signature/",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/set-default-signature/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["set-default-signature", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/signature-calculator/:id",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"html\": \"<html></html>\",\n\t\"template\": \"212\",\n\t\"data\": \"{keys: values}\",\n\t\"name\": \"Signature Name\",\n\t\"image\": \"imageUrl\"\n\t\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/signature-calculator/12",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["signature-calculator", "12"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/signature-calculator/:id",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/signature-calculator/5",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["signature-calculator", "5"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/signature-event-v2",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/signature-event-v2",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["signature-event-v2"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/signature-event/:email_id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/signature-event/:email_id",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["signature-event", ":email_id"],
+                  "variable": [
+                    {
+                      "key": "email_id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/signature-calculator",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/signature-calculator",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["signature-calculator"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/send-email-signature/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"schedule_email_id\": 12,\n\t\"update_type\": \"delete\",\n\t\"scheduled_date_obj\": \"\",\n\t\"is_link_tracking_enabled\": \"\",\n\t\"is_tracking_enabled\": \"\",\n\t\"ping_sequence_id\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/send-email-signature/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["send-email-signature", ""]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Pings",
+          "item": [
+            {
+              "name": "{{baseUrl}}/ping-sequence-details/:pingSequenceId",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping-sequence-details/:pingSequenceId",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-sequence-details", ":pingSequenceId"],
+                  "variable": [
+                    {
+                      "key": "pingSequenceId",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/ping-sequence-details/",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"0\":{\n\t\t\"id\": 1,\n\t\t\"day\": 4,\n\t\t\"step\": 5,\n\t\t\"html\": \"HTML Content\",\n\t\t\"is_deleted\": true,\n\t\t\"ping_name\": \"Ping Name\"\n\t}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-sequence-details/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-sequence-details", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/ping-sequence-settings/",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"0\":{\n\t\t\"id\": 1,\n\t\t\"day\": 4,\n\t\t\"step\": 5,\n\t\t\"html\": \"HTML Content\",\n\t\t\"is_deleted\": true,\n\t\t\"ping_name\": \"Ping Name\"\n\t}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-sequence-settings/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-sequence-settings", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/ping-sequence/:id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping-sequence/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-sequence", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/ping-emails",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping-emails",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-emails"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/ping-email/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/ping-email-mg/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-email-mg/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-email-mg", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/stop-ping-email/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stop-ping-email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["stop-ping-email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/stop-ping-email-mg/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/stop-ping-email-mg/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["stop-ping-email-mg", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/temporary-email-bounces-webhook/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/temporary-email-bounces-webhook/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["temporary-email-bounces-webhook", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/ping-email/",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/ping-sequence-details/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"0\":{\n\t\t\"id\": 1,\n\t\t\"day\": 4,\n\t\t\"step\": 5,\n\t\t\"html\": \"HTML Content\",\n\t\t\"is_deleted\": true,\n\t\t\"ping_name\": \"Ping Name\"\n\t}\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-sequence-details/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-sequence-details", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/ping-sequence/",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-sequence/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-sequence", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/send-ping-preview-email/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/send-ping-preview-email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["send-ping-preview-email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/ping-email-by-draft-id/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/ping-email-by-draft-id/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-email-by-draft-id", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/pings-detail/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/pings-detail/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["pings-detail", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile/ping-emails",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile/ping-emails",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile", "ping-emails"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile-search-ping-email-summary",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile-search-ping-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile-search-ping-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/search-ping-email-summary",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search-ping-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["search-ping-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/restart-ping-email/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/restart-ping-email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["restart-ping-email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/custom-domain-pings/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"domain\": \"https:www.domain.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/custom-domain-pings/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["custom-domain-pings", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/custom-domain-pings/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/custom-domain-pings/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["custom-domain-pings", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/ping-sequence-list/:offset",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ping-sequence-list/:offset",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ping-sequence-list", ":offset"],
+                  "variable": [
+                    {
+                      "key": "offset",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Team",
+          "item": [
+            {
+              "name": "{{rootUrl}}/blog",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/blog",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["blog"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/user-draft-list",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/user-draft-list",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["user-draft-list"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/milestone-event",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/milestone-event",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["milestone-event"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/custom-domain",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/custom-domain",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["custom-domain"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/get-team-admins",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"team_id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/get-team-admins",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["get-team-admins"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/get-team-owner",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"team_id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/get-team-owner",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["get-team-owner"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/set-team-details",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"team_id\": 12,\n\t\"date_start\": \"2022-03-25\",\n\t\"date_end\": \"2022-09-25\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/set-team-details",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["set-team-details"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/send-team-invite/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/send-team-invite/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["send-team-invite", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/team-invite-accepted/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/team-invite-accepted/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["team-invite-accepted", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/delete-team-invite/",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\",\n\t\"team_id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/delete-team-invite/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["delete-team-invite", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/delete-team-member/",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\",\n\t\"team_id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/delete-team-member/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["delete-team-member", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/get-team-count",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"team_id\": 21\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/get-team-count",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["get-team-count"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/user",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/user",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["user"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/deleting-user-by-id/:id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/deleting-user-by-id/:id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["deleting-user-by-id", ":id"],
+                  "variable": [
+                    {
+                      "key": "id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/deleting-user/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"[Item Name]\": \"[Item Values] or 'Item Value'\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}/deleting-user/",
+                  "host": ["{{baseUrl}"],
+                  "path": ["deleting-user", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/delete-user",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/delete-user",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["delete-user"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/user",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"username\": \"user_name\",\n\t\"timezone\": \"EST\",\n\t\"preferredLanguage\": \"English\",\n\t\"country\": \"USA\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/user",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["user"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Settings",
+          "item": [
+            {
+              "name": "{{baseUrl}}/config-keys/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/config-keys/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["config-keys", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/app-config-keys/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/app-config-keys/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["app-config-keys", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/errors/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/errors/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["errors", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/profile-pic/:email",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/profile-pic/:email",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["profile-pic", ":email"],
+                  "variable": [
+                    {
+                      "key": "email",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Support",
+          "item": [
+            {
+              "name": "{{baseUrl}}/lambda-test",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/lambda-test",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["lambda-test"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}lambda-test-2",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}lambda-test-2",
+                  "host": ["{{baseUrl}}lambda-test-2"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/db-backup",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/db-backup",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["db-backup"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/demo",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/demo",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["demo"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/test/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/test/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["test", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/install",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/install",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["install"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/",
+                  "host": ["{{rootUrl}}"],
+                  "path": [""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/getting-started",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/getting-started",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["getting-started"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/mt-special-upgrade",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/mt-special-upgrade",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["mt-special-upgrade"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/mt-special-upgrade-success",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/mt-special-upgrade-success",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["mt-special-upgrade-success"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/deal-fuel",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/deal-fuel",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["deal-fuel"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/deal-fuel-success",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/deal-fuel-success",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["deal-fuel-success"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/site-upgrade",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/site-upgrade",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["site-upgrade"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/site-upgrade-onboarding",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/site-upgrade-onboarding",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["site-upgrade-onboarding"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/site-upgrade-success",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/site-upgrade-success",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["site-upgrade-success"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/about-us",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/about-us",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["about-us"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/thanks",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/thanks",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["thanks"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/leaving",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/leaving",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["leaving"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/gmail-disclaimer",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/gmail-disclaimer",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["gmail-disclaimer"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/set-admin/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\",\n\t\"team_id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/set-admin/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["set-admin", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/cookies-policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/cookies-policy",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["cookies-policy"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/remove-team-admin/",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\",\n\t\"team_id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/remove-team-admin/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["remove-team-admin", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/disclosure-policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/disclosure-policy",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["disclosure-policy"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/press",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/press",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["press"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/privacy-policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/privacy-policy",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["privacy-policy"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/information-security-policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/information-security-policy",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["information-security-policy"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/incident-response-policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/incident-response-policy",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["incident-response-policy"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/risk-management-policy",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/risk-management-policy",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["risk-management-policy"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/installation-complete/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/installation-complete/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["installation-complete", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/final-step/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/final-step/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["final-step", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/refresh-gmail/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/refresh-gmail/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["refresh-gmail", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/terms-conditions",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/terms-conditions",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["terms-conditions"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/gdpr",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/gdpr",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["gdpr"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/gift",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/gift",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["gift"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/gift-success",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/gift-success",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["gift-success"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/give-program",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/give-program",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["give-program"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/pro-credit",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/pro-credit",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["pro-credit"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/pro-credit-counter",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/pro-credit-counter",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["pro-credit-counter"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/signature-calc",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/signature-calc",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["signature-calc"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/attachment-event/:attachment_id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/attachment-event/:attachment_id",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["attachment-event", ":attachment_id"],
+                  "variable": [
+                    {
+                      "key": "attachment_id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/attachment/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/attachment/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["attachment", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/paypal-webhook/payment-capture-completed",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/paypal-webhook/payment-capture-completed",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["paypal-webhook", "payment-capture-completed"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/preferences",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/preferences",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["preferences"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/preferences/",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"desktop_notification\": 1,\n\t\"email_notification\": 0,\n\t\"reminders\": 1,\n\t\"link_tracking\": 1,\n\t\"click_notification\": 1,\n\t\"daily_report\": 1,\n\t\"bcc\":\"\",\n\t\"remove_ads\": 0,\n\t\"enable_mailtag\": 1,\n\t\"scheduled_confirmation\": 1,\n\t\"sub_domain\": \"subdomain.com\",\n\t\"email_domain\": \"\",\n\t\"boomerang\": \"\",\n\t\"attachment_tracking\": 1,\n\t\"signature\": 0,\n\t\"signature_pings\": 1\n\t\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/preferences/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["preferences", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile-notification-preferences/",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile-notification-preferences/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile-notification-preferences", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/user_device/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"public_key\": \"key\",\n\t\"token\": \"Token\",\n\t\"endpoint\": \"End point\",\n\t\"browser_name\": \"firefox\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/user_device/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["user_device", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/support/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"subject\": \"Subject\",\n\t\"message\": \"Message\",\n\t\"gRecaptchaResponse\": \"Captcha\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/support/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["support", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/enable-push/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/enable-push/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["enable-push", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/tracking-pixels/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/tracking-pixels/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["tracking-pixels", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/home-page-click-call/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"utm_source\": \"UTM Source\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/home-page-click-call/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["home-page-click-call", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/redir",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/redir",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["redir"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/google-contact-list/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/google-contact-list/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["google-contact-list", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/facebook-callback",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/facebook-callback",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["facebook-callback"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/retrieve-card-details/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/retrieve-card-details/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["retrieve-card-details", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/update-card-details/",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"token\": \"Token ID\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/update-card-details/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["update-card-details", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/domain-details/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/domain-details/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["domain-details", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/add-feedback/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\",\n\t\"rating\": 5,\n\t\"message\": \"Message Text\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/add-feedback/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["add-feedback", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/raise-ticket/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"subject\": \"Subject\",\n\t\"email\": \"test@email.com\",\n\t\"name\": \"Name\",\n\t\"message\": \"Message\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/raise-ticket/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["raise-ticket", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/chromeStore-link-clicked",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/chromeStore-link-clicked",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["chromeStore-link-clicked"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/twitter-callback",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/twitter-callback",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["twitter-callback"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/link-event-v2/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/link-event-v2/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["link-event-v2", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/subprocessors",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/subprocessors",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["subprocessors"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/eu",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/eu",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["eu"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/segment-analytics",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/segment-analytics",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["segment-analytics"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/add-free-trial-10th-feedback/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\",\n\t\"rating\": 5,\n\t\"message\": \"Message Text\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/add-free-trial-10th-feedback/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["add-free-trial-10th-feedback", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/ip-to-country",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/ip-to-country",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["ip-to-country"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile/user-data/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile/user-data/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile", "user-data", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile/push-notification",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile/push-notification",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile", "push-notification"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile/user-device/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile/user-device/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile", "user-device", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/blog",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"check\": true\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/blog",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["blog"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/set-default-signature/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"signature_id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/set-default-signature/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["set-default-signature", ""]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Login and SignUp",
+          "item": [
+            {
+              "name": "{{rootUrl}}/google-login/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/google-login/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["google-login", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/google-callback/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/google-callback/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["google-callback", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/session/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/session/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["session", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/register/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"plan\": \"basic\",\n\t\"plan_id\": 22,\n\t\"couponCode\": \"Applied Coupon Code Here\",\n\t\"duration\": \"monthly/annually\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/register/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["register", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/login/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/login/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["login", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/mobile/google-login",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/mobile/google-login",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["mobile", "google-login"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Payment",
+          "item": [
+            {
+              "name": "{{rootUrl}}/purchase",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/purchase",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["purchase"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/purchase-success",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/purchase-success",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["purchase-success"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/invoice/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/invoice/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["invoice", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/invoice-to-pdf/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/invoice-to-pdf/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["invoice-to-pdf", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/site-upgrade-coupon",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/site-upgrade-coupon",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["site-upgrade-coupon"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/site-upgrade-coupon-success",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/site-upgrade-coupon-success",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["site-upgrade-coupon-success"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/coupon/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/coupon/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["coupon", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/create-coupon",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/create-coupon",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["create-coupon"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/creating-coupon/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"[Items Name]\": \"[Items Values] or value\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/creating-coupon/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["creating-coupon", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/coupon-create/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/coupon-create/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["coupon-create", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/coupon/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"couponCode\": \"couponcode\",\n\t\"duration\": \"annually/monthly\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/coupon/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["coupon", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/plan-switch/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"plan_id\": 1\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/plan-switch/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["plan-switch", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/subscribe-team/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"team_id\": 21,\n\t\"plan\": \"basic\",\n\t\"token\": \"Team Management Token here\",\n\t\"duration\": \"monthly/annully\",\n\t\"couponCode\": \"Applied Coupon Code from Team Management\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscribe-team/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["subscribe-team", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/subscribe-team-paypal/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"team_id\": 21,\n\t\"plan\": \"basic\",\n\t\"duration\": \"monthly/annully\",\n\t\"couponCode\": \"Applied Coupon Code from Team Management\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscribe-team-paypal/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["subscribe-team-paypal", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/subscription-paypal/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"plan\": \"basic\",\n\t\"plan_id\": 1,\n\t\"couponCode\": \"Applied Coupon Code\",\n\t\"duration\": \"monthly/yearly\",\n\t\"referral\": \"Referral\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscription-paypal/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["subscription-paypal", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/subscription/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"plan\":\"basic\",\n\t\"plan_id\": 1,\n\t\"token\": \"Token\",\n\t\"couponCode\": \"Applied Coupon Code\",\n\t\"duration\": \"monthly/yearly\",\n\t\"referral\": \"Referral\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/subscription-webhook",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}/subscription-webhook",
+                  "host": ["{{baseUrl}"],
+                  "path": ["subscription-webhook"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/check-subscription/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/check-subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["check-subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/cancel-subscription/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/cancel-subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["cancel-subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/switch-subscription/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/switch-subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["switch-subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/subscription/",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/subscription",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/subscription",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["subscription"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/account-subscription/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/account-subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["account-subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/switch-subscription",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/switch-subscription",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["switch-subscription"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/subscription/ copy",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/switch-subscription/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\",\n\t\"switch_email\": \"switch_email@email.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/switch-subscription/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["switch-subscription", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/pricing/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/pricing/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["pricing", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/pricing-onboarding/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/pricing-onboarding/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["pricing-onboarding", ""]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Email",
+          "item": [
+            {
+              "name": "{{baseUrl}}/email-mg/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/email-mg/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email-mg", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/email/",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/demo-email-event/:email",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/demo-email-event/:email",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["demo-email-event", ":email"],
+                  "variable": [
+                    {
+                      "key": "email",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/email-event/:email_id",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/email-event/:email_id",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["email-event", ":email_id"],
+                  "variable": [
+                    {
+                      "key": "email_id",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/email-summary-old",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/email-summary-old",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email-summary-old"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/email-summary",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/sent-email/:date",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/sent-email/:date",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["sent-email", ":date"],
+                  "variable": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile-search-read-email-summary",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile-search-read-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile-search-read-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/search-unread-email-summary",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search-unread-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["search-unread-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/read-email-summary",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/read-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["read-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile-search-unread-email-summary",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile-search-unread-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile-search-unread-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/unread-email-summary",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/unread-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["unread-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}/permanent-email-bounces-webhook/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/permanent-email-bounces-webhook/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["permanent-email-bounces-webhook", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/send-invitation-email-gmail-contacts/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"emailList\": [\"abc@test.com\", \"avc@test.com\"]\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/send-invitation-email-gmail-contacts/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["send-invitation-email-gmail-contacts", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/optimised-link-summary-v2/:emailId",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/optimised-link-summary-v2/:emailId",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["optimised-link-summary-v2", ":emailId"],
+                  "variable": [
+                    {
+                      "key": "emailId",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/read-email/:date",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/read-email/:date",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["read-email", ":date"],
+                  "variable": [
+                    {
+                      "key": "date",
+                      "value": ""
+                    }
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/extension-link-send-email/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"email\": \"test@test.com\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/extension-link-send-email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["extension-link-send-email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/email/",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/email-by-draft-id/",
+              "request": {
+                "method": "PUT",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/email-by-draft-id/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email-by-draft-id", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/email-new/",
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"id\": 12\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/email-new/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email-new", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile/get-email/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile/get-email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile", "get-email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile/read-email-summary",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile/read-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile", "read-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/mobile/unread-email-summary",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/mobile/unread-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["mobile", "unread-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/search-read-email-summary",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/search-read-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["search-read-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/email/",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/email/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["email", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/optimised-email-summary-v2/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/optimised-email-summary-v2/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["optimised-email-summary-v2", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/create-mailchimp-user",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/create-mailchimp-user",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["create-mailchimp-user"]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Cron Job",
+          "item": [
+            {
+              "name": "{{baseUrl}/send-ping-email-job-executor",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/send-ping-email-job-executor",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["send-ping-email-job-executor"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/location-job-executor",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/location-job-executor",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["location-job-executor"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-chromeStoreLink-job/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-chromeStoreLink-job/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-chromeStoreLink-job", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-chrome-store-link-clicked-job-producer",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-chrome-store-link-clicked-job-producer",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-chrome-store-link-clicked-job-producer"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-facebook-shared-post-job/",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-facebook-shared-post-job/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-facebook-shared-post-job", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-facebook-shared-post-job-producer",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-facebook-shared-post-job-producer",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-facebook-shared-post-job-producer"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-facebook-shared-post-job-executor",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-facebook-shared-post-job-executor",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-facebook-shared-post-job-executor"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/upgrade-intension-job-creator",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/upgrade-intension-job-creator",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["upgrade-intension-job-creator"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/upgrade-intension-job-executor",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/upgrade-intension-job-executor",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["upgrade-intension-job-executor"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/upgrade-intension-job-producer",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/upgrade-intension-job-producer",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["upgrade-intension-job-producer"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/upgrade-intension-v2-job-creator",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/upgrade-intension-v2-job-creator",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["upgrade-intension-v2-job-creator"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/upgrade-intension-v2-job-executor",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/upgrade-intension-v2-job-executor",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["upgrade-intension-v2-job-executor"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/upgrade-intension-v2-get-jobs",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/upgrade-intension-v2-get-jobs",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["upgrade-intension-v2-get-jobs"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-email-job",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-email-job",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-email-job"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/update-mailchimp-field-job-executor",
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/update-mailchimp-field-job-executor",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["update-mailchimp-field-job-executor"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-email-summary",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-email-summary",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-email-summary"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-email-job-producer",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-email-job-producer",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-email-job-producer"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-email",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"scheduledOffset\": 0,\n\t\"scheduledEmailsummary\": [],\n\t\"allScheduledEmailSummary\": [],\n\t\"ready\": false,\n\t\"scheduledScroll\": true,\n\t\"scheduledOrder\": \"ASC\",\n\t\"isSort\": false,\n\t\"scheduledEmailsLoadCount\": 0\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-email",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-email"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-email",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"scheduledOffset\": 0,\n\t\"scheduledEmailsummary\": [],\n\t\"allScheduledEmailSummary\": [],\n\t\"ready\": false,\n\t\"scheduledScroll\": true,\n\t\"scheduledOrder\": \"ASC\",\n\t\"isSort\": false,\n\t\"scheduledEmailsLoadCount\": 0\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-email",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-email"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/pending-scheduled-email",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/pending-scheduled-email",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["pending-scheduled-email"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-email-send-now",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Authorization",
+                    "value": "Token"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"schedule_email_id\": 5,\n\t\"update_type\": \"delete\",\n\t\"scheduled_date_obj\": \"\",\n\t\"is_link_tracking_enabled\": \"\",\n\t\"is_tracking_enabled\": \"\",\n\t\"ping_sequence_id\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-email-send-now",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-email-send-now"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-email-job-executor",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n\t\"schedule_email_id\": \"\",\n\t\"update_type\": \"delete\",\n\t\"scheduled_date_obj\": \"\",\n\t\"is_link_tracking_enabled\": \"\",\n\t\"is_tracking_enabled\": \"\",\n\t\"ping_sequence_id\": \"\"\n}"
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-email-job-executor",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-email-job-executor"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-ping-email-job-producer",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-ping-email-job-producer",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-ping-email-job-producer"]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{rootUrl}}/dashboard/scheduled-emails/",
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{rootUrl}}/dashboard/scheduled-emails/",
+                  "host": ["{{rootUrl}}"],
+                  "path": ["dashboard", "scheduled-emails", ""]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "{{baseUrl}}/scheduled-mail-update/",
+              "request": {
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "formdata",
+                  "formdata": []
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/scheduled-mail-update/",
+                  "host": ["{{baseUrl}}"],
+                  "path": ["scheduled-mail-update", ""]
+                }
+              },
+              "response": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
