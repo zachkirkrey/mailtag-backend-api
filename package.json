@@ -22,11 +22,28 @@
     "rules": {
       "prettier/prettier": [
         "error"
-      ]
+      ],
+      "no-multiple-empty-lines": [
+        "error",
+        {
+          "max": 2
+        }
+      ],
+      "prefer-const": "error",
+      "prefer-template": "error",
+      "prefer-destructuring": "error",
+      "array-callback-return": "error",
+      "dot-notation": "error",
+      "curly": "error",
+      "no-duplicate-imports": "error",
+      "no-var": "error",
+      "no-console": "error",
+      "no-useless-return": "error"
     }
   },
   "eslintIgnore": [
-    "build"
+    "build",
+    "ace"
   ],
   "prettier": {
     "trailingComma": "es5",
