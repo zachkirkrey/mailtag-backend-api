@@ -7,7 +7,9 @@
     "build": "node ace build --production",
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky install",
+    "typecheck": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +47,7 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-adonis": "^2.1.0",
     "eslint-plugin-prettier": "^4.0.0",
+    "husky": "^8.0.1",
     "pino-pretty": "^8.0.0",
     "prettier": "^2.7.1",
     "typescript": "~4.6",
