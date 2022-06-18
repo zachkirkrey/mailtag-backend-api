@@ -8,5 +8,4 @@ export default class CreateExtensions extends BaseSchema {
   public override async down() {
     await this.raw(`DROP EXTENSION if exists "uuid-ossp";`)
   }
-  //
 }
