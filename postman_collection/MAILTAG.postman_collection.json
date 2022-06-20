@@ -9,7 +9,7 @@
       "name": "Google login",
       "item": [
         {
-          "name": "{{rootURL }}/google-login/",
+          "name": "{{rootURL}}/google-login/",
           "request": {
             "method": "GET",
             "header": [
@@ -19,8 +19,8 @@
               }
             ],
             "url": {
-              "raw": "{{rootURL }}/google-login/",
-              "host": ["{{rootURL }}"],
+              "raw": "{{rootURL}}/google-login/",
+              "host": ["{{rootURL}}"],
               "path": ["google-login", ""]
             }
           },
@@ -32,13 +32,13 @@
       "name": "Dashboard",
       "item": [
         {
-          "name": "{{rootURL }}/dashboard/",
+          "name": "{{rootURL}}/dashboard/",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{rootURL }}/dashboard/",
-              "host": ["{{rootURL }}"],
+              "raw": "{{rootURL}}/dashboard/",
+              "host": ["{{rootURL}}"],
               "path": ["dashboard", ""]
             }
           },
@@ -50,13 +50,13 @@
       "name": "Google Callback",
       "item": [
         {
-          "name": "{{rootURL }}/google-callback/",
+          "name": "{{rootURL}}/google-callback/",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{rootURL }}/google-callback/",
-              "host": ["{{rootURL }}"],
+              "raw": "{{rootURL}}/google-callback/",
+              "host": ["{{rootURL}}"],
               "path": ["google-callback", ""]
             }
           },
@@ -68,13 +68,13 @@
       "name": "Inbox",
       "item": [
         {
-          "name": "{{rootURL }}/dashboard/read-emails/",
+          "name": "{{rootURL}}/dashboard/read-emails/",
           "request": {
             "method": "GET",
             "header": [],
             "url": {
-              "raw": "{{rootURL }}/dashboard/read-emails/",
-              "host": ["{{rootURL }}"],
+              "raw": "{{rootURL}}/dashboard/read-emails/",
+              "host": ["{{rootURL}}"],
               "path": ["dashboard", "read-emails", ""]
             }
           },
