@@ -5,4 +5,4 @@ Route.group(() => {
   Route.get('/google', async ({ ally }) => {
     return ally.use('google').redirect()
   })
-}).prefix('/auth')
+}).prefix('auth')

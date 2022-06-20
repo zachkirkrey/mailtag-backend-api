@@ -1,6 +1,8 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-// TODO add api middleware
 Route.group(() => {
-  Route.resource('users', 'User/UsersController').apiOnly()
+  Route.get(':id', 'User/UsersController.show')
+  Route.put(':id', 'User/UsersController.update')
 })
+  .prefix('users')
+  .middleware('auth')
