@@ -4,7 +4,7 @@ import Account from 'App/Models/Account'
 import User from 'App/Models/User'
 
 export default class AuthController {
-  public async googleCallback({ ally, auth }: HttpContextContract) {
+  public async login({ ally, auth }: HttpContextContract) {
     const google = ally.use('google')
 
     if (google.accessDenied()) {
