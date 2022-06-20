@@ -41,6 +41,9 @@ export default class AuthMiddleware {
          * the rest of the request, since the user authenticated
          * succeeded here
          */
+
+        // response.append('auth', auth.defaultGuard)
+        // response.append('id', auth.user!.id)
         auth.defaultGuard = guard
         return true
       }
