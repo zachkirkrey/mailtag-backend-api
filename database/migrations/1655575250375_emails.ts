@@ -6,6 +6,11 @@ export default class extends BaseSchema {
   public override async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
+      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE')
+      table.string('recipient').notNullable()
+      table.string('subject').nullable()
+      table.string('gmail_message_id').notNullable()
+      table.string('gmail_thread_id').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

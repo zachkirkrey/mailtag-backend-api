@@ -11,6 +11,8 @@ export default class extends BaseSchema {
       table.uuid('account_id').references('id').inTable('accounts').onDelete('CASCADE')
       table.string('username').notNullable()
       table.string('avatar_url').nullable()
+      table.string('first_name').nullable()
+      table.string('last_name').nullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

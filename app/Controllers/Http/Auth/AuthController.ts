@@ -41,6 +41,8 @@ export default class AuthController {
         providerId: googleUser.id,
         accountId: account.id,
         username: googleUser.name,
+        firstName: googleUser.original.given_name,
+        lastName: googleUser.original.family_name,
       }),
     ])
 
@@ -48,7 +50,7 @@ export default class AuthController {
 
     return {
       data: {
-        newUser,
+        user,
         token,
       },
     }
