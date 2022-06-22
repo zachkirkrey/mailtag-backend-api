@@ -14,9 +14,10 @@ export default class extends BaseSeeder {
     await new seeder.default(this.client).run()
   }
 
-  public async run() {
+  public override async run() {
     // Write your database queries inside the run method
     await this.runSeeder(await import('../Account'))
     await this.runSeeder(await import('../User'))
+    await this.runSeeder(await import('../Email'))
   }
 }

@@ -11,6 +11,7 @@ export default class extends BaseSchema {
       table.string('subject').nullable()
       table.string('gmail_message_id').notNullable()
       table.string('gmail_thread_id').notNullable()
+      table.boolean('is_deleted').notNullable().defaultTo(false)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

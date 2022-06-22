@@ -22,6 +22,9 @@ export default class Email extends BaseModel {
   @column()
   public gmailThreadId: string
 
+  @column()
+  public isDeleted: boolean = false
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
