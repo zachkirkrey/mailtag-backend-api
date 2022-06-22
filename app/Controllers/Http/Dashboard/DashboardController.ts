@@ -67,4 +67,19 @@ export default class DashboardController {
       },
     }
   }
+
+  public async getRecentlyOpenedEmails({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const fiveDaysAgo = daysAgo(5).toSQLDate()
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .andWhere('created_at', '>=', fiveDaysAgo)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
 }
