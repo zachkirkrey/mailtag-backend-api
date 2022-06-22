@@ -1,5 +1,6 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, computed } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, column, computed, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import Email from './Email'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -26,8 +27,8 @@ export default class User extends BaseModel {
   @column()
   public avatarUrl: string | null
 
-  @computed()
-  public get full_name() {
+  @computed({ serializeAs: 'full_name' })
+  public get fullName() {
     if (!this.firstName || !this.lastName) {
       return null
     }
@@ -40,4 +41,7 @@ export default class User extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @hasMany(() => Email)
+  public emails: HasMany<typeof Email>
 }

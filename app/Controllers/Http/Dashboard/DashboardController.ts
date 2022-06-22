@@ -19,7 +19,7 @@ export default class DashboardController {
     }
   }
 
-  public async getEmailsSentThisMonth({ auth }: HttpContextContract) {
+  public async getEmailsSentMonth({ auth }: HttpContextContract) {
     const user = auth.use('api').user!
     const oneMonthAgo = monthsAgo(1).toSQLDate()
     const emails = await Email.query()
@@ -32,4 +32,10 @@ export default class DashboardController {
       },
     }
   }
+
+  // public async getAverageOpenRate({ auth }: HttpContextContract) {
+  //   const user = auth.use('api').user!
+  //   const emails = await Email.query().count('user_id')
+  //   return emails
+  // }
 }

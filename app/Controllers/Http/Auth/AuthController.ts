@@ -43,6 +43,7 @@ export default class AuthController {
         username: googleUser.name,
         firstName: googleUser.original.given_name,
         lastName: googleUser.original.family_name,
+        avatarUrl: googleUser.avatarUrl,
       }),
     ])
 
