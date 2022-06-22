@@ -51,7 +51,7 @@ export default class AuthController {
 
     return {
       data: {
-        user,
+        user: newUser,
         token,
       },
     }

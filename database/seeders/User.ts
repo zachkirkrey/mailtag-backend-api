@@ -4,12 +4,16 @@ import User from 'App/Models/User'
 import Account from 'App/Models/Account'
 import { UserAttributes } from 'App/Helpers/type'
 
+export const TEST_USER_PROVIDER_ID = '100849119556065200741'
+export const TEST_USER_EMAIL = 'newtestingwebdev@gmail.com'
+export const TEST_USER_USERNAME = 'testing account'
+
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
-    const accounts = await Account.query().limit(3)
+    const accounts = await Account.query().limit(2)
 
-    const users = accounts.map((account) => {
+    const randomUsers = accounts.map((account) => {
       const userAttributes: UserAttributes = {
         accountId: account.id,
         providerId: faker.finance.account(21),
@@ -23,6 +27,18 @@ export default class extends BaseSeeder {
       return userAttributes
     })
 
-    await User.createMany(users)
+    const account = await Account.query().doesntHave('user').firstOrFail()
+
+    const testUser: UserAttributes = {
+      accountId: account.id,
+      providerId: TEST_USER_PROVIDER_ID,
+      firstName: faker.name.firstName(),
+      lastName: faker.name.lastName(),
+      email: TEST_USER_EMAIL,
+      username: TEST_USER_USERNAME,
+      avatarUrl: faker.internet.avatar(),
+    }
+
+    await User.createMany([...randomUsers, testUser])
   }
 }

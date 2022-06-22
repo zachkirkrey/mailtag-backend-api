@@ -1,6 +1,15 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, computed, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  computed,
+  HasMany,
+  hasMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
+import Account from './Account'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -44,4 +53,7 @@ export default class User extends BaseModel {
 
   @hasMany(() => Email)
   public emails: HasMany<typeof Email>
+
+  @belongsTo(() => Account)
+  public account: BelongsTo<typeof Account>
 }
