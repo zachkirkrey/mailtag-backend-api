@@ -2,6 +2,8 @@ import { ModelAttributes } from '@ioc:Adonis/Lucid/Orm'
 import Account from 'App/Models/Account'
 import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
+import Link from 'App/Models/Link'
+import LinkEvent from 'App/Models/LinkEvent'
 import User from 'App/Models/User'
 
 export type AccountAttributes = Omit<
@@ -21,5 +23,15 @@ export type EmailAttributes = Omit<
 
 export type EmailEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof EmailEvent>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type LinkAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Link>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type LinkEventAttributes = Omit<
+  ModelAttributes<InstanceType<typeof LinkEvent>>,
   'id' | 'createdAt' | 'updatedAt'
 >

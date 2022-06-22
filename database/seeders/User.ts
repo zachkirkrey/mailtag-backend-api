@@ -3,10 +3,7 @@ import { faker } from '@faker-js/faker'
 import User from 'App/Models/User'
 import Account from 'App/Models/Account'
 import { UserAttributes } from 'App/Helpers/type'
-
-export const TEST_USER_PROVIDER_ID = '100849119556065200741'
-export const TEST_USER_EMAIL = 'newtestingwebdev@gmail.com'
-export const TEST_USER_USERNAME = 'testing account'
+import { TEST_USER_EMAIL, TEST_USER_PROVIDER_ID, TEST_USER_USERNAME } from 'App/Helpers/constant'
 
 export default class extends BaseSeeder {
   public override async run() {

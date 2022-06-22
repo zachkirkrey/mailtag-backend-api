@@ -1,8 +1,9 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
-import { EmailEventAttributes } from 'App/Helpers/type'
+import { LinkAttributes } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
-import EmailEvent from 'App/Models/EmailEvent'
+import { faker } from '@faker-js/faker'
+import Link from 'App/Models/Link'
 
 export default class extends BaseSeeder {
   public override async run() {
@@ -11,14 +12,16 @@ export default class extends BaseSeeder {
       .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
       .firstOrFail()
 
-    const emailEvents = Array.from(Array(5)).map(() => {
-      const emailEventAttributes: EmailEventAttributes = {
+    const links = Array.from(Array(5)).map(() => {
+      const linkAttributes: LinkAttributes = {
         emailId: email.id,
+        body: faker.internet.url(),
+        isDeleted: false,
       }
 
-      return emailEventAttributes
+      return linkAttributes
     })
 
-    await EmailEvent.createMany(emailEvents)
+    await Link.createMany(links)
   }
 }

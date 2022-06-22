@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
+import LinkEvent from './LinkEvent'
 
 export default class Link extends BaseModel {
   @column({ isPrimary: true })
@@ -23,4 +24,7 @@ export default class Link extends BaseModel {
 
   @belongsTo(() => Email)
   public email: BelongsTo<typeof Email>
+
+  @hasMany(() => LinkEvent)
+  public events: HasMany<typeof LinkEvent>
 }

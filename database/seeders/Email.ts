@@ -3,7 +3,7 @@ import { EmailAttributes } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import User from 'App/Models/User'
 import { faker } from '@faker-js/faker'
-import { TEST_USER_PROVIDER_ID } from './User'
+import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
 
 export default class extends BaseSeeder {
   public override async run() {
