@@ -8,7 +8,12 @@ export default class extends BaseSchema {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.string('email').notNullable().unique()
       table.string('provider_id').notNullable().unique()
-      table.uuid('account_id').references('id').inTable('accounts').onDelete('CASCADE')
+      table
+        .uuid('account_id')
+        .references('id')
+        .inTable('accounts')
+        .onDelete('CASCADE')
+        .notNullable()
       table.string('username').notNullable()
       table.string('avatar_url').nullable()
       table.string('first_name').nullable()

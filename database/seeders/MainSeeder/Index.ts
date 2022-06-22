@@ -19,5 +19,6 @@ export default class extends BaseSeeder {
     await this.runSeeder(await import('../Account'))
     await this.runSeeder(await import('../User'))
     await this.runSeeder(await import('../Email'))
+    await this.runSeeder(await import('../EmailEvent'))
   }
 }
