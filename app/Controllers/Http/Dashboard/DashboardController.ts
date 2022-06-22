@@ -14,6 +14,7 @@ export default class DashboardController {
 
     return {
       data: {
+        count: emails.length,
         emails,
       },
     }
@@ -28,6 +29,7 @@ export default class DashboardController {
 
     return {
       data: {
+        count: emails.length,
         emails,
       },
     }
@@ -45,4 +47,8 @@ export default class DashboardController {
       },
     }
   }
+
+  // public async getAverageLinkClickRate({ auth }: HttpContextContract) {
+  //   return 'average link click rate'
+  // }
 }
