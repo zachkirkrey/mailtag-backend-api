@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import { daysAgo, monthsAgo } from 'App/Helpers/date'
 import Email from 'App/Models/Email'
+import Link from 'App/Models/Link'
 
 export default class DashboardController {
   public async getEmailsSentToday({ auth }: HttpContextContract) {
@@ -50,7 +51,20 @@ export default class DashboardController {
     }
   }
 
-  // public async getAverageLinkClickRate({ auth }: HttpContextContract) {
-  //   return 'average link click rate'
-  // }
+  public async getAverageLinkClickRate({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const emails = await Email.query().where({ userId: user.id })
+    const emailsIds = emails.map((email) => email.id)
+    const [links, linksClicked] = await Promise.all([
+      Link.query().whereIn('email_id', emailsIds),
+      Link.query().whereIn('email_id', emailsIds).has('events'),
+    ])
+    const averageLinkClickRate = (linksClicked.length / links.length) * 100
+
+    return {
+      data: {
+        averageLinkClickRate,
+      },
+    }
+  }
 }
