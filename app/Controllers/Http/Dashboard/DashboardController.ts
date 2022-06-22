@@ -33,9 +33,16 @@ export default class DashboardController {
     }
   }
 
-  // public async getAverageOpenRate({ auth }: HttpContextContract) {
-  //   const user = auth.use('api').user!
-  //   const emails = await Email.query().count('user_id')
-  //   return emails
-  // }
+  public async getAverageOpenRate({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const emails = await Email.query().where({ userId: user.id })
+    const emailsOpened = await Email.query().where({ userId: user.id }).has('events')
+    const averageOpenRate = (emailsOpened.length / emails.length) * 100
+
+    return {
+      data: {
+        averageOpenRate,
+      },
+    }
+  }
 }
