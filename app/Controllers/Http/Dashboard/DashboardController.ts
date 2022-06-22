@@ -37,8 +37,10 @@ export default class DashboardController {
 
   public async getAverageOpenRate({ auth }: HttpContextContract) {
     const user = auth.use('api').user!
-    const emails = await Email.query().where({ userId: user.id })
-    const emailsOpened = await Email.query().where({ userId: user.id }).has('events')
+    const [emails, emailsOpened] = await Promise.all([
+      Email.query().where({ userId: user.id }),
+      Email.query().where({ userId: user.id }).has('events'),
+    ])
     const averageOpenRate = (emailsOpened.length / emails.length) * 100
 
     return {
