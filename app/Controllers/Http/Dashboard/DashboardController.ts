@@ -98,7 +98,10 @@ export default class DashboardController {
 
   public async getSignatureClicks({ auth }: HttpContextContract) {
     const user = auth.use('api').user!
-    const signatures = await Signature.query().where({ userId: user.id }).has('events')
+    const signatures = await Signature.query()
+      .where({ userId: user.id })
+      .has('events')
+      .preload('user')
 
     return {
       data: {

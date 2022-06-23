@@ -11,6 +11,7 @@ import {
 import User from './User'
 import { BorderRadiusTypes } from 'App/Helpers/type'
 import SignatureEvent from './SignatureEvent'
+import { isRelationshipPreloaded } from 'App/Helpers/model'
 
 export default class Signature extends BaseModel {
   @column({ isPrimary: true })
@@ -76,6 +77,9 @@ export default class Signature extends BaseModel {
 
   @computed({ serializeAs: 'full_name' })
   public get fullName() {
+    // TODO send type of model instance instead of string
+    isRelationshipPreloaded(this, 'user')
+
     return this.user.fullName
   }
 
