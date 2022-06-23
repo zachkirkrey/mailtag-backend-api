@@ -1,13 +1,72 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm'
+import User from './User'
+import { BorderRadiusTypes } from 'App/Helpers/type'
 
 export default class Signature extends BaseModel {
   @column({ isPrimary: true })
   public id: string
+
+  @column()
+  public userId: string
+
+  @column()
+  public name: string
+
+  @column()
+  public title: string | null
+
+  @column()
+  public avatarUrl: string | null
+
+  // TODO make this column enum type
+  @column()
+  public avatarBorderRadiusType: BorderRadiusTypes = BorderRadiusTypes.SQUARE
+
+  @column()
+  public company: string | null
+
+  @column()
+  public email: string | null
+
+  @column()
+  public website: string | null
+
+  @column()
+  public officeAddress: string | null
+
+  @column()
+  public officePhoneNumber: string | null
+
+  @column()
+  public homePhoneNumber: string | null
+
+  @column()
+  public calendarUrl: string | null
+
+  @column()
+  public bannerUrl: string | null
+
+  @column()
+  public isBannerEnabled: boolean = false
+
+  @column()
+  public isDeleted: boolean = false
+
+  @column()
+  public isDefault: boolean = false
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
+
+  @computed({ serializeAs: 'full_name' })
+  public get fullName() {
+    return this.user.fullName
+  }
 }

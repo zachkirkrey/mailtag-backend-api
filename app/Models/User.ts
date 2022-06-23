@@ -10,6 +10,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
 import Account from './Account'
+import Signature from './Signature'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -56,4 +57,7 @@ export default class User extends BaseModel {
 
   @belongsTo(() => Account)
   public account: BelongsTo<typeof Account>
+
+  @hasMany(() => Signature)
+  public signatures: HasMany<typeof Signature>
 }
