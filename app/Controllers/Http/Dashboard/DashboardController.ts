@@ -82,4 +82,16 @@ export default class DashboardController {
       },
     }
   }
+
+  public async getUnreadEmails({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const emails = await Email.query().where({ userId: user.id }).doesntHave('events')
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
 }

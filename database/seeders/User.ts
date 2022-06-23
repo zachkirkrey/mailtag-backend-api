@@ -24,6 +24,8 @@ export default class extends BaseSeeder {
       return userAttributes
     })
 
+    await User.createMany(randomUsers)
+
     const account = await Account.query().doesntHave('user').firstOrFail()
 
     const testUser: UserAttributes = {
@@ -36,6 +38,6 @@ export default class extends BaseSeeder {
       avatarUrl: faker.internet.avatar(),
     }
 
-    await User.createMany([...randomUsers, testUser])
+    await User.createMany([testUser])
   }
 }

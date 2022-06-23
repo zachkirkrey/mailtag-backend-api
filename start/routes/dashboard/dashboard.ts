@@ -6,6 +6,7 @@ Route.group(() => {
   Route.get('average-open-rate', 'Dashboard/DashboardController.getAverageOpenRate')
   Route.get('average-link-click-rate', 'Dashboard/DashboardController.getAverageLinkClickRate')
   Route.get('recently-opened-emails', 'Dashboard/DashboardController.getRecentlyOpenedEmails')
+  Route.get('unread-emails', 'Dashboard/DashboardController.getUnreadEmails')
 })
   .prefix('dashboard')
   .middleware('auth')
