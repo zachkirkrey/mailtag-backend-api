@@ -3,6 +3,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { daysAgo, monthsAgo } from 'App/Helpers/date'
 import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
+import Signature from 'App/Models/Signature'
 
 export default class DashboardController {
   public async getEmailsSentToday({ auth }: HttpContextContract) {
@@ -91,6 +92,18 @@ export default class DashboardController {
       data: {
         count: emails.length,
         emails,
+      },
+    }
+  }
+
+  public async getSignatureClicks({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const signatures = await Signature.query().where({ userId: user.id }).has('events')
+
+    return {
+      data: {
+        count: signatures.length,
+        signatures,
       },
     }
   }
