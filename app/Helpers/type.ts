@@ -5,6 +5,7 @@ import EmailEvent from 'App/Models/EmailEvent'
 import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
 import Signature from 'App/Models/Signature'
+import SignatureEvent from 'App/Models/SignatureEvent'
 import User from 'App/Models/User'
 
 export type AccountAttributes = Omit<
@@ -40,6 +41,11 @@ export type LinkEventAttributes = Omit<
 export type SignatureAttributes = Omit<
   ModelAttributes<InstanceType<typeof Signature>>,
   'id' | 'createdAt' | 'updatedAt' | 'fullName'
+>
+
+export type SignatureEventAttributes = Omit<
+  ModelAttributes<InstanceType<typeof SignatureEvent>>,
+  'id' | 'createdAt' | 'updatedAt'
 >
 
 export enum BorderRadiusTypes {

@@ -23,5 +23,6 @@ export default class extends BaseSeeder {
     await this.runSeeder(await import('../Link'))
     await this.runSeeder(await import('../LinkEvent'))
     await this.runSeeder(await import('../Signature'))
+    await this.runSeeder(await import('../SignatureEvent'))
   }
 }

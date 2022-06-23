@@ -1,7 +1,16 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  computed,
+  HasMany,
+  hasMany,
+} from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import { BorderRadiusTypes } from 'App/Helpers/type'
+import SignatureEvent from './SignatureEvent'
 
 export default class Signature extends BaseModel {
   @column({ isPrimary: true })
@@ -69,4 +78,7 @@ export default class Signature extends BaseModel {
   public get fullName() {
     return this.user.fullName
   }
+
+  @hasMany(() => SignatureEvent)
+  public events: HasMany<typeof SignatureEvent>
 }
