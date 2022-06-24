@@ -170,4 +170,24 @@ export default class DashboardController {
       },
     }
   }
+
+  public async getUnreadEmailsToday({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const todayDate = DateTime.local(
+      DateTime.local().year,
+      DateTime.local().month,
+      DateTime.local().day
+    ).toSQL()
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .doesntHave('events')
+      .andWhere('created_at', '>=', todayDate)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
 }
