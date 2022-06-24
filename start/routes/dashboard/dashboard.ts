@@ -15,6 +15,7 @@ Route.group(() => {
     'Dashboard/DashboardController.getAverageLinkClickRatePerMonth'
   ).where('month', Route.matchers.number())
   Route.get('unread-emails-today', 'Dashboard/DashboardController.getUnreadEmailsToday')
+  Route.get('read-emails-today', 'Dashboard/DashboardController.getReadEmailsToday')
 })
   .prefix('dashboard')
   .middleware('auth')
