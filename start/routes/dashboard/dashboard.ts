@@ -10,6 +10,10 @@ Route.group(() => {
   Route.get('signature-clicks', 'Dashboard/DashboardController.getSignatureClicks')
   Route.get('pings', 'Dashboard/DashboardController.getPings')
   Route.get('chart-stats', 'Dashboard/DashboardController.getChartStats')
+  Route.get(
+    'average-link-click-rate-month/:month',
+    'Dashboard/DashboardController.getAverageLinkClickRatePerMonth'
+  ).where('month', Route.matchers.number())
 })
   .prefix('dashboard')
   .middleware('auth')

@@ -5,6 +5,7 @@ import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
 import Ping from 'App/Models/Ping'
 import Signature from 'App/Models/Signature'
+import { DateTime } from 'luxon'
 
 export default class DashboardController {
   public async getEmailsSentToday({ auth }: HttpContextContract) {
@@ -140,6 +141,32 @@ export default class DashboardController {
         emailsSentCount: emailsSent.length,
         emailsReadCount: emailsRead.length,
         emailsUnreadCount: emailsUnread.length,
+      },
+    }
+  }
+
+  public async getAverageLinkClickRatePerMonth({ auth, params }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const { month } = params
+    const YEAR = DateTime.local().year
+    const monthStartDate = DateTime.local(YEAR, month).toSQL()
+    const monthEndDate = DateTime.local(YEAR, month + 1).toSQL()
+    const emails = await Email.query().where({ userId: user.id })
+    const emailsIds = emails.map((email) => email.id)
+    const [links, linksClicked] = await Promise.all([
+      Link.query().whereIn('email_id', emailsIds),
+      Link.query()
+        .whereIn('email_id', emailsIds)
+        .has('events')
+        .andWhereBetween('created_at', [monthStartDate, monthEndDate]),
+    ])
+    const averageLinkClickRatePerMonth = (linksClicked.length / links.length) * 100
+
+    return {
+      data: {
+        year: YEAR,
+        month: DateTime.local(YEAR, month).monthLong,
+        averageLinkClickRatePerMonth,
       },
     }
   }
