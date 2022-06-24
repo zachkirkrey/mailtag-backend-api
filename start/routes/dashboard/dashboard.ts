@@ -8,6 +8,7 @@ Route.group(() => {
   Route.get('recently-opened-emails', 'Dashboard/DashboardController.getRecentlyOpenedEmails')
   Route.get('unread-emails', 'Dashboard/DashboardController.getUnreadEmails')
   Route.get('signature-clicks', 'Dashboard/DashboardController.getSignatureClicks')
+  Route.get('pings', 'Dashboard/DashboardController.getPings')
 })
   .prefix('dashboard')
   .middleware('auth')

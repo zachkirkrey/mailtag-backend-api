@@ -3,6 +3,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { daysAgo, monthsAgo } from 'App/Helpers/date'
 import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
+import Ping from 'App/Models/Ping'
 import Signature from 'App/Models/Signature'
 
 export default class DashboardController {
@@ -107,6 +108,21 @@ export default class DashboardController {
       data: {
         count: signatures.length,
         signatures,
+      },
+    }
+  }
+
+  public async getPings({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const pings = await Ping.query()
+      .whereHas('email', (emailQuery) => emailQuery.where({ userId: user.id }))
+      .andHas('events')
+      .preload('events')
+
+    return {
+      data: {
+        count: pings.length,
+        pings,
       },
     }
   }
