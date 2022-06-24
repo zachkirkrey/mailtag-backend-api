@@ -17,6 +17,7 @@ Route.group(() => {
   Route.get('unread-emails-today', 'Dashboard/DashboardController.getUnreadEmailsToday')
   Route.get('read-emails-today', 'Dashboard/DashboardController.getReadEmailsToday')
   Route.get('recent-emails', 'Dashboard/DashboardController.getRecentEmails')
+  Route.get('recent-read-emails', 'Dashboard/DashboardController.getRecentReadEmails')
 })
   .prefix('dashboard')
   .middleware('auth')
