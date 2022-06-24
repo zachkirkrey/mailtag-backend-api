@@ -16,6 +16,7 @@ Route.group(() => {
   ).where('month', Route.matchers.number())
   Route.get('unread-emails-today', 'Dashboard/DashboardController.getUnreadEmailsToday')
   Route.get('read-emails-today', 'Dashboard/DashboardController.getReadEmailsToday')
+  Route.get('recent-emails', 'Dashboard/DashboardController.getRecentEmails')
 })
   .prefix('dashboard')
   .middleware('auth')

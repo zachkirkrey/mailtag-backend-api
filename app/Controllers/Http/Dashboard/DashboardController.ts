@@ -210,4 +210,19 @@ export default class DashboardController {
       },
     }
   }
+
+  public async getRecentEmails({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .orderBy('created_at', 'desc')
+      .limit(3)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
 }
