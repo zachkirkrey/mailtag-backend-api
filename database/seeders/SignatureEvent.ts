@@ -5,7 +5,7 @@ import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
 
 export default class extends BaseSeeder {
-  public async run() {
+  public override async run() {
     // Write your database queries inside the run method
     const signature = await Signature.query()
       .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))

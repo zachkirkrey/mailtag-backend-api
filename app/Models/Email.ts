@@ -2,6 +2,7 @@ import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import EmailEvent from './EmailEvent'
 import User from './User'
+import Ping from './Ping'
 
 export default class Email extends BaseModel {
   @column({ isPrimary: true })
@@ -36,4 +37,7 @@ export default class Email extends BaseModel {
 
   @hasMany(() => EmailEvent)
   public events: HasMany<typeof EmailEvent>
+
+  @hasMany(() => Ping)
+  public pings: HasMany<typeof Ping>
 }

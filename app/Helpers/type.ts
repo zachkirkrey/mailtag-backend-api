@@ -4,6 +4,8 @@ import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
 import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
+import Ping from 'App/Models/Ping'
+import PingEvent from 'App/Models/PingEvent'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
 import User from 'App/Models/User'
@@ -45,6 +47,16 @@ export type SignatureAttributes = Omit<
 
 export type SignatureEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof SignatureEvent>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type PingAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Ping>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type PingEventAttributes = Omit<
+  ModelAttributes<InstanceType<typeof PingEvent>>,
   'id' | 'createdAt' | 'updatedAt'
 >
 

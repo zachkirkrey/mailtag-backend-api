@@ -5,7 +5,7 @@ import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
 
 export default class extends BaseSeeder {
-  public async run() {
+  public override async run() {
     // Write your database queries inside the run method
     const link = await Link.query()
       .whereHas('email', (query) =>
