@@ -18,10 +18,12 @@ export default class UsersController {
     // TODO add validator
     const user = await User.findByOrFail('id', params.id)
     // TODO add body validator
+    // TODO add email change verification flow
     await user.merge(request.body()).save()
 
     return {
       data: {
+        message: 'User updated successfully',
         user,
       },
     }

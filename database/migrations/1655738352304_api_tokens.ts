@@ -3,10 +3,10 @@ import BaseSchema from '@ioc:Adonis/Lucid/Schema'
 export default class ApiTokens extends BaseSchema {
   protected tableName = 'api_tokens'
 
-  public async up() {
+  public override async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
-      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE')
+      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE').notNullable()
       table.string('name').notNullable()
       table.string('type').notNullable()
       table.string('token', 64).notNullable().unique()
@@ -19,7 +19,7 @@ export default class ApiTokens extends BaseSchema {
     })
   }
 
-  public async down() {
+  public override async down() {
     this.schema.dropTable(this.tableName)
   }
 }

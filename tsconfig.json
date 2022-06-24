@@ -19,6 +19,9 @@
       "@adonisjs/lucid",
       "@adonisjs/ally",
       "@adonisjs/auth"
-    ]
+    ],
+    "noImplicitOverride": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true
   }
 }

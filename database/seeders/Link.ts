@@ -1,0 +1,27 @@
+import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
+import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
+import { LinkAttributes } from 'App/Helpers/type'
+import Email from 'App/Models/Email'
+import { faker } from '@faker-js/faker'
+import Link from 'App/Models/Link'
+
+export default class extends BaseSeeder {
+  public override async run() {
+    // Write your database queries inside the run method
+    const email = await Email.query()
+      .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
+      .firstOrFail()
+
+    const links = Array.from(Array(5)).map(() => {
+      const linkAttributes: LinkAttributes = {
+        emailId: email.id,
+        body: faker.internet.url(),
+        isDeleted: false,
+      }
+
+      return linkAttributes
+    })
+
+    await Link.createMany(links)
+  }
+}
