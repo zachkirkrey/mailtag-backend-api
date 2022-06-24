@@ -126,4 +126,21 @@ export default class DashboardController {
       },
     }
   }
+
+  public async getChartStats({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const [emailsSent, emailsRead, emailsUnread] = await Promise.all([
+      Email.query().where({ userId: user.id }),
+      Email.query().where({ userId: user.id }).has('events'),
+      Email.query().where({ userId: user.id }).doesntHave('events'),
+    ])
+
+    return {
+      data: {
+        emailsSentCount: emailsSent.length,
+        emailsReadCount: emailsRead.length,
+        emailsUnreadCount: emailsUnread.length,
+      },
+    }
+  }
 }
