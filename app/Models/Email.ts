@@ -1,5 +1,13 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+  scope,
+} from '@ioc:Adonis/Lucid/Orm'
 import EmailEvent from './EmailEvent'
 import User from './User'
 import Ping from './Ping'
@@ -40,4 +48,15 @@ export default class Email extends BaseModel {
 
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>
+
+  // TODO add fixed scopes to model
+  public static today = scope((query) => {
+    const todayDate = DateTime.local(
+      DateTime.local().year,
+      DateTime.local().month,
+      DateTime.local().day
+    ).toSQL()
+
+    query.where('created_at', '>=', todayDate)
+  })
 }

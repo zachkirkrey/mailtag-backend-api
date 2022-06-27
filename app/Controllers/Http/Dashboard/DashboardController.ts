@@ -1,10 +1,12 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import { daysAgo, monthsAgo } from 'App/Helpers/date'
+import { daysAgo, LOCAL_DATE_WITH_PARAMS, monthsAgo, YEAR } from 'App/Helpers/date'
 import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
 import Ping from 'App/Models/Ping'
 import Signature from 'App/Models/Signature'
+import ChartStatsDateRange from 'App/Services/ChartStatsDateRange'
+import GetChartStatsValidator from 'App/Validators/GetChartStatsValidator'
 import { DateTime } from 'luxon'
 
 export default class DashboardController {
@@ -128,12 +130,24 @@ export default class DashboardController {
     }
   }
 
-  public async getChartStats({ auth }: HttpContextContract) {
+  public async getChartStats({ auth, request }: HttpContextContract) {
+    // TODO Custom date range
     const user = auth.use('api').user!
+    const { params } = await request.validate(GetChartStatsValidator)
+
+    const ranges = new ChartStatsDateRange(params.range)
+    const { startDate, endDate } = ranges.getDates()
+
     const [emailsSent, emailsRead, emailsUnread] = await Promise.all([
-      Email.query().where({ userId: user.id }),
-      Email.query().where({ userId: user.id }).has('events'),
-      Email.query().where({ userId: user.id }).doesntHave('events'),
+      Email.query().where({ userId: user.id }).andWhereBetween('created_at', [startDate, endDate]),
+      Email.query()
+        .where({ userId: user.id })
+        .has('events')
+        .andWhereBetween('created_at', [startDate, endDate]),
+      Email.query()
+        .where({ userId: user.id })
+        .doesntHave('events')
+        .andWhereBetween('created_at', [startDate, endDate]),
     ])
 
     return {
@@ -148,7 +162,6 @@ export default class DashboardController {
   public async getAverageLinkClickRatePerMonth({ auth, params }: HttpContextContract) {
     const user = auth.use('api').user!
     const { month } = params
-    const YEAR = DateTime.local().year
     const monthStartDate = DateTime.local(YEAR, month).toSQL()
     const monthEndDate = DateTime.local(YEAR, month + 1).toSQL()
     const emails = await Email.query().where({ userId: user.id })
@@ -165,7 +178,7 @@ export default class DashboardController {
     return {
       data: {
         year: YEAR,
-        month: DateTime.local(YEAR, month).monthLong,
+        month: LOCAL_DATE_WITH_PARAMS.monthLong,
         averageLinkClickRatePerMonth,
       },
     }
