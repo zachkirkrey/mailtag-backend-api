@@ -12,8 +12,8 @@
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "prepare": "node ./husky-prepare.js",
-    "typecheck": "tsc --noEmit"
+    "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
+      "typecheck": "tsc --noEmit"
   },
   "eslintConfig": {
     "extends": [
