@@ -12,7 +12,7 @@
     "start": "node server.js",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
-    "prepare": "husky install",
+    "prepare": "node ./husky-prepare.js",
     "typecheck": "tsc --noEmit"
   },
   "eslintConfig": {
