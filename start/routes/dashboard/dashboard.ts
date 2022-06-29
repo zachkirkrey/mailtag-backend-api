@@ -10,6 +10,15 @@ Route.group(() => {
   Route.get('signature-clicks', 'Dashboard/DashboardController.getSignatureClicks')
   Route.get('pings', 'Dashboard/DashboardController.getPings')
   Route.get('chart-stats', 'Dashboard/DashboardController.getChartStats')
+  Route.get(
+    'average-link-click-rate-month/:month',
+    'Dashboard/DashboardController.getAverageLinkClickRatePerMonth'
+  ).where('month', Route.matchers.number())
+  Route.get('unread-emails-today', 'Dashboard/DashboardController.getUnreadEmailsToday')
+  Route.get('read-emails-today', 'Dashboard/DashboardController.getReadEmailsToday')
+  Route.get('recent-emails', 'Dashboard/DashboardController.getRecentEmails')
+  Route.get('recent-read-emails', 'Dashboard/DashboardController.getRecentReadEmails')
+  Route.get('recent-unread-emails', 'Dashboard/DashboardController.getRecentUnreadEmails')
 })
   .prefix('dashboard')
   .middleware('auth')

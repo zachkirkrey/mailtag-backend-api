@@ -64,3 +64,21 @@ export enum BorderRadiusTypes {
   SQUARE = 'square',
   CIRCLE = 'circle',
 }
+
+export enum ChartFilterRanges {
+  THIS_WEEK = 'this-week',
+  LAST_WEEK = 'last-week',
+  THIS_MONTH = 'this-month',
+  LAST_MONTH = 'last-month',
+  THIS_YEAR = 'this-year',
+  LAST_YEAR = 'last-year',
+  CUSTOM = 'custom',
+}
+
+type ReverseMap<T> = T[keyof T]
+export type RangeType = ReverseMap<typeof ChartFilterRanges>
+
+export type DateRangeString = {
+  startDate: string
+  endDate: string
+}

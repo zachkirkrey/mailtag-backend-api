@@ -1,10 +1,14 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import { daysAgo, monthsAgo } from 'App/Helpers/date'
+import { daysAgo, LOCAL_DATE_WITH_PARAMS, monthsAgo, YEAR } from 'App/Helpers/date'
+import { ChartFilterRanges } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
 import Ping from 'App/Models/Ping'
 import Signature from 'App/Models/Signature'
+import ChartStatsDateRange from 'App/Services/ChartStatsDateRange'
+import GetChartStatsValidator from 'App/Validators/GetChartStatsValidator'
+import { DateTime } from 'luxon'
 
 export default class DashboardController {
   public async getEmailsSentToday({ auth }: HttpContextContract) {
@@ -127,12 +131,22 @@ export default class DashboardController {
     }
   }
 
-  public async getChartStats({ auth }: HttpContextContract) {
+  public async getChartStats({ auth, request }: HttpContextContract) {
     const user = auth.use('api').user!
+    const { range, start, end } = await request.validate(GetChartStatsValidator)
+    const isCustomRange = !!(start && end)
+    const ranges = new ChartStatsDateRange(isCustomRange ? ChartFilterRanges.CUSTOM : range!)
+    const { startDate, endDate } = ranges.getDates(start!, end!)
     const [emailsSent, emailsRead, emailsUnread] = await Promise.all([
-      Email.query().where({ userId: user.id }),
-      Email.query().where({ userId: user.id }).has('events'),
-      Email.query().where({ userId: user.id }).doesntHave('events'),
+      Email.query().where({ userId: user.id }).andWhereBetween('created_at', [startDate, endDate]),
+      Email.query()
+        .where({ userId: user.id })
+        .has('events')
+        .andWhereBetween('created_at', [startDate, endDate]),
+      Email.query()
+        .where({ userId: user.id })
+        .doesntHave('events')
+        .andWhereBetween('created_at', [startDate, endDate]),
     ])
 
     return {
@@ -140,6 +154,118 @@ export default class DashboardController {
         emailsSentCount: emailsSent.length,
         emailsReadCount: emailsRead.length,
         emailsUnreadCount: emailsUnread.length,
+      },
+    }
+  }
+
+  public async getAverageLinkClickRatePerMonth({ auth, params }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const { month } = params
+    const monthStartDate = DateTime.local(YEAR, month).toSQL()
+    const monthEndDate = DateTime.local(YEAR, month + 1).toSQL()
+    const emails = await Email.query().where({ userId: user.id })
+    const emailsIds = emails.map((email) => email.id)
+    const [links, linksClicked] = await Promise.all([
+      Link.query().whereIn('email_id', emailsIds),
+      Link.query()
+        .whereIn('email_id', emailsIds)
+        .has('events')
+        .andWhereBetween('created_at', [monthStartDate, monthEndDate]),
+    ])
+    const averageLinkClickRatePerMonth = (linksClicked.length / links.length) * 100
+
+    return {
+      data: {
+        year: YEAR,
+        month: LOCAL_DATE_WITH_PARAMS.monthLong,
+        averageLinkClickRatePerMonth,
+      },
+    }
+  }
+
+  public async getUnreadEmailsToday({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const todayDate = DateTime.local(
+      DateTime.local().year,
+      DateTime.local().month,
+      DateTime.local().day
+    ).toSQL()
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .doesntHave('events')
+      .andWhere('created_at', '>=', todayDate)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
+
+  public async getReadEmailsToday({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const todayDate = DateTime.local(
+      DateTime.local().year,
+      DateTime.local().month,
+      DateTime.local().day
+    ).toSQL()
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .has('events')
+      .andWhere('created_at', '>=', todayDate)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
+
+  public async getRecentEmails({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .orderBy('created_at', 'desc')
+      .limit(3)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
+
+  public async getRecentReadEmails({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .has('events')
+      .orderBy('created_at', 'desc')
+      .limit(3)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
+
+  public async getRecentUnreadEmails({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .doesntHave('events')
+      .orderBy('created_at', 'desc')
+      .limit(3)
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
       },
     }
   }
