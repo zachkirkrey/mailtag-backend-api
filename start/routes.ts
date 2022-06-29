@@ -24,5 +24,5 @@ import './routes/user'
 import './routes/dashboard'
 
 Route.get('/', async () => {
-  return { hello: 'world' }
+  return { hello: 'mailtag' }
 })

@@ -27,7 +27,10 @@ const allyConfig: AllyConfig = {
     driver: 'google',
     clientId: Env.get('GOOGLE_CLIENT_ID'),
     clientSecret: Env.get('GOOGLE_CLIENT_SECRET'),
-    callbackUrl: 'http://localhost:3333/auth/google/callback',
+    callbackUrl:
+      Env.get('NODE_ENV') === 'development'
+        ? Env.get('GOOGLE_CLIENT_CALLBACK_URL_LOCAL')
+        : Env.get('GOOGLE_CLIENT_CALLBACK_URL_PRODUCTION'),
   },
 }
 
