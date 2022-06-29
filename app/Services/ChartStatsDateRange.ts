@@ -8,7 +8,8 @@ export default class ChartStatsDateRange {
   private startDate: DateTime
   private endDate: DateTime
 
-  public getDates(): DateRangeString {
+  public getDates(start: DateTime, end: DateTime): DateRangeString {
+    // TODO eliminate switch case here e.g. use polymorphism
     switch (this.range) {
       case 'this-week':
         return this.weekDateRanges(false)
@@ -22,6 +23,8 @@ export default class ChartStatsDateRange {
         return this.yearDateRanges(false)
       case 'last-year':
         return this.yearDateRanges(true)
+      case 'custom':
+        return this.customDateRanges(start, end)
 
       default:
         return this.monthDateRanges(false)
@@ -59,6 +62,13 @@ export default class ChartStatsDateRange {
 
     this.startDate = dateTime.startOf('year')
     this.endDate = dateTime.endOf('year')
+
+    return this.serializeRanges(this.startDate, this.endDate)
+  }
+
+  private customDateRanges(startDate: DateTime, endDate: DateTime) {
+    this.startDate = startDate
+    this.endDate = endDate
 
     return this.serializeRanges(this.startDate, this.endDate)
   }

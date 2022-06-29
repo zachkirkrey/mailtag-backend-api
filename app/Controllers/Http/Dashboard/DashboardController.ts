@@ -1,6 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 import { daysAgo, LOCAL_DATE_WITH_PARAMS, monthsAgo, YEAR } from 'App/Helpers/date'
+import { ChartFilterRanges } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
 import Ping from 'App/Models/Ping'
@@ -131,13 +132,11 @@ export default class DashboardController {
   }
 
   public async getChartStats({ auth, request }: HttpContextContract) {
-    // TODO Custom date range
     const user = auth.use('api').user!
-    const { params } = await request.validate(GetChartStatsValidator)
-
-    const ranges = new ChartStatsDateRange(params.range)
-    const { startDate, endDate } = ranges.getDates()
-
+    const { range, start, end } = await request.validate(GetChartStatsValidator)
+    const isCustomRange = !!(start && end)
+    const ranges = new ChartStatsDateRange(isCustomRange ? ChartFilterRanges.CUSTOM : range!)
+    const { startDate, endDate } = ranges.getDates(start!, end!)
     const [emailsSent, emailsRead, emailsUnread] = await Promise.all([
       Email.query().where({ userId: user.id }).andWhereBetween('created_at', [startDate, endDate]),
       Email.query()

@@ -72,6 +72,7 @@ export enum ChartFilterRanges {
   LAST_MONTH = 'last-month',
   THIS_YEAR = 'this-year',
   LAST_YEAR = 'last-year',
+  CUSTOM = 'custom',
 }
 
 type ReverseMap<T> = T[keyof T]

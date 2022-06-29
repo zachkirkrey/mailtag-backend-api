@@ -9,7 +9,7 @@ Route.group(() => {
   Route.get('unread-emails', 'Dashboard/DashboardController.getUnreadEmails')
   Route.get('signature-clicks', 'Dashboard/DashboardController.getSignatureClicks')
   Route.get('pings', 'Dashboard/DashboardController.getPings')
-  Route.get('chart-stats/:range', 'Dashboard/DashboardController.getChartStats')
+  Route.get('chart-stats', 'Dashboard/DashboardController.getChartStats')
   Route.get(
     'average-link-click-rate-month/:month',
     'Dashboard/DashboardController.getAverageLinkClickRatePerMonth'
