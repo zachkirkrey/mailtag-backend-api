@@ -5,6 +5,9 @@ export default class ReadEmailActivity extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
+  @column()
+  public readEmailId: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

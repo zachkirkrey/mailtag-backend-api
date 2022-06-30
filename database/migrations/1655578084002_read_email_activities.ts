@@ -6,6 +6,12 @@ export default class extends BaseSchema {
   public override async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
+      table
+        .uuid('read_email_id')
+        .references('id')
+        .inTable('read_emails')
+        .onDelete('CASCADE')
+        .notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

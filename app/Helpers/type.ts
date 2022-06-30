@@ -6,6 +6,8 @@ import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
 import Ping from 'App/Models/Ping'
 import PingEvent from 'App/Models/PingEvent'
+import ReadEmail from 'App/Models/ReadEmail'
+import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
 import User from 'App/Models/User'
@@ -57,6 +59,16 @@ export type PingAttributes = Omit<
 
 export type PingEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof PingEvent>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type ReadEmailAttributes = Omit<
+  ModelAttributes<InstanceType<typeof ReadEmail>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type ReadEmailActivityAttributes = Omit<
+  ModelAttributes<InstanceType<typeof ReadEmailActivity>>,
   'id' | 'createdAt' | 'updatedAt'
 >
 

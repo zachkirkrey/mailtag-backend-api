@@ -11,6 +11,7 @@ import {
 import EmailEvent from './EmailEvent'
 import User from './User'
 import Ping from './Ping'
+import ReadEmailActivity from './ReadEmailActivity'
 
 export default class Email extends BaseModel {
   @column({ isPrimary: true })
@@ -48,6 +49,9 @@ export default class Email extends BaseModel {
 
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>
+
+  @hasMany(() => ReadEmailActivity)
+  public activities: HasMany<typeof ReadEmailActivity>
 
   // TODO add fixed scopes to model
   public static today = scope((query) => {
