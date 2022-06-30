@@ -1,23 +1,18 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-import { daysAgo, LOCAL_DATE_WITH_PARAMS, monthsAgo, YEAR } from 'App/Helpers/date'
+import { LOCAL_DATE_WITH_PARAMS, YEAR } from 'App/Helpers/date'
 import { ChartFilterRanges } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
-import Ping from 'App/Models/Ping'
-import Signature from 'App/Models/Signature'
-import ChartStatsDateRange from 'App/Services/ChartStatsDateRange'
+import ChartStatsDateRange from 'App/Services/Dashboard/ChartStatsDateRange'
+import DashboardInfo from 'App/Services/Dashboard/DashboardInfo'
 import GetChartStatsValidator from 'App/Validators/GetChartStatsValidator'
 import { DateTime } from 'luxon'
 
 export default class DashboardController {
-  public async getEmailsSentToday({ auth }: HttpContextContract) {
-    const user = auth.use('api').user!
-    // TODO query based on this day not bigger than a day ago
-    const oneDayAgo = daysAgo(1).toSQLDate()
-    const emails = await Email.query()
-      .where({ userId: user.id })
-      .andWhere('created_at', '>=', oneDayAgo)
+  public async getEmailsSentToday(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const emails = await service.getEmailsSentToday()
 
     return {
       data: {
@@ -27,12 +22,9 @@ export default class DashboardController {
     }
   }
 
-  public async getEmailsSentMonth({ auth }: HttpContextContract) {
-    const user = auth.use('api').user!
-    const oneMonthAgo = monthsAgo(1).toSQLDate()
-    const emails = await Email.query()
-      .where({ userId: user.id })
-      .andWhere('created_at', '>=', oneMonthAgo)
+  public async getEmailsSentMonth(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const emails = await service.getEmailsSentMonth()
 
     return {
       data: {
@@ -42,13 +34,9 @@ export default class DashboardController {
     }
   }
 
-  public async getAverageOpenRate({ auth }: HttpContextContract) {
-    const user = auth.use('api').user!
-    const [emails, emailsOpened] = await Promise.all([
-      Email.query().where({ userId: user.id }),
-      Email.query().where({ userId: user.id }).has('events'),
-    ])
-    const averageOpenRate = (emailsOpened.length / emails.length) * 100
+  public async getAverageOpenRate(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const averageOpenRate = await service.getAverageOpenRate()
 
     return {
       data: {
@@ -57,15 +45,9 @@ export default class DashboardController {
     }
   }
 
-  public async getAverageLinkClickRate({ auth }: HttpContextContract) {
-    const user = auth.use('api').user!
-    const emails = await Email.query().where({ userId: user.id })
-    const emailsIds = emails.map((email) => email.id)
-    const [links, linksClicked] = await Promise.all([
-      Link.query().whereIn('email_id', emailsIds),
-      Link.query().whereIn('email_id', emailsIds).has('events'),
-    ])
-    const averageLinkClickRate = (linksClicked.length / links.length) * 100
+  public async getAverageLinkClickRate(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const averageLinkClickRate = await service.getAverageLinkClickRate()
 
     return {
       data: {
@@ -74,12 +56,33 @@ export default class DashboardController {
     }
   }
 
-  public async getRecentlyOpenedEmails({ auth }: HttpContextContract) {
+  public async getRecentlyReadEmails(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const emails = await service.getRecentlyReadEmails()
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
+
+  public async getRecentlyUnreadEmails(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const emails = await service.getRecentlyUnreadEmails()
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
+
+  public async getReadEmails({ auth }: HttpContextContract) {
     const user = auth.use('api').user!
-    const fiveDaysAgo = daysAgo(5).toSQLDate()
-    const emails = await Email.query()
-      .where({ userId: user.id })
-      .andWhere('created_at', '>=', fiveDaysAgo)
+    const emails = await Email.query().where({ userId: user.id }).andHas('events')
 
     return {
       data: {
@@ -91,7 +94,7 @@ export default class DashboardController {
 
   public async getUnreadEmails({ auth }: HttpContextContract) {
     const user = auth.use('api').user!
-    const emails = await Email.query().where({ userId: user.id }).doesntHave('events')
+    const emails = await Email.query().where({ userId: user.id }).andDoesntHave('events')
 
     return {
       data: {
@@ -101,12 +104,9 @@ export default class DashboardController {
     }
   }
 
-  public async getSignatureClicks({ auth }: HttpContextContract) {
-    const user = auth.use('api').user!
-    const signatures = await Signature.query()
-      .where({ userId: user.id })
-      .has('events')
-      .preload('user')
+  public async getSignatureClicks(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const signatures = await service.getSignatureClicks()
 
     return {
       data: {
@@ -116,12 +116,9 @@ export default class DashboardController {
     }
   }
 
-  public async getPings({ auth }: HttpContextContract) {
-    const user = auth.use('api').user!
-    const pings = await Ping.query()
-      .whereHas('email', (emailQuery) => emailQuery.where({ userId: user.id }))
-      .andHas('events')
-      .preload('events')
+  public async getPings(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+    const pings = await service.getPings()
 
     return {
       data: {
@@ -141,11 +138,11 @@ export default class DashboardController {
       Email.query().where({ userId: user.id }).andWhereBetween('created_at', [startDate, endDate]),
       Email.query()
         .where({ userId: user.id })
-        .has('events')
+        .andHas('events')
         .andWhereBetween('created_at', [startDate, endDate]),
       Email.query()
         .where({ userId: user.id })
-        .doesntHave('events')
+        .andDoesntHave('events')
         .andWhereBetween('created_at', [startDate, endDate]),
     ])
 
@@ -169,7 +166,7 @@ export default class DashboardController {
       Link.query().whereIn('email_id', emailsIds),
       Link.query()
         .whereIn('email_id', emailsIds)
-        .has('events')
+        .andHas('events')
         .andWhereBetween('created_at', [monthStartDate, monthEndDate]),
     ])
     const averageLinkClickRatePerMonth = (linksClicked.length / links.length) * 100
@@ -192,7 +189,7 @@ export default class DashboardController {
     ).toSQL()
     const emails = await Email.query()
       .where({ userId: user.id })
-      .doesntHave('events')
+      .andDoesntHave('events')
       .andWhere('created_at', '>=', todayDate)
 
     return {
@@ -212,7 +209,7 @@ export default class DashboardController {
     ).toSQL()
     const emails = await Email.query()
       .where({ userId: user.id })
-      .has('events')
+      .andHas('events')
       .andWhere('created_at', '>=', todayDate)
 
     return {
@@ -242,7 +239,7 @@ export default class DashboardController {
     const user = auth.use('api').user!
     const emails = await Email.query()
       .where({ userId: user.id })
-      .has('events')
+      .andHas('events')
       .orderBy('created_at', 'desc')
       .limit(3)
 
@@ -258,7 +255,7 @@ export default class DashboardController {
     const user = auth.use('api').user!
     const emails = await Email.query()
       .where({ userId: user.id })
-      .doesntHave('events')
+      .andDoesntHave('events')
       .orderBy('created_at', 'desc')
       .limit(3)
 
@@ -266,6 +263,43 @@ export default class DashboardController {
       data: {
         count: emails.length,
         emails,
+      },
+    }
+  }
+
+  public async getDashboardInfo(ctx: HttpContextContract) {
+    const service = new DashboardInfo(ctx)
+
+    const [
+      emailsSentToday,
+      emailsSentThisMonth,
+      averageOpenRate,
+      averageLinkClickRate,
+      recentlyReadEmails,
+      recentlyUnreadEmails,
+      signatureClicks,
+      pings,
+    ] = await Promise.all([
+      service.getEmailsSentToday(),
+      service.getEmailsSentMonth(),
+      service.getAverageOpenRate(),
+      service.getAverageLinkClickRate(),
+      service.getRecentlyReadEmails(),
+      service.getRecentlyUnreadEmails(),
+      service.getSignatureClicks(),
+      service.getPings(),
+    ])
+
+    return {
+      data: {
+        emailsSentToday: emailsSentToday.length,
+        emailsSentThisMonth: emailsSentThisMonth.length,
+        averageOpenRate,
+        averageLinkClickRate,
+        recentlyReadEmails: recentlyReadEmails.length,
+        recentlyUnreadEmails: recentlyUnreadEmails.length,
+        signatureClicks: signatureClicks.length,
+        pings: pings.length,
       },
     }
   }

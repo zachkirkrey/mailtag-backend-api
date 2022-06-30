@@ -26,7 +26,7 @@ export default class extends BaseSeeder {
 
     await User.createMany(randomUsers)
 
-    const account = await Account.query().doesntHave('user').firstOrFail()
+    const account = await Account.query().andDoesntHave('user').firstOrFail()
 
     const testUser: UserAttributes = {
       accountId: account.id,
