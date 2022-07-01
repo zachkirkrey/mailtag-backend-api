@@ -1,6 +1,7 @@
+import { faker } from '@faker-js/faker'
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
-import { ReadEmailActivityAttributes } from 'App/Helpers/type'
+import { ReadEmailActivityAttributes, ReadEmailActivityTypes } from 'App/Helpers/type'
 import ReadEmail from 'App/Models/ReadEmail'
 import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 
@@ -16,6 +17,7 @@ export default class extends BaseSeeder {
     const readEmailActivities = Array.from(Array(5)).map(() => {
       const readEmailActivityAttributes: ReadEmailActivityAttributes = {
         readEmailId: readEmail.id,
+        type: faker.helpers.arrayElement(ReadEmailActivityTypes),
       }
 
       return readEmailActivityAttributes

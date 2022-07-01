@@ -6,12 +6,15 @@ import {
   column,
   HasMany,
   hasMany,
+  HasOne,
+  hasOne,
   scope,
 } from '@ioc:Adonis/Lucid/Orm'
 import EmailEvent from './EmailEvent'
 import User from './User'
 import Ping from './Ping'
 import ReadEmailActivity from './ReadEmailActivity'
+import ReadEmail from './ReadEmail'
 
 export default class Email extends BaseModel {
   @column({ isPrimary: true })
@@ -52,6 +55,9 @@ export default class Email extends BaseModel {
 
   @hasMany(() => ReadEmailActivity)
   public activities: HasMany<typeof ReadEmailActivity>
+
+  @hasOne(() => ReadEmail)
+  public readEmail: HasOne<typeof ReadEmail>
 
   // TODO add fixed scopes to model
   public static today = scope((query) => {

@@ -26,5 +26,7 @@ export default class extends BaseSeeder {
     await this.runSeeder(await import('../SignatureEvent'))
     await this.runSeeder(await import('../Ping'))
     await this.runSeeder(await import('../PingEvent'))
+    await this.runSeeder(await import('../ReadEmail'))
+    await this.runSeeder(await import('../ReadEmailActivity'))
   }
 }

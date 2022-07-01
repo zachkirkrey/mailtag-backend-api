@@ -64,7 +64,7 @@ export type PingEventAttributes = Omit<
 
 export type ReadEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof ReadEmail>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'readTimes'
 >
 
 export type ReadEmailActivityAttributes = Omit<
@@ -94,3 +94,6 @@ export type DateRangeString = {
   startDate: string
   endDate: string
 }
+
+export const ReadEmailActivityTypes = ['open', 'read']
+export type ReadEmailActivityType = typeof ReadEmailActivityTypes[number]
