@@ -13,6 +13,7 @@ export default class extends BaseSeeder {
 
     const emails = await Email.query()
       .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
+      .andHas('events')
       .limit(5)
 
     const readEmails = emails.map((email) => {

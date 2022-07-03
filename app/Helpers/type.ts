@@ -10,6 +10,8 @@ import ReadEmail from 'App/Models/ReadEmail'
 import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
+import UnreadEmail from 'App/Models/UnreadEmail'
+import UnreadEmailActivity from 'App/Models/UnreadEmailActivity'
 import User from 'App/Models/User'
 
 export type AccountAttributes = Omit<
@@ -70,6 +72,16 @@ export type ReadEmailAttributes = Omit<
 export type ReadEmailActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof ReadEmailActivity>>,
   'id' | 'createdAt' | 'updatedAt' | 'date'
+>
+
+export type UnreadEmailAttributes = Omit<
+  ModelAttributes<InstanceType<typeof UnreadEmail>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type UnreadEmailActivityAttributes = Omit<
+  ModelAttributes<InstanceType<typeof UnreadEmailActivity>>,
+  'id' | 'createdAt' | 'updatedAt'
 >
 
 export enum BorderRadiusTypes {
