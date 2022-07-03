@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm'
 import { ReadEmailActivityType } from 'App/Helpers/type'
 import ReadEmail from './ReadEmail'
 
@@ -16,6 +16,12 @@ export default class ReadEmailActivity extends BaseModel {
   @column()
   public device: string
 
+  @column()
+  public location: string
+
+  @column()
+  public recipient: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
@@ -24,4 +30,9 @@ export default class ReadEmailActivity extends BaseModel {
 
   @belongsTo(() => ReadEmail)
   public readEmail: BelongsTo<typeof ReadEmail>
+
+  @computed()
+  public get date() {
+    return this.createdAt.toLocaleString(DateTime.DATE_MED)
+  }
 }

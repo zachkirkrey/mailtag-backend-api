@@ -69,7 +69,7 @@ export type ReadEmailAttributes = Omit<
 
 export type ReadEmailActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof ReadEmailActivity>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'date'
 >
 
 export enum BorderRadiusTypes {

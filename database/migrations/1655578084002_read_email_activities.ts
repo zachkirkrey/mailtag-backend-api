@@ -15,6 +15,8 @@ export default class extends BaseSchema {
 
       table.string('type').notNullable()
       table.string('device').notNullable()
+      table.string('location').notNullable()
+      table.string('recipient').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

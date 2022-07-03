@@ -23,6 +23,8 @@ export default class extends BaseSeeder {
           readEmailId: readEmail.id,
           type: faker.helpers.arrayElement(ReadEmailActivityTypes),
           device: faker.system.fileType(),
+          location: faker.address.cityName(),
+          recipient: faker.internet.email(),
         }
 
         return readEmailActivityAttributes
