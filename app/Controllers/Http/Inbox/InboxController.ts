@@ -23,6 +23,8 @@ export default class InboxController {
     }
   }
 
+  // populate read emails details MR-183
+
   public async getUnreadById() {
     return 'its unread email'
   }

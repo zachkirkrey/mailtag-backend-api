@@ -3,10 +3,13 @@ import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
 import { LinkEventAttributes } from 'App/Helpers/type'
 import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
+    Logger.info('Starting link event seeder')
+
     const link = await Link.query()
       .whereHas('email', (query) =>
         query.whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
@@ -22,5 +25,7 @@ export default class extends BaseSeeder {
     })
 
     await LinkEvent.createMany(linkEvents)
+
+    Logger.info('Finishing link event seeder')
   }
 }

@@ -4,10 +4,13 @@ import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
 import { BorderRadiusTypes, SignatureAttributes } from 'App/Helpers/type'
 import Signature from 'App/Models/Signature'
 import User from 'App/Models/User'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
+    Logger.info('Starting signature seeder')
+
     const user = await User.query().where({ providerId: TEST_USER_PROVIDER_ID }).firstOrFail()
 
     const signatures = Array.from(Array(5)).map(() => {
@@ -34,5 +37,7 @@ export default class extends BaseSeeder {
     })
 
     await Signature.createMany(signatures)
+
+    Logger.info('Finishing signature seeder')
   }
 }

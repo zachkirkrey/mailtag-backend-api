@@ -4,17 +4,18 @@ import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
 import { ReadEmailAttributes } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import ReadEmail from 'App/Models/ReadEmail'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
-    // TODO should be query.all.limit(5)
-    const email = await Email.query()
-      .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
-      .firstOrFail()
+    Logger.info('Starting read email seeder')
 
-    // FIXME create only one read email to each unique email then we have multiple activities for each read email
-    const readEmails = Array.from(Array(5)).map(() => {
+    const emails = await Email.query()
+      .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
+      .limit(5)
+
+    const readEmails = emails.map((email) => {
       const readEmailAttributes: ReadEmailAttributes = {
         emailId: email.id,
         device: faker.system.fileType(),
@@ -24,5 +25,7 @@ export default class extends BaseSeeder {
     })
 
     await ReadEmail.createMany(readEmails)
+
+    Logger.info('Finishing read email seeder')
   }
 }

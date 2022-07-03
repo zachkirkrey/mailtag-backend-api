@@ -14,6 +14,7 @@ export default class extends BaseSchema {
         .notNullable()
 
       table.string('type').notNullable()
+      table.string('device').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

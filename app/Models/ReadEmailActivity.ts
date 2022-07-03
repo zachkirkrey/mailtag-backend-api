@@ -13,6 +13,9 @@ export default class ReadEmailActivity extends BaseModel {
   @column()
   public type: ReadEmailActivityType
 
+  @column()
+  public device: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

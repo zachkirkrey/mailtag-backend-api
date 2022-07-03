@@ -10,6 +10,7 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
 import ReadEmailActivity from './ReadEmailActivity'
+import { isRelationshipPreloaded } from 'App/Helpers/model'
 
 export default class ReadEmail extends BaseModel {
   @column({ isPrimary: true })
@@ -24,7 +25,8 @@ export default class ReadEmail extends BaseModel {
   @computed()
   // TODO count from this.activities with type read / reopen
   public get readTimes() {
-    return 1
+    isRelationshipPreloaded(this, 'activities')
+    return this.activities.length
   }
 
   @column.dateTime({ autoCreate: true })
