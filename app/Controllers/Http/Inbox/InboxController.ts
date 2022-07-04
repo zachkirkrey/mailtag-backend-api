@@ -24,7 +24,7 @@ export default class InboxController {
     }
   }
 
-  public async getUnreadById({ auth, request }: HttpContextContract) {
+  public async getUnreadEmailById({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { params } = await request.validate(GetEmailByIdValidator)
     const email = await Email.query()
