@@ -28,4 +28,14 @@ export default class UsersController {
       },
     }
   }
+
+  public async profile({ auth }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+
+    return {
+      data: {
+        user,
+      },
+    }
+  }
 }
