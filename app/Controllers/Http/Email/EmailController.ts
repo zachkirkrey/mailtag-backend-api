@@ -4,6 +4,18 @@ import User from 'App/Models/User'
 import GetEmailByIdValidator from 'App/Validators/GetEmailByIdValidator'
 
 export default class EmailController {
+  public async index({ auth }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const emails = await Email.query().where({ userId: user.id }).preload('events')
+
+    return {
+      data: {
+        count: emails.length,
+        emails,
+      },
+    }
+  }
+
   public async show({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { params } = await request.validate(GetEmailByIdValidator)
