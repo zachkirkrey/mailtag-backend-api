@@ -40,4 +40,9 @@ export default class ReadEmail extends BaseModel {
 
   @hasMany(() => ReadEmailActivity)
   public activities: HasMany<typeof ReadEmailActivity>
+
+  @computed()
+  public get time() {
+    return this.createdAt.toRelative()
+  }
 }

@@ -26,7 +26,7 @@ export type UserAttributes = Omit<
 
 export type EmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof Email>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'time'
 >
 
 export type EmailEventAttributes = Omit<
@@ -66,7 +66,7 @@ export type PingEventAttributes = Omit<
 
 export type ReadEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof ReadEmail>>,
-  'id' | 'createdAt' | 'updatedAt' | 'readTimes'
+  'id' | 'createdAt' | 'updatedAt' | 'readTimes' | 'time'
 >
 
 export type ReadEmailActivityAttributes = Omit<
@@ -76,7 +76,7 @@ export type ReadEmailActivityAttributes = Omit<
 
 export type UnreadEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof UnreadEmail>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'time'
 >
 
 export type UnreadEmailActivityAttributes = Omit<

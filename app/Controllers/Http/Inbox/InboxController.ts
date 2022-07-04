@@ -1,14 +1,15 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Email from 'App/Models/Email'
 import User from 'App/Models/User'
-import GetReadEmailByIdValidator from 'App/Validators/GetReadEmailByIdValidator'
+import GetEmailByIdValidator from 'App/Validators/GetEmailByIdValidator'
 
 export default class InboxController {
   public async getReadEmailById({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const { params } = await request.validate(GetReadEmailByIdValidator)
+    const { params } = await request.validate(GetEmailByIdValidator)
     const email = await Email.query()
       .where({ id: params.id, userId: user.id })
+      .andHas('events')
       .preload('readEmail', (query) => query.preload('activities'))
       .firstOrFail()
 
@@ -23,9 +24,20 @@ export default class InboxController {
     }
   }
 
-  // populate read emails details MR-183
+  public async getUnreadById({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { params } = await request.validate(GetEmailByIdValidator)
+    const email = await Email.query()
+      .where({ id: params.id, userId: user.id })
+      .andDoesntHave('events')
+      .preload('unreadEmail', (query) => query.preload('activities'))
+      .firstOrFail()
 
-  public async getUnreadById() {
-    return 'its unread email'
+    return {
+      data: {
+        recipient: email.recipient,
+        activities: email.unreadEmail.activities,
+      },
+    }
   }
 }
