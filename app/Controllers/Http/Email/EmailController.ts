@@ -40,4 +40,19 @@ export default class EmailController {
       },
     }
   }
+
+  public async destroy({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { params } = await request.validate(GetEmailByIdValidator)
+
+    const email = await Email.query().where({ userId: user.id, id: params.id }).firstOrFail()
+
+    await email.delete()
+
+    return {
+      data: {
+        message: 'Email deleted successfully',
+      },
+    }
+  }
 }
