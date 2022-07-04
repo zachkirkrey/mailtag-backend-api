@@ -4,13 +4,18 @@ import {
   BelongsTo,
   belongsTo,
   column,
+  computed,
   HasMany,
   hasMany,
-  scope,
+  HasOne,
+  hasOne,
 } from '@ioc:Adonis/Lucid/Orm'
 import EmailEvent from './EmailEvent'
 import User from './User'
 import Ping from './Ping'
+import ReadEmailActivity from './ReadEmailActivity'
+import ReadEmail from './ReadEmail'
+import UnreadEmail from './UnreadEmail'
 
 export default class Email extends BaseModel {
   @column({ isPrimary: true })
@@ -49,14 +54,17 @@ export default class Email extends BaseModel {
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>
 
-  // TODO add fixed scopes to model
-  public static today = scope((query) => {
-    const todayDate = DateTime.local(
-      DateTime.local().year,
-      DateTime.local().month,
-      DateTime.local().day
-    ).toSQL()
+  @hasMany(() => ReadEmailActivity)
+  public activities: HasMany<typeof ReadEmailActivity>
 
-    query.where('created_at', '>=', todayDate)
-  })
+  @hasOne(() => ReadEmail)
+  public readEmail: HasOne<typeof ReadEmail>
+
+  @hasOne(() => UnreadEmail)
+  public unreadEmail: HasOne<typeof UnreadEmail>
+
+  @computed()
+  public get time() {
+    return this.createdAt.toRelative()
+  }
 }

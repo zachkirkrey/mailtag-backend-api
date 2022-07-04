@@ -3,10 +3,13 @@ import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
 import { SignatureEventAttributes } from 'App/Helpers/type'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
+    Logger.info('Starting signature event seeder')
+
     const signature = await Signature.query()
       .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
       .firstOrFail()
@@ -20,5 +23,7 @@ export default class extends BaseSeeder {
     })
 
     await SignatureEvent.createMany(signatureEvents)
+
+    Logger.info('Finishing signature event seeder')
   }
 }

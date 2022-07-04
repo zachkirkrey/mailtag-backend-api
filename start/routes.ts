@@ -22,6 +22,7 @@ import Route from '@ioc:Adonis/Core/Route'
 import './routes/auth'
 import './routes/user'
 import './routes/dashboard'
+import './routes/inbox'
 
 Route.get('/', async () => {
   return { hello: 'mailtag' }

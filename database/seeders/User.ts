@@ -4,10 +4,13 @@ import User from 'App/Models/User'
 import Account from 'App/Models/Account'
 import { UserAttributes } from 'App/Helpers/type'
 import { TEST_USER_EMAIL, TEST_USER_PROVIDER_ID, TEST_USER_USERNAME } from 'App/Helpers/constant'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
+    Logger.info('Starting user seeder')
+
     const accounts = await Account.query().limit(2)
 
     const randomUsers = accounts.map((account) => {
@@ -39,5 +42,7 @@ export default class extends BaseSeeder {
     }
 
     await User.createMany([testUser])
+
+    Logger.info('Finishing user seeder')
   }
 }

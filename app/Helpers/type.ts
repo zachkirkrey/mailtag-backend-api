@@ -6,8 +6,12 @@ import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
 import Ping from 'App/Models/Ping'
 import PingEvent from 'App/Models/PingEvent'
+import ReadEmail from 'App/Models/ReadEmail'
+import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
+import UnreadEmail from 'App/Models/UnreadEmail'
+import UnreadEmailActivity from 'App/Models/UnreadEmailActivity'
 import User from 'App/Models/User'
 
 export type AccountAttributes = Omit<
@@ -22,7 +26,7 @@ export type UserAttributes = Omit<
 
 export type EmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof Email>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'time'
 >
 
 export type EmailEventAttributes = Omit<
@@ -60,6 +64,26 @@ export type PingEventAttributes = Omit<
   'id' | 'createdAt' | 'updatedAt'
 >
 
+export type ReadEmailAttributes = Omit<
+  ModelAttributes<InstanceType<typeof ReadEmail>>,
+  'id' | 'createdAt' | 'updatedAt' | 'readTimes' | 'time'
+>
+
+export type ReadEmailActivityAttributes = Omit<
+  ModelAttributes<InstanceType<typeof ReadEmailActivity>>,
+  'id' | 'createdAt' | 'updatedAt' | 'date'
+>
+
+export type UnreadEmailAttributes = Omit<
+  ModelAttributes<InstanceType<typeof UnreadEmail>>,
+  'id' | 'createdAt' | 'updatedAt' | 'time'
+>
+
+export type UnreadEmailActivityAttributes = Omit<
+  ModelAttributes<InstanceType<typeof UnreadEmailActivity>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
 export enum BorderRadiusTypes {
   SQUARE = 'square',
   CIRCLE = 'circle',
@@ -82,3 +106,6 @@ export type DateRangeString = {
   startDate: string
   endDate: string
 }
+
+export const ReadEmailActivityTypes = ['open', 'read']
+export type ReadEmailActivityType = typeof ReadEmailActivityTypes[number]

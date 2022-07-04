@@ -4,10 +4,13 @@ import { LinkAttributes } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import { faker } from '@faker-js/faker'
 import Link from 'App/Models/Link'
+import Logger from '@ioc:Adonis/Core/Logger'
 
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
+    Logger.info('Starting link seeder')
+
     const email = await Email.query()
       .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
       .firstOrFail()
@@ -23,5 +26,7 @@ export default class extends BaseSeeder {
     })
 
     await Link.createMany(links)
+
+    Logger.info('Finishing link seeder')
   }
 }
