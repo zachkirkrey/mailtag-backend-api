@@ -37,7 +37,7 @@ export default class DashboardInfo {
     ])
     const averageOpenRate = (emailsOpened.length / emails.length) * 100
 
-    return averageOpenRate.toFixed()
+    return averageOpenRate ? averageOpenRate.toFixed() : 0
   }
 
   public async getAverageLinkClickRate() {
@@ -49,7 +49,7 @@ export default class DashboardInfo {
     ])
     const averageLinkClickRate = (linksClicked.length / links.length) * 100
 
-    return averageLinkClickRate.toFixed()
+    return averageLinkClickRate ? averageLinkClickRate.toFixed() : 0
   }
 
   public async getRecentlyReadEmails() {
