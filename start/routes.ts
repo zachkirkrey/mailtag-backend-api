@@ -25,6 +25,7 @@ import './routes/user'
 import './routes/dashboard'
 import './routes/inbox'
 import './routes/email'
+import './routes/activity'
 
 Route.get('/', async () => {
   return { hello: 'mailtag' }

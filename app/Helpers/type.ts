@@ -1,5 +1,6 @@
 import { ModelAttributes } from '@ioc:Adonis/Lucid/Orm'
 import Account from 'App/Models/Account'
+import Activity from 'App/Models/Activity'
 import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
 import Link from 'App/Models/Link'
@@ -81,6 +82,11 @@ export type UnreadEmailAttributes = Omit<
 
 export type UnreadEmailActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof UnreadEmailActivity>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type ActivityAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Activity>>,
   'id' | 'createdAt' | 'updatedAt'
 >
 

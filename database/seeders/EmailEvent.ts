@@ -19,7 +19,7 @@ export default class extends BaseSeeder {
       const emailEventAttributes: EmailEventAttributes = {
         emailId: email.id,
         device: faker.system.fileType(),
-        userAgent: faker.random.words(3),
+        userAgent: faker.internet.userAgent(),
         location: faker.address.streetAddress(),
       }
 
