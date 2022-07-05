@@ -7,6 +7,9 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.uuid('email_id').references('id').inTable('emails').onDelete('CASCADE').notNullable()
+      table.string('device').notNullable()
+      table.string('location').notNullable()
+      table.string('user_agent').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -31,7 +31,7 @@ export type EmailAttributes = Omit<
 
 export type EmailEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof EmailEvent>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'time'
 >
 
 export type LinkAttributes = Omit<
