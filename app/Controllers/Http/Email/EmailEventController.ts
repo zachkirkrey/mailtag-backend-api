@@ -28,4 +28,17 @@ export default class EmailEventController {
       },
     }
   }
+
+  public async destroy({ request }: HttpContextContract) {
+    const { params } = await request.validate(GetEmailEventByIdValidator)
+    const emailEvent = await EmailEvent.query().where({ id: params.id }).firstOrFail()
+
+    await emailEvent.delete()
+
+    return {
+      data: {
+        message: 'Email event deleted successfully',
+      },
+    }
+  }
 }
