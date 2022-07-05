@@ -48,7 +48,23 @@ export default class EmailController {
       data: {
         message: 'Email created successfully',
         email,
-        user,
+      },
+    }
+  }
+
+  public async update({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    // TODO add body validator
+    const { recipient, subject } = request.body()
+    const { params } = await request.validate(GetEmailByIdValidator)
+    const email = await Email.query().where({ id: params.id, userId: user.id }).firstOrFail()
+
+    await email.merge(recipient, subject).save()
+
+    return {
+      data: {
+        message: 'Email updated successfully',
+        email,
       },
     }
   }
