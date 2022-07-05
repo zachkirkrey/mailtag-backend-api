@@ -1,8 +1,8 @@
 MailTag.io staging features/method:
 
 - dashboard service
-	- getStatsInfo
-	- getGraphData
-	- getRecentUnreadEmailsCount
+  - getStatsInfo
+  - getGraphData
+  - getRecentUnreadEmailsCount
 - payment service
-	- createSubscription
+  - createSubscription
