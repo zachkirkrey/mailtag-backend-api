@@ -5,9 +5,6 @@ Route.group(() => {
   Route.get(':id', 'Email/EmailController.show')
   Route.post('/', 'Email/EmailController.create')
   Route.delete(':id', 'Email/EmailController.destroy')
-  Route.group(() => {
-    Route.post('', 'Email/EmailController.createEmailEvent')
-  }).prefix('events')
 })
   .prefix('emails')
   .middleware('auth')

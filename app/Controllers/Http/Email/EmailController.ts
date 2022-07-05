@@ -1,8 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Email from 'App/Models/Email'
-import EmailEvent from 'App/Models/EmailEvent'
 import User from 'App/Models/User'
-import CreateEmailEventValidator from 'App/Validators/CreateEmailEventValidator'
 import GetEmailByIdValidator from 'App/Validators/GetEmailByIdValidator'
 
 export default class EmailController {
@@ -66,20 +64,6 @@ export default class EmailController {
     return {
       data: {
         message: 'Email deleted successfully',
-      },
-    }
-  }
-
-  public async createEmailEvent({ request }: HttpContextContract) {
-    const { emailId, device, userAgent, location } = await request.validate(
-      CreateEmailEventValidator
-    )
-    const emailEvent = await EmailEvent.create({ emailId, device, userAgent, location })
-
-    return {
-      data: {
-        message: 'Email event created successfully',
-        emailEvent,
       },
     }
   }
