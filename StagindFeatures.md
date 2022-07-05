@@ -1,4 +1,4 @@
-MailTag.io staging features/method:
+# MailTag.io staging features/method
 
 - dashboard service
   - getStatsInfo
