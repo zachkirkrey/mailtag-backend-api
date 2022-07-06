@@ -62,7 +62,7 @@ export type SignatureEventAttributes = Omit<
 
 export type PingAttributes = Omit<
   ModelAttributes<InstanceType<typeof Ping>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedPingInfo'
 >
 
 export type PingEventAttributes = Omit<

@@ -4,6 +4,7 @@ import { PingAttributes } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import Ping from 'App/Models/Ping'
 import Logger from '@ioc:Adonis/Core/Logger'
+import { faker } from '@faker-js/faker'
 
 export default class extends BaseSeeder {
   public override async run() {
@@ -17,6 +18,8 @@ export default class extends BaseSeeder {
     const pings = Array.from(Array(5)).map(() => {
       const pingAttributes: PingAttributes = {
         emailId: email.id,
+        userId: email.userId,
+        name: faker.lorem.words(2),
       }
 
       return pingAttributes
