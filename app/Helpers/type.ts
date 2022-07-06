@@ -47,7 +47,12 @@ export type LinkEventAttributes = Omit<
 
 export type SignatureAttributes = Omit<
   ModelAttributes<InstanceType<typeof Signature>>,
-  'id' | 'createdAt' | 'updatedAt' | 'fullName'
+  | 'id'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'fullName'
+  | 'serializedSignatureBasicInfo'
+  | 'serializedSignatureInfo'
 >
 
 export type SignatureEventAttributes = Omit<
