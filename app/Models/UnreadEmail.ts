@@ -10,6 +10,8 @@ import {
 } from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
 import UnreadEmailActivity from './UnreadEmailActivity'
+import User from './User'
+import { isRelationshipPreloaded } from 'App/Helpers/model'
 
 export default class UnreadEmail extends BaseModel {
   @column({ isPrimary: true })
@@ -17,6 +19,12 @@ export default class UnreadEmail extends BaseModel {
 
   @column()
   public emailId: string
+
+  @column()
+  public userId: string
+
+  @column()
+  public device: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -30,8 +38,26 @@ export default class UnreadEmail extends BaseModel {
   @hasMany(() => UnreadEmailActivity)
   public activities: HasMany<typeof UnreadEmailActivity>
 
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
+
   @computed()
   public get time() {
     return this.createdAt.toRelative()
+  }
+
+  public get serializedEmailInfo() {
+    isRelationshipPreloaded(this, 'email')
+
+    const { id, email, time } = this
+
+    return {
+      id,
+      recipient: email.recipient,
+      subject: email.subject,
+      gmailMessageId: email.gmailMessageId,
+      gmailThreadId: email.gmailThreadId,
+      time,
+    }
   }
 }

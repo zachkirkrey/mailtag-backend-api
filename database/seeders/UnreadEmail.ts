@@ -4,6 +4,7 @@ import Email from 'App/Models/Email'
 import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
 import { UnreadEmailAttributes } from 'App/Helpers/type'
 import UnreadEmail from 'App/Models/UnreadEmail'
+import { faker } from '@faker-js/faker'
 
 export default class extends BaseSeeder {
   public override async run() {
@@ -18,6 +19,8 @@ export default class extends BaseSeeder {
     const unreadEmails = emails.map((email) => {
       const unreadEmailAttributes: UnreadEmailAttributes = {
         emailId: email.id,
+        userId: email.userId,
+        device: faker.system.fileType(),
       }
 
       return unreadEmailAttributes

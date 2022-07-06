@@ -63,4 +63,9 @@ export default class Email extends BaseModel {
   public get time() {
     return this.createdAt.toRelative()
   }
+
+  public get serializedEmailInfo() {
+    const { id, recipient, subject, gmailMessageId, gmailThreadId, time } = this
+    return { id, recipient, subject, gmailMessageId, gmailThreadId, time }
+  }
 }

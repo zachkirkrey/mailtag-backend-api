@@ -11,6 +11,7 @@ import {
 import Email from './Email'
 import ReadEmailActivity from './ReadEmailActivity'
 import { isRelationshipPreloaded } from 'App/Helpers/model'
+import User from './User'
 
 export default class ReadEmail extends BaseModel {
   @column({ isPrimary: true })
@@ -18,6 +19,9 @@ export default class ReadEmail extends BaseModel {
 
   @column()
   public emailId: string
+
+  @column()
+  public userId: string
 
   @column()
   public device: string
@@ -41,8 +45,26 @@ export default class ReadEmail extends BaseModel {
   @hasMany(() => ReadEmailActivity)
   public activities: HasMany<typeof ReadEmailActivity>
 
+  @belongsTo(() => User)
+  public user: BelongsTo<typeof User>
+
   @computed()
   public get time() {
     return this.createdAt.toRelative()
+  }
+
+  public get serializedEmailInfo() {
+    isRelationshipPreloaded(this, 'email')
+
+    const { id, email, time } = this
+
+    return {
+      id,
+      recipient: email.recipient,
+      subject: email.subject,
+      gmailMessageId: email.gmailMessageId,
+      gmailThreadId: email.gmailThreadId,
+      time,
+    }
   }
 }

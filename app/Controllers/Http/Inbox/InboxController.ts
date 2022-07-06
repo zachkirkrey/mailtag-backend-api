@@ -1,9 +1,26 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Email from 'App/Models/Email'
+import ReadEmail from 'App/Models/ReadEmail'
+import UnreadEmail from 'App/Models/UnreadEmail'
 import User from 'App/Models/User'
 import GetEmailByIdValidator from 'App/Validators/GetEmailByIdValidator'
 
 export default class InboxController {
+  public async getEmails({ auth }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const [readEmails, unreadEmails] = await Promise.all([
+      ReadEmail.query().where({ userId: user.id }).preload('activities').preload('email'),
+      UnreadEmail.query().where({ userId: user.id }).preload('activities').preload('email'),
+    ])
+
+    return {
+      data: {
+        readEmails: readEmails.map((readEmail) => readEmail.serializedEmailInfo),
+        unreadEmails: unreadEmails.map((unreadEmail) => unreadEmail.serializedEmailInfo),
+      },
+    }
+  }
+
   public async getReadEmailById({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { params } = await request.validate(GetEmailByIdValidator)
