@@ -1,5 +1,6 @@
 import { ModelAttributes } from '@ioc:Adonis/Lucid/Orm'
 import Account from 'App/Models/Account'
+import Activity from 'App/Models/Activity'
 import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
 import Link from 'App/Models/Link'
@@ -26,12 +27,12 @@ export type UserAttributes = Omit<
 
 export type EmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof Email>>,
-  'id' | 'createdAt' | 'updatedAt' | 'time'
+  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedEmailInfo'
 >
 
 export type EmailEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof EmailEvent>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'time'
 >
 
 export type LinkAttributes = Omit<
@@ -46,7 +47,12 @@ export type LinkEventAttributes = Omit<
 
 export type SignatureAttributes = Omit<
   ModelAttributes<InstanceType<typeof Signature>>,
-  'id' | 'createdAt' | 'updatedAt' | 'fullName'
+  | 'id'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'fullName'
+  | 'serializedSignatureBasicInfo'
+  | 'serializedSignatureInfo'
 >
 
 export type SignatureEventAttributes = Omit<
@@ -56,7 +62,7 @@ export type SignatureEventAttributes = Omit<
 
 export type PingAttributes = Omit<
   ModelAttributes<InstanceType<typeof Ping>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedPingInfo'
 >
 
 export type PingEventAttributes = Omit<
@@ -66,7 +72,7 @@ export type PingEventAttributes = Omit<
 
 export type ReadEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof ReadEmail>>,
-  'id' | 'createdAt' | 'updatedAt' | 'readTimes' | 'time'
+  'id' | 'createdAt' | 'updatedAt' | 'readTimes' | 'time' | 'serializedEmailInfo'
 >
 
 export type ReadEmailActivityAttributes = Omit<
@@ -76,11 +82,16 @@ export type ReadEmailActivityAttributes = Omit<
 
 export type UnreadEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof UnreadEmail>>,
-  'id' | 'createdAt' | 'updatedAt' | 'time'
+  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedEmailInfo'
 >
 
 export type UnreadEmailActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof UnreadEmailActivity>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type ActivityAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Activity>>,
   'id' | 'createdAt' | 'updatedAt'
 >
 

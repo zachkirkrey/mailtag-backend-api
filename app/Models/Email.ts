@@ -13,7 +13,6 @@ import {
 import EmailEvent from './EmailEvent'
 import User from './User'
 import Ping from './Ping'
-import ReadEmailActivity from './ReadEmailActivity'
 import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
 
@@ -54,9 +53,6 @@ export default class Email extends BaseModel {
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>
 
-  @hasMany(() => ReadEmailActivity)
-  public activities: HasMany<typeof ReadEmailActivity>
-
   @hasOne(() => ReadEmail)
   public readEmail: HasOne<typeof ReadEmail>
 
@@ -66,5 +62,10 @@ export default class Email extends BaseModel {
   @computed()
   public get time() {
     return this.createdAt.toRelative()
+  }
+
+  public get serializedEmailInfo() {
+    const { id, recipient, subject, gmailMessageId, gmailThreadId, time } = this
+    return { id, recipient, subject, gmailMessageId, gmailThreadId, time }
   }
 }

@@ -4,6 +4,7 @@ import { EmailEventAttributes } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
 import Logger from '@ioc:Adonis/Core/Logger'
+import { faker } from '@faker-js/faker'
 
 export default class extends BaseSeeder {
   public override async run() {
@@ -17,6 +18,9 @@ export default class extends BaseSeeder {
     const emailEvents = Array.from(Array(5)).map(() => {
       const emailEventAttributes: EmailEventAttributes = {
         emailId: email.id,
+        device: faker.system.fileType(),
+        userAgent: faker.internet.userAgent(),
+        location: faker.address.streetAddress(),
       }
 
       return emailEventAttributes

@@ -49,7 +49,7 @@ const databaseConfig: DatabaseConfig = {
       seeders: {
         paths: ['./database/seeders/MainSeeder'],
       },
-      healthCheck: false,
+      healthCheck: true,
       debug: false,
     },
   },

@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
 
 export default class EmailEvent extends BaseModel {
@@ -9,6 +9,15 @@ export default class EmailEvent extends BaseModel {
   @column()
   public emailId: string
 
+  @column()
+  public device: string
+
+  @column()
+  public userAgent: string
+
+  @column()
+  public location: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
@@ -17,4 +26,9 @@ export default class EmailEvent extends BaseModel {
 
   @belongsTo(() => Email)
   public email: BelongsTo<typeof Email>
+
+  @computed()
+  public get time() {
+    return this.createdAt.toRelative()
+  }
 }

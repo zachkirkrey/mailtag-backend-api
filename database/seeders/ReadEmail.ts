@@ -19,6 +19,7 @@ export default class extends BaseSeeder {
     const readEmails = emails.map((email) => {
       const readEmailAttributes: ReadEmailAttributes = {
         emailId: email.id,
+        userId: email.userId,
         device: faker.system.fileType(),
       }
 

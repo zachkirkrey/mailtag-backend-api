@@ -11,6 +11,9 @@ import {
 import Email from './Email'
 import Account from './Account'
 import Signature from './Signature'
+import ReadEmail from './ReadEmail'
+import UnreadEmail from './UnreadEmail'
+import Ping from './Ping'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -60,4 +63,13 @@ export default class User extends BaseModel {
 
   @hasMany(() => Signature)
   public signatures: HasMany<typeof Signature>
+
+  @hasMany(() => ReadEmail)
+  public readEmails: HasMany<typeof ReadEmail>
+
+  @hasMany(() => UnreadEmail)
+  public unreadEmails: HasMany<typeof UnreadEmail>
+
+  @hasMany(() => Ping)
+  public pings: HasMany<typeof Ping>
 }

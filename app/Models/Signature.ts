@@ -85,4 +85,58 @@ export default class Signature extends BaseModel {
 
   @hasMany(() => SignatureEvent)
   public events: HasMany<typeof SignatureEvent>
+
+  public get serializedSignatureBasicInfo() {
+    const { id, name, isDefault, createdAt, updatedAt } = this
+
+    return {
+      id,
+      name,
+      isDefault,
+      createdAt,
+      updatedAt,
+    }
+  }
+
+  public get serializedSignatureInfo() {
+    const {
+      id,
+      userId,
+      fullName,
+      name,
+      title,
+      avatarUrl,
+      company,
+      email,
+      avatarBorderRadiusType,
+      website,
+      officeAddress,
+      officePhoneNumber,
+      homePhoneNumber,
+      bannerUrl,
+      isBannerEnabled,
+      isDeleted,
+      isDefault,
+    } = this
+
+    return {
+      id,
+      userId,
+      fullName,
+      name,
+      title,
+      avatarUrl,
+      company,
+      email,
+      avatarBorderRadiusType,
+      website,
+      officeAddress,
+      officePhoneNumber,
+      homePhoneNumber,
+      bannerUrl,
+      isBannerEnabled,
+      isDeleted,
+      isDefault,
+    }
+  }
 }
