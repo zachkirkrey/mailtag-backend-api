@@ -3,6 +3,7 @@ import PingSequence from 'App/Models/PingSequence'
 import User from 'App/Models/User'
 import CreatePingSequenceValidator from 'App/Validators/CreatePingSequenceValidator'
 import GetPingSequenceByIdValidator from 'App/Validators/GetPingSequenceByIdValidator'
+import UpdatePingSequenceValidator from 'App/Validators/UpdatePingSequenceValidator'
 export default class PingSequenceController {
   public async index({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
@@ -39,6 +40,26 @@ export default class PingSequenceController {
     return {
       data: {
         message: 'Ping sequence created successfully',
+        pingSequence,
+      },
+    }
+  }
+
+  public async update({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { params } = await request.validate(GetPingSequenceByIdValidator)
+    const pingSequence = await PingSequence.query()
+      .where({ userId: user.id, id: params.id })
+      .preload('pings')
+      .firstOrFail()
+    const { name, duration, timezone } = await request.validate(UpdatePingSequenceValidator)
+
+    await pingSequence.merge({ name, duration, timezone }).save()
+    await pingSequence.refresh()
+
+    return {
+      data: {
+        message: 'Ping sequence updated successfully',
         pingSequence,
       },
     }
