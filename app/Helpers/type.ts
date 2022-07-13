@@ -7,6 +7,7 @@ import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
 import Ping from 'App/Models/Ping'
 import PingEvent from 'App/Models/PingEvent'
+import PingSequence from 'App/Models/PingSequence'
 import ReadEmail from 'App/Models/ReadEmail'
 import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
@@ -68,6 +69,11 @@ export type PingAttributes = Omit<
 export type PingEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof PingEvent>>,
   'id' | 'createdAt' | 'updatedAt'
+>
+
+export type PingSequenceAttributes = Omit<
+  ModelAttributes<InstanceType<typeof PingSequence>>,
+  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedPingSequenceInfo' | 'pingsCount'
 >
 
 export type ReadEmailAttributes = Omit<

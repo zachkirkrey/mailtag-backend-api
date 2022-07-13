@@ -5,6 +5,6 @@ Route.group(() => {
   Route.post('', 'Email/EmailEventController.create')
   Route.delete(':id', 'Email/EmailEventController.destroy')
 })
-  .prefix('emails/events')
+  .prefix('email-events')
   .middleware('auth')
   .where('id', Route.matchers.uuid())

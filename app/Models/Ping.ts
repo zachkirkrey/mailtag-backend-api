@@ -11,6 +11,7 @@ import {
 import Email from './Email'
 import PingEvent from './PingEvent'
 import User from './User'
+import PingSequence from './PingSequence'
 
 export default class Ping extends BaseModel {
   @column({ isPrimary: true })
@@ -21,6 +22,9 @@ export default class Ping extends BaseModel {
 
   @column()
   public userId: string
+
+  @column()
+  public pingSequenceId: string
 
   @column()
   public name: string
@@ -36,6 +40,9 @@ export default class Ping extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
+
+  @belongsTo(() => PingSequence)
+  public pingSequence: BelongsTo<typeof PingSequence>
 
   @hasMany(() => PingEvent)
   public events: HasMany<typeof PingEvent>
