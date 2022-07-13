@@ -40,7 +40,7 @@ export default class PingSequenceController {
     return {
       data: {
         message: 'Ping sequence created successfully',
-        pingSequence,
+        pingSequence: pingSequence.serializedPingSequenceInfo,
       },
     }
   }
@@ -60,7 +60,7 @@ export default class PingSequenceController {
     return {
       data: {
         message: 'Ping sequence updated successfully',
-        pingSequence,
+        pingSequence: pingSequence.serializedPingSequenceInfo,
       },
     }
   }
