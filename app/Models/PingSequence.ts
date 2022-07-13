@@ -20,7 +20,7 @@ export default class PingSequence extends BaseModel {
   public name: string
 
   @column()
-  public duration: string
+  public duration: number
 
   @column()
   public isDeleted: boolean = false
@@ -29,7 +29,7 @@ export default class PingSequence extends BaseModel {
   public userId: string
 
   @column()
-  public recipientTimezone: string
+  public timezone: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -54,13 +54,13 @@ export default class PingSequence extends BaseModel {
   }
 
   public get serializedPingSequenceInfo() {
-    const { id, name, pingsCount, recipientTimezone, userId, isDeleted, duration } = this
+    const { id, name, pingsCount, timezone, userId, isDeleted, duration } = this
 
     return {
       id,
       name,
       pingsCount,
-      recipientTimezone,
+      timezone,
       userId,
       isDeleted,
       duration,

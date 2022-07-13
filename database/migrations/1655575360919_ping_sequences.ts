@@ -7,10 +7,10 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.string('name').notNullable()
-      table.string('duration').notNullable()
+      table.integer('duration').notNullable()
       table.boolean('is_deleted').notNullable().defaultTo(false)
       table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE').notNullable()
-      table.string('recipient_timezone').notNullable()
+      table.string('timezone').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

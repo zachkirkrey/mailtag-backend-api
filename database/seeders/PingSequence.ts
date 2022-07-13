@@ -20,8 +20,8 @@ export default class extends BaseSeeder {
         userId: email.userId,
         name: faker.lorem.words(2),
         isDeleted: faker.datatype.boolean(),
-        duration: faker.lorem.words(2),
-        recipientTimezone: faker.address.timeZone(),
+        duration: faker.datatype.number({ max: 15 }),
+        timezone: faker.address.timeZone(),
       }
 
       return pingSequenceAttributes
