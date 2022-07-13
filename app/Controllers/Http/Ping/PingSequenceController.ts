@@ -43,4 +43,20 @@ export default class PingSequenceController {
       },
     }
   }
+
+  public async destroy({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { params } = await request.validate(GetPingSequenceByIdValidator)
+    const pingSequence = await PingSequence.query()
+      .where({ userId: user.id, id: params.id })
+      .firstOrFail()
+
+    await pingSequence.delete()
+
+    return {
+      data: {
+        message: 'Ping sequence deleted successfully',
+      },
+    }
+  }
 }
