@@ -7,10 +7,13 @@ import {
   computed,
   HasMany,
   hasMany,
+  HasOne,
+  hasOne,
 } from '@ioc:Adonis/Lucid/Orm'
 import Ping from './Ping'
 import { isRelationshipPreloaded } from 'App/Helpers/model'
 import User from './User'
+import PingSequenceDetail from './PingSequenceDetail'
 
 export default class PingSequence extends BaseModel {
   @column({ isPrimary: true })
@@ -48,6 +51,9 @@ export default class PingSequence extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
+
+  @hasOne(() => PingSequenceDetail)
+  public pingSequenceDetail: HasOne<typeof PingSequenceDetail>
 
   public get time() {
     return this.createdAt.toRelative()
