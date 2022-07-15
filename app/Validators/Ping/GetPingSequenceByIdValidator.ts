@@ -6,7 +6,7 @@ export default class GetPingSequenceByIdValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string([rules.uuid()]),
+      id: schema.string([rules.uuid(), rules.exists({ table: 'ping_sequences', column: 'id' })]),
     }),
   })
 

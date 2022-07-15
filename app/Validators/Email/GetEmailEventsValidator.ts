@@ -6,7 +6,7 @@ export default class GetEmailEventsValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      emailId: schema.string([rules.uuid()]),
+      emailId: schema.string([rules.uuid(), rules.exists({ table: 'emails', column: 'id' })]),
     }),
   })
 

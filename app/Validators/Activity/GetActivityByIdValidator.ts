@@ -6,7 +6,7 @@ export default class GetActivityByIdValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string([rules.uuid()]), //TODO add where clause to all validators
+      id: schema.string([rules.uuid(), rules.exists({ table: 'activities', column: 'id' })]),
     }),
   })
 

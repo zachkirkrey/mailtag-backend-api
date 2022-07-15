@@ -6,7 +6,7 @@ export default class GetEmailByIdValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string([rules.uuid()]),
+      id: schema.string([rules.uuid(), rules.exists({ table: 'emails', column: 'id' })]),
     }),
   })
 
