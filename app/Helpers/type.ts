@@ -80,7 +80,7 @@ export type PingSequenceAttributes = Omit<
 
 export type PingSequenceDetailAttributes = Omit<
   ModelAttributes<InstanceType<typeof PingSequenceDetail>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedPingSequenceDetailInfo'
 >
 
 export type PingSequenceActivityAttributes = Omit<

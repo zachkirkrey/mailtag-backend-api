@@ -17,7 +17,7 @@ export default class PingSequenceDetail extends BaseModel {
   public html: string
 
   @column()
-  public isDeleted: boolean
+  public isDeleted: boolean = false
 
   @column()
   public pingSequenceId: string
@@ -36,4 +36,18 @@ export default class PingSequenceDetail extends BaseModel {
 
   @belongsTo(() => PingSequence)
   public pingSequence: BelongsTo<typeof PingSequence>
+
+  public get serializedPingSequenceDetailInfo() {
+    const { id, day, step, html, pingSequenceId, userId, isDeleted } = this
+
+    return {
+      id,
+      day,
+      step,
+      html,
+      pingSequenceId,
+      userId,
+      isDeleted,
+    }
+  }
 }

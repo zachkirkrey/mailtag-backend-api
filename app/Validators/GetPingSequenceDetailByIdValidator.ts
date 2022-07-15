@@ -1,12 +1,15 @@
 import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class GetActivityByIdValidator {
+export default class GetPingSequenceDetailByIdValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string([rules.uuid()]), //TODO add where clause to all validators
+      id: schema.string([
+        rules.uuid(),
+        rules.exists({ table: 'ping_sequence_details', column: 'id' }),
+      ]),
     }),
   })
 
