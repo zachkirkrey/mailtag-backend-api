@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import PingSequenceActivity from 'App/Models/PingSequenceActivity'
 import User from 'App/Models/User'
-import CreatePingSequenceActivityValidator from 'App/Validators/CreatePingSequenceActivityValidator'
-import GetPingSequenceActivityByIdValidator from 'App/Validators/GetPingSequenceActivityByIdValidator'
-import UpdatePingSequenceActivityValidator from 'App/Validators/UpdatePingSequenceActivityValidator'
+import GetPingSequenceActivityByIdValidator from 'App/Validators/Ping/GetPingSequenceActivityByIdValidator'
+import CreatePingSequenceActivityValidator from 'App/Validators/Ping/CreatePingSequenceActivityValidator'
+import UpdatePingSequenceActivityValidator from 'App/Validators/Ping/UpdatePingSequenceActivityValidator'
 
 export default class PingSequenceActivityController {
   public async index({ auth }: HttpContextContract) {

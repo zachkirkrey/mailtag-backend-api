@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import EmailEvent from 'App/Models/EmailEvent'
-import CreateEmailEventValidator from 'App/Validators/CreateEmailEventValidator'
-import GetEmailEventByIdValidator from 'App/Validators/GetEmailEventByIdValidator'
+import CreateEmailEventValidator from 'App/Validators/Email/CreateEmailEventValidator'
+import GetEmailEventByIdValidator from 'App/Validators/Email/GetEmailEventByIdValidator'
 
 export default class EmailEventController {
   public async show({ request }: HttpContextContract) {

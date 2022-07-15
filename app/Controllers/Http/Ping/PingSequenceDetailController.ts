@@ -1,9 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import PingSequenceDetail from 'App/Models/PingSequenceDetail'
 import User from 'App/Models/User'
-import CreatePingSequenceDetailValidator from 'App/Validators/CreatePingSequenceDetailValidator'
-import GetPingSequenceDetailByIdValidator from 'App/Validators/GetPingSequenceDetailByIdValidator'
-import UpdatePingSequenceDetailValidator from 'App/Validators/UpdatePingSequenceDetailValidator'
+import CreatePingSequenceDetailValidator from 'App/Validators/Ping/CreatePingSequenceDetailValidator'
+import GetPingSequenceDetailByIdValidator from 'App/Validators/Ping/GetPingSequenceDetailByIdValidator'
+import UpdatePingSequenceDetailValidator from 'App/Validators/Ping/UpdatePingSequenceDetailValidator'
+
 export default class PingSequenceDetailController {
   public async index({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!

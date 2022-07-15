@@ -6,7 +6,7 @@ import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
 import ChartStatsDateRange from 'App/Services/Dashboard/ChartStatsDateRange'
 import DashboardInfo from 'App/Services/Dashboard/DashboardInfo'
-import GetChartStatsValidator from 'App/Validators/GetChartStatsValidator'
+import GetChartStatsValidator from 'App/Validators/Dashboard/GetChartStatsValidator'
 import { DateTime } from 'luxon'
 
 export default class DashboardController {
