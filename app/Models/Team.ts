@@ -5,6 +5,15 @@ export default class Team extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
+  @column()
+  public owner: string
+
+  @column()
+  public userId: string
+
+  @column()
+  public isDeleted: boolean = false
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
