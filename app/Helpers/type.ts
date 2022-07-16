@@ -91,7 +91,7 @@ export type PingSequenceActivityAttributes = Omit<
 
 export type PingEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof PingEmail>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedPingEmailInfo'
 >
 
 export type ReadEmailAttributes = Omit<

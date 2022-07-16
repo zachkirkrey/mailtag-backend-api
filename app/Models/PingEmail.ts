@@ -52,4 +52,32 @@ export default class PingEmail extends BaseModel {
 
   @belongsTo(() => Email)
   public email: BelongsTo<typeof Email>
+
+  public get serializedPingEmailInfo() {
+    const {
+      name,
+      subject,
+      status,
+      recipient,
+      isDeleted,
+      userId,
+      gmailMessageId,
+      gmailThreadId,
+      emailId,
+      pingSequenceId,
+    } = this
+
+    return {
+      name,
+      subject,
+      status,
+      recipient,
+      isDeleted,
+      userId,
+      gmailMessageId,
+      gmailThreadId,
+      emailId,
+      pingSequenceId,
+    }
+  }
 }
