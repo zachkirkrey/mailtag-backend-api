@@ -3,7 +3,7 @@ import Email from 'App/Models/Email'
 import ReadEmail from 'App/Models/ReadEmail'
 import UnreadEmail from 'App/Models/UnreadEmail'
 import User from 'App/Models/User'
-import GetEmailByIdValidator from 'App/Validators/GetEmailByIdValidator'
+import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
 
 export default class InboxController {
   public async getEmails({ auth }: HttpContextContract) {

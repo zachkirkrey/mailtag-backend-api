@@ -6,6 +6,17 @@ export default class extends BaseSchema {
   public override async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
+      table.integer('day').notNullable()
+      table.integer('step').notNullable()
+      table.text('html').notNullable()
+      table.boolean('is_deleted').notNullable()
+      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE').notNullable()
+      table
+        .uuid('ping_sequence_id')
+        .references('id')
+        .inTable('ping_sequences')
+        .onDelete('CASCADE')
+        .notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

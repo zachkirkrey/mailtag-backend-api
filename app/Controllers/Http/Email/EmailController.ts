@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Email from 'App/Models/Email'
 import User from 'App/Models/User'
-import GetEmailByIdValidator from 'App/Validators/GetEmailByIdValidator'
+import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
 
 export default class EmailController {
   public async index({ auth }: HttpContextContract) {

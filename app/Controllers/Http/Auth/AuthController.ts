@@ -20,7 +20,9 @@ export default class AuthController {
     const user = await User.findBy('provider_id', googleUser.id)
 
     if (user) {
-      const { token } = await auth.use('api').generate(user)
+      const { token } = await auth.use('api').generate(user, {
+        expiresIn: '30mins',
+      })
 
       return {
         data: {
@@ -47,7 +49,9 @@ export default class AuthController {
       }),
     ])
 
-    const { token } = await auth.use('api').generate(newUser)
+    const { token } = await auth.use('api').generate(newUser, {
+      expiresIn: '30mins',
+    })
 
     return {
       data: {

@@ -1,13 +1,13 @@
 import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class GetSignatureByIdValidator {
+export default class UpdatePingSequenceValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    params: schema.object().members({
-      id: schema.string([rules.uuid()]),
-    }),
+    name: schema.string.optional(),
+    duration: schema.number.optional(),
+    timezone: schema.string.optional([rules.timezone()]),
   })
 
   public messages: CustomMessages = {}

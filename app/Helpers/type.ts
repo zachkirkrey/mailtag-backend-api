@@ -6,7 +6,11 @@ import EmailEvent from 'App/Models/EmailEvent'
 import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
 import Ping from 'App/Models/Ping'
+import PingEmail from 'App/Models/PingEmail'
 import PingEvent from 'App/Models/PingEvent'
+import PingSequence from 'App/Models/PingSequence'
+import PingSequenceActivity from 'App/Models/PingSequenceActivity'
+import PingSequenceDetail from 'App/Models/PingSequenceDetail'
 import ReadEmail from 'App/Models/ReadEmail'
 import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
@@ -68,6 +72,26 @@ export type PingAttributes = Omit<
 export type PingEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof PingEvent>>,
   'id' | 'createdAt' | 'updatedAt'
+>
+
+export type PingSequenceAttributes = Omit<
+  ModelAttributes<InstanceType<typeof PingSequence>>,
+  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedPingSequenceInfo' | 'pingsCount'
+>
+
+export type PingSequenceDetailAttributes = Omit<
+  ModelAttributes<InstanceType<typeof PingSequenceDetail>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedPingSequenceDetailInfo'
+>
+
+export type PingSequenceActivityAttributes = Omit<
+  ModelAttributes<InstanceType<typeof PingSequenceActivity>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedPingSequenceActivityInfo'
+>
+
+export type PingEmailAttributes = Omit<
+  ModelAttributes<InstanceType<typeof PingEmail>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedPingEmailInfo'
 >
 
 export type ReadEmailAttributes = Omit<

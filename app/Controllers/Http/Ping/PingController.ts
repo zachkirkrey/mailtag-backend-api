@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Ping from 'App/Models/Ping'
 import User from 'App/Models/User'
-import GetPingByIdValidator from 'App/Validators/GetPingByIdValidator'
+import GetPingByIdValidator from 'App/Validators/Ping/GetPingByIdValidator'
 
 export default class PingController {
   public async index({ auth }: HttpContextContract) {

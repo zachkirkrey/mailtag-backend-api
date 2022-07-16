@@ -1,7 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Signature from 'App/Models/Signature'
 import User from 'App/Models/User'
-import GetSignatureByIdValidator from 'App/Validators/GetSignatureByIdValidator'
+import GetSignatureByIdValidator from 'App/Validators/Signature/GetSignatureByIdValidator'
 
 export default class SignatureController {
   public async index({ auth }: HttpContextContract) {

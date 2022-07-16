@@ -1,6 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Activity from 'App/Models/Activity'
-import GetActivityByIdValidator from 'App/Validators/GetActivityByIdValidator'
+import GetActivityByIdValidator from 'App/Validators/Activity/GetActivityByIdValidator'
 
 export default class ActivityController {
   public async show({ request }: HttpContextContract) {

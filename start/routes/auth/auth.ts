@@ -5,5 +5,5 @@ Route.group(() => {
   Route.get('google', async ({ ally }) => {
     return ally.use('google').redirect()
   })
-  Route.get('logout', 'Auth/AuthController.logout')
+  Route.post('logout', 'Auth/AuthController.logout')
 }).prefix('auth')
