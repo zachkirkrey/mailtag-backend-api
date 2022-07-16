@@ -97,4 +97,62 @@ export default class PingEmailController {
       },
     }
   }
+
+  public async start({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { params } = await request.validate(GetPingEmailByIdValidator)
+    const pingEmail = await PingEmail.query()
+      .where({ id: params.id, userId: user.id })
+      .firstOrFail()
+
+    // TODO add this operation to SQS or queue service
+    await pingEmail.merge({ status: 'started' }).save()
+    await pingEmail.refresh()
+
+    return {
+      data: {
+        message: 'Ping email started successfully',
+        pingEmailStatus: pingEmail.status,
+      },
+    }
+  }
+
+  public async stop({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { params } = await request.validate(GetPingEmailByIdValidator)
+    const pingEmail = await PingEmail.query()
+      .where({ id: params.id, userId: user.id })
+      .firstOrFail()
+
+    // TODO add this operation to SQS or queue service
+    await pingEmail.merge({ status: 'stopped' }).save()
+    await pingEmail.refresh()
+
+    return {
+      data: {
+        message: 'Ping email stopped successfully',
+        pingEmailStatus: pingEmail.status,
+      },
+    }
+  }
+
+  public async restart({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { params } = await request.validate(GetPingEmailByIdValidator)
+    const pingEmail = await PingEmail.query()
+      .where({ id: params.id, userId: user.id })
+      .firstOrFail()
+
+    // TODO add this operation to SQS or queue service
+    await pingEmail.merge({ status: 'stopped' }).save()
+    await pingEmail.merge({ status: 'started' }).save()
+    await pingEmail.refresh()
+
+    return {
+      data: {
+        message: 'Ping email restarted successfully',
+        pingEmailStatus: pingEmail.status,
+      },
+    }
+  }
 }

@@ -18,7 +18,7 @@ export default class PingEmail extends BaseModel {
   public subject: string | null
 
   @column()
-  public status: string
+  public status: string = 'stopped' //TODO add enum value type
 
   @column()
   public isDeleted: boolean = false
@@ -55,6 +55,7 @@ export default class PingEmail extends BaseModel {
 
   public get serializedPingEmailInfo() {
     const {
+      id,
       name,
       subject,
       status,
@@ -68,6 +69,7 @@ export default class PingEmail extends BaseModel {
     } = this
 
     return {
+      id,
       name,
       subject,
       status,
