@@ -8,3 +8,4 @@ Route.group(() => {
 })
   .prefix('team')
   .middleware('auth')
+  .where('id', Route.matchers.uuid())

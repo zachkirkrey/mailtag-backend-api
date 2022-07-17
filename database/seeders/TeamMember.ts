@@ -19,7 +19,9 @@ export default class extends BaseSeeder {
       const teamMemberAttributes: TeamMemberAttributes = {
         email: user.email,
         teamId: team.id,
+        isAdmin: false,
         isDeleted: faker.datatype.boolean(),
+        status: faker.lorem.words(1),
       }
 
       return teamMemberAttributes

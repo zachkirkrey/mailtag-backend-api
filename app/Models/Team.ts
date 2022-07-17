@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
+import TeamMember from './TeamMember'
 
 export default class Team extends BaseModel {
   @column({ isPrimary: true })
@@ -38,4 +39,7 @@ export default class Team extends BaseModel {
       isDeleted,
     }
   }
+
+  @hasMany(() => TeamMember)
+  public teamMembers: HasMany<typeof TeamMember>
 }

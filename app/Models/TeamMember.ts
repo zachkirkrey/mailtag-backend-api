@@ -15,6 +15,12 @@ export default class TeamMember extends BaseModel {
   @column()
   public isDeleted: boolean = false
 
+  @column()
+  public isAdmin: boolean = false
+
+  @column()
+  public status: string = 'invited' //TODO make this enum based on invitation controller
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
@@ -23,4 +29,16 @@ export default class TeamMember extends BaseModel {
 
   @belongsTo(() => Team)
   public team: BelongsTo<typeof Team>
+
+  public get serializedTeamMemberInfo() {
+    const { id, email, teamId, isAdmin, isDeleted } = this
+
+    return {
+      id,
+      email,
+      teamId,
+      isAdmin,
+      isDeleted,
+    }
+  }
 }

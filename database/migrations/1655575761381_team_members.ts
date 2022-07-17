@@ -8,8 +8,10 @@ export default class extends BaseSchema {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.string('email').notNullable()
       table.uuid('team_id').references('id').inTable('teams').onDelete('CASCADE').notNullable()
+      table.boolean('is_admin').notNullable().defaultTo(false)
       table.boolean('is_deleted').notNullable().defaultTo(false)
       table.unique(['email', 'team_id'])
+      table.string('status').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

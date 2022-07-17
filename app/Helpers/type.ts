@@ -128,7 +128,7 @@ export type TeamAttributes = Omit<
 
 export type TeamMemberAttributes = Omit<
   ModelAttributes<InstanceType<typeof TeamMember>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedTeamMemberInfo'
 >
 
 export enum BorderRadiusTypes {
