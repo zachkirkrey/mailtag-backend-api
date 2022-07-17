@@ -15,6 +15,8 @@ import ReadEmail from 'App/Models/ReadEmail'
 import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
+import Team from 'App/Models/Team'
+import TeamMember from 'App/Models/TeamMember'
 import UnreadEmail from 'App/Models/UnreadEmail'
 import UnreadEmailActivity from 'App/Models/UnreadEmailActivity'
 import User from 'App/Models/User'
@@ -116,6 +118,16 @@ export type UnreadEmailActivityAttributes = Omit<
 
 export type ActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof Activity>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type TeamAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Team>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type TeamMemberAttributes = Omit<
+  ModelAttributes<InstanceType<typeof TeamMember>>,
   'id' | 'createdAt' | 'updatedAt'
 >
 

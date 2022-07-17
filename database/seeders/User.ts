@@ -11,7 +11,7 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     Logger.info('Starting user seeder')
 
-    const accounts = await Account.query().limit(2)
+    const accounts = await Account.query().limit(9)
 
     const randomUsers = accounts.map((account) => {
       const userAttributes: UserAttributes = {

@@ -7,7 +7,7 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     Logger.info('Starting account seeder')
 
-    await Account.createMany(Array.from(Array(3)))
+    await Account.createMany(Array.from(Array(10)))
 
     Logger.info('Finishing account seeder')
   }

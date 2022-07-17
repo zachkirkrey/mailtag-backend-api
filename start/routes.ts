@@ -28,6 +28,7 @@ import './routes/email'
 import './routes/activity'
 import './routes/signature'
 import './routes/ping'
+import './routes/team'
 
 Route.get('/', async () => {
   return { hello: 'mailtag' }

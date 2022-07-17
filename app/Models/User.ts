@@ -7,6 +7,8 @@ import {
   computed,
   HasMany,
   hasMany,
+  HasOne,
+  hasOne,
 } from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
 import Account from './Account'
@@ -14,6 +16,7 @@ import Signature from './Signature'
 import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
 import Ping from './Ping'
+import Team from './Team'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -72,4 +75,7 @@ export default class User extends BaseModel {
 
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>
+
+  @hasOne(() => Team)
+  public team: HasOne<typeof Team>
 }
