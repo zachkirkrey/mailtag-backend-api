@@ -7,6 +7,9 @@ export default class Team extends BaseModel {
   public id: string
 
   @column()
+  public name: string
+
+  @column()
   public owner: string
 
   @column()
@@ -23,4 +26,16 @@ export default class Team extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
+
+  public get serializedTeamInfo() {
+    const { id, name, owner, userId, isDeleted } = this
+
+    return {
+      id,
+      name,
+      owner,
+      userId,
+      isDeleted,
+    }
+  }
 }

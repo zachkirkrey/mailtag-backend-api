@@ -16,7 +16,8 @@
     "typecheck": "tsc --noEmit",
     "migrate": "node ace migration:run",
     "seed": "node ace db:seed",
-    "drop": "node ace drop:tables"
+    "drop": "node ace drop:tables",
+    "routes": "node ace list:routes"
   },
   "eslintConfig": {
     "extends": [

@@ -123,7 +123,7 @@ export type ActivityAttributes = Omit<
 
 export type TeamAttributes = Omit<
   ModelAttributes<InstanceType<typeof Team>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedTeamInfo'
 >
 
 export type TeamMemberAttributes = Omit<
