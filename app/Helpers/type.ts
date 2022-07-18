@@ -16,6 +16,7 @@ import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
 import Team from 'App/Models/Team'
+import TeamInvite from 'App/Models/TeamInvite'
 import TeamMember from 'App/Models/TeamMember'
 import UnreadEmail from 'App/Models/UnreadEmail'
 import UnreadEmailActivity from 'App/Models/UnreadEmailActivity'
@@ -129,6 +130,11 @@ export type TeamAttributes = Omit<
 export type TeamMemberAttributes = Omit<
   ModelAttributes<InstanceType<typeof TeamMember>>,
   'id' | 'createdAt' | 'updatedAt' | 'serializedTeamMemberInfo'
+>
+
+export type TeamInviteAttributes = Omit<
+  ModelAttributes<InstanceType<typeof TeamInvite>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedTeamInviteInfo'
 >
 
 export enum BorderRadiusTypes {
