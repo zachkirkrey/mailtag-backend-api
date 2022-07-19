@@ -1,8 +1,18 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+  HasOne,
+  hasOne,
+} from '@ioc:Adonis/Lucid/Orm'
 import User from './User'
 import TeamMember from './TeamMember'
 import TeamInvite from './TeamInvite'
+import Sku from './Sku'
 
 export default class Team extends BaseModel {
   @column({ isPrimary: true })
@@ -19,6 +29,9 @@ export default class Team extends BaseModel {
 
   @column()
   public isDeleted: boolean = false
+
+  @column()
+  public skuId: string | null
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -46,4 +59,7 @@ export default class Team extends BaseModel {
 
   @hasMany(() => TeamInvite)
   public teamInvites: HasMany<typeof TeamInvite>
+
+  @hasOne(() => Sku)
+  public sku: HasOne<typeof Sku>
 }
