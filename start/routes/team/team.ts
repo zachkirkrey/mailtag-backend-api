@@ -5,6 +5,7 @@ Route.group(() => {
   Route.post('', 'Team/TeamController.create')
   Route.patch(':id', 'Team/TeamController.update')
   Route.delete(':id', 'Team/TeamController.destroy')
+  Route.get('stats', 'Team/TeamController.stats')
 })
   .prefix('team')
   .middleware('auth')

@@ -59,4 +59,24 @@ export default class TeamController {
       },
     }
   }
+
+  public async stats({ auth }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const team = await Team.query()
+      .where({ userId: user.id })
+      .preload('teamMembers')
+      .preload('teamInvites')
+      .withCount('teamInvites', (query) => {
+        query.where({ isAccepted: false }).as('pendingInvites')
+      })
+      .firstOrFail()
+
+    return {
+      data: {
+        membersCount: team.teamMembers.length,
+        invitesCount: team.teamInvites.length,
+        pendingInvitesCount: parseInt(team.$extras.pendingInvites),
+      },
+    }
+  }
 }
