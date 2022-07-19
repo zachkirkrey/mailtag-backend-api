@@ -20,6 +20,7 @@ export default class extends BaseSeeder {
         email: user.email,
         teamId: team.id,
         isDeleted: faker.datatype.boolean(),
+        isAccepted: faker.datatype.boolean(),
       }
 
       return teamInviteAttributes

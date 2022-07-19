@@ -15,6 +15,9 @@ export default class TeamInvite extends BaseModel {
   @column()
   public isDeleted: boolean = false
 
+  @column()
+  public isAccepted: boolean = false
+
   @belongsTo(() => Team)
   public team: BelongsTo<typeof Team>
 

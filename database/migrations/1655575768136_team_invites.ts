@@ -9,6 +9,7 @@ export default class extends BaseSchema {
       table.string('email').notNullable()
       table.uuid('team_id').references('id').inTable('teams').notNullable()
       table.boolean('is_deleted').notNullable().defaultTo(false)
+      table.boolean('is_accepted').notNullable().defaultTo(false)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

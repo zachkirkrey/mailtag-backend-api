@@ -1,7 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Team from 'App/Models/Team'
 import TeamInvite from 'App/Models/TeamInvite'
+import TeamMember from 'App/Models/TeamMember'
 import User from 'App/Models/User'
+import AcceptTeamInviteValidator from 'App/Validators/Team/Invite/AcceptTeamInviteValidator'
 import CreateTeamInviteValidator from 'App/Validators/Team/Invite/CreateTeamInviteValidator'
 import GetTeamInviteByIdValidator from 'App/Validators/Team/Invite/GetTeamInviteByIdValidator'
 import UpdateTeamInviteValidator from 'App/Validators/Team/Invite/UpdateTeamInviteValidator'
@@ -89,6 +91,31 @@ export default class TeamInviteController {
     return {
       data: {
         message: 'Team invite deleted successfully',
+      },
+    }
+  }
+
+  public async accept({ request }: HttpContextContract) {
+    const { params } = await request.validate(GetTeamInviteByIdValidator)
+    const { teamId, email } = await request.validate(AcceptTeamInviteValidator)
+    // TODO check if user can accept different invitation
+    const teamInvite = await TeamInvite.query()
+      .where({
+        id: params.id,
+        teamId,
+        email,
+      })
+      .firstOrFail()
+
+    // TODO add transaction here
+    await Promise.all([
+      teamInvite.merge({ isAccepted: true }).save(),
+      TeamMember.create({ teamId, email }),
+    ])
+
+    return {
+      data: {
+        message: 'Team invitation accepted successfully',
       },
     }
   }
