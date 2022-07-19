@@ -33,4 +33,8 @@ export default Env.rules({
   GOOGLE_CLIENT_SECRET: Env.schema.string(),
   GOOGLE_CLIENT_CALLBACK_URL_LOCAL: Env.schema.string(),
   GOOGLE_CLIENT_CALLBACK_URL_PRODUCTION: Env.schema.string(),
+
+  SES_ACCESS_KEY: Env.schema.string(),
+  SES_ACCESS_SECRET: Env.schema.string(),
+  SES_REGION: Env.schema.string(),
 })

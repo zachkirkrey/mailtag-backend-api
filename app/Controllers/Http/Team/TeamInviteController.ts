@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import InviteTeamMember from 'App/Mailers/InviteTeamMember'
 import Team from 'App/Models/Team'
 import TeamInvite from 'App/Models/TeamInvite'
 import TeamMember from 'App/Models/TeamMember'
@@ -43,6 +44,7 @@ export default class TeamInviteController {
     const teamInvite = await TeamInvite.create({ email, teamId: team.id })
 
     // TODO add SES call here
+    await new InviteTeamMember(email, teamInvite.id, user.fullName ?? user.firstName).sendLater()
 
     return {
       data: {
