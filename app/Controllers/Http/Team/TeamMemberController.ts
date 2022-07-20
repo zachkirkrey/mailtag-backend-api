@@ -1,4 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { randomSkuCode } from 'App/Helpers/sku'
 import Sku from 'App/Models/Sku'
 import Team from 'App/Models/Team'
 import TeamMember from 'App/Models/TeamMember'
@@ -6,7 +7,6 @@ import User from 'App/Models/User'
 import CreateTeamMemberValidator from 'App/Validators/Team/Member/CreateTeamMemberValidator'
 import GetTeamMemberByIdValidator from 'App/Validators/Team/Member/GetTeamMemberByIdValidator'
 import UpdateTeamMemberValidator from 'App/Validators/Team/Member/UpdateTeamMemberValidator'
-import { randomUUID } from 'crypto'
 
 export default class TeamMemberController {
   public async index({ auth }: HttpContextContract) {
@@ -37,18 +37,15 @@ export default class TeamMemberController {
 
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.query().where({ userId: user.id }).firstOrFail()
+    const team = await Team.query().where({ userId: user.id }).preload('teamMembers').firstOrFail()
     const { email } = await request.validate(CreateTeamMemberValidator)
     // TODO wrap transaction
-    const teamMember = await TeamMember.create({ email, teamId: team.id })
-
-    await team.load('teamMembers')
+    const teamMember = await team.related('teamMembers').create({ email, teamId: team.id })
 
     if (team.teamMembers.length >= 5 && !team.skuId) {
-      const skuCode = randomUUID().split('-')
       const sku = await Sku.firstOrCreate(
         { teamId: team.id },
-        { code: `${skuCode[0]}-${skuCode[1]}`, teamId: team.id }
+        { code: randomSkuCode(), teamId: team.id }
       )
       await team.merge({ skuId: sku.id }).save()
     }
@@ -71,13 +68,12 @@ export default class TeamMemberController {
       .firstOrFail()
     const { isAdmin } = await request.validate(UpdateTeamMemberValidator)
 
-    await teamMember.merge({ isAdmin }).save()
-    await teamMember.refresh()
+    const updatedTeamMember = await teamMember.merge({ isAdmin }).save()
 
     return {
       data: {
         message: 'Team member updated successfully',
-        teamMember: teamMember.serializedTeamMemberInfo,
+        teamMember: updatedTeamMember.serializedTeamMemberInfo,
       },
     }
   }

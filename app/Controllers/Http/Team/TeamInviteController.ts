@@ -41,7 +41,7 @@ export default class TeamInviteController {
     const user: User = auth.use('api').user!
     const team = await Team.findByOrFail('userId', user.id)
     const { email } = await request.validate(CreateTeamInviteValidator)
-    const teamInvite = await TeamInvite.create({ email, teamId: team.id })
+    const teamInvite = await TeamInvite.firstOrCreate({ email }, { email, teamId: team.id })
 
     // TODO add SES call here
     await new InviteTeamMember(email, teamInvite.id, user.fullName ?? user.firstName).sendLater()
@@ -66,13 +66,12 @@ export default class TeamInviteController {
       .firstOrFail()
     const { email } = await request.validate(UpdateTeamInviteValidator)
 
-    await teamInvite.merge({ email }).save()
-    await teamInvite.refresh()
+    const updateTeamInvite = await teamInvite.merge({ email }).save()
 
     return {
       data: {
         message: 'Team invite updated successfully',
-        teamInvite: teamInvite.serializedTeamInviteInfo,
+        teamInvite: updateTeamInvite.serializedTeamInviteInfo,
       },
     }
   }
@@ -88,7 +87,7 @@ export default class TeamInviteController {
       })
       .firstOrFail()
 
-    await teamInvite.delete()
+    await teamInvite.merge({ isDeleted: true }).save()
 
     return {
       data: {

@@ -35,13 +35,12 @@ export default class TeamController {
     const { name } = await request.validate(UpdateTeamValidator)
     const team = await Team.query().where({ userId: user.id }).firstOrFail()
 
-    await team.merge({ name }).save()
-    await team.refresh()
+    const updatedTeam = await team.merge({ name }).save()
 
     return {
       data: {
         message: 'Team updated successfully',
-        team: team.serializedTeamInfo,
+        team: updatedTeam.serializedTeamInfo,
       },
     }
   }
@@ -51,7 +50,7 @@ export default class TeamController {
     const { params } = await request.validate(GetTeamByIdValidator)
     const team = await Team.query().where({ id: params.id, userId: user.id }).firstOrFail()
 
-    await team.delete()
+    await team.merge({ isDeleted: true }).save()
 
     return {
       data: {
@@ -64,18 +63,22 @@ export default class TeamController {
     const user: User = auth.use('api').user!
     const team = await Team.query()
       .where({ userId: user.id })
-      .preload('teamMembers')
-      .preload('teamInvites')
+      .withCount('teamMembers', (query) => {
+        query.as('membersCount')
+      })
       .withCount('teamInvites', (query) => {
-        query.where({ isAccepted: false }).as('pendingInvites')
+        query.as('invitesCount')
+      })
+      .withCount('teamInvites', (query) => {
+        query.where({ isAccepted: false }).as('pendingInvitesCount')
       })
       .firstOrFail()
 
     return {
       data: {
-        membersCount: team.teamMembers.length,
-        invitesCount: team.teamInvites.length,
-        pendingInvitesCount: parseInt(team.$extras.pendingInvites),
+        membersCount: team.$extras.membersCount,
+        invitesCount: team.$extras.invitesCount,
+        pendingInvitesCount: parseInt(team.$extras.pendingInvitesCount),
       },
     }
   }
