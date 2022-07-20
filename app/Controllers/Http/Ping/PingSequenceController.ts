@@ -36,7 +36,7 @@ export default class PingSequenceController {
     const { name, duration, timezone } = await request.validate(CreatePingSequenceValidator)
     const pingSequence = await PingSequence.create({ userId: user.id, name, duration, timezone })
 
-    await pingSequence.load('pings')
+    await pingSequence.load('pings') // Fixme: This would be always empty
 
     return {
       data: {
