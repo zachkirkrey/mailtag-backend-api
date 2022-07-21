@@ -13,7 +13,11 @@
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write .",
     "prepare": "node -e \"try { require('husky').install() } catch (e) {if (e.code !== 'MODULE_NOT_FOUND') throw e}\"",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "migrate": "node ace migration:run",
+    "seed": "node ace db:seed",
+    "drop": "node ace drop:tables",
+    "routes": "node ace list:routes"
   },
   "eslintConfig": {
     "extends": [
@@ -86,6 +90,8 @@
     "@adonisjs/core": "^5.8.3",
     "@adonisjs/lucid": "^18.0.1",
     "@adonisjs/repl": "^3.1.11",
+    "@types/jsonwebtoken": "^8.5.8",
+    "jsonwebtoken": "^8.5.1",
     "luxon": "^2.4.0",
     "pg": "^8.7.3",
     "proxy-addr": "^2.0.7",
