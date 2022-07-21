@@ -5,7 +5,11 @@ export default class extends BaseSchema {
 
   public override async up() {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id')
+      table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
+      table.string('name').notNullable()
+      table.decimal('price').notNullable()
+      table.boolean('is_active').notNullable().defaultTo(true)
+      table.boolean('is_deleted').notNullable().defaultTo(false)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

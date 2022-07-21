@@ -3,7 +3,19 @@ import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
 export default class Plan extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: string
+
+  @column()
+  public name: string
+
+  @column()
+  public price: number
+
+  @column()
+  public isActive: boolean = true
+
+  @column()
+  public isDeleted: boolean = false
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

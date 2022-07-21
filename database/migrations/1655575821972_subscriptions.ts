@@ -6,10 +6,17 @@ export default class extends BaseSchema {
   public override async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
+      table.uuid('plan_id').references('id').inTable('plans').onDelete('CASCADE').notNullable()
+      table.uuid('user_id').references('id').inTable('users').onDelete('CASCADE').notNullable()
+      table.string('payment_status').notNullable()
+      table.boolean('is_canceled').notNullable().defaultTo(false)
+      table.boolean('is_expired').notNullable().defaultTo(false)
+      table.boolean('is_deleted').notNullable().defaultTo(false)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */
+      table.timestamp('expires_at', { useTz: true })
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

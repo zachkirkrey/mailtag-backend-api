@@ -13,6 +13,7 @@ export default class Subscription extends BaseModel {
   @column()
   public userId: string
 
+  //TODO define statuses ['complete', 'pending', 'canceled'] used in seeder
   @column()
   public paymentStatus: string
 

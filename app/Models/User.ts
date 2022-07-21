@@ -7,6 +7,8 @@ import {
   computed,
   HasMany,
   hasMany,
+  HasOne,
+  hasOne,
 } from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
 import Account from './Account'
@@ -14,6 +16,9 @@ import Signature from './Signature'
 import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
 import Ping from './Ping'
+import Plan from './Plan'
+import Subscription from './Subscription'
+import Coupon from './Coupon'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -75,6 +80,15 @@ export default class User extends BaseModel {
 
   @column()
   public refreshToken: string
+
+  @hasOne(() => Subscription)
+  public subscription: HasOne<typeof Subscription>
+
+  @hasOne(() => Plan)
+  public plan: HasOne<typeof Plan>
+
+  @hasMany(() => Coupon)
+  public coupons: HasMany<typeof Coupon>
 
   public get serializedUserInfo() {
     const {

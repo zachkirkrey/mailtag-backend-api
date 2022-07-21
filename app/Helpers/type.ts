@@ -1,6 +1,7 @@
 import { ModelAttributes } from '@ioc:Adonis/Lucid/Orm'
 import Account from 'App/Models/Account'
 import Activity from 'App/Models/Activity'
+import Coupon from 'App/Models/Coupon'
 import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
 import Link from 'App/Models/Link'
@@ -11,10 +12,12 @@ import PingEvent from 'App/Models/PingEvent'
 import PingSequence from 'App/Models/PingSequence'
 import PingSequenceActivity from 'App/Models/PingSequenceActivity'
 import PingSequenceDetail from 'App/Models/PingSequenceDetail'
+import Plan from 'App/Models/Plan'
 import ReadEmail from 'App/Models/ReadEmail'
 import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
+import Subscription from 'App/Models/Subscription'
 import UnreadEmail from 'App/Models/UnreadEmail'
 import UnreadEmailActivity from 'App/Models/UnreadEmailActivity'
 import User from 'App/Models/User'
@@ -116,6 +119,20 @@ export type UnreadEmailActivityAttributes = Omit<
 
 export type ActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof Activity>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type SubscriptionAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Subscription>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+
+export type PlanAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Plan>>,
+  'id' | 'createdAt' | 'updatedAt'
+>
+export type CouponAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Coupon>>,
   'id' | 'createdAt' | 'updatedAt'
 >
 
