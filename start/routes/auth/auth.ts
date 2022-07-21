@@ -6,4 +6,5 @@ Route.group(() => {
     return ally.use('google').redirect()
   })
   Route.post('logout', 'Auth/AuthController.logout')
+  Route.post('renew-access', 'Auth/AuthController.renewAccess')
 }).prefix('auth')
