@@ -133,7 +133,7 @@ export type PlanAttributes = Omit<
 >
 export type CouponAttributes = Omit<
   ModelAttributes<InstanceType<typeof Coupon>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedCouponInfo'
 >
 
 export enum BorderRadiusTypes {

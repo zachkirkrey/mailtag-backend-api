@@ -35,4 +35,18 @@ export default class Coupon extends BaseModel {
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
+
+  public get serializedCouponInfo() {
+    const { id, code, userId, percentage, isRepetitive, isUsed, isDeleted } = this
+
+    return {
+      id,
+      code,
+      userId,
+      percentage,
+      isRepetitive,
+      isUsed,
+      isDeleted,
+    }
+  }
 }
