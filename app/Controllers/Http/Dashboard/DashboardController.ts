@@ -134,6 +134,7 @@ export default class DashboardController {
     const isCustomRange = !!(start && end)
     const ranges = new ChartStatsDateRange(isCustomRange ? ChartFilterRanges.CUSTOM : range!)
     const { startDate, endDate } = ranges.getDates(start!, end!)
+    // TODO: use withCount methods to do single query and consume less memory
     const [emailsSent, emailsRead, emailsUnread] = await Promise.all([
       Email.query().where({ userId: user.id }).andWhereBetween('created_at', [startDate, endDate]),
       Email.query()
@@ -162,6 +163,7 @@ export default class DashboardController {
     const monthEndDate = DateTime.local(YEAR, month + 1).toSQL()
     const emails = await Email.query().where({ userId: user.id })
     const emailsIds = emails.map((email) => email.id)
+    // TODO: use withCount methods to do single query and consume less memory
     const [links, linksClicked] = await Promise.all([
       Link.query().whereIn('email_id', emailsIds),
       Link.query()
@@ -270,6 +272,7 @@ export default class DashboardController {
   public async getDashboardInfo(ctx: HttpContextContract) {
     const service = new DashboardInfo(ctx)
 
+    // TODO: use withCount methods to do single query and consume less memory
     const [
       emailsSentToday,
       emailsSentThisMonth,
