@@ -86,6 +86,7 @@
     "@adonisjs/core": "^5.8.3",
     "@adonisjs/lucid": "^18.0.1",
     "@adonisjs/repl": "^3.1.11",
+    "@bitkidd/adonis-stripe": "^8.168.0",
     "luxon": "^2.4.0",
     "pg": "^8.7.3",
     "proxy-addr": "^2.0.7",
