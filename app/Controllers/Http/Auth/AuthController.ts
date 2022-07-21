@@ -23,7 +23,7 @@ export default class AuthController {
 
     if (user) {
       const { token: accessToken } = await auth.use('api').generate(user, {
-        expiresIn: '1min',
+        expiresIn: '30mins',
       })
 
       return {
@@ -53,7 +53,7 @@ export default class AuthController {
       .save()
 
     const { token: accessToken } = await auth.use('api').generate(newUser, {
-      expiresIn: '1min',
+      expiresIn: '30mins',
     })
 
     return {
