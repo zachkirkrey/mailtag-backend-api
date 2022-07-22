@@ -35,5 +35,8 @@ export default class extends BaseSeeder {
     await this.runSeeder(await import('../UnreadEmail'))
     await this.runSeeder(await import('../UnreadEmailActivity'))
     await this.runSeeder(await import('../Activity'))
+    await this.runSeeder(await import('../Team'))
+    await this.runSeeder(await import('../TeamMember'))
+    await this.runSeeder(await import('../TeamInvite'))
   }
 }
