@@ -4,6 +4,7 @@ import User from 'App/Models/User'
 import CreatePingEmailValidator from 'App/Validators/Ping/CreatePingEmailValidator'
 import GetPingEmailByIdValidator from 'App/Validators/Ping/GetPingEmailByIdValidator'
 import UpdatePingEmailValidator from 'App/Validators/Ping/UpdatePingEmailValidator'
+import SearchPingEmailValidator from 'App/Validators/Ping/SearchPingEmailValidator'
 
 export default class PingEmailController {
   public async index({ auth }: HttpContextContract) {
@@ -152,6 +153,24 @@ export default class PingEmailController {
       data: {
         message: 'Ping email restarted successfully',
         pingEmailStatus: pingEmail.status,
+      },
+    }
+  }
+
+  public async search({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { searchTerm } = await request.validate(SearchPingEmailValidator)
+
+    const pingEmails = await PingEmail.query()
+      .where({ userId: user.id })
+      .andWhere((query) => {
+        query.whereILike('subject', `%${searchTerm}%`).orWhereILike('recipient', `%${searchTerm}%`)
+      })
+      .orderBy([{ column: 'created_at', order: 'desc' }])
+
+    return {
+      data: {
+        pingEmails: pingEmails.map((pingEmail) => pingEmail.serializedPingEmailInfo),
       },
     }
   }
