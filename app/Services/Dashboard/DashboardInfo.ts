@@ -31,6 +31,7 @@ export default class DashboardInfo {
   }
 
   public async getAverageOpenRate() {
+    // TODO: use withCount methods to do single query and consume less memory
     const [emails, emailsOpened] = await Promise.all([
       Email.query().where({ userId: this.user.id }),
       Email.query().where({ userId: this.user.id }).andHas('events'),
@@ -43,6 +44,7 @@ export default class DashboardInfo {
   public async getAverageLinkClickRate() {
     const emails = await Email.query().where({ userId: this.user.id })
     const emailsIds = emails.map((email) => email.id)
+    // TODO: use withCount methods to do single query and consume less memory
     const [links, linksClicked] = await Promise.all([
       Link.query().whereIn('email_id', emailsIds),
       Link.query().whereIn('email_id', emailsIds).andHas('events'),

@@ -2,6 +2,8 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import AuthException from 'App/Exceptions/AuthException'
 import Account from 'App/Models/Account'
 import User from 'App/Models/User'
+import Env from '@ioc:Adonis/Core/Env'
+import jwt from 'jsonwebtoken'
 
 export default class AuthController {
   public async login({ ally, auth }: HttpContextContract) {
@@ -20,25 +22,25 @@ export default class AuthController {
     const user = await User.findBy('provider_id', googleUser.id)
 
     if (user) {
-      const { token } = await auth.use('api').generate(user, {
+      const { token: accessToken } = await auth.use('api').generate(user, {
         expiresIn: '30mins',
       })
 
       return {
         data: {
-          user,
-          token,
+          user: { ...user.serializedUserInfo, accessToken },
         },
       }
     }
 
-    const account = new Account()
-
     // TODO add db transaction to prevent redundant data
-    const [, newUser] = await Promise.all([
-      account.save(),
-      // TODO use idempotent method e.g. firstOrCreate
-      User.create({
+    const account = await new Account().save()
+    const newUser = new User()
+    const refreshToken = jwt.sign(googleUser.id, Env.get('APP_SECRET'))
+
+    // TODO use idempotent method e.g. firstOrCreate
+    await newUser
+      .merge({
         email: googleUser.email!,
         providerId: googleUser.id,
         accountId: account.id,
@@ -46,17 +48,17 @@ export default class AuthController {
         firstName: googleUser.original.given_name,
         lastName: googleUser.original.family_name,
         avatarUrl: googleUser.avatarUrl,
-      }),
-    ])
+        refreshToken: refreshToken,
+      })
+      .save()
 
-    const { token } = await auth.use('api').generate(newUser, {
+    const { token: accessToken } = await auth.use('api').generate(newUser, {
       expiresIn: '30mins',
     })
 
     return {
       data: {
-        user: newUser,
-        token,
+        user: { ...newUser.serializedUserInfo, accessToken },
       },
     }
   }
@@ -68,6 +70,27 @@ export default class AuthController {
       data: {
         message: 'Bye Bye!',
       },
+    }
+  }
+
+  public async renewAccess({ request, auth }: HttpContextContract) {
+    const { refreshToken } = request.body()
+
+    try {
+      const providerId = jwt.verify(refreshToken, Env.get('APP_SECRET'))
+      const user = await User.query().where({ providerId }).firstOrFail()
+      const { token: accessToken } = await auth.use('api').generate(user, {
+        expiresIn: '1min',
+      })
+
+      return {
+        data: {
+          accessToken,
+        },
+      }
+    } catch {
+      await auth.use('api').revoke()
+      throw new AuthException('Invalid refresh token, please login again!', 422)
     }
   }
 }

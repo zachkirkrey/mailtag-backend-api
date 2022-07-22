@@ -93,6 +93,8 @@
     "@adonisjs/repl": "^3.1.11",
     "@adonisjs/view": "^6.1.6",
     "aws-sdk": "^2.1177.0",
+    "@types/jsonwebtoken": "^8.5.8",
+    "jsonwebtoken": "^8.5.1",
     "luxon": "^2.4.0",
     "pg": "^8.7.3",
     "proxy-addr": "^2.0.7",

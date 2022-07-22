@@ -80,4 +80,34 @@ export default class User extends BaseModel {
     foreignKey: 'ownerId',
   })
   public team: HasOne<typeof Team>
+
+  @column()
+  public refreshToken: string
+
+  public get serializedUserInfo() {
+    const {
+      id,
+      email,
+      providerId,
+      accountId,
+      username,
+      firstName,
+      lastName,
+      fullName,
+      avatarUrl,
+      refreshToken,
+    } = this
+    return {
+      id,
+      email,
+      providerId,
+      accountId,
+      username,
+      firstName,
+      lastName,
+      fullName,
+      avatarUrl,
+      refreshToken,
+    }
+  }
 }

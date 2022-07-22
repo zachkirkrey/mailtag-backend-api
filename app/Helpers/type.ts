@@ -29,7 +29,7 @@ export type AccountAttributes = Omit<
 
 export type UserAttributes = Omit<
   ModelAttributes<InstanceType<typeof User>>,
-  'id' | 'createdAt' | 'updatedAt' | 'fullName'
+  'id' | 'createdAt' | 'updatedAt' | 'fullName' | 'serializedUserInfo'
 >
 
 export type EmailAttributes = Omit<

@@ -22,6 +22,7 @@ export default class extends BaseSeeder {
         email: faker.internet.email('', '', 'gmail.com'),
         username: faker.internet.userName(),
         avatarUrl: faker.internet.avatar(),
+        refreshToken: faker.random.alphaNumeric(10),
       }
 
       return userAttributes
@@ -39,6 +40,7 @@ export default class extends BaseSeeder {
       email: TEST_USER_EMAIL,
       username: TEST_USER_USERNAME,
       avatarUrl: faker.internet.avatar(),
+      refreshToken: faker.random.alphaNumeric(10),
     }
 
     await User.createMany([testUser])
