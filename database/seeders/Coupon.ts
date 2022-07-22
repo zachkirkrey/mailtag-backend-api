@@ -11,7 +11,7 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     Logger.info('Starting coupon seeder')
 
-    const users = await User.query().doesntHave('coupons').limit(5)
+    const users = await User.query()
 
     const coupons = users.map((user) => {
       const couponAttributes: CouponAttributes = {

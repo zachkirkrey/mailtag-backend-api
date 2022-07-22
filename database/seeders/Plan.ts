@@ -9,7 +9,7 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     Logger.info('Starting plan seeder')
 
-    const plans = Array.from(Array(5)).map(() => {
+    const plans = Array.from(Array(10)).map(() => {
       const planAttributes: PlanAttributes = {
         name: faker.lorem.word(5),
         price: faker.datatype.number({ min: 1, max: 100 }),

@@ -27,7 +27,7 @@ export default class Subscription extends BaseModel {
   public isDeleted: boolean = false
 
   @column.dateTime()
-  public expiresAt: DateTime
+  public expiresAt: DateTime = DateTime.now() // TODO define auto expiry time maybe based on this.plan
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

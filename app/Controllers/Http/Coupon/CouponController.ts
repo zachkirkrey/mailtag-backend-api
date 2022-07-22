@@ -53,6 +53,10 @@ export default class CouponController {
     const coupon = await Coupon.query().where({ id: params.id, userId: user.id }).firstOrFail()
     const { percentage, isRepetitive } = await request.validate(UpdateCouponValidator)
 
+    /**
+     * //FIXME don't refreshing the updated instance doesn't return the not update fields
+     * from the body if they are not sent that's why we were refreshing on update in general
+     */
     const updatedCoupon = await coupon.merge({ percentage, isRepetitive }).save()
 
     return {

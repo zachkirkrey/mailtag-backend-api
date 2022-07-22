@@ -12,6 +12,7 @@ export default class extends BaseSchema {
       table.boolean('is_canceled').notNullable().defaultTo(false)
       table.boolean('is_expired').notNullable().defaultTo(false)
       table.boolean('is_deleted').notNullable().defaultTo(false)
+      table.unique(['plan_id', 'user_id', 'is_canceled'])
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import AuthException from 'App/Exceptions/AuthException'
+import { generateRefreshToken, verifyRefreshToken } from 'App/Helpers/token'
 import Account from 'App/Models/Account'
 import User from 'App/Models/User'
-import Env from '@ioc:Adonis/Core/Env'
-import jwt from 'jsonwebtoken'
+import GetRefreshTokenValidator from 'App/Validators/Auth/GetRefreshTokenValidator'
 
 export default class AuthController {
   public async login({ ally, auth }: HttpContextContract) {
@@ -36,7 +36,6 @@ export default class AuthController {
     // TODO add db transaction to prevent redundant data
     const account = await new Account().save()
     const newUser = new User()
-    const refreshToken = jwt.sign(googleUser.id, Env.get('APP_SECRET'))
 
     // TODO use idempotent method e.g. firstOrCreate
     await newUser
@@ -48,7 +47,7 @@ export default class AuthController {
         firstName: googleUser.original.given_name,
         lastName: googleUser.original.family_name,
         avatarUrl: googleUser.avatarUrl,
-        refreshToken: refreshToken,
+        refreshToken: generateRefreshToken(newUser.id, googleUser.id),
       })
       .save()
 
@@ -74,10 +73,10 @@ export default class AuthController {
   }
 
   public async renewAccess({ request, auth }: HttpContextContract) {
-    const { refreshToken } = request.body()
+    const { refreshToken } = await request.validate(GetRefreshTokenValidator)
 
     try {
-      const providerId = jwt.verify(refreshToken, Env.get('APP_SECRET'))
+      const providerId = verifyRefreshToken(refreshToken)
       const user = await User.query().where({ providerId }).firstOrFail()
       const { token: accessToken } = await auth.use('api').generate(user, {
         expiresIn: '1min',

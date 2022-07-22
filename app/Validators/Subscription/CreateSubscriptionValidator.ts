@@ -6,6 +6,7 @@ export default class CreateSubscriptionValidator {
 
   public schema = schema.create({
     planId: schema.string([rules.uuid(), rules.exists({ table: 'plans', column: 'id' })]),
+    paymentStatus: schema.enum(['complete', 'pending', 'canceled'] as const),
   })
 
   public messages: CustomMessages = {}

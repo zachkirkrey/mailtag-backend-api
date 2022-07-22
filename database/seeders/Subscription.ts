@@ -13,12 +13,12 @@ export default class extends BaseSeeder {
     Logger.info('Starting subscription seeder')
 
     const users = await User.query()
-    const plans = await Plan.query().limit(2)
+    const plans = await Plan.query()
 
-    const subscriptions = plans.map((plan, index) => {
+    const subscriptions = users.map((user, index) => {
       const subscriptionAttributes: SubscriptionAttributes = {
-        planId: plan.id,
-        userId: users[index].id,
+        planId: plans[index].id,
+        userId: user.id,
         paymentStatus: faker.helpers.arrayElement(['complete', 'pending', 'canceled']),
         isCanceled: faker.datatype.boolean(),
         isExpired: faker.datatype.boolean(),

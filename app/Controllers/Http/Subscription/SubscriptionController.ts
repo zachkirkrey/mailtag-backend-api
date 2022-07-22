@@ -18,9 +18,9 @@ export default class SubscriptionController {
 
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const { planId } = await request.validate(CreateSubscriptionValidator)
+    const { planId, paymentStatus } = await request.validate(CreateSubscriptionValidator)
     // TODO add stripe call here
-    const subscription = await Subscription.create({ userId: user.id, planId })
+    const subscription = await Subscription.create({ userId: user.id, planId, paymentStatus })
 
     return {
       data: {

@@ -180,3 +180,9 @@ export type DateRangeString = {
 
 export const ReadEmailActivityTypes = ['open', 'read']
 export type ReadEmailActivityType = typeof ReadEmailActivityTypes[number]
+
+export type JwtPayload = {
+  userId: User['id']
+  providerId: User['providerId']
+  iat: number
+}

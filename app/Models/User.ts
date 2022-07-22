@@ -20,10 +20,11 @@ import Plan from './Plan'
 import Subscription from './Subscription'
 import Coupon from './Coupon'
 import Team from './Team'
+import { v4 as uuidv4 } from 'uuid'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
-  public id: string
+  public id: string = uuidv4()
 
   @column()
   public email: string
