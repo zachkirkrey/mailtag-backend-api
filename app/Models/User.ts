@@ -17,6 +17,7 @@ import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
 import Ping from './Ping'
 import Team from './Team'
+import Settings from './Settings'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -63,6 +64,9 @@ export default class User extends BaseModel {
 
   @belongsTo(() => Account)
   public account: BelongsTo<typeof Account>
+
+  @hasOne(() => Settings)
+  public settings: HasOne<typeof Settings>
 
   @hasMany(() => Signature)
   public signatures: HasMany<typeof Signature>
