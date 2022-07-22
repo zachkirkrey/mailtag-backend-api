@@ -20,9 +20,9 @@ export default class extends BaseSeeder {
         planId: plans[index].id,
         userId: user.id,
         paymentStatus: faker.helpers.arrayElement(['complete', 'pending', 'canceled']),
-        isCanceled: faker.datatype.boolean(),
-        isExpired: faker.datatype.boolean(),
-        isDeleted: faker.datatype.boolean(),
+        isCanceled: false,
+        isExpired: false,
+        isDeleted: false,
         expiresAt: DateTime.now(),
       }
 
