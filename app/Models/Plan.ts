@@ -22,4 +22,9 @@ export default class Plan extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  public get serializedPlanInfo() {
+    const { id, name, price, isActive, isDeleted } = this
+    return { id, name, price, isActive, isDeleted }
+  }
 }

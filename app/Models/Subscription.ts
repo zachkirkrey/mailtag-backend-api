@@ -40,4 +40,9 @@ export default class Subscription extends BaseModel {
 
   @belongsTo(() => Plan)
   public plan: BelongsTo<typeof Plan>
+
+  public get serializedSubscriptionInfo() {
+    const { id, planId, userId, paymentStatus, isCanceled, isExpired, isDeleted, expiresAt } = this
+    return { id, planId, userId, paymentStatus, isCanceled, isExpired, isDeleted, expiresAt }
+  }
 }

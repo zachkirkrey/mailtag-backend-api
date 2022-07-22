@@ -124,12 +124,12 @@ export type ActivityAttributes = Omit<
 
 export type SubscriptionAttributes = Omit<
   ModelAttributes<InstanceType<typeof Subscription>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedSubscriptionInfo'
 >
 
 export type PlanAttributes = Omit<
   ModelAttributes<InstanceType<typeof Plan>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedPlanInfo'
 >
 export type CouponAttributes = Omit<
   ModelAttributes<InstanceType<typeof Coupon>>,
