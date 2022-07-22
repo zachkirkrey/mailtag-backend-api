@@ -22,10 +22,10 @@ export default class Team extends BaseModel {
   public name: string
 
   @column()
-  public owner: string
+  public ownerEmail: string
 
   @column()
-  public userId: string
+  public ownerId: string
 
   @column()
   public isDeleted: boolean = false
@@ -40,16 +40,16 @@ export default class Team extends BaseModel {
   public updatedAt: DateTime
 
   @belongsTo(() => User)
-  public user: BelongsTo<typeof User>
+  public owner: BelongsTo<typeof User>
 
   public get serializedTeamInfo() {
-    const { id, name, owner, userId, isDeleted } = this
+    const { id, name, ownerEmail, ownerId, isDeleted } = this
 
     return {
       id,
       name,
-      owner,
-      userId,
+      ownerEmail,
+      ownerId,
       isDeleted,
     }
   }

@@ -13,7 +13,7 @@ export default class extends BaseSeeder {
     Logger.info('Starting team member seeder')
 
     const users = await User.query().whereNot({ providerId: TEST_USER_PROVIDER_ID }).limit(5)
-    const team = await Team.query().where({ owner: TEST_USER_EMAIL }).firstOrFail()
+    const team = await Team.query().where({ ownerEmail: TEST_USER_EMAIL }).firstOrFail()
 
     const teamMembers = users.map((user) => {
       const teamMemberAttributes: TeamMemberAttributes = {

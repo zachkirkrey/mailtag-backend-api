@@ -76,6 +76,8 @@ export default class User extends BaseModel {
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>
 
-  @hasOne(() => Team)
+  @hasOne(() => Team, {
+    foreignKey: 'ownerId',
+  })
   public team: HasOne<typeof Team>
 }

@@ -13,7 +13,7 @@ export default class extends BaseSeeder {
     Logger.info('Starting team invite seeder')
 
     const users = await User.query().orDoesntHave('team').limit(5)
-    const team = await Team.query().where({ owner: TEST_USER_EMAIL }).firstOrFail()
+    const team = await Team.query().where({ ownerEmail: TEST_USER_EMAIL }).firstOrFail()
 
     const teamInvites = users.map((user) => {
       const teamInviteAttributes: TeamInviteAttributes = {

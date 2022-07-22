@@ -15,8 +15,8 @@ export default class extends BaseSeeder {
     const teams = users.map((user) => {
       const teamAttributes: TeamAttributes = {
         name: faker.lorem.words(1),
-        userId: user.id,
-        owner: user.email,
+        ownerId: user.id,
+        ownerEmail: user.email,
         isDeleted: faker.datatype.boolean(),
       }
 

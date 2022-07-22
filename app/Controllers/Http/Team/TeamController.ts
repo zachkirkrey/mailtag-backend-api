@@ -20,7 +20,7 @@ export default class TeamController {
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { name } = await request.validate(CreateTeamValidator)
-    const team = await Team.create({ name, owner: user.email, userId: user.id })
+    const team = await Team.create({ name, ownerEmail: user.email, ownerId: user.id })
 
     return {
       data: {
