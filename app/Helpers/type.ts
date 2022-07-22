@@ -18,6 +18,9 @@ import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
 import Subscription from 'App/Models/Subscription'
+import Team from 'App/Models/Team'
+import TeamInvite from 'App/Models/TeamInvite'
+import TeamMember from 'App/Models/TeamMember'
 import UnreadEmail from 'App/Models/UnreadEmail'
 import UnreadEmailActivity from 'App/Models/UnreadEmailActivity'
 import User from 'App/Models/User'
@@ -122,6 +125,21 @@ export type ActivityAttributes = Omit<
   'id' | 'createdAt' | 'updatedAt'
 >
 
+export type TeamAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Team>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedTeamInfo' | 'skuId'
+>
+
+export type TeamMemberAttributes = Omit<
+  ModelAttributes<InstanceType<typeof TeamMember>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedTeamMemberInfo'
+>
+
+export type TeamInviteAttributes = Omit<
+  ModelAttributes<InstanceType<typeof TeamInvite>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedTeamInviteInfo'
+>
+
 export type SubscriptionAttributes = Omit<
   ModelAttributes<InstanceType<typeof Subscription>>,
   'id' | 'createdAt' | 'updatedAt' | 'serializedSubscriptionInfo'
@@ -131,6 +149,7 @@ export type PlanAttributes = Omit<
   ModelAttributes<InstanceType<typeof Plan>>,
   'id' | 'createdAt' | 'updatedAt' | 'serializedPlanInfo'
 >
+
 export type CouponAttributes = Omit<
   ModelAttributes<InstanceType<typeof Coupon>>,
   'id' | 'createdAt' | 'updatedAt' | 'serializedCouponInfo'

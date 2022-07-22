@@ -37,4 +37,8 @@ export default Env.rules({
 
   STRIPE_SECRET_KEY: Env.schema.string(),
   STRIPE_API_VERSION: Env.schema.string(),
+
+  SES_ACCESS_KEY: Env.schema.string(),
+  SES_ACCESS_SECRET: Env.schema.string(),
+  SES_REGION: Env.schema.string(),
 })

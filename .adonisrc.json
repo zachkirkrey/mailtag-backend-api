@@ -4,7 +4,8 @@
     "./commands",
     "@adonisjs/core/build/commands/index.js",
     "@adonisjs/repl/build/commands",
-    "@adonisjs/lucid/build/commands"
+    "@adonisjs/lucid/build/commands",
+    "@adonisjs/mail/build/commands"
   ],
   "exceptionHandlerNamespace": "App/Exceptions/Handler",
   "aliases": {
@@ -16,7 +17,8 @@
   "preloads": [
     "./start/routes",
     "./start/kernel",
-    "./start/validator"
+    "./start/validator",
+    "./start/events"
   ],
   "providers": [
     "./providers/AppProvider",
@@ -25,6 +27,8 @@
     "@adonisjs/ally",
     "@adonisjs/auth",
     "@bitkidd/adonis-stripe"
+    "@adonisjs/mail",
+    "@adonisjs/view"
   ],
   "aceProviders": [
     "@adonisjs/repl"
@@ -42,5 +46,11 @@
   },
   "testProviders": [
     "@japa/preset-adonis/TestsProvider"
+  ],
+  "metaFiles": [
+    {
+      "pattern": "resources/views/**/*.edge",
+      "reloadServer": false
+    }
   ]
 }

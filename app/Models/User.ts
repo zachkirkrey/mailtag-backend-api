@@ -19,6 +19,7 @@ import Ping from './Ping'
 import Plan from './Plan'
 import Subscription from './Subscription'
 import Coupon from './Coupon'
+import Team from './Team'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -77,6 +78,11 @@ export default class User extends BaseModel {
 
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>
+
+  @hasOne(() => Team, {
+    foreignKey: 'ownerId',
+  })
+  public team: HasOne<typeof Team>
 
   @column()
   public refreshToken: string

@@ -2,24 +2,24 @@ import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Team from './Team'
 
-export default class TeamInvite extends BaseModel {
+export default class Sku extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
   @column()
-  public email: string
+  public code: string
 
   @column()
-  public teamId: string
+  public isExpired: boolean = false
+
+  @column()
+  public isUsed: boolean = false
 
   @column()
   public isDeleted: boolean = false
 
   @column()
-  public isAccepted: boolean = false
-
-  @belongsTo(() => Team)
-  public team: BelongsTo<typeof Team>
+  public teamId: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -27,14 +27,6 @@ export default class TeamInvite extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  public get serializedTeamInviteInfo() {
-    const { id, email, teamId, isDeleted } = this
-
-    return {
-      id,
-      email,
-      teamId,
-      isDeleted,
-    }
-  }
+  @belongsTo(() => Team)
+  public team: BelongsTo<typeof Team>
 }
