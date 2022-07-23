@@ -32,6 +32,7 @@ import './routes/team'
 import './routes/coupon'
 import './routes/plan'
 import './routes/subscription'
+import './routes/settings'
 
 Route.get('/', async () => {
   return { hello: 'mailtag' }

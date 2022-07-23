@@ -9,6 +9,7 @@ Route.group(() => {
   Route.patch('/:id/start', 'Ping/PingEmailController.start')
   Route.patch('/:id/stop', 'Ping/PingEmailController.stop')
   Route.patch('/:id/restart', 'Ping/PingEmailController.restart')
+  Route.get('/search', 'Ping/PingEmailController.search')
 })
   .prefix('ping-emails')
   .middleware('auth')

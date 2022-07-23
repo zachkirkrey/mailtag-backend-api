@@ -21,6 +21,7 @@ import Subscription from './Subscription'
 import Coupon from './Coupon'
 import Team from './Team'
 import { v4 as uuidv4 } from 'uuid'
+import Settings from './Settings'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -67,6 +68,9 @@ export default class User extends BaseModel {
 
   @belongsTo(() => Account)
   public account: BelongsTo<typeof Account>
+
+  @hasOne(() => Settings)
+  public settings: HasOne<typeof Settings>
 
   @hasMany(() => Signature)
   public signatures: HasMany<typeof Signature>

@@ -2,6 +2,7 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Email from 'App/Models/Email'
 import User from 'App/Models/User'
 import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
+import SearchInboxEmailValidator from 'App/Validators/SearchInboxEmailValidator'
 
 export default class EmailController {
   public async index({ auth }: HttpContextContract) {
@@ -80,6 +81,31 @@ export default class EmailController {
     return {
       data: {
         message: 'Email deleted successfully',
+      },
+    }
+  }
+
+  public async search({ auth, request }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+    const { searchTerm, only } = await request.validate(SearchInboxEmailValidator)
+
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .andWhere((query) => {
+        query.whereILike('subject', `%${searchTerm}%`).orWhereILike('recipient', `%${searchTerm}%`)
+      })
+      .if(only === 'reads', (query) => {
+        query.andHas('events')
+      })
+      .if(only === 'unreads', (query) => {
+        query.andDoesntHave('events')
+      })
+      .preload('events')
+      .orderBy([{ column: 'created_at', order: 'desc' }])
+
+    return {
+      data: {
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }

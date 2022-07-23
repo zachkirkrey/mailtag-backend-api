@@ -4,6 +4,7 @@ import { generateRefreshToken, verifyRefreshToken } from 'App/Helpers/token'
 import Account from 'App/Models/Account'
 import User from 'App/Models/User'
 import GetRefreshTokenValidator from 'App/Validators/Auth/GetRefreshTokenValidator'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class AuthController {
   public async login({ ally, auth }: HttpContextContract) {
@@ -33,23 +34,29 @@ export default class AuthController {
       }
     }
 
-    // TODO add db transaction to prevent redundant data
-    const account = await new Account().save()
-    const newUser = new User()
+    const newUser = await Database.transaction(async (trx) => {
+      const account = await Account.create({}, { client: trx })
+      // TODO use idempotent method e.g. firstOrCreate
+      const newUser = new User().useTransaction(trx)
 
-    // TODO use idempotent method e.g. firstOrCreate
-    await newUser
-      .merge({
-        email: googleUser.email!,
-        providerId: googleUser.id,
-        accountId: account.id,
-        username: googleUser.name,
-        firstName: googleUser.original.given_name,
-        lastName: googleUser.original.family_name,
-        avatarUrl: googleUser.avatarUrl,
-        refreshToken: generateRefreshToken(newUser.id, googleUser.id),
-      })
-      .save()
+      await newUser
+        .useTransaction(trx)
+        .merge({
+          email: googleUser.email!,
+          providerId: googleUser.id,
+          accountId: account.id,
+          username: googleUser.name,
+          firstName: googleUser.original.given_name,
+          lastName: googleUser.original.family_name,
+          avatarUrl: googleUser.avatarUrl,
+          refreshToken: generateRefreshToken(newUser.id, googleUser.id),
+        })
+        .save()
+
+      await newUser.related('settings').create({}, { client: trx })
+
+      return newUser
+    })
 
     const { token: accessToken } = await auth.use('api').generate(newUser, {
       expiresIn: '30mins',
