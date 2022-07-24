@@ -30,6 +30,7 @@ import './routes/signature'
 import './routes/ping'
 import './routes/team'
 import './routes/settings'
+import './routes/support'
 
 Route.get('/', async () => {
   return { hello: 'mailtag' }
