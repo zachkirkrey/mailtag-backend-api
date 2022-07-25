@@ -5,6 +5,7 @@ import User from 'App/Models/User'
 import Env from '@ioc:Adonis/Core/Env'
 import jwt from 'jsonwebtoken'
 import Database from '@ioc:Adonis/Lucid/Database'
+import WelcomeUserMail from 'App/Mailers/WelcomeUserMail'
 
 export default class AuthController {
   public async login({ ally, auth }: HttpContextContract) {
@@ -61,6 +62,8 @@ export default class AuthController {
     const { token: accessToken } = await auth.use('api').generate(newUser, {
       expiresIn: '30mins',
     })
+
+    await new WelcomeUserMail(newUser.id, newUser.username).sendLater()
 
     return {
       data: {

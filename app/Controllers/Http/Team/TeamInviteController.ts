@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import InviteTeamMember from 'App/Mailers/InviteTeamMember'
+import InviteTeamMemberMail from 'App/Mailers/InviteTeamMemberMail'
 import Team from 'App/Models/Team'
 import TeamInvite from 'App/Models/TeamInvite'
 import TeamMember from 'App/Models/TeamMember'
@@ -43,7 +43,11 @@ export default class TeamInviteController {
     const { email } = await request.validate(CreateTeamInviteValidator)
     const teamInvite = await TeamInvite.firstOrCreate({ email }, { email, teamId: team.id })
 
-    await new InviteTeamMember(email, teamInvite.id, user.fullName ?? user.firstName).sendLater()
+    await new InviteTeamMemberMail(
+      email,
+      teamInvite.id,
+      user.fullName ?? user.firstName
+    ).sendLater()
 
     return {
       data: {
