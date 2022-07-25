@@ -18,6 +18,36 @@ export default class Settings extends BaseModel {
   public country: string = 'US'
 
   @column()
+  public mailtagDefaultEnabled: boolean = true
+
+  @column()
+  public desktopNotifications: boolean = false
+
+  @column()
+  public emailNotifications: boolean = false
+
+  @column()
+  public linkTracking: boolean = false
+
+  @column()
+  public attachmentTracking: boolean = false
+
+  @column()
+  public customSignatures: boolean = false
+
+  @column()
+  public customSignatureForPings: boolean = false
+
+  @column()
+  public bcc: string | null = null
+
+  @column()
+  public subDomain: string | null = null
+
+  @column()
+  public boomerang: string | null = null
+
+  @column()
   public userId: string
 
   @belongsTo(() => User)
@@ -28,4 +58,40 @@ export default class Settings extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  public get serialized() {
+    const {
+      id,
+      timezone,
+      language,
+      country,
+      mailtagDefaultEnabled,
+      desktopNotifications,
+      emailNotifications,
+      linkTracking,
+      attachmentTracking,
+      customSignatures,
+      customSignatureForPings,
+      bcc,
+      subDomain,
+      boomerang,
+    } = this
+
+    return {
+      id,
+      timezone,
+      language,
+      country,
+      mailtagDefaultEnabled,
+      desktopNotifications,
+      emailNotifications,
+      linkTracking,
+      attachmentTracking,
+      customSignatures,
+      customSignatureForPings,
+      bcc,
+      subDomain,
+      boomerang,
+    }
+  }
 }

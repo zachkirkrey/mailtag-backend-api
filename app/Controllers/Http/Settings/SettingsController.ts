@@ -10,11 +10,7 @@ export default class SettingsController {
 
     return {
       data: {
-        settings: user.settings.serialize({
-          fields: {
-            pick: ['id', 'timezone', 'language', 'country'],
-          },
-        }),
+        settings: user.settings.serialized,
       },
     }
   }
@@ -28,11 +24,7 @@ export default class SettingsController {
 
     return {
       data: {
-        settings: updatedSettings.serialize({
-          fields: {
-            pick: ['id', 'timezone', 'language', 'country'],
-          },
-        }),
+        settings: updatedSettings.serialized,
       },
     }
   }
