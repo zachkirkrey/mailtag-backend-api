@@ -11,7 +11,7 @@ import UpdateTeamMemberValidator from 'App/Validators/Team/Member/UpdateTeamMemb
 export default class TeamMemberController {
   public async index({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.query().where({ userId: user.id }).preload('teamMembers').firstOrFail()
+    const team = await Team.query().where({ ownerId: user.id }).preload('teamMembers').firstOrFail()
 
     return {
       data: {
@@ -22,7 +22,7 @@ export default class TeamMemberController {
 
   public async show({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.query().where({ userId: user.id }).firstOrFail()
+    const team = await Team.query().where({ ownerId: user.id }).firstOrFail()
     const { params } = await request.validate(GetTeamMemberByIdValidator)
     const teamMember = await TeamMember.query()
       .where({ id: params.id, teamId: team.id })
@@ -37,7 +37,7 @@ export default class TeamMemberController {
 
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.query().where({ userId: user.id }).preload('teamMembers').firstOrFail()
+    const team = await Team.query().where({ ownerId: user.id }).preload('teamMembers').firstOrFail()
     const { email } = await request.validate(CreateTeamMemberValidator)
     // TODO wrap transaction
     const teamMember = await team.related('teamMembers').create({ email, teamId: team.id })
@@ -61,7 +61,7 @@ export default class TeamMemberController {
   // TODO set this methods to SetAdmin instead if no update fields exist on member
   public async update({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.query().where({ userId: user.id }).firstOrFail()
+    const team = await Team.query().where({ ownerId: user.id }).firstOrFail()
     const { params } = await request.validate(GetTeamMemberByIdValidator)
     const teamMember = await TeamMember.query()
       .where({ id: params.id, teamId: team.id })
@@ -80,7 +80,7 @@ export default class TeamMemberController {
 
   public async destroy({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.query().where({ userId: user.id }).firstOrFail()
+    const team = await Team.query().where({ ownerId: user.id }).firstOrFail()
     const { params } = await request.validate(GetTeamMemberByIdValidator)
     const teamMember = await TeamMember.query()
       .where({ id: params.id, teamId: team.id })

@@ -11,13 +11,13 @@ export default class InviteTeamMember extends BaseMailer {
 
   public override prepare(message: MessageContract) {
     message
-      .subject('The email subject')
-      .from('admin@example.com')
-      .to('user@example.com')
+      .subject('MailTag Team Invitation')
+      .from('info@mailtag.io') //TODO verify domain identity in SES
+      .to(this.email)
       .htmlView('emails/team_invitation', {
         teamInvite: { id: this.teamInviteId, owner: this.teamOwnerName },
         user: { email: this.email },
-        url: 'https://mailtag.io', //TODO change this to accept url maybe if not from frontend
+        url: `https://mailtag.io/team-invites/${this.teamInviteId}/accept`, //TODO change this to accept url maybe if not from frontend
       })
   }
 }

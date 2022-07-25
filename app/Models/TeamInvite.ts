@@ -28,12 +28,13 @@ export default class TeamInvite extends BaseModel {
   public updatedAt: DateTime
 
   public get serializedTeamInviteInfo() {
-    const { id, email, teamId, isDeleted } = this
+    const { id, email, teamId, isAccepted, isDeleted } = this
 
     return {
       id,
       email,
       teamId,
+      isAccepted,
       isDeleted,
     }
   }
