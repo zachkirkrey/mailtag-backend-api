@@ -6,6 +6,7 @@ export default class extends BaseSchema {
   public override async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
+      table.text('ping_name').notNullable()
       table.integer('day').notNullable()
       table.integer('step').notNullable()
       table.text('html').notNullable()

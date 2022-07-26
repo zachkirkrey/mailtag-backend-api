@@ -7,13 +7,21 @@ import {
   computed,
   HasMany,
   hasMany,
-  HasOne,
-  hasOne,
 } from '@ioc:Adonis/Lucid/Orm'
-import Ping from './Ping'
 import { isRelationshipPreloaded } from 'App/Helpers/model'
 import User from './User'
 import PingSequenceDetail from './PingSequenceDetail'
+
+/**
+ * TODO: Consider moving settings related fields into it's own model
+ * these fields from the old codebase;
+ *  recipients_timezone character varying(255),
+ *  send_ping_week_days json,
+ *  is_send_ping_time integer DEFAULT 1,
+ *  send_ping_start_time character varying(255) DEFAULT '08:00 AM'::character varying,
+ *  send_ping_end_time character varying(255) DEFAULT '10:00 AM'::character varying,
+ *  is_send_ping_on_special_holidays integer DEFAULT 0,
+ */
 
 export default class PingSequence extends BaseModel {
   @column({ isPrimary: true })
@@ -21,9 +29,6 @@ export default class PingSequence extends BaseModel {
 
   @column()
   public name: string
-
-  @column()
-  public duration: number
 
   @column()
   public isDeleted: boolean = false
@@ -40,21 +45,27 @@ export default class PingSequence extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
-  @hasMany(() => Ping)
-  public pings: HasMany<typeof Ping>
-
   @computed()
   public get pingsCount() {
-    isRelationshipPreloaded(this, 'pings')
-    return this.pings.length
+    // TODO: change this into scope, it should be aggregate query. We shouldn't need to preload relation
+    isRelationshipPreloaded(this, 'pingSequenceDetails')
+    return this.pingSequenceDetails.length
+  }
+
+  @computed()
+  public get duration() {
+    // TODO: change this into scope, it should be aggregate query. We shouldn't need to preload relation
+    isRelationshipPreloaded(this, 'pingSequenceDetails')
+    return this.pingSequenceDetails.reduce((sum, pingDetail) => sum + pingDetail.day, 0)
   }
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
 
-  @hasOne(() => PingSequenceDetail)
-  public pingSequenceDetail: HasOne<typeof PingSequenceDetail>
+  @hasMany(() => PingSequenceDetail)
+  public pingSequenceDetails: HasMany<typeof PingSequenceDetail>
 
+  // Fixme: neither column or computed. Also never referenced in project
   public get time() {
     return this.createdAt.toRelative()
   }

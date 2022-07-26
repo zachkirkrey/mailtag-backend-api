@@ -19,6 +19,7 @@ export default class extends BaseSeeder {
       const pingSequenceDetailAttributes: PingSequenceDetailAttributes = {
         userId: pingSequence.userId,
         pingSequenceId: pingSequence.id,
+        pingName: faker.word.noun(2),
         day: faker.datatype.number({ max: 10 }),
         step: faker.datatype.number({ max: 15 }),
         html: faker.lorem.paragraphs(2),

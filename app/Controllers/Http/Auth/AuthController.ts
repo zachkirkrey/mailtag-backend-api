@@ -1,10 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import AuthException from 'App/Exceptions/AuthException'
-import { generateRefreshToken, verifyRefreshToken } from 'App/Helpers/token'
-import Account from 'App/Models/Account'
+import { verifyRefreshToken } from 'App/Helpers/token'
 import User from 'App/Models/User'
 import GetRefreshTokenValidator from 'App/Validators/Auth/GetRefreshTokenValidator'
-import Database from '@ioc:Adonis/Lucid/Database'
+import FetchOrCreateUser from 'App/Services/User/FetchOrCreateUser'
 
 export default class AuthController {
   public async login({ ally, auth }: HttpContextContract) {
@@ -20,51 +19,17 @@ export default class AuthController {
     }
 
     const googleUser = await google.user()
-    const user = await User.findBy('provider_id', googleUser.id)
 
-    if (user) {
-      const { token: accessToken } = await auth.use('api').generate(user, {
-        expiresIn: '30mins',
-      })
+    const service = new FetchOrCreateUser(googleUser)
+    const user = await service.call()
 
-      return {
-        data: {
-          user: { ...user.serializedUserInfo, accessToken },
-        },
-      }
-    }
-
-    const newUser = await Database.transaction(async (trx) => {
-      const account = await Account.create({}, { client: trx })
-      // TODO use idempotent method e.g. firstOrCreate
-      const newUser = new User().useTransaction(trx)
-
-      await newUser
-        .useTransaction(trx)
-        .merge({
-          email: googleUser.email!,
-          providerId: googleUser.id,
-          accountId: account.id,
-          username: googleUser.name,
-          firstName: googleUser.original.given_name,
-          lastName: googleUser.original.family_name,
-          avatarUrl: googleUser.avatarUrl,
-          refreshToken: generateRefreshToken(newUser.id, googleUser.id),
-        })
-        .save()
-
-      await newUser.related('settings').create({}, { client: trx })
-
-      return newUser
-    })
-
-    const { token: accessToken } = await auth.use('api').generate(newUser, {
+    const { token: accessToken } = await auth.use('api').generate(user, {
       expiresIn: '30mins',
     })
 
     return {
       data: {
-        user: { ...newUser.serializedUserInfo, accessToken },
+        user: { ...user.serializedUserInfo, accessToken },
       },
     }
   }

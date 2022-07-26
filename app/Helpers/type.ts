@@ -82,7 +82,13 @@ export type PingEventAttributes = Omit<
 
 export type PingSequenceAttributes = Omit<
   ModelAttributes<InstanceType<typeof PingSequence>>,
-  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedPingSequenceInfo' | 'pingsCount'
+  | 'id'
+  | 'createdAt'
+  | 'updatedAt'
+  | 'time'
+  | 'serializedPingSequenceInfo'
+  | 'pingsCount'
+  | 'duration'
 >
 
 export type PingSequenceDetailAttributes = Omit<
