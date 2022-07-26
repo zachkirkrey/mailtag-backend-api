@@ -1,5 +1,5 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import InviteTeamMember from 'App/Mailers/InviteTeamMember'
+import InviteTeamMemberMail from 'App/Mailers/InviteTeamMemberMail'
 import Team from 'App/Models/Team'
 import TeamInvite from 'App/Models/TeamInvite'
 import TeamMember from 'App/Models/TeamMember'
@@ -12,7 +12,7 @@ import UpdateTeamInviteValidator from 'App/Validators/Team/Invite/UpdateTeamInvi
 export default class TeamInviteController {
   public async index({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.findByOrFail('userId', user.id)
+    const team = await Team.findByOrFail('ownerId', user.id)
     const teamInvites = await TeamInvite.query().where({ teamId: team.id })
 
     return {
@@ -24,7 +24,7 @@ export default class TeamInviteController {
 
   public async show({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.findByOrFail('userId', user.id)
+    const team = await Team.findByOrFail('ownerId', user.id)
     const { params } = await request.validate(GetTeamInviteByIdValidator)
     const teamInvite = await TeamInvite.query()
       .where({ id: params.id, teamId: team.id })
@@ -39,12 +39,15 @@ export default class TeamInviteController {
 
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.findByOrFail('userId', user.id)
+    const team = await Team.findByOrFail('ownerId', user.id)
     const { email } = await request.validate(CreateTeamInviteValidator)
     const teamInvite = await TeamInvite.firstOrCreate({ email }, { email, teamId: team.id })
 
-    // TODO add SES call here
-    await new InviteTeamMember(email, teamInvite.id, user.fullName ?? user.firstName).sendLater()
+    await new InviteTeamMemberMail(
+      email,
+      teamInvite.id,
+      user.fullName ?? user.firstName
+    ).sendLater()
 
     return {
       data: {
@@ -56,7 +59,7 @@ export default class TeamInviteController {
 
   public async update({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.findByOrFail('userId', user.id)
+    const team = await Team.findByOrFail('ownerId', user.id)
     const { params } = await request.validate(GetTeamInviteByIdValidator)
     const teamInvite = await TeamInvite.query()
       .where({
@@ -78,7 +81,7 @@ export default class TeamInviteController {
 
   public async destroy({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.findByOrFail('userId', user.id)
+    const team = await Team.findByOrFail('ownerId', user.id)
     const { params } = await request.validate(GetTeamInviteByIdValidator)
     const teamInvite = await TeamInvite.query()
       .where({

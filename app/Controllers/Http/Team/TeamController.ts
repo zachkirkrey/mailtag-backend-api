@@ -7,7 +7,7 @@ import UpdateTeamValidator from 'App/Validators/Team/UpdateTeamValidator'
 export default class TeamController {
   public async show({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.query().where({ userId: user.id }).firstOrFail()
+    const team = await Team.query().where({ ownerId: user.id }).firstOrFail()
 
     return {
       data: {
@@ -32,7 +32,7 @@ export default class TeamController {
   public async update({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { name } = await request.validate(UpdateTeamValidator)
-    const team = await Team.query().where({ userId: user.id }).firstOrFail()
+    const team = await Team.query().where({ ownerId: user.id }).firstOrFail()
 
     const updatedTeam = await team.merge({ name }).save()
 
@@ -60,7 +60,7 @@ export default class TeamController {
   public async stats({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const team = await Team.query()
-      .where({ userId: user.id })
+      .where({ ownerId: user.id })
       .withCount('teamMembers', (query) => {
         query.as('membersCount')
       })

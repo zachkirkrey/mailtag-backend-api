@@ -3,6 +3,7 @@ import AuthException from 'App/Exceptions/AuthException'
 import { verifyRefreshToken } from 'App/Helpers/token'
 import User from 'App/Models/User'
 import GetRefreshTokenValidator from 'App/Validators/Auth/GetRefreshTokenValidator'
+import WelcomeUserMail from 'App/Mailers/WelcomeUserMail'
 import FetchOrCreateUser from 'App/Services/User/FetchOrCreateUser'
 
 export default class AuthController {
@@ -26,6 +27,8 @@ export default class AuthController {
     const { token: accessToken } = await auth.use('api').generate(user, {
       expiresIn: '30mins',
     })
+
+    await new WelcomeUserMail(user.id, user.username).sendLater()
 
     return {
       data: {
