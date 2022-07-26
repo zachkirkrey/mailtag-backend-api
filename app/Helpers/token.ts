@@ -12,6 +12,6 @@ export const generateRefreshToken = (userId: string, providerId: string) => {
 }
 
 export const verifyRefreshToken = (refreshToken: string) => {
-  const payload: JwtPayload = Object(jwt.verify(refreshToken, Env.get('APP_SECRET')))
+  const payload = jwt.verify(refreshToken, Env.get('APP_SECRET')) as JwtPayload
   return payload.providerId
 }

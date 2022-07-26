@@ -1,4 +1,4 @@
-import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
+import { schema, CustomMessages } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 export default class GetCouponByIdValidator {
@@ -6,7 +6,7 @@ export default class GetCouponByIdValidator {
 
   public schema = schema.create({
     params: schema.object().members({
-      id: schema.string([rules.uuid(), rules.exists({ table: 'coupons', column: 'id' })]),
+      id: schema.string(),
     }),
   })
 
