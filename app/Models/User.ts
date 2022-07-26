@@ -22,6 +22,7 @@ import Coupon from './Coupon'
 import Team from './Team'
 import { v4 as uuidv4 } from 'uuid'
 import Settings from './Settings'
+import PingSequence from './PingSequence'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
@@ -88,6 +89,9 @@ export default class User extends BaseModel {
     foreignKey: 'ownerId',
   })
   public team: HasOne<typeof Team>
+
+  @hasMany(() => PingSequence)
+  public pingSequences: HasMany<typeof PingSequence>
 
   @column()
   public refreshToken: string

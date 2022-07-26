@@ -7,6 +7,10 @@ export default class PingSequenceDetail extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
+  // TODO: rename pingname to name after the data migration
+  @column()
+  public pingName: string
+
   @column()
   public day: number
 
@@ -31,6 +35,8 @@ export default class PingSequenceDetail extends BaseModel {
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
 
+  // TODO: check if this is necessary at all
+  // It exists in the old codebase, not sure where it's used.
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
 

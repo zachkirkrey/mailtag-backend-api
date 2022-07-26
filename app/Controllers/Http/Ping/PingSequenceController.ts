@@ -8,7 +8,11 @@ import UpdatePingSequenceValidator from 'App/Validators/Ping/UpdatePingSequenceV
 export default class PingSequenceController {
   public async index({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const pingSequences = await PingSequence.query().where({ userId: user.id }).preload('pings')
+
+    const pingSequences = await PingSequence.query()
+      .where({ userId: user.id })
+      .preload('pingSequenceDetails')
+      .orderBy('created_at', 'asc')
 
     return {
       data: {
@@ -21,7 +25,7 @@ export default class PingSequenceController {
     const { params } = await request.validate(GetPingSequenceByIdValidator)
     const pingSequence = await PingSequence.query()
       .where('id', params.id)
-      .preload('pings')
+      .preload('pingSequenceDetails')
       .firstOrFail()
 
     return {
@@ -36,7 +40,7 @@ export default class PingSequenceController {
     const { name, duration, timezone } = await request.validate(CreatePingSequenceValidator)
     const pingSequence = await PingSequence.create({ userId: user.id, name, duration, timezone })
 
-    await pingSequence.load('pings') // Fixme: This would be always empty
+    await pingSequence.load('pingSequenceDetails') // Fixme: This would be always empty
 
     return {
       data: {
@@ -49,19 +53,18 @@ export default class PingSequenceController {
   public async update({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { params } = await request.validate(GetPingSequenceByIdValidator)
+    const updateAttrs = await request.validate(UpdatePingSequenceValidator)
+
     const pingSequence = await PingSequence.query()
       .where({ userId: user.id, id: params.id })
-      .preload('pings')
+      .preload('pingSequenceDetails')
       .firstOrFail()
-    const { name, duration, timezone } = await request.validate(UpdatePingSequenceValidator)
-
-    await pingSequence.merge({ name, duration, timezone }).save()
-    await pingSequence.refresh()
+    const updatedPingSequence = await pingSequence.merge(updateAttrs).save()
 
     return {
       data: {
         message: 'Ping sequence updated successfully',
-        pingSequence: pingSequence.serializedPingSequenceInfo,
+        pingSequence: updatedPingSequence.serializedPingSequenceInfo,
       },
     }
   }
