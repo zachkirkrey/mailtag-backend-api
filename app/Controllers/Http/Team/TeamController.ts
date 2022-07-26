@@ -2,7 +2,6 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Team from 'App/Models/Team'
 import User from 'App/Models/User'
 import CreateTeamValidator from 'App/Validators/Team/CreateTeamValidator'
-import GetTeamByIdValidator from 'App/Validators/Team/GetTeamByIdValidator'
 import UpdateTeamValidator from 'App/Validators/Team/UpdateTeamValidator'
 
 export default class TeamController {
@@ -45,10 +44,9 @@ export default class TeamController {
     }
   }
 
-  public async destroy({ auth, request }: HttpContextContract) {
+  public async destroy({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const { params } = await request.validate(GetTeamByIdValidator)
-    const team = await Team.query().where({ id: params.id, ownerId: user.id }).firstOrFail()
+    const team = await Team.query().where({ userId: user.id }).firstOrFail()
 
     await team.merge({ isDeleted: true }).save()
 

@@ -5,6 +5,8 @@ import Account from 'App/Models/Account'
 import { UserAttributes } from 'App/Helpers/type'
 import { TEST_USER_EMAIL, TEST_USER_PROVIDER_ID, TEST_USER_USERNAME } from 'App/Helpers/constant'
 import Logger from '@ioc:Adonis/Core/Logger'
+import { generateRefreshToken } from 'App/Helpers/token'
+import { v4 as uuidv4 } from 'uuid'
 
 export default class extends BaseSeeder {
   public override async run() {
@@ -40,7 +42,7 @@ export default class extends BaseSeeder {
       email: TEST_USER_EMAIL,
       username: TEST_USER_USERNAME,
       avatarUrl: faker.internet.avatar(),
-      refreshToken: faker.random.alphaNumeric(10),
+      refreshToken: generateRefreshToken(uuidv4(), TEST_USER_PROVIDER_ID),
     }
 
     await User.createMany([testUser])

@@ -1,9 +1,9 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import AuthException from 'App/Exceptions/AuthException'
+import { generateRefreshToken, verifyRefreshToken } from 'App/Helpers/token'
 import Account from 'App/Models/Account'
 import User from 'App/Models/User'
-import Env from '@ioc:Adonis/Core/Env'
-import jwt from 'jsonwebtoken'
+import GetRefreshTokenValidator from 'App/Validators/Auth/GetRefreshTokenValidator'
 import Database from '@ioc:Adonis/Lucid/Database'
 import WelcomeUserMail from 'App/Mailers/WelcomeUserMail'
 
@@ -35,13 +35,14 @@ export default class AuthController {
       }
     }
 
-    const refreshToken = jwt.sign(googleUser.id, Env.get('APP_SECRET'))
-
     const newUser = await Database.transaction(async (trx) => {
       const account = await Account.create({}, { client: trx })
       // TODO use idempotent method e.g. firstOrCreate
-      const newUser = await User.create(
-        {
+      const newUser = new User().useTransaction(trx)
+
+      await newUser
+        .useTransaction(trx)
+        .merge({
           email: googleUser.email!,
           providerId: googleUser.id,
           accountId: account.id,
@@ -49,10 +50,9 @@ export default class AuthController {
           firstName: googleUser.original.given_name,
           lastName: googleUser.original.family_name,
           avatarUrl: googleUser.avatarUrl,
-          refreshToken: refreshToken,
-        },
-        { client: trx }
-      )
+          refreshToken: generateRefreshToken(newUser.id, googleUser.id),
+        })
+        .save()
 
       await newUser.related('settings').create({}, { client: trx })
 
@@ -83,10 +83,10 @@ export default class AuthController {
   }
 
   public async renewAccess({ request, auth }: HttpContextContract) {
-    const { refreshToken } = request.body()
+    const { refreshToken } = await request.validate(GetRefreshTokenValidator)
 
     try {
-      const providerId = jwt.verify(refreshToken, Env.get('APP_SECRET'))
+      const providerId = verifyRefreshToken(refreshToken)
       const user = await User.query().where({ providerId }).firstOrFail()
       const { token: accessToken } = await auth.use('api').generate(user, {
         expiresIn: '1min',

@@ -1,6 +1,7 @@
 import { ModelAttributes } from '@ioc:Adonis/Lucid/Orm'
 import Account from 'App/Models/Account'
 import Activity from 'App/Models/Activity'
+import Coupon from 'App/Models/Coupon'
 import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
 import Link from 'App/Models/Link'
@@ -11,10 +12,12 @@ import PingEvent from 'App/Models/PingEvent'
 import PingSequence from 'App/Models/PingSequence'
 import PingSequenceActivity from 'App/Models/PingSequenceActivity'
 import PingSequenceDetail from 'App/Models/PingSequenceDetail'
+import Plan from 'App/Models/Plan'
 import ReadEmail from 'App/Models/ReadEmail'
 import ReadEmailActivity from 'App/Models/ReadEmailActivity'
 import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
+import Subscription from 'App/Models/Subscription'
 import Team from 'App/Models/Team'
 import TeamInvite from 'App/Models/TeamInvite'
 import TeamMember from 'App/Models/TeamMember'
@@ -137,6 +140,21 @@ export type TeamInviteAttributes = Omit<
   'id' | 'createdAt' | 'updatedAt' | 'serializedTeamInviteInfo'
 >
 
+export type SubscriptionAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Subscription>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedSubscriptionInfo'
+>
+
+export type PlanAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Plan>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedPlanInfo'
+>
+
+export type CouponAttributes = Omit<
+  ModelAttributes<InstanceType<typeof Coupon>>,
+  'id' | 'createdAt' | 'updatedAt' | 'serializedCouponInfo'
+>
+
 export enum BorderRadiusTypes {
   SQUARE = 'square',
   CIRCLE = 'circle',
@@ -162,3 +180,9 @@ export type DateRangeString = {
 
 export const ReadEmailActivityTypes = ['open', 'read']
 export type ReadEmailActivityType = typeof ReadEmailActivityTypes[number]
+
+export type JwtPayload = {
+  userId: User['id']
+  providerId: User['providerId']
+  iat: number
+}
