@@ -12,7 +12,7 @@ export default class EmailController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -27,7 +27,7 @@ export default class EmailController {
 
     return {
       data: {
-        email,
+        email: email.serializedEmailInfo,
       },
     }
   }
@@ -48,7 +48,7 @@ export default class EmailController {
     return {
       data: {
         message: 'Email created successfully',
-        email,
+        email: email.serializedEmailInfo,
       },
     }
   }
@@ -65,7 +65,7 @@ export default class EmailController {
     return {
       data: {
         message: 'Email updated successfully',
-        email,
+        email: email.serializedEmailInfo,
       },
     }
   }

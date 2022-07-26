@@ -10,6 +10,11 @@ export const monthsAgo = (months: number) => {
   return now.minus(Duration.fromObject({ months }))
 }
 
+export const timeInUnix = () => {
+  const now = DateTime.now()
+  return now.toUnixInteger()
+}
+
 export const LOCAL_DATE = DateTime.local()
 export const YEAR = LOCAL_DATE.year
 export const MONTH = LOCAL_DATE.month

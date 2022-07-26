@@ -16,12 +16,16 @@ import Signature from './Signature'
 import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
 import Ping from './Ping'
+import Plan from './Plan'
+import Subscription from './Subscription'
+import Coupon from './Coupon'
 import Team from './Team'
+import { v4 as uuidv4 } from 'uuid'
 import Settings from './Settings'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
-  public id: string
+  public id: string = uuidv4()
 
   @column()
   public email: string
@@ -87,6 +91,15 @@ export default class User extends BaseModel {
 
   @column()
   public refreshToken: string
+
+  @hasOne(() => Subscription)
+  public subscription: HasOne<typeof Subscription>
+
+  @hasOne(() => Plan)
+  public plan: HasOne<typeof Plan>
+
+  @hasMany(() => Coupon)
+  public coupons: HasMany<typeof Coupon>
 
   public get serializedUserInfo() {
     const {
