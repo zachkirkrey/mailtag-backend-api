@@ -14,7 +14,7 @@ export default class Subscription extends BaseModel {
   public userId: string
 
   @column()
-  public paymentStatus: 'complete' | 'pending' | 'canceled'
+  public paymentStatus: 'paid' | 'unpaid' | 'no_payment_required'
 
   @column()
   public isCanceled: boolean = false

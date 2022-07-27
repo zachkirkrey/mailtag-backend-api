@@ -4,7 +4,9 @@ import User from 'App/Models/User'
 import CreateSubscriptionValidator from 'App/Validators/Subscription/CreateSubscriptionValidator'
 import UpdateSubscriptionValidator from 'App/Validators/Subscription/UpdateSubscriptionValidator'
 import Stripe from '@ioc:Adonis/Addons/Stripe'
-import Plan from 'App/Models/Plan'
+import CreatePaymentValidator from 'App/Validators/Subscription/CreatePaymentValidator'
+import Payment from 'App/Services/Subscription/Payment'
+import PaymentException from 'App/Exceptions/PaymentException'
 
 export default class SubscriptionController {
   public async show({ auth }: HttpContextContract) {
@@ -20,39 +22,35 @@ export default class SubscriptionController {
 
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const { planId, paymentStatus } = await request.validate(CreateSubscriptionValidator)
-    const plan = await Plan.query().where({ id: planId }).firstOrFail()
+    const { planId, paymentRequestId } = await request.validate(CreateSubscriptionValidator)
 
+    const service = new Payment(planId)
+    const { payment_status: paymentStatus, status } = await service.getPaymentRequest(
+      paymentRequestId
+    )
+
+    if (paymentStatus !== 'paid' && status !== 'complete') {
+      throw new PaymentException('Payment is not done, please pay then try again!', 403)
+    }
+
+    // TODO use the same stripe customer for the same user if paid before
     const customer = await Stripe.customers.create({
       email: user.email,
     })
 
-    const session = await Stripe.checkout.sessions.create({
-      line_items: [
-        {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: plan.name,
-            },
-            unit_amount: plan.price, //FIXME maybe need to be string or vice versa on decimal
-          },
-          quantity: 1,
-        },
-      ],
-      mode: 'payment',
-      success_url: 'https://mailtag.io/success',
-      cancel_url: 'https://mailtag.io/cancel',
-    })
-
-    // FIXME add payment logic then create may be add a service async
-    const subscription = await Subscription.create({ userId: user.id, planId, paymentStatus })
+    const subscription = await Subscription.firstOrCreate(
+      { userId: user.id },
+      {
+        userId: user.id,
+        planId,
+        paymentStatus,
+      }
+    )
 
     return {
       data: {
-        payment: { id: session.id, url: session.url },
-        customer: { id: customer.id, email: customer.email },
         message: 'Subscription created successfully',
+        customer: { id: customer.id, email: customer.email },
         subscription: subscription.serializedSubscriptionInfo,
       },
     }
@@ -83,6 +81,20 @@ export default class SubscriptionController {
     return {
       data: {
         message: 'Subscription deleted successfully',
+      },
+    }
+  }
+
+  public async payment({ request }: HttpContextContract) {
+    const { planId } = await request.validate(CreatePaymentValidator)
+
+    const service = new Payment(planId)
+    const paymentRequest = await service.createPaymentRequest()
+
+    return {
+      data: {
+        id: paymentRequest.id,
+        url: paymentRequest.url,
       },
     }
   }

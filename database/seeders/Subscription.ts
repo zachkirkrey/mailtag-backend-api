@@ -19,7 +19,7 @@ export default class extends BaseSeeder {
       const subscriptionAttributes: SubscriptionAttributes = {
         planId: plans[index].id,
         userId: user.id,
-        paymentStatus: faker.helpers.arrayElement(['complete', 'pending', 'canceled']),
+        paymentStatus: faker.helpers.arrayElement(['paid', 'unpaid', 'no_payment_required']),
         isCanceled: false,
         isExpired: false,
         isDeleted: false,
