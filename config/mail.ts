@@ -50,9 +50,9 @@ export default mailConfig({
     ses: {
       driver: 'ses',
       apiVersion: '2010-12-01',
-      key: Env.get('SES_ACCESS_KEY'),
-      secret: Env.get('SES_ACCESS_SECRET'),
-      region: Env.get('SES_REGION'),
+      key: Env.get('AWS_ACCESS_KEY'),
+      secret: Env.get('AWS_ACCESS_SECRET'),
+      region: Env.get('AWS_REGION'),
       sslEnabled: true,
       sendingRate: 10,
       maxConnections: 5,
