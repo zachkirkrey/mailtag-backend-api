@@ -31,6 +31,9 @@ export default class PingSequenceController {
     return {
       data: {
         pingSequence: pingSequence.serializedPingSequenceInfo,
+        pingSequenceDetails: pingSequence.pingSequenceDetails.map(
+          (pingSequenceDetail) => pingSequenceDetail.serializedPingSequenceDetailInfo
+        ),
       },
     }
   }
