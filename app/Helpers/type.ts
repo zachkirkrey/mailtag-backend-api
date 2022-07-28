@@ -24,6 +24,7 @@ import TeamMember from 'App/Models/TeamMember'
 import UnreadEmail from 'App/Models/UnreadEmail'
 import UnreadEmailActivity from 'App/Models/UnreadEmailActivity'
 import User from 'App/Models/User'
+import { DateTime } from 'luxon'
 
 export type AccountAttributes = Omit<
   ModelAttributes<InstanceType<typeof Account>>,
@@ -37,7 +38,7 @@ export type UserAttributes = Omit<
 
 export type EmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof Email>>,
-  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedEmailInfo'
+  'id' | 'createdAt' | 'updatedAt' | 'date' | 'time' | 'serializedEmailInfo'
 >
 
 export type EmailEventAttributes = Omit<
@@ -108,22 +109,22 @@ export type PingEmailAttributes = Omit<
 
 export type ReadEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof ReadEmail>>,
-  'id' | 'createdAt' | 'updatedAt' | 'readTimes' | 'time' | 'serializedEmailInfo'
+  'id' | 'createdAt' | 'updatedAt' | 'readTimes' | 'date' | 'time' | 'serializedReadEmailInfo'
 >
 
 export type ReadEmailActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof ReadEmailActivity>>,
-  'id' | 'createdAt' | 'updatedAt' | 'date'
+  'id' | 'createdAt' | 'updatedAt' | 'date' | 'time' | 'serializedReadEmailActivity'
 >
 
 export type UnreadEmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof UnreadEmail>>,
-  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedEmailInfo'
+  'id' | 'createdAt' | 'updatedAt' | 'date' | 'time' | 'serializedUnreadEmailInfo'
 >
 
 export type UnreadEmailActivityAttributes = Omit<
   ModelAttributes<InstanceType<typeof UnreadEmailActivity>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'date' | 'time' | 'serializedUnreadEmailActivity'
 >
 
 export type ActivityAttributes = Omit<
@@ -180,12 +181,18 @@ type ReverseMap<T> = T[keyof T]
 export type RangeType = ReverseMap<typeof ChartFilterRanges>
 
 export type DateRangeString = {
-  startDate: string
-  endDate: string
+  startDate: DateTime
+  endDate: DateTime
 }
 
 export const ReadEmailActivityTypes = ['open', 'read']
 export type ReadEmailActivityType = typeof ReadEmailActivityTypes[number]
+
+export type ChartData = {
+  date: string
+  count: number
+  type: string
+}
 
 export type JwtPayload = {
   userId: User['id']

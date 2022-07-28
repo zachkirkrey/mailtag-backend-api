@@ -1,5 +1,5 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
+import { BaseModel, BelongsTo, belongsTo, column, computed } from '@ioc:Adonis/Lucid/Orm'
 import UnreadEmail from './UnreadEmail'
 
 export default class UnreadEmailActivity extends BaseModel {
@@ -17,4 +17,24 @@ export default class UnreadEmailActivity extends BaseModel {
 
   @belongsTo(() => UnreadEmail)
   public unreadEmail: BelongsTo<typeof UnreadEmail>
+
+  @computed()
+  public get date() {
+    return this.createdAt.toLocaleString(DateTime.DATE_MED)
+  }
+
+  public get time() {
+    return this.createdAt.toRelative()
+  }
+
+  public get serializedUnreadEmailActivity() {
+    const { id, unreadEmailId, date, time } = this
+
+    return {
+      id,
+      unreadEmailId,
+      date,
+      time,
+    }
+  }
 }

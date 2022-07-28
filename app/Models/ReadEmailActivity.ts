@@ -35,4 +35,23 @@ export default class ReadEmailActivity extends BaseModel {
   public get date() {
     return this.createdAt.toLocaleString(DateTime.DATE_MED)
   }
+
+  public get time() {
+    return this.createdAt.toRelative()
+  }
+
+  public get serializedReadEmailActivity() {
+    const { id, readEmailId, type, device, location, recipient, date, time } = this
+
+    return {
+      id,
+      readEmailId,
+      type,
+      device,
+      location,
+      recipient,
+      date,
+      time,
+    }
+  }
 }

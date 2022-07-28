@@ -60,12 +60,17 @@ export default class Email extends BaseModel {
   public unreadEmail: HasOne<typeof UnreadEmail>
 
   @computed()
+  public get date() {
+    return this.createdAt.toLocaleString(DateTime.DATE_MED)
+  }
+
+  @computed()
   public get time() {
     return this.createdAt.toRelative()
   }
 
   public get serializedEmailInfo() {
-    const { id, recipient, subject, gmailMessageId, gmailThreadId, time } = this
-    return { id, recipient, subject, gmailMessageId, gmailThreadId, time }
+    const { id, recipient, subject, gmailMessageId, gmailThreadId, date, time } = this
+    return { id, recipient, subject, gmailMessageId, gmailThreadId, date, time }
   }
 }

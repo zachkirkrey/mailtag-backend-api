@@ -75,8 +75,8 @@ export default class ChartStatsDateRange {
 
   private serializeRanges(startDate: DateTime, endDate: DateTime): DateRangeString {
     return {
-      startDate: startDate.toSQL(),
-      endDate: endDate.toSQL(),
+      startDate,
+      endDate,
     }
   }
 }

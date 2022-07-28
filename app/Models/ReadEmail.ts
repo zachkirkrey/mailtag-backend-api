@@ -49,22 +49,33 @@ export default class ReadEmail extends BaseModel {
   public user: BelongsTo<typeof User>
 
   @computed()
+  public get date() {
+    return this.createdAt.toLocaleString(DateTime.DATE_MED)
+  }
+
+  @computed()
   public get time() {
     return this.createdAt.toRelative()
   }
 
-  public get serializedEmailInfo() {
+  public get serializedReadEmailInfo() {
     isRelationshipPreloaded(this, 'email')
+    isRelationshipPreloaded(this, 'activities')
 
-    const { id, email, time } = this
+    const { id, email, emailId, readTimes, device, date, time, activities } = this
 
     return {
       id,
+      emailId,
+      readTimes,
+      device,
       recipient: email.recipient,
       subject: email.subject,
       gmailMessageId: email.gmailMessageId,
       gmailThreadId: email.gmailThreadId,
+      date,
       time,
+      activities: activities.map((activity) => activity.serializedReadEmailActivity),
     }
   }
 }

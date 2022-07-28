@@ -1,9 +1,12 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import { filterEmailsByDate } from 'App/Helpers/array'
 
 import { LOCAL_DATE_WITH_PARAMS, YEAR } from 'App/Helpers/date'
-import { ChartFilterRanges } from 'App/Helpers/type'
+import { ChartData, ChartFilterRanges } from 'App/Helpers/type'
 import Email from 'App/Models/Email'
 import Link from 'App/Models/Link'
+import ReadEmail from 'App/Models/ReadEmail'
+import UnreadEmail from 'App/Models/UnreadEmail'
 import ChartStatsDateRange from 'App/Services/Dashboard/ChartStatsDateRange'
 import DashboardInfo from 'App/Services/Dashboard/DashboardInfo'
 import GetChartStatsValidator from 'App/Validators/Dashboard/GetChartStatsValidator'
@@ -135,24 +138,54 @@ export default class DashboardController {
     const ranges = new ChartStatsDateRange(isCustomRange ? ChartFilterRanges.CUSTOM : range!)
     const { startDate, endDate } = ranges.getDates(start!, end!)
     // TODO: use withCount methods to do single query and consume less memory
+    // TODO optimize and Let's explore if this can be solved at database query. PR #17
     const [emailsSent, emailsRead, emailsUnread] = await Promise.all([
-      Email.query().where({ userId: user.id }).andWhereBetween('created_at', [startDate, endDate]),
       Email.query()
         .where({ userId: user.id })
-        .andHas('events')
-        .andWhereBetween('created_at', [startDate, endDate]),
-      Email.query()
-        .where({ userId: user.id })
-        .andDoesntHave('events')
-        .andWhereBetween('created_at', [startDate, endDate]),
+        .andWhereBetween('created_at', [startDate.toSQL(), endDate.toSQL()]),
+      ReadEmail.query()
+        .where({ userId: user.id, isDeleted: false })
+        .andWhereBetween('created_at', [startDate.toSQL(), endDate.toSQL()]),
+      UnreadEmail.query()
+        .where({ userId: user.id, isDeleted: false })
+        .andWhereBetween('created_at', [startDate.toSQL(), endDate.toSQL()]),
     ])
 
+    const daysBetween = Math.round(endDate.diff(startDate, 'days').toObject().days!)
+    const monthsBetween = Math.round(endDate.diff(startDate, 'months').toObject().months!)
+    const isYearSearch = monthsBetween > 1
+
+    const dates = Array.from(Array(isYearSearch ? monthsBetween : daysBetween)).map((_, index) => {
+      const date = startDate.plus(isYearSearch ? { months: index } : { days: index })
+      return date.toSQL()
+    })
+
+    const emailsSentPerDate = filterEmailsByDate(dates, emailsSent, 'emailsSentCount')
+    const emailsReadPerDate = filterEmailsByDate(dates, emailsRead, 'emailsReadCount')
+    const emailsUnreadPerDate = filterEmailsByDate(dates, emailsUnread, 'emailsUnreadCount')
+    const emailEvents: ChartData[] = emailsSentPerDate.concat(
+      emailsReadPerDate,
+      emailsUnreadPerDate
+    )
+
+    const emailEventsByDate = emailEvents
+      .reduce((data: ChartData[], event) => {
+        const existing = data.find((e) => e.date === event.date)
+        if (existing) {
+          // @ts-ignore
+          existing[event.type] = event.count
+        } else {
+          data.push({ ...event, [event.type]: event.count })
+        }
+        return data
+      }, [])
+      .map((event) => {
+        const { count, type, date, ...rest } = event
+        return rest
+      })
+
     return {
-      data: {
-        emailsSentCount: emailsSent.length,
-        emailsReadCount: emailsRead.length,
-        emailsUnreadCount: emailsUnread.length,
-      },
+      data: emailEventsByDate,
     }
   }
 

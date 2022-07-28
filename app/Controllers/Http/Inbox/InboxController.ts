@@ -1,59 +1,60 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Email from 'App/Models/Email'
 import ReadEmail from 'App/Models/ReadEmail'
 import UnreadEmail from 'App/Models/UnreadEmail'
 import User from 'App/Models/User'
-import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
+import GetReadEmailByIdValidator from 'App/Validators/Email/GetReadEmailByIdValidator'
+import GetUnreadEmailByIdValidator from 'App/Validators/Email/GetUnreadEmailByIdValidator'
 
 export default class InboxController {
   public async getEmails({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const [readEmails, unreadEmails] = await Promise.all([
-      ReadEmail.query().where({ userId: user.id }).preload('activities').preload('email'),
-      UnreadEmail.query().where({ userId: user.id }).preload('activities').preload('email'),
+      ReadEmail.query()
+        .where({ userId: user.id })
+        .preload('activities', (query) => query.orderBy('created_at', 'desc'))
+        .preload('email'),
+      UnreadEmail.query()
+        .where({ userId: user.id })
+        .preload('activities', (query) => query.orderBy('created_at', 'desc'))
+        .preload('email'),
     ])
 
     return {
       data: {
-        readEmails: readEmails.map((readEmail) => readEmail.serializedEmailInfo),
-        unreadEmails: unreadEmails.map((unreadEmail) => unreadEmail.serializedEmailInfo),
+        readEmails: readEmails.map((readEmail) => readEmail.serializedReadEmailInfo),
+        unreadEmails: unreadEmails.map((unreadEmail) => unreadEmail.serializedUnreadEmailInfo),
       },
     }
   }
 
   public async getReadEmailById({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const { params } = await request.validate(GetEmailByIdValidator)
-    const email = await Email.query()
+    const { params } = await request.validate(GetReadEmailByIdValidator)
+    const readEmail = await ReadEmail.query()
       .where({ id: params.id, userId: user.id })
-      .andHas('events')
-      .preload('readEmail', (query) => query.preload('activities'))
+      .preload('activities', (query) => query.orderBy('created_at', 'desc'))
+      .preload('email')
       .firstOrFail()
 
     return {
       data: {
-        recipient: email.recipient,
-        first_opened: email.readEmail.createdAt,
-        read_times: email.readEmail.readTimes,
-        device: email.readEmail.device,
-        activities: email.readEmail.activities,
+        readEmail: readEmail.serializedReadEmailInfo,
       },
     }
   }
 
   public async getUnreadEmailById({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const { params } = await request.validate(GetEmailByIdValidator)
-    const email = await Email.query()
+    const { params } = await request.validate(GetUnreadEmailByIdValidator)
+    const unreadEmail = await UnreadEmail.query()
       .where({ id: params.id, userId: user.id })
-      .andDoesntHave('events')
-      .preload('unreadEmail', (query) => query.preload('activities'))
+      .preload('activities', (query) => query.orderBy('created_at', 'desc'))
+      .preload('email')
       .firstOrFail()
 
     return {
       data: {
-        recipient: email.recipient,
-        activities: email.unreadEmail.activities,
+        unreadEmail: unreadEmail.serializedUnreadEmailInfo,
       },
     }
   }
