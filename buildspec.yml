@@ -17,9 +17,6 @@ phases:
   post_build:
     commands:
       - echo Build completed on `date`
-      - echo Migration started on `date`
-      - node ace migration:run --force
-      - echo Migration completed on `date`
 
 artifacts:
   files:
