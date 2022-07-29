@@ -26,6 +26,9 @@ export default class UnreadEmail extends BaseModel {
   @column()
   public device: string
 
+  @column()
+  public isDeleted: boolean = false
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

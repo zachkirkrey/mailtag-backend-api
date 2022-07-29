@@ -21,6 +21,7 @@ export default class extends BaseSeeder {
         emailId: email.id,
         userId: email.userId,
         device: faker.system.fileType(),
+        isDeleted: false,
       }
 
       return unreadEmailAttributes

@@ -26,6 +26,9 @@ export default class ReadEmail extends BaseModel {
   @column()
   public device: string
 
+  @column()
+  public isDeleted: boolean = false
+
   @computed()
   // TODO count from this.activities with type read / reopen
   public get readTimes() {
