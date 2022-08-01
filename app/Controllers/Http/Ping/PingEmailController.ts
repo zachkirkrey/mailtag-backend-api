@@ -5,10 +5,12 @@ import CreatePingEmailValidator from 'App/Validators/Ping/CreatePingEmailValidat
 import GetPingEmailByIdValidator from 'App/Validators/Ping/GetPingEmailByIdValidator'
 import UpdatePingEmailValidator from 'App/Validators/Ping/UpdatePingEmailValidator'
 import SearchPingEmailValidator from 'App/Validators/Ping/SearchPingEmailValidator'
+import MilestoneEvent, { EventType } from 'App/Models/MileStoneEvent'
 
 export default class PingEmailController {
   public async index({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
+
     const pingEmails = await PingEmail.query().where({ userId: user.id })
 
     return {
@@ -21,6 +23,7 @@ export default class PingEmailController {
   public async show({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { params } = await request.validate(GetPingEmailByIdValidator)
+
     const pingEmail = await PingEmail.query()
       .where({ id: params.id, userId: user.id })
       .firstOrFail()
@@ -44,6 +47,7 @@ export default class PingEmailController {
       emailId,
       pingSequenceId,
     } = await request.validate(CreatePingEmailValidator)
+
     const pingEmail = await PingEmail.create({
       userId: user.id,
       recipient,
@@ -55,6 +59,10 @@ export default class PingEmailController {
       emailId,
       pingSequenceId,
     })
+
+    // TODO: this event is also fired from post mailgun endpoint
+    const pingMilestone = { userId: user.id, eventType: EventType.pingCreated }
+    await MilestoneEvent.firstOrCreate(pingMilestone, pingMilestone)
 
     return {
       data: {
@@ -70,15 +78,14 @@ export default class PingEmailController {
     const pingEmail = await PingEmail.query()
       .where({ id: params.id, userId: user.id })
       .firstOrFail()
-    const { name, subject, status } = await request.validate(UpdatePingEmailValidator)
+    const updateAttrs = await request.validate(UpdatePingEmailValidator)
 
-    await pingEmail.merge({ name, subject, status }).save()
-    await pingEmail.refresh()
+    const updatedPingEmail = await pingEmail.merge(updateAttrs).save()
 
     return {
       data: {
         message: 'Ping email update successfully',
-        pingEmail,
+        updatedPingEmail,
       },
     }
   }
@@ -91,6 +98,14 @@ export default class PingEmailController {
       .firstOrFail()
 
     await pingEmail.delete()
+
+    /**
+     * TODO: queue a delete milestone background job
+     * If user has no ping email records, delete the user's milestone_event
+     *
+     * We might consider not doing this, since the user is already onboarded. No point in rollinback
+     * their onboarding progress
+     */
 
     return {
       data: {

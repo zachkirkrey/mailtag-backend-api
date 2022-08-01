@@ -35,6 +35,7 @@ import './routes/subscription'
 import './routes/settings'
 import './routes/support'
 import './routes/file'
+import './routes/milestone-events'
 
 Route.get('/', async () => {
   return { hello: 'mailtag' }

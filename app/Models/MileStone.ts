@@ -1,6 +1,8 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@ioc:Adonis/Lucid/Orm'
 
+// TODO: remove this table, it doesnt exists on old codebase
+
 export default class Milestone extends BaseModel {
   @column({ isPrimary: true })
   public id: number

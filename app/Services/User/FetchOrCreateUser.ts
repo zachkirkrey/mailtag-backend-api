@@ -4,6 +4,7 @@ import User from 'App/Models/User'
 import Account from 'App/Models/Account'
 import { generateRefreshToken } from 'App/Helpers/token'
 import { defaultPingSequenceAttributes } from 'App/Helpers/ping-sequences'
+import MilestoneEvent, { EventType } from 'App/Models/MileStoneEvent'
 
 type GoogleUser = AllyUserContract<GoogleToken>
 
@@ -41,6 +42,7 @@ export default class FetchOrCreateUser {
       await Promise.all([
         user.related('settings').create({}, { client: trx }),
         this.createDefaultPingSequences(user, trx),
+        this.createDefaultMilestoneEvents(user, trx),
       ])
 
       return user
@@ -71,5 +73,21 @@ export default class FetchOrCreateUser {
         { client: trx }
       )
     }
+  }
+
+  private async createDefaultMilestoneEvents(user: User, trx: TransactionClientContract) {
+    return await MilestoneEvent.createMany(
+      [
+        {
+          userId: user.id,
+          eventType: EventType.addMailtag,
+        },
+        {
+          userId: user.id,
+          eventType: EventType.enableMailtag,
+        },
+      ],
+      { client: trx }
+    )
   }
 }

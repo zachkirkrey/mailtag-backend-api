@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Email from 'App/Models/Email'
+import MilestoneEvent, { EventType } from 'App/Models/MileStoneEvent'
 import User from 'App/Models/User'
 import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
 import SearchInboxEmailValidator from 'App/Validators/SearchInboxEmailValidator'
@@ -45,6 +46,9 @@ export default class EmailController {
       gmailThreadId,
     })
 
+    const pingMilestone = { userId: user.id, eventType: EventType.emailCreated }
+    await MilestoneEvent.firstOrCreate(pingMilestone, pingMilestone)
+
     return {
       data: {
         message: 'Email created successfully',
@@ -77,6 +81,14 @@ export default class EmailController {
     const email = await Email.query().where({ userId: user.id, id: params.id }).firstOrFail()
 
     await email.delete()
+
+    /**
+     * TODO: queue a delete milestone background job
+     * If user has no email records, delete the user's milestone_event with event_type 3
+     *
+     * We might consider not doing this, since the user is already onboarded. No point in rollinback
+     * their onboarding progress
+     */
 
     return {
       data: {

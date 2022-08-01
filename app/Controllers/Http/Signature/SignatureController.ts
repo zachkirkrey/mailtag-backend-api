@@ -1,5 +1,6 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Database from '@ioc:Adonis/Lucid/Database'
+import MilestoneEvent, { EventType } from 'App/Models/MileStoneEvent'
 import Signature from 'App/Models/Signature'
 import User from 'App/Models/User'
 import GetSignatureByIdValidator from 'App/Validators/Signature/GetSignatureByIdValidator'
@@ -66,6 +67,9 @@ export default class SignatureController {
       bannerUrl,
     })
 
+    const pingMilestone = { userId: user.id, eventType: EventType.singatureCreated }
+    await MilestoneEvent.firstOrCreate(pingMilestone, pingMilestone)
+
     return {
       data: {
         message: 'Signature created successfully',
@@ -110,13 +114,23 @@ export default class SignatureController {
     }
   }
 
-  public async destroy({ request }: HttpContextContract) {
+  public async destroy({ auth, request }: HttpContextContract) {
+    const { id: userId } = auth.use('api').user!
     const { params } = await request.validate(GetSignatureByIdValidator)
-    const signature = await Signature.findByOrFail('id', params.id)
+
+    const signature = await Signature.query().where({ id: params.id, userId }).firstOrFail()
 
     // TODO: Consider raising error if the signature to be deleted is default
 
     await signature.delete()
+
+    /**
+     * TODO: queue a delete milestone background job
+     * If user has no ping email records, delete the user's milestone_event
+     *
+     * We might consider not doing this, since the user is already onboarded. No point in rollinback
+     * their onboarding progress
+     */
 
     return {
       data: {
