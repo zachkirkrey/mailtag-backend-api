@@ -199,3 +199,8 @@ export type JwtPayload = {
   providerId: User['providerId']
   iat: number
 }
+
+export enum SQSMessageTypes {
+  WELCOME_EMAIL = 'welcome_email',
+  PING = 'ping',
+}

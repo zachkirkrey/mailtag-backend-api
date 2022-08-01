@@ -12,6 +12,9 @@ export default class AppProvider {
   }
 
   public async ready() {
+    const { default: Sqs } = await import('App/Services/AWS/Sqs')
+    const consumer = new Sqs()
+    consumer.start()
     // App is ready
   }
 

@@ -10,7 +10,7 @@ export default class WelcomeUserMail extends BaseMailer {
       .subject('Welcome to MailTag!')
       .from('info@mailtag.io') //TODO verify domain identity in SES
       .to(this.email)
-      .htmlView('emails/team_invitation', {
+      .htmlView('emails/welcome_user', {
         user: { email: this.email, firstName: this.username },
         url: `https://mailtag.io`,
       })

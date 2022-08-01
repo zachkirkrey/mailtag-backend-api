@@ -42,6 +42,8 @@ export default Env.rules({
   AWS_ACCESS_SECRET: Env.schema.string(),
   AWS_REGION: Env.schema.string(),
 
+  SQS_QUEUE_URL: Env.schema.string(),
+
   S3_BUCKET: Env.schema.string(),
   S3_REGION: Env.schema.string(),
   S3_ENDPOINT: Env.schema.string.optional(),

@@ -3,8 +3,9 @@ import AuthException from 'App/Exceptions/AuthException'
 import { verifyRefreshToken } from 'App/Helpers/token'
 import User from 'App/Models/User'
 import GetRefreshTokenValidator from 'App/Validators/Auth/GetRefreshTokenValidator'
-import WelcomeUserMail from 'App/Mailers/WelcomeUserMail'
 import FetchOrCreateUser from 'App/Services/User/FetchOrCreateUser'
+import Sqs from 'App/Services/AWS/Sqs'
+import { SQSMessageTypes } from 'App/Helpers/type'
 
 export default class AuthController {
   public async login({ ally, auth }: HttpContextContract) {
@@ -28,7 +29,8 @@ export default class AuthController {
       expiresIn: '30mins',
     })
 
-    await new WelcomeUserMail(user.id, user.username).sendLater()
+    const sqs = new Sqs()
+    await sqs.sendMessage(SQSMessageTypes.WELCOME_EMAIL, user.id, user.email)
 
     return {
       data: {
