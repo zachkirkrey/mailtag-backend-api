@@ -4,6 +4,7 @@ Route.group(() => {
   Route.get('', 'Signature/SignatureController.index')
   Route.get(':id', 'Signature/SignatureController.show')
   Route.post('', 'Signature/SignatureController.create')
+  Route.patch(':id', 'Signature/SignatureController.update')
   Route.delete(':id', 'Signature/SignatureController.destroy')
 })
   .prefix('signatures')
