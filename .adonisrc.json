@@ -14,7 +14,12 @@
     "Database": "database",
     "Contracts": "contracts"
   },
-  "preloads": ["./start/routes", "./start/kernel", "./start/validator", "./start/events"],
+  "preloads": [
+    "./start/routes",
+    "./start/kernel",
+    "./start/validator",
+    "./start/events"
+  ],
   "providers": [
     "./providers/AppProvider",
     "@adonisjs/core",
@@ -23,19 +28,26 @@
     "@adonisjs/auth",
     "@bitkidd/adonis-stripe",
     "@adonisjs/mail",
-    "@adonisjs/view"
+    "@adonisjs/view",
+    "@adonisjs/drive-s3"
   ],
-  "aceProviders": ["@adonisjs/repl"],
+  "aceProviders": [
+    "@adonisjs/repl"
+  ],
   "tests": {
     "suites": [
       {
         "name": "functional",
-        "files": ["tests/functional/**/*.spec(.ts|.js)"],
+        "files": [
+          "tests/functional/**/*.spec(.ts|.js)"
+        ],
         "timeout": 60000
       }
     ]
   },
-  "testProviders": ["@japa/preset-adonis/TestsProvider"],
+  "testProviders": [
+    "@japa/preset-adonis/TestsProvider"
+  ],
   "metaFiles": [
     {
       "pattern": "resources/views/**/*.edge",
