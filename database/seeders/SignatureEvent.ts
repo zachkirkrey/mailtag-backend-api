@@ -1,22 +1,28 @@
 import BaseSeeder from '@ioc:Adonis/Lucid/Seeder'
 import { TEST_USER_PROVIDER_ID } from 'App/Helpers/constant'
 import { SignatureEventAttributes } from 'App/Helpers/type'
-import Signature from 'App/Models/Signature'
 import SignatureEvent from 'App/Models/SignatureEvent'
 import Logger from '@ioc:Adonis/Core/Logger'
+import Email from 'App/Models/Email'
 
 export default class extends BaseSeeder {
   public override async run() {
     // Write your database queries inside the run method
     Logger.info('Starting signature event seeder')
 
-    const signature = await Signature.query()
+    const email = await Email.query()
       .whereHas('user', (query) => query.where({ providerId: TEST_USER_PROVIDER_ID }))
+      .andWhereNotNull('signature_id')
       .firstOrFail()
 
     const signatureEvents = Array.from(Array(5)).map(() => {
       const signatureEventAttributes: SignatureEventAttributes = {
-        signatureId: signature.id,
+        userId: email.userId,
+        emailId: email.id,
+        signatureId: email.signatureId!,
+        emailSubject: email.subject,
+        clickRecipient: email.recipient,
+        isDeleted: false,
       }
 
       return signatureEventAttributes

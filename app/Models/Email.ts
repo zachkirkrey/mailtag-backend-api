@@ -24,6 +24,9 @@ export default class Email extends BaseModel {
   public userId: string
 
   @column()
+  public signatureId: string | null
+
+  @column()
   public recipient: string
 
   @column()

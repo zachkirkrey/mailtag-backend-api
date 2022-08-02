@@ -68,7 +68,7 @@ export type SignatureAttributes = Omit<
 
 export type SignatureEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof SignatureEvent>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'signatureClikedTime'
 >
 
 export type PingAttributes = Omit<

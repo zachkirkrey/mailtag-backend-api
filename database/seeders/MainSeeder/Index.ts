@@ -18,11 +18,11 @@ export default class extends BaseSeeder {
     // Write your database queries inside the run method
     await this.runSeeder(await import('../Account'))
     await this.runSeeder(await import('../User'))
+    await this.runSeeder(await import('../Signature'))
     await this.runSeeder(await import('../Email'))
     await this.runSeeder(await import('../EmailEvent'))
     await this.runSeeder(await import('../Link'))
     await this.runSeeder(await import('../LinkEvent'))
-    await this.runSeeder(await import('../Signature'))
     await this.runSeeder(await import('../SignatureEvent'))
     await this.runSeeder(await import('../PingSequence'))
     await this.runSeeder(await import('../PingSequenceDetail'))
