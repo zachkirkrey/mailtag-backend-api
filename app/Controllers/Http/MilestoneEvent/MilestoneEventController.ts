@@ -13,7 +13,9 @@ export default class MilestoneEventController {
 
     return {
       data: {
-        milestoneEvents,
+        milestoneEvents: milestoneEvents.map(
+          (milestoneEvent) => milestoneEvent.serializedMilestoneEventInfo
+        ),
       },
     }
   }

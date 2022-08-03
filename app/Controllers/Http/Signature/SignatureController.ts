@@ -67,7 +67,7 @@ export default class SignatureController {
       bannerUrl,
     })
 
-    const pingMilestone = { userId: user.id, eventType: EventType.singatureCreated }
+    const pingMilestone = { userId: user.id, eventType: EventType.signatureCreated }
     await MilestoneEvent.firstOrCreate(pingMilestone, pingMilestone)
 
     return {

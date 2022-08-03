@@ -9,7 +9,7 @@ export enum EventType {
   // 'scheduled' = 4, // This feature is removed?
   'pingCreated' = 5,
   // 'invite-friend' = 6, // commented out in the old codebase
-  'singatureCreated' = 7,
+  'signatureCreated' = 7,
 }
 
 export default class MilestoneEvent extends BaseModel {
@@ -33,4 +33,15 @@ export default class MilestoneEvent extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+
+  public get serializedMilestoneEventInfo() {
+    const { id, userId, eventType, isDeleted } = this
+
+    return {
+      id,
+      userId,
+      eventType,
+      isDeleted,
+    }
+  }
 }
