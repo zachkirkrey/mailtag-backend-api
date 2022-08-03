@@ -7,6 +7,7 @@ import Stripe from '@ioc:Adonis/Addons/Stripe'
 import CreatePaymentValidator from 'App/Validators/Subscription/CreatePaymentValidator'
 import Payment from 'App/Services/Subscription/Payment'
 import PaymentException from 'App/Exceptions/PaymentException'
+import Plan from 'App/Models/Plan'
 
 export default class SubscriptionController {
   public async show({ auth }: HttpContextContract) {
@@ -25,9 +26,11 @@ export default class SubscriptionController {
     const { planId, paymentRequestId } = await request.validate(CreateSubscriptionValidator)
 
     const service = new Payment(planId)
-    const { payment_status: paymentStatus, status } = await service.getPaymentRequest(
-      paymentRequestId
-    )
+    const {
+      payment_status: paymentStatus,
+      status,
+      subscription: stripeSubscriptionId,
+    } = await service.getPaymentRequest(paymentRequestId)
 
     if (paymentStatus !== 'paid' && status !== 'complete') {
       throw new PaymentException('Payment is not done, please pay then try again!', 403)
@@ -44,6 +47,7 @@ export default class SubscriptionController {
         userId: user.id,
         planId,
         paymentStatus,
+        stripeSubscriptionId: stripeSubscriptionId as string,
       }
     )
 
@@ -59,9 +63,22 @@ export default class SubscriptionController {
   public async update({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const subscription = await Subscription.query().where({ userId: user.id }).firstOrFail()
-    const { isCanceled } = await request.validate(UpdateSubscriptionValidator)
-    // TODO call stripe here
-    const updateSubscription = await subscription.merge({ isCanceled }).save()
+    const { isCanceled, planId } = await request.validate(UpdateSubscriptionValidator)
+    const plan = await Plan.query().where({ id: planId }).firstOrFail()
+    const stripeSubscription = await Stripe.subscriptions.retrieve(
+      subscription.stripeSubscriptionId
+    )
+    const updatedStripeSubscription = await Stripe.subscriptions.update(stripeSubscription.id, {
+      items: [
+        {
+          id: stripeSubscription.items.data[0].id,
+          price: plan.stripePlanId,
+        },
+      ],
+    })
+
+    const updateAttrs = { stripeSubscriptionId: updatedStripeSubscription.id, isCanceled, planId }
+    const updateSubscription = await subscription.merge(updateAttrs).save()
 
     return {
       data: {

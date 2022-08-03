@@ -5,7 +5,10 @@ export default class CreateSubscriptionValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    planId: schema.string([rules.uuid(), rules.exists({ table: 'plans', column: 'id' })]),
+    planId: schema.string([
+      rules.uuid(),
+      rules.exists({ table: 'plans', column: 'id', where: { is_active: true, is_deleted: false } }),
+    ]),
     paymentRequestId: schema.string(),
   })
 

@@ -9,17 +9,11 @@ export default class Payment {
     const session = await Stripe.checkout.sessions.create({
       line_items: [
         {
-          price_data: {
-            currency: 'usd',
-            product_data: {
-              name: plan.name,
-            },
-            unit_amount: plan.price * 100,
-          },
+          price: plan.stripePlanId,
           quantity: 1,
         },
       ],
-      mode: 'payment',
+      mode: 'subscription',
       success_url: 'https://mailtag.io/success',
       cancel_url: 'https://mailtag.io/cancel',
     })

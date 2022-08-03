@@ -8,14 +8,21 @@ export default class Plan extends BaseModel {
   @column()
   public name: string
 
+  // TODO maybe compute/update before fetch from Stripe
   @column()
   public price: number
+
+  @column()
+  public billing: 'monthly' | 'yearly'
 
   @column()
   public isActive: boolean = true
 
   @column()
   public isDeleted: boolean = false
+
+  @column()
+  public stripePlanId: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
@@ -24,7 +31,7 @@ export default class Plan extends BaseModel {
   public updatedAt: DateTime
 
   public get serializedPlanInfo() {
-    const { id, name, price, isActive, isDeleted } = this
-    return { id, name, price, isActive, isDeleted }
+    const { id, name, price, billing, stripePlanId, isActive, isDeleted } = this
+    return { id, name, price, billing, stripePlanId, isActive, isDeleted }
   }
 }

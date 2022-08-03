@@ -10,6 +10,8 @@ export default class extends BaseSchema {
       table.decimal('price').notNullable()
       table.boolean('is_active').notNullable().defaultTo(true)
       table.boolean('is_deleted').notNullable().defaultTo(false)
+      table.string('stripe_plan_id').notNullable()
+      table.string('billing').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

@@ -14,7 +14,13 @@ export default class Subscription extends BaseModel {
   public userId: string
 
   @column()
+  public stripeSubscriptionId: string
+
+  @column()
   public paymentStatus: 'paid' | 'unpaid' | 'no_payment_required'
+
+  @column()
+  public billing: 'monthly' | 'yearly'
 
   @column()
   public isCanceled: boolean = false
@@ -41,7 +47,30 @@ export default class Subscription extends BaseModel {
   public plan: BelongsTo<typeof Plan>
 
   public get serializedSubscriptionInfo() {
-    const { id, planId, userId, paymentStatus, isCanceled, isExpired, isDeleted, expiresAt } = this
-    return { id, planId, userId, paymentStatus, isCanceled, isExpired, isDeleted, expiresAt }
+    const {
+      id,
+      planId,
+      userId,
+      paymentStatus,
+      billing,
+      stripeSubscriptionId,
+      isCanceled,
+      isExpired,
+      isDeleted,
+      expiresAt,
+    } = this
+
+    return {
+      id,
+      planId,
+      userId,
+      paymentStatus,
+      billing,
+      stripeSubscriptionId,
+      isCanceled,
+      isExpired,
+      isDeleted,
+      expiresAt,
+    }
   }
 }

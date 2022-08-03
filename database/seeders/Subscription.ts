@@ -15,15 +15,17 @@ export default class extends BaseSeeder {
     const users = await User.query()
     const plans = await Plan.query()
 
-    const subscriptions = users.map((user, index) => {
+    const subscriptions = users.map((user) => {
       const subscriptionAttributes: SubscriptionAttributes = {
-        planId: plans[index].id,
+        planId: faker.helpers.arrayElement(plans).id,
         userId: user.id,
         paymentStatus: faker.helpers.arrayElement(['paid', 'unpaid', 'no_payment_required']),
         isCanceled: false,
         isExpired: false,
         isDeleted: false,
         expiresAt: DateTime.now(),
+        stripeSubscriptionId: faker.helpers.arrayElement(plans).stripePlanId,
+        billing: faker.helpers.arrayElement(plans).billing,
       }
 
       return subscriptionAttributes
