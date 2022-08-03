@@ -56,7 +56,7 @@ export default class AuthController {
       const providerId = verifyRefreshToken(refreshToken)
       const user = await User.query().where({ providerId }).firstOrFail()
       const { token: accessToken } = await auth.use('api').generate(user, {
-        expiresIn: '1min',
+        expiresIn: '30mins',
       })
 
       return {

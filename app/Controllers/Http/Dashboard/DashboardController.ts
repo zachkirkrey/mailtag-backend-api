@@ -15,24 +15,24 @@ import { DateTime } from 'luxon'
 export default class DashboardController {
   public async getEmailsSentToday(ctx: HttpContextContract) {
     const service = new DashboardInfo(ctx)
-    const emails = await service.getEmailsSentToday()
+    const payload = await service.getEmailsSentToday()
 
     return {
       data: {
-        count: emails.length,
-        emails,
+        count: payload.emails.length,
+        emails: payload.emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
 
   public async getEmailsSentMonth(ctx: HttpContextContract) {
     const service = new DashboardInfo(ctx)
-    const emails = await service.getEmailsSentMonth()
+    const payload = await service.getEmailsSentMonth()
 
     return {
       data: {
-        count: emails.length,
-        emails,
+        count: payload.emails.length,
+        emails: payload.emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -66,7 +66,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -78,7 +78,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -90,7 +90,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -102,7 +102,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -114,7 +114,7 @@ export default class DashboardController {
     return {
       data: {
         count: signatures.length,
-        signatures,
+        signatures: signatures.map((signature) => signature.serializedSignatureBasicInfo),
       },
     }
   }
@@ -126,7 +126,7 @@ export default class DashboardController {
     return {
       data: {
         count: pings.length,
-        pings,
+        pings: pings.map((ping) => ping.serializedPingInfo),
       },
     }
   }
@@ -230,7 +230,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -250,7 +250,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -265,7 +265,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -281,7 +281,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -297,7 +297,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails,
+        emails: emails.map((email) => email.serializedEmailInfo),
       },
     }
   }
@@ -328,8 +328,14 @@ export default class DashboardController {
 
     return {
       data: {
-        emailsSentToday: emailsSentToday.length,
-        emailsSentThisMonth: emailsSentThisMonth.length,
+        emailsSentToday: {
+          count: emailsSentToday.emails.length,
+          state: emailsSentToday.state,
+        },
+        emailsSentThisMonth: {
+          count: emailsSentThisMonth.emails.length,
+          state: emailsSentThisMonth.state,
+        },
         averageOpenRate,
         averageLinkClickRate,
         recentlyReadEmails: recentlyReadEmails.length,
