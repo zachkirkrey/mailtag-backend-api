@@ -49,7 +49,7 @@ export default class User extends BaseModel {
   @column()
   public avatarUrl: string | null
 
-  @computed({ serializeAs: 'full_name' })
+  @computed()
   public get fullName() {
     if (!this.firstName || !this.lastName) {
       return null

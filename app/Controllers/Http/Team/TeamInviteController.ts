@@ -39,7 +39,11 @@ export default class TeamInviteController {
 
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.findByOrFail('ownerId', user.id)
+    // TODO: early return 422 if authuser is a member of another team already.
+    const team = await Team.firstOrCreate(
+      { ownerId: user.id },
+      { name: `${user.username}'s Team`, ownerEmail: user.email, ownerId: user.id }
+    )
     const { email } = await request.validate(CreateTeamInviteValidator)
     const teamInvite = await TeamInvite.firstOrCreate({ email }, { email, teamId: team.id })
 
