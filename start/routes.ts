@@ -36,9 +36,10 @@ import './routes/settings'
 import './routes/support'
 import './routes/file'
 import './routes/milestone-events'
+import './routes/invite'
 
 Route.get('/', async () => {
-  return { hello: 'mailtag' }
+  return { hello: 'mailtag', login: '/auth/google' }
 })
 
 Route.get('health', async ({ response }) => {
