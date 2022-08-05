@@ -14,6 +14,7 @@ export default class extends BaseSchema {
       table.boolean('is_deleted').notNullable().defaultTo(false)
       table.unique(['plan_id', 'user_id', 'is_canceled'])
       table.string('stripe_subscription_id').notNullable()
+      table.string('stripe_customer_id').notNullable()
       table.string('billing').notNullable()
 
       /**
