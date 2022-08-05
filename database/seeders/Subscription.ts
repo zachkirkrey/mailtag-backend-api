@@ -25,6 +25,7 @@ export default class extends BaseSeeder {
         isDeleted: false,
         expiresAt: DateTime.now(),
         stripeSubscriptionId: faker.helpers.arrayElement(plans).stripePlanId,
+        stripeCustomerId: faker.random.numeric(5),
         billing: faker.helpers.arrayElement(plans).billing,
       }
 

@@ -17,6 +17,9 @@ export default class Subscription extends BaseModel {
   public stripeSubscriptionId: string
 
   @column()
+  public stripeCustomerId: string
+
+  @column()
   public paymentStatus: 'paid' | 'unpaid' | 'no_payment_required'
 
   @column()
@@ -54,6 +57,7 @@ export default class Subscription extends BaseModel {
       paymentStatus,
       billing,
       stripeSubscriptionId,
+      stripeCustomerId,
       isCanceled,
       isExpired,
       isDeleted,
@@ -67,6 +71,7 @@ export default class Subscription extends BaseModel {
       paymentStatus,
       billing,
       stripeSubscriptionId,
+      stripeCustomerId,
       isCanceled,
       isExpired,
       isDeleted,

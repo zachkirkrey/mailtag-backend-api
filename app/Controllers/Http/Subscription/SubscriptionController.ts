@@ -30,16 +30,12 @@ export default class SubscriptionController {
       payment_status: paymentStatus,
       status,
       subscription: stripeSubscriptionId,
+      customer: stripeCustomerId,
     } = await service.getPaymentRequest(paymentRequestId)
 
     if (paymentStatus !== 'paid' && status !== 'complete') {
       throw new PaymentException('Payment is not done, please pay then try again!', 403)
     }
-
-    // TODO use the same stripe customer for the same user if paid before
-    const customer = await Stripe.customers.create({
-      email: user.email,
-    })
 
     const subscription = await Subscription.firstOrCreate(
       { userId: user.id },
@@ -48,13 +44,13 @@ export default class SubscriptionController {
         planId,
         paymentStatus,
         stripeSubscriptionId: stripeSubscriptionId as string,
+        stripeCustomerId: stripeCustomerId as string,
       }
     )
 
     return {
       data: {
         message: 'Subscription created successfully',
-        customer: { id: customer.id, email: customer.email },
         subscription: subscription.serializedSubscriptionInfo,
       },
     }
@@ -104,11 +100,14 @@ export default class SubscriptionController {
     }
   }
 
-  public async payment({ request }: HttpContextContract) {
+  public async payment({ request, auth }: HttpContextContract) {
     const { planId } = await request.validate(CreatePaymentValidator)
+    const user: User = auth.use('api').user!
+
+    await user.load('subscription')
 
     const service = new Payment(planId)
-    const paymentRequest = await service.createPaymentRequest()
+    const paymentRequest = await service.createPaymentRequest(user)
 
     return {
       data: {
@@ -117,4 +116,6 @@ export default class SubscriptionController {
       },
     }
   }
+
+  public async showInvoices({}: HttpContextContract) {}
 }
