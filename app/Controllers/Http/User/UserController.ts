@@ -38,4 +38,17 @@ export default class UsersController {
       },
     }
   }
+
+  public async destroy({ auth }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+
+    await user.delete()
+    await auth.use('api').revoke()
+
+    return {
+      data: {
+        message: 'Sad to see you leave. Good Bye!',
+      },
+    }
+  }
 }
