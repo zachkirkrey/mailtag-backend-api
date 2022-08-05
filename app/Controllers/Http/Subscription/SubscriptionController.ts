@@ -92,8 +92,10 @@ export default class SubscriptionController {
     const user: User = auth.use('api').user!
     const subscription = await Subscription.query().where({ userId: user.id }).firstOrFail()
 
-    // TODO call stripe here
-    await subscription.merge({ isDeleted: true }).save()
+    await Stripe.subscriptions.update(subscription.stripeSubscriptionId, {
+      cancel_at_period_end: true,
+    })
+    await subscription.merge({ isCanceled: true }).save()
 
     return {
       data: {
