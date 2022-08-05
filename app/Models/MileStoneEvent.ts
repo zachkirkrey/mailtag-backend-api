@@ -35,13 +35,6 @@ export default class MilestoneEvent extends BaseModel {
   public updatedAt: DateTime
 
   public get serializedMilestoneEventInfo() {
-    const { id, userId, eventType, isDeleted } = this
-
-    return {
-      id,
-      userId,
-      eventType,
-      isDeleted,
-    }
+    return EventType[this.eventType]
   }
 }
