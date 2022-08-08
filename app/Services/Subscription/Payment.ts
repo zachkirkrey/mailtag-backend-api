@@ -7,7 +7,7 @@ export default class Payment {
 
   public async createPaymentRequest(user: User) {
     const plan = await Plan.query().where({ id: this.planId }).firstOrFail()
-    const customerId = user.$hasRelated('subscription')
+    const customerId = user.subscription?.stripeCustomerId
       ? user.subscription.stripeCustomerId
       : (await Stripe.customers.create({ email: user.email })).id
 

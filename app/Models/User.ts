@@ -118,6 +118,7 @@ export default class User extends BaseModel {
       avatarUrl,
       refreshToken,
     } = this
+
     return {
       id,
       email,

@@ -8,6 +8,8 @@ import CreatePaymentValidator from 'App/Validators/Subscription/CreatePaymentVal
 import Payment from 'App/Services/Subscription/Payment'
 import PaymentException from 'App/Exceptions/PaymentException'
 import Plan from 'App/Models/Plan'
+import { serializeInvoiceInfo } from 'App/Helpers/invoice'
+import GetInvoiceByIdValidator from 'App/Validators/GetInvoiceByIdValidator'
 
 export default class SubscriptionController {
   public async show({ auth }: HttpContextContract) {
@@ -25,6 +27,7 @@ export default class SubscriptionController {
     const user: User = auth.use('api').user!
     const { planId, paymentRequestId } = await request.validate(CreateSubscriptionValidator)
 
+    const plan = await Plan.query().where({ id: planId }).firstOrFail()
     const service = new Payment(planId)
     const {
       payment_status: paymentStatus,
@@ -45,6 +48,7 @@ export default class SubscriptionController {
         paymentStatus,
         stripeSubscriptionId: stripeSubscriptionId as string,
         stripeCustomerId: stripeCustomerId as string,
+        billing: plan.billing,
       }
     )
 
@@ -117,5 +121,29 @@ export default class SubscriptionController {
     }
   }
 
-  public async showInvoices({}: HttpContextContract) {}
+  public async indexInvoices({ auth }: HttpContextContract) {
+    const user: User = auth.use('api').user!
+
+    await user.load('subscription')
+
+    const invoices = await Stripe.invoices.list({ customer: user.subscription.stripeCustomerId })
+
+    return {
+      data: {
+        invoices: invoices.data.map((invoice) => serializeInvoiceInfo(invoice)),
+      },
+    }
+  }
+
+  public async showInvoice({ request }: HttpContextContract) {
+    const { params } = await request.validate(GetInvoiceByIdValidator)
+
+    const invoice = await Stripe.invoices.retrieve(params.id)
+
+    return {
+      data: {
+        invoice: serializeInvoiceInfo(invoice),
+      },
+    }
+  }
 }
