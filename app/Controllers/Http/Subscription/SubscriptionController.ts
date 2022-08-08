@@ -10,6 +10,7 @@ import PaymentException from 'App/Exceptions/PaymentException'
 import Plan from 'App/Models/Plan'
 import { serializeInvoiceInfo } from 'App/Helpers/invoice'
 import GetInvoiceByIdValidator from 'App/Validators/GetInvoiceByIdValidator'
+import { serializePaymentMethod } from 'App/Helpers/payment-method'
 
 export default class SubscriptionController {
   public async show({ auth }: HttpContextContract) {
@@ -144,6 +145,25 @@ export default class SubscriptionController {
       data: {
         invoice: serializeInvoiceInfo(invoice),
       },
+    }
+  }
+
+  public async indexPaymentMethods({ auth }: HttpContextContract) {
+    const user = auth.user!
+
+    await user.load('subscription')
+
+    const customerPaymentMethods = await Stripe.customers.listPaymentMethods(
+      user.subscription.stripeCustomerId,
+      {
+        type: 'card',
+      }
+    )
+
+    return {
+      data: customerPaymentMethods.data.map((paymentMethod) =>
+        serializePaymentMethod(paymentMethod)
+      ),
     }
   }
 }

@@ -8,6 +8,7 @@ Route.group(() => {
   Route.post('/payment', 'Subscription/SubscriptionController.payment')
   Route.get('/invoices', 'Subscription/SubscriptionController.indexInvoices')
   Route.get('/invoices/:id', 'Subscription/SubscriptionController.showInvoice')
+  Route.get('/payment-methods', 'Subscription/SubscriptionController.indexPaymentMethods')
 })
   .prefix('subscription')
   .middleware('auth')
