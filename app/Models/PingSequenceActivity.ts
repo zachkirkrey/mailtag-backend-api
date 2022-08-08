@@ -10,19 +10,19 @@ export default class PingSequenceActivity extends BaseModel {
   @column()
   public status: string
 
-  @column()
+  @column({ serializeAs: 'isDeleted' })
   public isDeleted: boolean = false
 
-  @column()
+  @column({ serializeAs: 'pingSequenceId' })
   public pingSequenceId: string
 
-  @column()
+  @column({ serializeAs: 'userId' })
   public userId: string
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @belongsTo(() => User)
@@ -30,16 +30,4 @@ export default class PingSequenceActivity extends BaseModel {
 
   @belongsTo(() => PingSequence)
   public pingSequence: BelongsTo<typeof PingSequence>
-
-  public get serializedPingSequenceActivityInfo() {
-    const { id, status, userId, pingSequenceId, isDeleted } = this
-
-    return {
-      id,
-      status,
-      userId,
-      pingSequenceId,
-      isDeleted,
-    }
-  }
 }
