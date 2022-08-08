@@ -20,10 +20,10 @@ export default class Email extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
-  @column()
+  @column({ serializeAs: null })
   public userId: string
 
-  @column()
+  @column({ serializeAs: null })
   public signatureId: string | null
 
   @column()
@@ -32,13 +32,13 @@ export default class Email extends BaseModel {
   @column()
   public subject: string | null
 
-  @column()
+  @column({ serializeAs: 'gmailMessageId' })
   public gmailMessageId: string
 
-  @column()
+  @column({ serializeAs: 'gmailThreadId' })
   public gmailThreadId: string
 
-  @column()
+  @column({ serializeAs: 'isDeleted' })
   public isDeleted: boolean = false
 
   @column.dateTime({ autoCreate: true })
@@ -70,10 +70,5 @@ export default class Email extends BaseModel {
   @computed()
   public get time() {
     return this.createdAt.toRelative()
-  }
-
-  public get serializedEmailInfo() {
-    const { id, recipient, subject, gmailMessageId, gmailThreadId, date, time } = this
-    return { id, recipient, subject, gmailMessageId, gmailThreadId, date, time }
   }
 }
