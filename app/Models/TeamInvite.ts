@@ -6,36 +6,24 @@ export default class TeamInvite extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
-  @column()
+  @column({ serializeAs: 'email' })
   public email: string
 
-  @column()
+  @column({ serializeAs: 'teamId' })
   public teamId: string
 
-  @column()
+  @column({ serializeAs: 'isDeleted' })
   public isDeleted: boolean = false
 
-  @column()
+  @column({ serializeAs: 'isAccepted' })
   public isAccepted: boolean = false
 
   @belongsTo(() => Team)
   public team: BelongsTo<typeof Team>
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
-
-  public get serializedTeamInviteInfo() {
-    const { id, email, teamId, isAccepted, isDeleted } = this
-
-    return {
-      id,
-      email,
-      teamId,
-      isAccepted,
-      isDeleted,
-    }
-  }
 }
