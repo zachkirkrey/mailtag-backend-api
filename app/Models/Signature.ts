@@ -17,59 +17,59 @@ export default class Signature extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
-  @column()
+  @column({ serializeAs: 'userId' })
   public userId: string
 
-  @column()
+  @column({ serializeAs: 'name' })
   public name: string
 
-  @column()
+  @column({ serializeAs: 'title' })
   public title: string | null
 
-  @column()
+  @column({ serializeAs: 'avatarUrl' })
   public avatarUrl: string | null
 
   // TODO make this column enum type
-  @column()
+  @column({ serializeAs: 'avatarBorderRadiusType' })
   public avatarBorderRadiusType: BorderRadiusTypes = BorderRadiusTypes.SQUARE
 
-  @column()
+  @column({ serializeAs: 'company' })
   public company: string | null
 
-  @column()
+  @column({ serializeAs: 'email' })
   public email: string | null
 
-  @column()
+  @column({ serializeAs: 'website' })
   public website: string | null
 
-  @column()
+  @column({ serializeAs: 'officeAddress' })
   public officeAddress: string | null
 
-  @column()
+  @column({ serializeAs: 'officePhoneNumber' })
   public officePhoneNumber: string | null
 
-  @column()
+  @column({ serializeAs: 'homePhoneNumber' })
   public homePhoneNumber: string | null
 
-  @column()
+  @column({ serializeAs: 'calendarUrl' })
   public calendarUrl: string | null
 
-  @column()
+  @column({ serializeAs: 'bannerUrl' })
   public bannerUrl: string | null
 
-  @column()
+  @column({ serializeAs: 'isBannerEnabled' })
   public isBannerEnabled: boolean = false
 
-  @column()
+  @column({ serializeAs: 'isDeleted' })
   public isDeleted: boolean = false
 
-  @column()
+  @column({ serializeAs: 'isDefault' })
   public isDefault: boolean = false
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @belongsTo(() => User)
