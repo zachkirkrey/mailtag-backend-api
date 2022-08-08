@@ -51,4 +51,13 @@ export default class UsersController {
       },
     }
   }
+
+  public async index({ auth }: HttpContextContract) {
+    const user = auth.user!
+    const users = await User.query().where({ accountId: user.accountId })
+
+    return {
+      data: users.filter((filtered) => filtered.email !== user.email).map((user) => user.email),
+    }
+  }
 }

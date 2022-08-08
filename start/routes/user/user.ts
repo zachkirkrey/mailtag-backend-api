@@ -5,6 +5,7 @@ Route.group(() => {
   Route.get(':id', 'User/UserController.show')
   Route.put(':id', 'User/UserController.update')
   Route.delete('/me', 'User/UserController.destroy')
+  Route.get('/account', 'User/UserController.index')
 })
   .prefix('users')
   .middleware('auth')
