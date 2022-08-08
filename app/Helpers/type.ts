@@ -43,7 +43,7 @@ export type EmailAttributes = Omit<
 
 export type EmailEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof EmailEvent>>,
-  'id' | 'createdAt' | 'updatedAt' | 'time'
+  'id' | 'createdAt' | 'updatedAt' | 'time' | 'serializedEmailEventInfo'
 >
 
 export type LinkAttributes = Omit<

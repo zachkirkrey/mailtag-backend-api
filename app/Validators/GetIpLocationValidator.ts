@@ -1,13 +1,10 @@
 import { schema, CustomMessages, rules } from '@ioc:Adonis/Core/Validator'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class CreateEmailEventValidator {
+export default class GetIpLocationValidator {
   constructor(protected ctx: HttpContextContract) {}
 
   public schema = schema.create({
-    emailId: schema.string([rules.uuid(), rules.exists({ table: 'emails', column: 'id' })]),
-    device: schema.string(),
-    userAgent: schema.string(),
     ip: schema.string({}, [rules.ip()]),
   })
 

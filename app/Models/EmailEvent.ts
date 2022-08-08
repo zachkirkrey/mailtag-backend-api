@@ -31,4 +31,10 @@ export default class EmailEvent extends BaseModel {
   public get time() {
     return this.createdAt.toRelative()
   }
+
+  public get serializedEmailEventInfo() {
+    const { id, emailId, device, userAgent, location, time } = this
+
+    return { id, emailId, device, userAgent, location, time }
+  }
 }

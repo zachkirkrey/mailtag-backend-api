@@ -96,6 +96,7 @@
     "@bitkidd/adonis-stripe": "^8.168.0",
     "@types/jsonwebtoken": "^8.5.8",
     "aws-sdk": "^2.1177.0",
+    "axios": "^0.27.2",
     "jsonwebtoken": "^8.5.1",
     "luxon": "^2.4.0",
     "pg": "^8.7.3",
