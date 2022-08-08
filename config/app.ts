@@ -232,3 +232,21 @@ export const profiler: ProfilerConfig = {
 |
 */
 export const validator: ValidatorConfig = {}
+
+/*
+|--------------------------------------------------------------------------
+| Pagination
+|--------------------------------------------------------------------------
+|
+| 
+| 
+*/
+type Pagination = {
+  page?: number
+  limit?: number
+}
+
+export const pagination: Pagination = {
+  page: 1,
+  limit: 10,
+}
