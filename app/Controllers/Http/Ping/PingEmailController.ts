@@ -6,18 +6,15 @@ import GetPingEmailByIdValidator from 'App/Validators/Ping/GetPingEmailByIdValid
 import UpdatePingEmailValidator from 'App/Validators/Ping/UpdatePingEmailValidator'
 import SearchPingEmailValidator from 'App/Validators/Ping/SearchPingEmailValidator'
 import MilestoneEvent, { EventType } from 'App/Models/MileStoneEvent'
+import Config from '@ioc:Adonis/Core/Config'
 
 export default class PingEmailController {
-  public async index({ auth }: HttpContextContract) {
+  public async index({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-
-    const pingEmails = await PingEmail.query().where({ userId: user.id })
-
-    return {
-      data: {
-        pingEmails: pingEmails.map((pingEmail) => pingEmail.serializedPingEmailInfo),
-      },
-    }
+    const page: number = request.input('page', Config.get('app.pagination.page'))
+    const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+    const pingEmails = await PingEmail.query().where({ userId: user.id }).paginate(page, limit)
+    return pingEmails.serialize()
   }
 
   public async show({ auth, request }: HttpContextContract) {
@@ -30,7 +27,7 @@ export default class PingEmailController {
 
     return {
       data: {
-        pingEmail: pingEmail.serializedPingEmailInfo,
+        pingEmail: pingEmail.serialize(),
       },
     }
   }
@@ -67,7 +64,7 @@ export default class PingEmailController {
     return {
       data: {
         message: 'Ping email created successfully',
-        pingEmail: pingEmail.serializedPingEmailInfo,
+        pingEmail: pingEmail.serialize(),
       },
     }
   }
@@ -185,7 +182,7 @@ export default class PingEmailController {
 
     return {
       data: {
-        pingEmails: pingEmails.map((pingEmail) => pingEmail.serializedPingEmailInfo),
+        pingEmails: pingEmails.map((pingEmail) => pingEmail.serialize()),
       },
     }
   }
