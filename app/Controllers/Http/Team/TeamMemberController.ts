@@ -15,7 +15,7 @@ export default class TeamMemberController {
 
     return {
       data: {
-        teamMembers: team.teamMembers.map((teamMember) => teamMember.serializedTeamMemberInfo),
+        teamMembers: team.teamMembers.map((teamMember) => teamMember.serialize()),
       },
     }
   }
@@ -30,7 +30,7 @@ export default class TeamMemberController {
 
     return {
       data: {
-        teamMember: teamMember.serializedTeamMemberInfo,
+        teamMember: teamMember.serialize(),
       },
     }
   }
@@ -53,7 +53,7 @@ export default class TeamMemberController {
     return {
       data: {
         message: 'Team member created successfully',
-        teamMember: teamMember.serializedTeamMemberInfo,
+        teamMember: teamMember.serialize(),
       },
     }
   }
@@ -73,7 +73,7 @@ export default class TeamMemberController {
     return {
       data: {
         message: 'Team member updated successfully',
-        teamMember: updatedTeamMember.serializedTeamMemberInfo,
+        teamMember: updatedTeamMember.serialize(),
       },
     }
   }
