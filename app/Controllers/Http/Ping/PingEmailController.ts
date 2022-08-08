@@ -13,7 +13,9 @@ export default class PingEmailController {
     const user: User = auth.use('api').user!
     const page: number = request.input('page', Config.get('app.pagination.page'))
     const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+
     const pingEmails = await PingEmail.query().where({ userId: user.id }).paginate(page, limit)
+
     return pingEmails.serialize()
   }
 

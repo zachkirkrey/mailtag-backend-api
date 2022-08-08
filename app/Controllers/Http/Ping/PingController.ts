@@ -9,7 +9,9 @@ export default class PingController {
     const user: User = auth.use('api').user!
     const page: number = request.input('page', Config.get('app.pagination.page'))
     const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+
     const pings = await Ping.query().where({ userId: user.id }).paginate(page, limit)
+
     return pings.serialize()
   }
 

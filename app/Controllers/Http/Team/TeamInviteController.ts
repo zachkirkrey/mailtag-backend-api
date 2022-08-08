@@ -15,6 +15,7 @@ export default class TeamInviteController {
     const user: User = auth.use('api').user!
     const page: number = request.input('page', Config.get('app.pagination.page'))
     const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+
     const team = await Team.findByOrFail('ownerId', user.id)
     const teamInvites = await TeamInvite.query().where({ teamId: team.id }).paginate(page, limit)
 

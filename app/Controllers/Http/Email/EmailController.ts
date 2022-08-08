@@ -11,10 +11,12 @@ export default class EmailController {
     const user: User = auth.use('api').user!
     const page: number = request.input('page', Config.get('app.pagination.page'))
     const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+
     const emails = await Email.query()
       .where({ userId: user.id })
       .preload('events')
       .paginate(page, limit)
+
     return emails.serialize()
   }
 

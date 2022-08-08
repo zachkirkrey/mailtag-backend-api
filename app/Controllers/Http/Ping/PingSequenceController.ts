@@ -11,11 +11,13 @@ export default class PingSequenceController {
     const user: User = auth.use('api').user!
     const page: number = request.input('page', Config.get('app.pagination.page'))
     const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+
     const pingSequences = await PingSequence.query()
       .where({ userId: user.id })
       .preload('pingSequenceDetails')
       .orderBy('created_at', 'asc')
       .paginate(page, limit)
+
     return pingSequences.serialize()
   }
 
