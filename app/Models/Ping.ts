@@ -51,16 +51,4 @@ export default class Ping extends BaseModel {
   public get time() {
     return this.createdAt.toRelative()
   }
-
-  // public get serializedPingInfo() {
-  //   const { id, userId, emailId, name, time } = this
-
-  //   return {
-  //     id,
-  //     userId,
-  //     emailId,
-  //     name,
-  //     time,
-  //   }
-  // }
 }
