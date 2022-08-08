@@ -5,19 +5,18 @@ import User from 'App/Models/User'
 import CreatePingSequenceDetailValidator from 'App/Validators/Ping/CreatePingSequenceDetailValidator'
 import GetPingSequenceDetailByIdValidator from 'App/Validators/Ping/GetPingSequenceDetailByIdValidator'
 import UpdatePingSequenceDetailValidator from 'App/Validators/Ping/UpdatePingSequenceDetailValidator'
+import Config from '@ioc:Adonis/Core/Config'
 
 export default class PingSequenceDetailController {
-  public async index({ auth }: HttpContextContract) {
+  public async index({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const pingSequenceDetails = await PingSequenceDetail.query().where({ userId: user.id })
+    const page: number = request.input('page', Config.get('app.pagination.page'))
+    const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+    const pingSequenceDetails = await PingSequenceDetail.query()
+      .where({ userId: user.id })
+      .paginate(page, limit)
 
-    return {
-      data: {
-        pingSequenceDetails: pingSequenceDetails.map(
-          (pingSequenceDetail) => pingSequenceDetail.serializedPingSequenceDetailInfo
-        ),
-      },
-    }
+    return pingSequenceDetails.serialize()
   }
 
   public async show({ auth, request }: HttpContextContract) {
@@ -29,7 +28,7 @@ export default class PingSequenceDetailController {
 
     return {
       data: {
-        pingSequenceDetail: pingSequenceDetail.serializedPingSequenceDetailInfo,
+        pingSequenceDetail: pingSequenceDetail.serialize(),
       },
     }
   }
@@ -50,7 +49,7 @@ export default class PingSequenceDetailController {
     return {
       data: {
         message: 'Ping sequence detail created successfully',
-        pingSequenceDetail: pingSequenceDetail.serializedPingSequenceDetailInfo,
+        pingSequenceDetail: pingSequenceDetail.serialize(),
       },
     }
   }
@@ -73,7 +72,7 @@ export default class PingSequenceDetailController {
     return {
       data: {
         message: 'Ping sequence detail updated successfully',
-        pingSequenceDetail: pingSequenceDetail.serializedPingSequenceDetailInfo,
+        pingSequenceDetail: pingSequenceDetail.serialize(),
       },
     }
   }
