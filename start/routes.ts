@@ -38,6 +38,7 @@ import './routes/file'
 import './routes/milestone-events'
 import './routes/invite'
 import './routes/ip'
+import './routes/account'
 
 Route.get('/', async () => {
   return { hello: 'mailtag', login: '/auth/google' }
