@@ -6,9 +6,10 @@ import GetRefreshTokenValidator from 'App/Validators/Auth/GetRefreshTokenValidat
 import FetchOrCreateUser from 'App/Services/User/FetchOrCreateUser'
 import Sqs from 'App/Services/AWS/Sqs'
 import { SQSMessageTypes } from 'App/Helpers/type'
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class AuthController {
-  public async login({ ally, auth }: HttpContextContract) {
+  public async login({ ally, auth, response }: HttpContextContract) {
     const google = ally.use('google')
 
     if (google.accessDenied()) {
@@ -32,11 +33,15 @@ export default class AuthController {
     const sqs = new Sqs()
     await sqs.sendMessage(SQSMessageTypes.WELCOME_EMAIL, user.id, user.email)
 
-    return {
-      data: {
-        user: { ...user.serializedUserInfo, accessToken },
-      },
-    }
+    response.cookie('refresh-token', user.refreshToken, { httpOnly: true })
+    response.cookie('access-token', accessToken, { httpOnly: true })
+    response.redirect(`${Env.get('CLIENT_BASE_URL')}/google/success`)
+
+    // return {
+    //   data: {
+    //     user: { ...user.serializedUserInfo, accessToken },
+    //   },
+    // }
   }
 
   public async logout({ auth }: HttpContextContract) {

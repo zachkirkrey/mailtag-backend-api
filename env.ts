@@ -47,4 +47,6 @@ export default Env.rules({
   S3_BUCKET: Env.schema.string(),
   S3_REGION: Env.schema.string(),
   S3_ENDPOINT: Env.schema.string.optional(),
+
+  CLIENT_BASE_URL: Env.schema.string(),
 })
