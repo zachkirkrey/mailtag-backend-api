@@ -6,8 +6,6 @@ Route.group(() => {
   Route.patch('', 'Subscription/SubscriptionController.update')
   Route.delete('', 'Subscription/SubscriptionController.destroy')
   Route.post('/payment', 'Subscription/SubscriptionController.payment')
-  Route.get('/invoices', 'Subscription/SubscriptionController.indexInvoices')
-  Route.get('/invoices/:id', 'Subscription/SubscriptionController.showInvoice')
 })
   .prefix('subscription')
   .middleware('auth')
