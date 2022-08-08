@@ -5,7 +5,10 @@ Route.group(() => {
   Route.post('', 'Subscription/SubscriptionController.create')
   Route.patch('', 'Subscription/SubscriptionController.update')
   Route.delete('', 'Subscription/SubscriptionController.destroy')
-  Route.post('/payment', 'Subscription/SubscriptionController.payment')
+  Route.post(
+    '/create-subscription-intent',
+    'Subscription/SubscriptionController.createSubscriptionIntent'
+  )
 })
   .prefix('subscription')
   .middleware('auth')

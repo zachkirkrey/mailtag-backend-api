@@ -102,11 +102,9 @@ export default class SubscriptionController {
     }
   }
 
-  public async payment({ request, auth }: HttpContextContract) {
-    const { planId } = await request.validate(CreatePaymentValidator)
+  public async createSubscriptionIntent({ request, auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
-
-    await user.load('subscription')
+    const { planId } = await request.validate(CreatePaymentValidator)
 
     const service = new Payment(planId)
     const paymentRequest = await service.createPaymentRequest(user)
