@@ -17,22 +17,22 @@ export default class Ping extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
-  @column()
+  @column({ serializeAs: 'emailId' })
   public emailId: string
 
-  @column()
+  @column({ serializeAs: 'userId' })
   public userId: string
 
-  @column()
+  @column({ serializeAs: null })
   public pingSequenceId: string
 
   @column()
   public name: string
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @belongsTo(() => Email)
@@ -52,15 +52,15 @@ export default class Ping extends BaseModel {
     return this.createdAt.toRelative()
   }
 
-  public get serializedPingInfo() {
-    const { id, userId, emailId, name, time } = this
+  // public get serializedPingInfo() {
+  //   const { id, userId, emailId, name, time } = this
 
-    return {
-      id,
-      userId,
-      emailId,
-      name,
-      time,
-    }
-  }
+  //   return {
+  //     id,
+  //     userId,
+  //     emailId,
+  //     name,
+  //     time,
+  //   }
+  // }
 }

@@ -2,17 +2,15 @@ import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Ping from 'App/Models/Ping'
 import User from 'App/Models/User'
 import GetPingByIdValidator from 'App/Validators/Ping/GetPingByIdValidator'
+import Config from '@ioc:Adonis/Core/Config'
 
 export default class PingController {
-  public async index({ auth }: HttpContextContract) {
+  public async index({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const pings = await Ping.query().where({ userId: user.id })
-
-    return {
-      data: {
-        pings: pings.map((ping) => ping.serializedPingInfo),
-      },
-    }
+    const page: number = request.input('page', Config.get('app.pagination.page'))
+    const limit: number = request.input('limit', Config.get('app.pagination.limit'))
+    const pings = await Ping.query().where({ userId: user.id }).paginate(page, limit)
+    return pings.serialize()
   }
 
   public async show({ auth, request }: HttpContextContract) {
@@ -22,7 +20,7 @@ export default class PingController {
 
     return {
       data: {
-        ping: ping.serializedPingInfo,
+        ping: ping.serialize(),
       },
     }
   }
@@ -35,7 +33,7 @@ export default class PingController {
     return {
       data: {
         message: 'Ping created successfully',
-        ping: ping.serializedPingInfo,
+        ping: ping.serialize(),
       },
     }
   }
