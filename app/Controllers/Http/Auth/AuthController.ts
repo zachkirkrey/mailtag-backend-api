@@ -35,7 +35,13 @@ export default class AuthController {
 
     response.cookie('refresh-token', user.refreshToken, { httpOnly: true })
     response.cookie('access-token', accessToken, { httpOnly: true })
-    response.redirect(`${Env.get('CLIENT_BASE_URL')}/google/success`)
+
+    const url =
+      Env.get('NODE_ENV') === 'production'
+        ? Env.get('PRODUCTION_CLIENT_BASE_URL')
+        : Env.get('LOCAL_CLIENT_BASE_URL')
+
+    response.redirect(`${url}/google/success?refresh=${user.refreshToken}&access=${accessToken}`)
 
     // return {
     //   data: {
