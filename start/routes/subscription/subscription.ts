@@ -9,6 +9,10 @@ Route.group(() => {
     '/create-subscription-intent',
     'Subscription/SubscriptionController.createSubscriptionIntent'
   )
+  Route.post(
+    '/change-payment-method-intent',
+    'Subscription/SubscriptionController.changePaymentMethodIntent'
+  )
 })
   .prefix('subscription')
   .middleware('auth')

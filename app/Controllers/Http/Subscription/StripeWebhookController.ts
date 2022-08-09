@@ -4,6 +4,7 @@ import Stripe from 'stripe'
 import CreateSubsciption from 'App/Services/Subscription/CreateSubscription'
 import Subscription from 'App/Models/Subscription'
 import { getStripeEvent } from 'App/Helpers/stripe'
+import { default as StripeAddon } from '@ioc:Adonis/Addons/Stripe'
 import Plan from 'App/Models/Plan'
 
 export default class StripeWebhookController {
@@ -75,6 +76,23 @@ export default class StripeWebhookController {
         }
 
         await subscription.delete()
+
+        return response.status(200)
+      }
+
+      case 'setup_intent.succeeded': {
+        // This event might mean a payment method added, we send a request for
+        // default_payment_method here
+        const setupIntentEvent = event.data.object as Stripe.SetupIntent
+        const { payment_method: paymentMethodId, metadata, status } = setupIntentEvent
+
+        if (status !== 'succeeded' || !metadata?.subscription_id) {
+          return response.status(204)
+        }
+
+        await StripeAddon.subscriptions.update(metadata.subscription_id, {
+          default_payment_method: paymentMethodId as string,
+        })
 
         return response.status(200)
       }

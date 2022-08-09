@@ -7,6 +7,8 @@ import CreatePaymentValidator from 'App/Validators/Subscription/CreatePaymentVal
 import CreateSubscriptionIntent from 'App/Services/Subscription/CreateSubscriptionIntent'
 import Plan from 'App/Models/Plan'
 import PaymentException from 'App/Exceptions/PaymentException'
+import ChangePaymentMethodIntent from 'App/Services/Subscription/ChangePaymentMethodIntent'
+import { Exception } from '@adonisjs/core/build/standalone'
 
 export default class SubscriptionController {
   public async show({ auth }: HttpContextContract) {
@@ -83,6 +85,29 @@ export default class SubscriptionController {
       data: {
         id: paymentRequest.id,
         url: paymentRequest.url,
+      },
+    }
+  }
+
+  public async changePaymentMethodIntent({ auth }: HttpContextContract) {
+    const user = auth.use('api').user!
+
+    await user.load('subscription')
+
+    if (!user.subscription) {
+      throw new Exception("User doesn't have subscription")
+    }
+
+    const service = new ChangePaymentMethodIntent(
+      user.subscription.stripeCustomerId,
+      user.subscription.stripeSubscriptionId
+    )
+    const changePaymentMethodSession = await service.call()
+
+    return {
+      data: {
+        id: changePaymentMethodSession.id,
+        url: changePaymentMethodSession.url,
       },
     }
   }
