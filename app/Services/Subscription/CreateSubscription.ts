@@ -1,10 +1,10 @@
 import Plan from 'App/Models/Plan'
 import User from 'App/Models/User'
-import { default as Stripe2 } from 'stripe'
+import Stripe from 'stripe'
 import Subscription from 'App/Models/Subscription'
 
 export default class CreateSubsciption {
-  constructor(private readonly invoice: Stripe2.Invoice) {}
+  constructor(private readonly invoice: Stripe.Invoice) {}
 
   public async call() {
     const {
@@ -15,7 +15,7 @@ export default class CreateSubsciption {
       lines,
       subscription: stripeSubscriptionId,
     } = this.invoice
-    const planId = lines.data[0].price?.id
+    const stripePlanId = lines.data[0].price?.id
 
     if (status !== 'paid' || billingReason !== 'subscription_create') {
       // TODO: log this
@@ -24,14 +24,14 @@ export default class CreateSubsciption {
 
     const [user, plan] = await Promise.all([
       User.query().where({ email: customerEmail }).firstOrFail(),
-      Plan.query().where({ id: planId }).firstOrFail(),
+      Plan.query().where({ stripePlanId: stripePlanId }).firstOrFail(),
     ])
 
     const subscription = await Subscription.firstOrCreate(
       { userId: user.id },
       {
         userId: user.id,
-        planId,
+        planId: plan.id,
         paymentStatus: 'paid',
         stripeSubscriptionId: stripeSubscriptionId as string,
         stripeCustomerId: customer as string,
