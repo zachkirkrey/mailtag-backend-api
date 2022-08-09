@@ -36,15 +36,15 @@ export default class AuthController {
     response.cookie('refresh-token', user.refreshToken, { httpOnly: true })
     response.cookie('access-token', accessToken, { httpOnly: true })
 
-    const url = Env.get('PRODUCTION_CLIENT_BASE_URL')
+    // const url = Env.get('PRODUCTION_CLIENT_BASE_URL')
 
-    response.redirect(`${url}/google/success?refresh=${user.refreshToken}&access=${accessToken}`)
+    // response.redirect(`${url}/google/success?refresh=${user.refreshToken}&access=${accessToken}`)
 
-    // return {
-    //   data: {
-    //     user: { ...user.serializedUserInfo, accessToken },
-    //   },
-    // }
+    return {
+      data: {
+        user: { ...user.serializedUserInfo, accessToken },
+      },
+    }
   }
 
   public async logout({ auth }: HttpContextContract) {
