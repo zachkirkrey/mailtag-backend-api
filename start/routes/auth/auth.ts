@@ -5,6 +5,7 @@ Route.group(() => {
   Route.get('google', async ({ ally }) => {
     return ally.use('google').redirect()
   })
+  Route.get('google/callback/local', 'Auth/AuthController.local')
   Route.get('google/local', async ({ ally }) => {
     return ally.use('local').redirect()
   })

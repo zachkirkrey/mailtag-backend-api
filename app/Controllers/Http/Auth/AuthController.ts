@@ -36,10 +36,7 @@ export default class AuthController {
     response.cookie('refresh-token', user.refreshToken, { httpOnly: true })
     response.cookie('access-token', accessToken, { httpOnly: true })
 
-    const url =
-      Env.get('NODE_ENV') === 'production'
-        ? Env.get('PRODUCTION_CLIENT_BASE_URL')
-        : Env.get('LOCAL_CLIENT_BASE_URL')
+    const url = Env.get('PRODUCTION_CLIENT_BASE_URL')
 
     response.redirect(`${url}/google/success?refresh=${user.refreshToken}&access=${accessToken}`)
 
@@ -79,5 +76,44 @@ export default class AuthController {
       await auth.use('api').revoke()
       throw new AuthException('Invalid refresh token, please login again!', 422)
     }
+  }
+
+  // TODO remove after testing
+  public async local({ ally, auth, response }: HttpContextContract) {
+    const google = ally.use('local')
+
+    if (google.accessDenied()) {
+      // TODO create standard custom error codes sheet
+      throw new AuthException('Access Denied', 403)
+    }
+
+    if (google.stateMisMatch()) {
+      throw new AuthException('Request expired. Retry again', 422)
+    }
+
+    const googleUser = await google.user()
+
+    const service = new FetchOrCreateUser(googleUser)
+    const user = await service.call()
+
+    const { token: accessToken } = await auth.use('api').generate(user, {
+      expiresIn: '30mins',
+    })
+
+    const sqs = new Sqs()
+    await sqs.sendMessage(SQSMessageTypes.WELCOME_EMAIL, user.id, user.email)
+
+    response.cookie('refresh-token', user.refreshToken, { httpOnly: true })
+    response.cookie('access-token', accessToken, { httpOnly: true })
+
+    const url = Env.get('LOCAL_CLIENT_BASE_URL')
+
+    response.redirect(`${url}/google/success?refresh=${user.refreshToken}&access=${accessToken}`)
+
+    // return {
+    //   data: {
+    //     user: { ...user.serializedUserInfo, accessToken },
+    //   },
+    // }
   }
 }
