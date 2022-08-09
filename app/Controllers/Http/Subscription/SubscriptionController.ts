@@ -1,13 +1,10 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Subscription from 'App/Models/Subscription'
 import User from 'App/Models/User'
-import CreateSubscriptionValidator from 'App/Validators/Subscription/CreateSubscriptionValidator'
 import UpdateSubscriptionValidator from 'App/Validators/Subscription/UpdateSubscriptionValidator'
 import Stripe from '@ioc:Adonis/Addons/Stripe'
 import CreatePaymentValidator from 'App/Validators/Subscription/CreatePaymentValidator'
 import CreateSubscriptionIntent from 'App/Services/Subscription/CreateSubscriptionIntent'
-import Payment from 'App/Services/Subscription/Payment'
-import PaymentException from 'App/Exceptions/PaymentException'
 import Plan from 'App/Models/Plan'
 
 export default class SubscriptionController {
@@ -17,43 +14,6 @@ export default class SubscriptionController {
 
     return {
       data: {
-        subscription: subscription.serializedSubscriptionInfo,
-      },
-    }
-  }
-
-  public async create({ auth, request }: HttpContextContract) {
-    const user: User = auth.use('api').user!
-    const { planId, paymentRequestId } = await request.validate(CreateSubscriptionValidator)
-
-    const plan = await Plan.query().where({ id: planId }).firstOrFail()
-    const service = new Payment(planId)
-    const {
-      payment_status: paymentStatus,
-      status,
-      subscription: stripeSubscriptionId,
-      customer: stripeCustomerId,
-    } = await service.getPaymentRequest(paymentRequestId)
-
-    if (paymentStatus !== 'paid' && status !== 'complete') {
-      throw new PaymentException('Payment is not done, please pay then try again!', 403)
-    }
-
-    const subscription = await Subscription.firstOrCreate(
-      { userId: user.id },
-      {
-        userId: user.id,
-        planId,
-        paymentStatus,
-        stripeSubscriptionId: stripeSubscriptionId as string,
-        stripeCustomerId: stripeCustomerId as string,
-        billing: plan.billing,
-      }
-    )
-
-    return {
-      data: {
-        message: 'Subscription created successfully',
         subscription: subscription.serializedSubscriptionInfo,
       },
     }

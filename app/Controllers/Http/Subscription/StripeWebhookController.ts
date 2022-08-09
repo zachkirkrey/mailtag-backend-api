@@ -14,13 +14,9 @@ export default class StripeWebhookController {
     )
 
     switch (event.type) {
-      case 'customer.created': {
-        // TODO: handle the customer created case.
-        break
-      }
-
-      case 'customer.subscription.created': {
-        const subscription = event.data.object as Stripe2.Subscription
+      case 'invoice.payment_succeeded': {
+        // This event means subscription is creaqted and payment was succesful
+        const subscription = event.data.object as Stripe2.Invoice
 
         const service = new CreateSubsciption(subscription)
         const resultFixme = await service.call()
@@ -29,7 +25,7 @@ export default class StripeWebhookController {
       }
 
       case 'customer.subscription.updated': {
-        // const subscription = event.data.object
+        // const subscription = event.data.object as Whatever
         // Then define and call a method to handle the subscription update.
         // handleSubscriptionUpdated(subscription);
         break
@@ -42,7 +38,7 @@ export default class StripeWebhookController {
         break
       }
 
-      case 'customer.subscription.trial_will_end': {
+      case 'invoice.payment_failed': {
         // TODO: handle this case
 
         // const subscription = event.data.object
