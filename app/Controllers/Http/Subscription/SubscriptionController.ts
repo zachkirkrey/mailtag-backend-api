@@ -6,6 +6,7 @@ import Stripe from '@ioc:Adonis/Addons/Stripe'
 import CreatePaymentValidator from 'App/Validators/Subscription/CreatePaymentValidator'
 import CreateSubscriptionIntent from 'App/Services/Subscription/CreateSubscriptionIntent'
 import Plan from 'App/Models/Plan'
+import PaymentException from 'App/Exceptions/PaymentException'
 
 export default class SubscriptionController {
   public async show({ auth }: HttpContextContract) {
@@ -27,6 +28,11 @@ export default class SubscriptionController {
     const stripeSubscription = await Stripe.subscriptions.retrieve(
       subscription.stripeSubscriptionId
     )
+
+    if (subscription.planId === planId) {
+      throw new PaymentException('Selected plan id is already the active subscription plan')
+    }
+
     const updatedStripeSubscription = await Stripe.subscriptions.update(stripeSubscription.id, {
       items: [
         {
