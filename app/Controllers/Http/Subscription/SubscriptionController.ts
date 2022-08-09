@@ -42,6 +42,7 @@ export default class SubscriptionController {
       ],
     })
 
+    // TODO: move this db call into a webhook event. Stripe update might fail and we would have mismatch
     const updateAttrs = { stripeSubscriptionId: updatedStripeSubscription.id, isCanceled, planId }
     const updateSubscription = await subscription.merge(updateAttrs).save()
 
@@ -60,6 +61,7 @@ export default class SubscriptionController {
     await Stripe.subscriptions.update(subscription.stripeSubscriptionId, {
       cancel_at_period_end: true,
     })
+    // TODO: move this db call into a webhook event. Stripe update might fail and we would have mismatch
     await subscription.merge({ isCanceled: true }).save()
 
     return {

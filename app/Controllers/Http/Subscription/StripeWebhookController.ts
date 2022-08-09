@@ -4,6 +4,7 @@ import Stripe from 'stripe'
 import CreateSubsciption from 'App/Services/Subscription/CreateSubscription'
 import Subscription from 'App/Models/Subscription'
 import { getStripeEvent } from 'App/Helpers/stripe'
+import Plan from 'App/Models/Plan'
 
 export default class StripeWebhookController {
   public async stripeWebhook({ request, response }: HttpContextContract) {
@@ -11,7 +12,7 @@ export default class StripeWebhookController {
 
     switch (event.type) {
       case 'invoice.payment_succeeded': {
-        // This event means subscription is creaqted and payment was succesful
+        // This event means subscription is created and payment was succesful
         const invoice = event.data.object as Stripe.Invoice
 
         const service = new CreateSubsciption(invoice)
@@ -22,15 +23,13 @@ export default class StripeWebhookController {
 
       case 'invoice.payment_failed': {
         const subscriptionEvent = event.data.object as Stripe.Subscription
-        const { status, items } = subscriptionEvent
-        const paymentStatus = status === 'active' ? 'paid' : 'unpaid'
+        const paymentStatus = subscriptionEvent.status === 'active' ? 'paid' : 'unpaid'
 
         const subscription = await Subscription.findByOrFail(
           'stripeSubscriptionId',
           subscriptionEvent.id
         )
-        const planId = items.data[0].price.id
-        await subscription.merge({ planId, paymentStatus }).save()
+        await subscription.merge({ paymentStatus }).save()
 
         return response.status(200)
       }
@@ -39,14 +38,15 @@ export default class StripeWebhookController {
         const subscriptionEvent = event.data.object as Stripe.Subscription
 
         const { status, items } = subscriptionEvent
-        const planId = items.data[0].price.id
+        const stripePlanId = items.data[0].price.id
         const paymentStatus = status === 'active' ? 'paid' : 'unpaid'
 
-        const subscription = await Subscription.findByOrFail(
-          'stripeSubscriptionId',
-          subscriptionEvent.id
-        )
-        await subscription.merge({ planId, paymentStatus }).save()
+        const [plan, subscription] = await Promise.all([
+          Plan.query().where({ stripePlanId: stripePlanId }).firstOrFail(),
+          Subscription.findByOrFail('stripeSubscriptionId', subscriptionEvent.id),
+        ])
+
+        await subscription.merge({ planId: plan.id, paymentStatus }).save()
 
         return response.status(200)
       }
@@ -64,6 +64,7 @@ export default class StripeWebhookController {
 
         return response.status(200)
       }
+
       case 'customer.deleted': {
         // Customer is deleted at the stripe, along with their subscription
         const customerEvent = event.data.object as Stripe.Customer
@@ -77,10 +78,12 @@ export default class StripeWebhookController {
 
         return response.status(200)
       }
-      default:
+
+      default: {
         Logger.info(`Unknown event type from stripe, ${event.type}`)
 
         return response.status(204)
+      }
     }
   }
 }
