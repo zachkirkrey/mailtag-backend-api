@@ -19,11 +19,8 @@ export default class InvoicesController {
     }
   }
 
-  public async show({ auth, request }: HttpContextContract) {
-    const user: User = auth.use('api').user!
+  public async show({ request }: HttpContextContract) {
     const { params } = await request.validate(GetInvoiceByIdValidator)
-
-    await user.load('subscription')
 
     const invoice = await Stripe.invoices.retrieve(params.id)
 
