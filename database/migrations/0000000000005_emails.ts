@@ -12,6 +12,8 @@ export default class extends BaseSchema {
       table.string('gmail_message_id').notNullable()
       table.string('gmail_thread_id').notNullable()
       table.boolean('is_deleted').notNullable().defaultTo(false)
+      table.specificType('cc', 'text ARRAY').notNullable()
+      table.specificType('bcc', 'text ARRAY').notNullable()
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

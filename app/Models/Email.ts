@@ -15,6 +15,8 @@ import User from './User'
 import Ping from './Ping'
 import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
+import Link from './Link'
+import { isRelationshipPreloaded } from 'App/Helpers/model'
 
 export default class Email extends BaseModel {
   @column({ isPrimary: true })
@@ -37,6 +39,12 @@ export default class Email extends BaseModel {
 
   @column()
   public gmailThreadId: string
+
+  @column()
+  public cc: string[] = []
+
+  @column()
+  public bcc: string[] = []
 
   @column()
   public isDeleted: boolean = false
@@ -62,6 +70,9 @@ export default class Email extends BaseModel {
   @hasOne(() => UnreadEmail)
   public unreadEmail: HasOne<typeof UnreadEmail>
 
+  @hasMany(() => Link)
+  public links: HasMany<typeof Link>
+
   @computed()
   public get date() {
     return this.createdAt.toLocaleString(DateTime.DATE_MED)
@@ -73,7 +84,22 @@ export default class Email extends BaseModel {
   }
 
   public get serializedEmailInfo() {
-    const { id, recipient, subject, gmailMessageId, gmailThreadId, date, time } = this
-    return { id, recipient, subject, gmailMessageId, gmailThreadId, date, time }
+    isRelationshipPreloaded(this, 'links')
+
+    const { id, recipient, subject, cc, bcc, links, gmailMessageId, gmailThreadId, date, time } =
+      this
+
+    return {
+      id,
+      recipient,
+      subject,
+      cc,
+      bcc,
+      links: links.map((link) => link.serializedLinkInfo),
+      gmailMessageId,
+      gmailThreadId,
+      date,
+      time,
+    }
   }
 }

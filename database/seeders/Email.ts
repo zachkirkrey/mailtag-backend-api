@@ -24,6 +24,8 @@ export default class extends BaseSeeder {
         gmailMessageId: faker.random.alphaNumeric(16),
         gmailThreadId: faker.random.alphaNumeric(16),
         isDeleted: false,
+        bcc: [faker.internet.email(), faker.internet.email()],
+        cc: [faker.internet.email()],
       }
 
       return emailAttributes

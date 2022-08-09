@@ -48,7 +48,7 @@ export type EmailEventAttributes = Omit<
 
 export type LinkAttributes = Omit<
   ModelAttributes<InstanceType<typeof Link>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedLinkInfo' | 'trackingUrl' | 'date' | 'time'
 >
 
 export type LinkEventAttributes = Omit<

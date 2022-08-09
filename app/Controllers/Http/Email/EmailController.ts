@@ -1,5 +1,7 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import Database from '@ioc:Adonis/Lucid/Database'
 import Email from 'App/Models/Email'
+import Link from 'App/Models/Link'
 import MilestoneEvent, { EventType } from 'App/Models/MileStoneEvent'
 import User from 'App/Models/User'
 import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
@@ -36,23 +38,38 @@ export default class EmailController {
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     // TODO add validator
-    const { recipient, subject, gmailMessageId, gmailThreadId } = request.body()
-
-    const email = await Email.create({
-      userId: user.id,
-      recipient,
-      subject,
-      gmailMessageId,
-      gmailThreadId,
-    })
-
+    const { recipient, subject, gmailMessageId, gmailThreadId, cc, bcc, links } = request.body()
     const pingMilestone = { userId: user.id, eventType: EventType.emailCreated }
-    await MilestoneEvent.firstOrCreate(pingMilestone, pingMilestone)
+
+    const response = await Database.transaction(async (trx) => {
+      const email = await Email.create(
+        {
+          userId: user.id,
+          recipient,
+          subject,
+          gmailMessageId,
+          gmailThreadId,
+          cc,
+          bcc,
+        },
+        { client: trx }
+      )
+
+      for (const link of links) {
+        await Link.create({ body: link.body, emailId: email.id }, { client: trx })
+      }
+
+      await MilestoneEvent.firstOrCreate(pingMilestone, pingMilestone, { client: trx })
+
+      await email.load('links')
+
+      return email
+    })
 
     return {
       data: {
         message: 'Email created successfully',
-        email: email.serializedEmailInfo,
+        email: response.serializedEmailInfo,
       },
     }
   }

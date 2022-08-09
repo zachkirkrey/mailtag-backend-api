@@ -50,4 +50,7 @@ export default Env.rules({
 
   PRODUCTION_CLIENT_BASE_URL: Env.schema.string(),
   LOCAL_CLIENT_BASE_URL: Env.schema.string(),
+
+  PRODUCTION_API_BASE_URL: Env.schema.string(),
+  LOCAL_API_BASE_URL: Env.schema.string(),
 })
