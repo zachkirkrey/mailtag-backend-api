@@ -69,10 +69,12 @@ export default class SubscriptionController {
     }
   }
 
-  public async createSubscriptionIntent({ request }: HttpContextContract) {
+  public async createSubscriptionIntent({ auth, request }: HttpContextContract) {
+    const user = auth.use('api').user!
     const { planId } = await request.validate(CreatePaymentValidator)
+    await user.load('subscription')
 
-    const service = new CreateSubscriptionIntent(planId)
+    const service = new CreateSubscriptionIntent(planId, user.subscription?.stripeCustomerId)
     const paymentRequest = await service.call()
 
     return {
