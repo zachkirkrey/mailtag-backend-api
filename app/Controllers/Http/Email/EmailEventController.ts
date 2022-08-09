@@ -16,14 +16,19 @@ export default class EmailEventController {
     }
   }
 
-  public async create({ request }: HttpContextContract) {
-    const { emailId, device, userAgent, ip } = await request.validate(CreateEmailEventValidator)
+  public async create({ request, params }: HttpContextContract) {
+    const { device, userAgent, ip } = await request.validate(CreateEmailEventValidator)
 
     // TODO: Move to background job, should be called after the event created
     const ipData = await getIpData(ip)
     const location = `${ipData.city} / ${ipData.country}`
 
-    const emailEvent = await EmailEvent.create({ emailId, device, userAgent, location })
+    const emailEvent = await EmailEvent.create({
+      emailId: params.emailId,
+      device,
+      userAgent,
+      location,
+    })
 
     return {
       data: {
@@ -44,5 +49,25 @@ export default class EmailEventController {
         message: 'Email event deleted successfully',
       },
     }
+  }
+
+  public async track({ params, request }: HttpContextContract) {
+    const { ip, device, agent } = request.all()
+    const ipData = await getIpData(ip)
+    const location = `${ipData.city} / ${ipData.country}`
+
+    await EmailEvent.create({
+      emailId: params.emailId,
+      device,
+      userAgent: agent,
+      location,
+    })
+
+    const trackImg = Buffer.from(
+      'R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7',
+      'base64'
+    )
+
+    return trackImg
   }
 }

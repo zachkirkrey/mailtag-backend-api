@@ -38,7 +38,7 @@ export type UserAttributes = Omit<
 
 export type EmailAttributes = Omit<
   ModelAttributes<InstanceType<typeof Email>>,
-  'id' | 'createdAt' | 'updatedAt' | 'date' | 'time' | 'serializedEmailInfo'
+  'id' | 'createdAt' | 'updatedAt' | 'date' | 'time' | 'serializedEmailInfo' | 'trackingUrl'
 >
 
 export type EmailEventAttributes = Omit<
@@ -53,7 +53,7 @@ export type LinkAttributes = Omit<
 
 export type LinkEventAttributes = Omit<
   ModelAttributes<InstanceType<typeof LinkEvent>>,
-  'id' | 'createdAt' | 'updatedAt'
+  'id' | 'createdAt' | 'updatedAt' | 'serializedLinkEventInfo'
 >
 
 export type SignatureAttributes = Omit<

@@ -10,7 +10,7 @@ import SearchInboxEmailValidator from 'App/Validators/SearchInboxEmailValidator'
 export default class EmailController {
   public async index({ auth }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const emails = await Email.query().where({ userId: user.id }).preload('events')
+    const emails = await Email.query().where({ userId: user.id }).preload('events').preload('links')
 
     return {
       data: {

@@ -26,4 +26,16 @@ export default class LinkEvent extends BaseModel {
 
   @belongsTo(() => Link)
   public link: BelongsTo<typeof Link>
+
+  public get serializedLinkEventInfo() {
+    const { id, linkId, device, userAgent, location } = this
+
+    return {
+      id,
+      linkId,
+      device,
+      userAgent,
+      location,
+    }
+  }
 }

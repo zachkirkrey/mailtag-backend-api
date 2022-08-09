@@ -17,6 +17,7 @@ import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
 import Link from './Link'
 import { isRelationshipPreloaded } from 'App/Helpers/model'
+import Env from '@ioc:Adonis/Core/Env'
 
 export default class Email extends BaseModel {
   @column({ isPrimary: true })
@@ -86,8 +87,19 @@ export default class Email extends BaseModel {
   public get serializedEmailInfo() {
     isRelationshipPreloaded(this, 'links')
 
-    const { id, recipient, subject, cc, bcc, links, gmailMessageId, gmailThreadId, date, time } =
-      this
+    const {
+      id,
+      recipient,
+      subject,
+      cc,
+      bcc,
+      links,
+      trackingUrl,
+      gmailMessageId,
+      gmailThreadId,
+      date,
+      time,
+    } = this
 
     return {
       id,
@@ -96,10 +108,18 @@ export default class Email extends BaseModel {
       cc,
       bcc,
       links: links.map((link) => link.serializedLinkInfo),
+      trackingUrl,
       gmailMessageId,
       gmailThreadId,
       date,
       time,
     }
+  }
+
+  @computed()
+  public get trackingUrl() {
+    const url = `${Env.get('PRODUCTION_API_BASE_URL')}/email-events/${this.id}.png`
+
+    return url
   }
 }
