@@ -1,27 +1,21 @@
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import Stripe from '@ioc:Adonis/Addons/Stripe'
-import { default as Stripe2 } from 'stripe'
-import Env from '@ioc:Adonis/Core/Env'
+import Stripe from 'stripe'
 import CreateSubsciption from 'App/Services/Subscription/CreateSubscription'
+import { getStripeEvent } from 'App/Helpers/stripe'
 
 export default class StripeWebhookController {
   public async stripeWebhook({ request }: HttpContextContract) {
-    // TODO: move this to request helper, getStripeEvent. It should get request object as parameter.
-    const event = Stripe.webhooks.constructEvent(
-      request.raw()!,
-      request.header('stripe-signature')!,
-      Env.get('STRIPE_WEBHOOK_SECRET')
-    )
+    const event = await getStripeEvent(request)
 
     switch (event.type) {
       case 'invoice.payment_succeeded': {
         // This event means subscription is creaqted and payment was succesful
-        const subscription = event.data.object as Stripe2.Invoice
+        const invoice = event.data.object as Stripe.Invoice
 
-        const service = new CreateSubsciption(subscription)
-        const resultFixme = await service.call()
+        const service = new CreateSubsciption(invoice)
+        await service.call()
 
-        return resultFixme
+        return response.status(201)
       }
 
       case 'customer.subscription.updated': {
