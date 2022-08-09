@@ -1,10 +1,12 @@
+import Logger from '@ioc:Adonis/Core/Logger'
 import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Stripe from 'stripe'
 import CreateSubsciption from 'App/Services/Subscription/CreateSubscription'
+import Subscription from 'App/Models/Subscription'
 import { getStripeEvent } from 'App/Helpers/stripe'
 
 export default class StripeWebhookController {
-  public async stripeWebhook({ request }: HttpContextContract) {
+  public async stripeWebhook({ request, response }: HttpContextContract) {
     const event = await getStripeEvent(request)
 
     switch (event.type) {
@@ -18,31 +20,67 @@ export default class StripeWebhookController {
         return response.status(201)
       }
 
+      case 'invoice.payment_failed': {
+        const subscriptionEvent = event.data.object as Stripe.Subscription
+        const { status, items } = subscriptionEvent
+        const paymentStatus = status === 'active' ? 'paid' : 'unpaid'
+
+        const subscription = await Subscription.findByOrFail(
+          'stripeSubscriptionId',
+          subscriptionEvent.id
+        )
+        const planId = items.data[0].price.id
+        await subscription.merge({ planId, paymentStatus }).save()
+
+        return response.status(200)
+      }
+
       case 'customer.subscription.updated': {
-        // const subscription = event.data.object as Whatever
-        // Then define and call a method to handle the subscription update.
-        // handleSubscriptionUpdated(subscription);
-        break
+        const subscriptionEvent = event.data.object as Stripe.Subscription
+
+        const { status, items } = subscriptionEvent
+        const planId = items.data[0].price.id
+        const paymentStatus = status === 'active' ? 'paid' : 'unpaid'
+
+        const subscription = await Subscription.findByOrFail(
+          'stripeSubscriptionId',
+          subscriptionEvent.id
+        )
+        await subscription.merge({ planId, paymentStatus }).save()
+
+        return response.status(200)
       }
 
       case 'customer.subscription.deleted': {
-        // const subscription = event.data.object
-        // Then define and call a method to handle the subscription deleted.
-        // handleSubscriptionDeleted(subscriptionDeleted);
-        break
+        const subscriptionEvent = event.data.object as Stripe.Subscription
+        const { status } = subscriptionEvent
+        const paymentStatus = status === 'active' ? 'paid' : 'unpaid'
+
+        const subscription = await Subscription.findByOrFail(
+          'stripeSubscriptionId',
+          subscriptionEvent.id
+        )
+        await subscription.merge({ paymentStatus }).save()
+
+        return response.status(200)
       }
+      case 'customer.deleted': {
+        // Customer is deleted at the stripe, along with their subscription
+        const customerEvent = event.data.object as Stripe.Customer
 
-      case 'invoice.payment_failed': {
-        // TODO: handle this case
+        const subscription = await Subscription.findBy('stripeCustomerId', customerEvent.id)
+        if (!subscription) {
+          return response.status(204)
+        }
 
-        // const subscription = event.data.object
-        // const { status } = subscription
-        // Then define and call a method to handle the subscription trial ending.
-        // handleSubscriptionTrialEnding(subscription);
-        break
+        await subscription.delete()
+
+        return response.status(200)
       }
       default:
-        throw new Error('Unknown event type from stripe')
+        Logger.info(`Unknown event type from stripe, ${event.type}`)
+
+        return response.status(204)
     }
   }
 }
