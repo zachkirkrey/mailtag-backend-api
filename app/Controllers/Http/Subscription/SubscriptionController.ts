@@ -5,6 +5,7 @@ import CreateSubscriptionValidator from 'App/Validators/Subscription/CreateSubsc
 import UpdateSubscriptionValidator from 'App/Validators/Subscription/UpdateSubscriptionValidator'
 import Stripe from '@ioc:Adonis/Addons/Stripe'
 import CreatePaymentValidator from 'App/Validators/Subscription/CreatePaymentValidator'
+import CreateSubscriptionIntent from 'App/Services/Subscription/CreateSubscriptionIntent'
 import Payment from 'App/Services/Subscription/Payment'
 import PaymentException from 'App/Exceptions/PaymentException'
 import Plan from 'App/Models/Plan'
@@ -102,12 +103,11 @@ export default class SubscriptionController {
     }
   }
 
-  public async createSubscriptionIntent({ request, auth }: HttpContextContract) {
-    const user: User = auth.use('api').user!
+  public async createSubscriptionIntent({ request }: HttpContextContract) {
     const { planId } = await request.validate(CreatePaymentValidator)
 
-    const service = new Payment(planId)
-    const paymentRequest = await service.createPaymentRequest(user)
+    const service = new CreateSubscriptionIntent(planId)
+    const paymentRequest = await service.call()
 
     return {
       data: {
