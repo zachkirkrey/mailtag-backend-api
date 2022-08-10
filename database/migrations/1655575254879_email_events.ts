@@ -9,7 +9,11 @@ export default class extends BaseSchema {
       table.uuid('email_id').references('id').inTable('emails').onDelete('CASCADE').notNullable()
       table.string('device').notNullable()
       table.string('location').notNullable()
+      table.string('email_read_time').nullable()
+      table.string('email_clicked_device_name').notNullable()
       table.string('user_agent').notNullable()
+      table.string('read_recipient').nullable()
+      table.boolean('is_deleted').notNullable().defaultTo(false)
 
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL

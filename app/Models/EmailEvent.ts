@@ -18,10 +18,22 @@ export default class EmailEvent extends BaseModel {
   @column()
   public location: string
 
-  @column.dateTime({ autoCreate: true })
+  @column()
+  public emailReadTime: DateTime | null
+
+  @column()
+  public emailClickedDeviceName: string
+
+  @column()
+  public readRecipient: string | null
+
+  @column()
+  public isDeleted: boolean = false
+
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @belongsTo(() => Email)

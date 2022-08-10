@@ -5,6 +5,7 @@ import Email from 'App/Models/Email'
 import EmailEvent from 'App/Models/EmailEvent'
 import Logger from '@ioc:Adonis/Core/Logger'
 import { faker } from '@faker-js/faker'
+import { DateTime } from 'luxon'
 
 export default class extends BaseSeeder {
   public override async run() {
@@ -21,6 +22,10 @@ export default class extends BaseSeeder {
         device: faker.system.fileType(),
         userAgent: faker.internet.userAgent(),
         location: faker.address.streetAddress(),
+        emailReadTime: DateTime.now(),
+        isDeleted: false,
+        readRecipient: faker.internet.email(),
+        emailClickedDeviceName: faker.internet.domainSuffix(),
       }
 
       return emailEventAttributes
