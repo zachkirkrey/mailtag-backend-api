@@ -18,7 +18,10 @@ export default class extends BaseSeeder {
     const links = Array.from(Array(5)).map(() => {
       const linkAttributes: LinkAttributes = {
         emailId: email.id,
-        body: faker.internet.url(),
+        link: faker.internet.url(),
+        trackingUrl: faker.internet.url(),
+        date: '2022-11-14T22:46:12.257+00:00',
+        time: '2022-11-14T22:46:12.257+00:00',
         isDeleted: false,
       }
 

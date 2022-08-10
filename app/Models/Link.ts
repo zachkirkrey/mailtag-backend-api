@@ -1,7 +1,16 @@
 import { DateTime } from 'luxon'
-import { BaseModel, BelongsTo, belongsTo, column, HasMany, hasMany } from '@ioc:Adonis/Lucid/Orm'
+import {
+  BaseModel,
+  BelongsTo,
+  belongsTo,
+  column,
+  HasMany,
+  hasMany,
+  computed,
+} from '@ioc:Adonis/Lucid/Orm'
 import Email from './Email'
 import LinkEvent from './LinkEvent'
+import Config from '@ioc:Adonis/Core/Config'
 
 export default class Link extends BaseModel {
   @column({ isPrimary: true })
@@ -11,15 +20,15 @@ export default class Link extends BaseModel {
   public emailId: string
 
   @column()
-  public body: string
+  public link: string
 
   @column()
   public isDeleted: boolean = false
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @belongsTo(() => Email)
@@ -27,4 +36,19 @@ export default class Link extends BaseModel {
 
   @hasMany(() => LinkEvent)
   public events: HasMany<typeof LinkEvent>
+
+  @computed()
+  public get trackingUrl() {
+    return `${Config.get('app.productionClientBaseUrl')}/link-events?id=${this.id}&url=${this.link}`
+  }
+
+  @computed()
+  public get date() {
+    return this.createdAt.toLocaleString(DateTime.DATE_MED)
+  }
+
+  @computed()
+  public get time() {
+    return this.createdAt.toRelative()
+  }
 }

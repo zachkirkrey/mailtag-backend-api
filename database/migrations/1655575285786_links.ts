@@ -7,7 +7,7 @@ export default class extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.uuid('id').primary().defaultTo(this.raw('uuid_generate_v4()'))
       table.uuid('email_id').references('id').inTable('emails').onDelete('CASCADE').notNullable()
-      table.string('body').notNullable()
+      table.string('link').notNullable()
       table.boolean('is_deleted').notNullable().defaultTo(false)
 
       /**

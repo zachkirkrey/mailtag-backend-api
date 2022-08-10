@@ -9,10 +9,19 @@ export default class LinkEvent extends BaseModel {
   @column()
   public linkId: string
 
-  @column.dateTime({ autoCreate: true })
+  @column()
+  public device: string
+
+  @column()
+  public userAgent: string
+
+  @column()
+  public location: string
+
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @belongsTo(() => Link)

@@ -4,6 +4,7 @@ import { LinkEventAttributes } from 'App/Helpers/type'
 import Link from 'App/Models/Link'
 import LinkEvent from 'App/Models/LinkEvent'
 import Logger from '@ioc:Adonis/Core/Logger'
+import { faker } from '@faker-js/faker'
 
 export default class extends BaseSeeder {
   public override async run() {
@@ -19,6 +20,9 @@ export default class extends BaseSeeder {
     const linkEvents = Array.from(Array(5)).map(() => {
       const linkEventAttributes: LinkEventAttributes = {
         linkId: link.id,
+        device: faker.system.fileType(),
+        userAgent: faker.internet.userAgent(),
+        location: faker.address.streetAddress(),
       }
 
       return linkEventAttributes
