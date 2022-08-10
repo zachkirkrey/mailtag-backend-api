@@ -250,3 +250,14 @@ export const pagination: Pagination = {
   page: 1,
   limit: 10,
 }
+
+/*
+|--------------------------------------------------------------------------
+| App Configs
+|--------------------------------------------------------------------------
+|
+| 
+| 
+*/
+export const productionApiBaseUrl = Env.get('PRODUCTION_API_BASE_URL')
+export const productionClientBaseUrl = Env.get('PRODUCTION_CLIENT_BASE_URL')

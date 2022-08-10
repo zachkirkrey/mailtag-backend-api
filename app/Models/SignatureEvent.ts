@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, BelongsTo, belongsTo, column } from '@ioc:Adonis/Lucid/Orm'
 import Signature from './Signature'
+import { EmailRecipient } from 'App/Helpers/type'
 
 // SignatureEvent literally holds nothing we can't derive from the related email row.
 // We could remove all columns except emailId, and created_at. Nothing would change for the applicaton
@@ -22,7 +23,7 @@ export default class SignatureEvent extends BaseModel {
   public emailSubject: string | null
 
   @column()
-  public clickRecipient: string
+  public clickRecipient: Array<EmailRecipient> = []
 
   @column()
   public isDeleted: boolean = false

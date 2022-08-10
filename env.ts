@@ -49,4 +49,7 @@ export default Env.rules({
   S3_ENDPOINT: Env.schema.string.optional(),
 
   CLIENT_BASE_URL: Env.schema.string(),
+  PRODUCTION_API_BASE_URL: Env.schema.string(),
+  PRODUCTION_CLIENT_BASE_URL: Env.schema.string(),
+  LOCAL_API_BASE_URL: Env.schema.string(),
 })

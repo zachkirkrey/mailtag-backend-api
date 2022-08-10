@@ -21,7 +21,7 @@ export default class extends BaseSeeder {
         emailId: email.id,
         signatureId: email.signatureId!,
         emailSubject: email.subject,
-        clickRecipient: email.recipient,
+        clickRecipient: [],
         isDeleted: false,
       }
 
