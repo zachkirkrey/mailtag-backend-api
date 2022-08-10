@@ -19,8 +19,29 @@ export default class extends BaseSeeder {
       const emailAttributes: EmailAttributes = {
         userId: signature.userId,
         signatureId: signature.id,
-        recipient: faker.internet.email('', '', 'gmail.com'),
+        name: faker.random.alphaNumeric(16),
+        destinationEmail: faker.internet.email('', '', 'gmail.com'),
+        recipient: [
+          {
+            name: faker.random.alphaNumeric(16),
+            emailAddress: faker.internet.email('', '', 'gmail.com'),
+          },
+        ],
+        ccRecipient: [
+          {
+            name: faker.random.alphaNumeric(16),
+            emailAddress: faker.internet.email('', '', 'gmail.com'),
+          },
+        ],
+        bccRecipient: [
+          {
+            name: faker.random.alphaNumeric(16),
+            emailAddress: faker.internet.email('', '', 'gmail.com'),
+          },
+        ],
         subject: faker.lorem.words(3),
+        timeZone: 'UTC',
+        emailBody: faker.random.alphaNumeric(16),
         gmailMessageId: faker.random.alphaNumeric(16),
         gmailThreadId: faker.random.alphaNumeric(16),
         isDeleted: false,

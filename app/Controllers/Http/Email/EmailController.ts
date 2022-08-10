@@ -5,6 +5,7 @@ import User from 'App/Models/User'
 import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
 import SearchInboxEmailValidator from 'App/Validators/SearchInboxEmailValidator'
 import Config from '@ioc:Adonis/Core/Config'
+import Link from 'App/Models/Link'
 
 export default class EmailController {
   public async index({ auth, request }: HttpContextContract) {
@@ -15,6 +16,7 @@ export default class EmailController {
     const emails = await Email.query()
       .where({ userId: user.id })
       .preload('events')
+      .preload('links')
       .paginate(page, limit)
 
     return emails.serialize()
@@ -38,18 +40,26 @@ export default class EmailController {
   public async create({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     // TODO add validator
-    const { recipient, subject, gmailMessageId, gmailThreadId } = request.body()
+    const { uuid, destinationEmail, name, subject, recipient, ccRecipient, bccRecipient, links } =
+      request.body()
 
     const email = await Email.create({
+      id: uuid,
       userId: user.id,
-      recipient,
+      destinationEmail,
+      name,
       subject,
-      gmailMessageId,
-      gmailThreadId,
+      recipient,
+      ccRecipient,
+      bccRecipient,
     })
 
     const pingMilestone = { userId: user.id, eventType: EventType.emailCreated }
     await MilestoneEvent.firstOrCreate(pingMilestone, pingMilestone)
+
+    links.forEach(async (link: Link) => {
+      await Link.create(link)
+    })
 
     return {
       data: {

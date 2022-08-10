@@ -15,30 +15,50 @@ import User from './User'
 import Ping from './Ping'
 import ReadEmail from './ReadEmail'
 import UnreadEmail from './UnreadEmail'
+import Link from './Link'
+import { EmailRecipient } from 'App/Helpers/type'
 
 export default class Email extends BaseModel {
   @column({ isPrimary: true })
   public id: string
 
-  @column({ serializeAs: null })
+  @column()
   public userId: string
 
-  @column({ serializeAs: null })
+  @column()
   public signatureId: string | null
 
   @column()
-  public recipient: string
+  public recipient: Array<EmailRecipient> = []
+
+  @column()
+  public bccRecipient: Array<EmailRecipient> = []
+
+  @column()
+  public ccRecipient: Array<EmailRecipient> = []
+
+  @column()
+  public destinationEmail: string | null
 
   @column()
   public subject: string | null
 
-  @column({ serializeAs: 'gmailMessageId' })
+  @column()
+  public name: string | null
+
+  @column()
   public gmailMessageId: string
 
-  @column({ serializeAs: 'gmailThreadId' })
+  @column()
   public gmailThreadId: string
 
-  @column({ serializeAs: 'isDeleted' })
+  @column()
+  public timeZone: string | null
+
+  @column()
+  public emailBody: string | null
+
+  @column()
   public isDeleted: boolean = false
 
   @column.dateTime({ autoCreate: true })
@@ -52,6 +72,9 @@ export default class Email extends BaseModel {
 
   @hasMany(() => EmailEvent)
   public events: HasMany<typeof EmailEvent>
+
+  @hasMany(() => Link)
+  public links: HasMany<typeof Link>
 
   @hasMany(() => Ping)
   public pings: HasMany<typeof Ping>

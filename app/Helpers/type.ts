@@ -204,3 +204,8 @@ export enum SQSMessageTypes {
   WELCOME_EMAIL = 'welcome_email',
   PING = 'ping',
 }
+
+export type EmailRecipient = {
+  name: string | null
+  emailAddress: string | null
+}
