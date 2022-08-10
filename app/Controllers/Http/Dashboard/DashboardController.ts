@@ -20,7 +20,7 @@ export default class DashboardController {
     return {
       data: {
         count: payload.emails.length,
-        emails: payload.emails.map((email) => email.serializedEmailInfo),
+        emails: payload.emails.map((email) => email.serialize()),
       },
     }
   }
@@ -32,7 +32,7 @@ export default class DashboardController {
     return {
       data: {
         count: payload.emails.length,
-        emails: payload.emails.map((email) => email.serializedEmailInfo),
+        emails: payload.emails.map((email) => email.serialize()),
       },
     }
   }
@@ -66,7 +66,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -78,7 +78,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -90,7 +90,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -102,7 +102,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -126,7 +126,7 @@ export default class DashboardController {
     return {
       data: {
         count: pings.length,
-        pings: pings.map((ping) => ping.serializedPingInfo),
+        pings: pings.map((ping) => ping.serialize()),
       },
     }
   }
@@ -230,7 +230,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -250,7 +250,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -265,7 +265,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -281,7 +281,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }
@@ -297,7 +297,7 @@ export default class DashboardController {
     return {
       data: {
         count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
+        emails: emails.map((email) => email.serialize()),
       },
     }
   }

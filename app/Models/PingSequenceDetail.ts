@@ -8,31 +8,31 @@ export default class PingSequenceDetail extends BaseModel {
   public id: string
 
   // TODO: rename pingname to name after the data migration
-  @column()
+  @column({ serializeAs: 'pingName' })
   public pingName: string
 
-  @column()
+  @column({ serializeAs: 'day' })
   public day: number
 
-  @column()
+  @column({ serializeAs: 'step' })
   public step: number
 
-  @column()
+  @column({ serializeAs: 'html' })
   public html: string
 
-  @column()
+  @column({ serializeAs: 'isDeleted' })
   public isDeleted: boolean = false
 
-  @column()
+  @column({ serializeAs: 'pingSequenceId' })
   public pingSequenceId: string
 
-  @column()
+  @column({ serializeAs: 'userId' })
   public userId: string
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   // TODO: check if this is necessary at all
@@ -42,18 +42,4 @@ export default class PingSequenceDetail extends BaseModel {
 
   @belongsTo(() => PingSequence)
   public pingSequence: BelongsTo<typeof PingSequence>
-
-  public get serializedPingSequenceDetailInfo() {
-    const { id, day, step, html, pingSequenceId, userId, isDeleted } = this
-
-    return {
-      id,
-      day,
-      step,
-      html,
-      pingSequenceId,
-      userId,
-      isDeleted,
-    }
-  }
 }

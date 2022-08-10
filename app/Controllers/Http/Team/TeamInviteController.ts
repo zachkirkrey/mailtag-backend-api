@@ -8,18 +8,18 @@ import AcceptTeamInviteValidator from 'App/Validators/Team/Invite/AcceptTeamInvi
 import CreateTeamInviteValidator from 'App/Validators/Team/Invite/CreateTeamInviteValidator'
 import GetTeamInviteByIdValidator from 'App/Validators/Team/Invite/GetTeamInviteByIdValidator'
 import UpdateTeamInviteValidator from 'App/Validators/Team/Invite/UpdateTeamInviteValidator'
+import Config from '@ioc:Adonis/Core/Config'
 
 export default class TeamInviteController {
-  public async index({ auth }: HttpContextContract) {
+  public async index({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const team = await Team.findByOrFail('ownerId', user.id)
-    const teamInvites = await TeamInvite.query().where({ teamId: team.id })
+    const page: number = request.input('page', Config.get('app.pagination.page'))
+    const limit: number = request.input('limit', Config.get('app.pagination.limit'))
 
-    return {
-      data: {
-        teamInvites: teamInvites.map((teamInvite) => teamInvite.serializedTeamInviteInfo),
-      },
-    }
+    const team = await Team.findByOrFail('ownerId', user.id)
+    const teamInvites = await TeamInvite.query().where({ teamId: team.id }).paginate(page, limit)
+
+    return teamInvites.serialize()
   }
 
   public async show({ auth, request }: HttpContextContract) {
@@ -32,7 +32,7 @@ export default class TeamInviteController {
 
     return {
       data: {
-        teamInvite: teamInvite.serializedTeamInviteInfo,
+        teamInvite: teamInvite.serialize(),
       },
     }
   }
@@ -56,7 +56,7 @@ export default class TeamInviteController {
     return {
       data: {
         message: 'Team invite created successfully',
-        teamInvite: teamInvite.serializedTeamInviteInfo,
+        teamInvite: teamInvite.serialize(),
       },
     }
   }
@@ -78,7 +78,7 @@ export default class TeamInviteController {
     return {
       data: {
         message: 'Team invite updated successfully',
-        teamInvite: updateTeamInvite.serializedTeamInviteInfo,
+        teamInvite: updateTeamInvite.serialize(),
       },
     }
   }

@@ -9,44 +9,30 @@ export default class Coupon extends BaseModel {
   @column()
   public code: string
 
-  @column()
+  @column({ serializeAs: 'userId' })
   public userId: string
 
   @column()
   public percentage: number
 
-  @column()
+  @column({ serializeAs: 'isRepetitive' })
   public isRepetitive: boolean
 
-  @column()
+  @column({ serializeAs: 'isDeleted' })
   public isDeleted: boolean = false
 
-  @column()
+  @column({ serializeAs: 'isUsed' })
   public isUsed: boolean = false
 
-  @column.dateTime()
+  @column.dateTime({ serializeAs: null })
   public usedAt: DateTime
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
-
-  public get serializedCouponInfo() {
-    const { id, code, userId, percentage, isRepetitive, isUsed, isDeleted } = this
-
-    return {
-      id,
-      code,
-      userId,
-      percentage,
-      isRepetitive,
-      isUsed,
-      isDeleted,
-    }
-  }
 }

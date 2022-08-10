@@ -4,18 +4,20 @@ import MilestoneEvent, { EventType } from 'App/Models/MileStoneEvent'
 import User from 'App/Models/User'
 import GetEmailByIdValidator from 'App/Validators/Email/GetEmailByIdValidator'
 import SearchInboxEmailValidator from 'App/Validators/SearchInboxEmailValidator'
+import Config from '@ioc:Adonis/Core/Config'
 
 export default class EmailController {
-  public async index({ auth }: HttpContextContract) {
+  public async index({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
-    const emails = await Email.query().where({ userId: user.id }).preload('events')
+    const page: number = request.input('page', Config.get('app.pagination.page'))
+    const limit: number = request.input('limit', Config.get('app.pagination.limit'))
 
-    return {
-      data: {
-        count: emails.length,
-        emails: emails.map((email) => email.serializedEmailInfo),
-      },
-    }
+    const emails = await Email.query()
+      .where({ userId: user.id })
+      .preload('events')
+      .paginate(page, limit)
+
+    return emails.serialize()
   }
 
   public async show({ auth, request }: HttpContextContract) {
@@ -28,7 +30,7 @@ export default class EmailController {
 
     return {
       data: {
-        email: email.serializedEmailInfo,
+        email: email.serialize(),
       },
     }
   }
@@ -52,7 +54,7 @@ export default class EmailController {
     return {
       data: {
         message: 'Email created successfully',
-        email: email.serializedEmailInfo,
+        email: email.serialize(),
       },
     }
   }
@@ -69,7 +71,7 @@ export default class EmailController {
     return {
       data: {
         message: 'Email updated successfully',
-        email: email.serializedEmailInfo,
+        email: email.serialize(),
       },
     }
   }
@@ -100,6 +102,8 @@ export default class EmailController {
   public async search({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
     const { searchTerm, only } = await request.validate(SearchInboxEmailValidator)
+    const page: number = request.input('page', Config.get('app.pagination.page'))
+    const limit: number = request.input('limit', Config.get('app.pagination.limit'))
 
     const emails = await Email.query()
       .where({ userId: user.id })
@@ -114,11 +118,8 @@ export default class EmailController {
       })
       .preload('events')
       .orderBy([{ column: 'created_at', order: 'desc' }])
+      .paginate(page, limit)
 
-    return {
-      data: {
-        emails: emails.map((email) => email.serializedEmailInfo),
-      },
-    }
+    return emails.serialize()
   }
 }

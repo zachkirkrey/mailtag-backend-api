@@ -30,19 +30,19 @@ export default class PingSequence extends BaseModel {
   @column()
   public name: string
 
-  @column()
+  @column({ serializeAs: 'isDeleted' })
   public isDeleted: boolean = false
 
-  @column()
+  @column({ serializeAs: 'userId' })
   public userId: string
 
   @column()
   public timezone: string
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @computed()
@@ -62,25 +62,13 @@ export default class PingSequence extends BaseModel {
   @belongsTo(() => User)
   public user: BelongsTo<typeof User>
 
-  @hasMany(() => PingSequenceDetail)
+  @hasMany(() => PingSequenceDetail, {
+    serializeAs: null,
+  })
   public pingSequenceDetails: HasMany<typeof PingSequenceDetail>
 
   // Fixme: neither column or computed. Also never referenced in project
   public get time() {
     return this.createdAt.toRelative()
-  }
-
-  public get serializedPingSequenceInfo() {
-    const { id, name, pingsCount, timezone, userId, isDeleted, duration } = this
-
-    return {
-      id,
-      name,
-      pingsCount,
-      timezone,
-      userId,
-      isDeleted,
-      duration,
-    }
   }
 }

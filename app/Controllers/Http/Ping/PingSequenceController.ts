@@ -4,21 +4,21 @@ import User from 'App/Models/User'
 import CreatePingSequenceValidator from 'App/Validators/Ping/CreatePingSequenceValidator'
 import GetPingSequenceByIdValidator from 'App/Validators/Ping/GetPingSequenceByIdValidator'
 import UpdatePingSequenceValidator from 'App/Validators/Ping/UpdatePingSequenceValidator'
+import Config from '@ioc:Adonis/Core/Config'
 
 export default class PingSequenceController {
-  public async index({ auth }: HttpContextContract) {
+  public async index({ auth, request }: HttpContextContract) {
     const user: User = auth.use('api').user!
+    const page: number = request.input('page', Config.get('app.pagination.page'))
+    const limit: number = request.input('limit', Config.get('app.pagination.limit'))
 
     const pingSequences = await PingSequence.query()
       .where({ userId: user.id })
       .preload('pingSequenceDetails')
       .orderBy('created_at', 'asc')
+      .paginate(page, limit)
 
-    return {
-      data: {
-        pingSequences: pingSequences.map((pingSequence) => pingSequence.serializedPingSequenceInfo),
-      },
-    }
+    return pingSequences.serialize()
   }
 
   public async show({ request }: HttpContextContract) {
@@ -30,9 +30,9 @@ export default class PingSequenceController {
 
     return {
       data: {
-        pingSequence: pingSequence.serializedPingSequenceInfo,
-        pingSequenceDetails: pingSequence.pingSequenceDetails.map(
-          (pingSequenceDetail) => pingSequenceDetail.serializedPingSequenceDetailInfo
+        pingSequence: pingSequence.serialize(),
+        pingSequenceDetails: pingSequence.pingSequenceDetails.map((pingSequenceDetail) =>
+          pingSequenceDetail.serialize()
         ),
       },
     }
@@ -48,7 +48,7 @@ export default class PingSequenceController {
     return {
       data: {
         message: 'Ping sequence created successfully',
-        pingSequence: pingSequence.serializedPingSequenceInfo,
+        pingSequence: pingSequence.serialize(),
       },
     }
   }
@@ -67,7 +67,7 @@ export default class PingSequenceController {
     return {
       data: {
         message: 'Ping sequence updated successfully',
-        pingSequence: updatedPingSequence.serializedPingSequenceInfo,
+        pingSequence: updatedPingSequence.serialize(),
       },
     }
   }
